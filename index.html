@@ -28,10 +28,21 @@
         flex-direction: column !important;
         gap: 0.7rem !important;
       }
+      /* เพิ่มการจัดการ modal ในมือถือ */
+      .about-modal-content {
+        max-height: 80vh !important; /* จำกัดความสูงสูงสุด 80% ของ viewport */
+        overflow-y: auto !important; /* เปิดให้เลื่อนในแนวตั้ง */
+        padding: 2rem 1.5rem !important; /* ลด padding ในมือถือ */
+        margin: 0 10px !important; /* เพิ่ม margin ด้านข้างเล็กน้อย */
+      }
     }
     @media (max-width: 480px) {
       .card, .character-item, .vocab-item, .kanji-card {
         padding: 0.7rem 0.2rem !important;
+      }
+      .about-modal-content {
+        padding: 1.5rem 1rem !important; /* ลด padding เพิ่มเติมสำหรับหน้าจอเล็ก */
+        max-height: 75vh !important; /* ลดความสูงลงเล็กน้อยสำหรับหน้าจอเล็ก */
       }
     }
     .fade-in-page {
