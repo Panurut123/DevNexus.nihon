@@ -249,7 +249,16 @@ const randomBtn = document.querySelector('.kanji-random-btn');
 if (randomBtn) {
     randomBtn.onclick = () => {
         const rand = window.kanjiData[Math.floor(Math.random() * window.kanjiData.length)];
-        renderKanjiList([rand]);
+        const modal = document.getElementById('kanji-modal');
+        const modalBody = modal.querySelector('.kanji-modal-body');
+        modalBody.innerHTML = `
+            <div class="kanji-modal-char" style="font-size:3.5rem;text-align:center;">${rand.char}</div>
+            <div class="kanji-modal-furigana" style="font-size:1.3rem;text-align:center;margin:0.5rem 0;">ฟุริกานะ: ${rand.furigana || '-'}</div>
+            <div class="kanji-modal-meaning" style="font-size:1.1rem;text-align:center;">ความหมาย: ${rand.meaning || '-'}</div>
+            <div class="kanji-modal-example" style="font-size:1rem;text-align:center;margin:0.5rem 0;">ตัวอย่าง: ${rand.example || '-'}</div>
+            <div class="kanji-modal-level" style="font-size:0.95rem;text-align:center;color:#888;">ระดับ: ${rand.level || '-'}</div>
+        `;
+        modal.style.display = 'flex';
     };
 }
 
