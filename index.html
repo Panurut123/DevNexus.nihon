@@ -7,6 +7,41 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+    @media (max-width: 768px) {
+      .feature-cards, .tabs, .tab-content, .character-grid, .vocab-list, .kanji-grid {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        align-items: stretch !important;
+      }
+      .card, .character-item, .vocab-item, .kanji-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        padding: 1rem 0.5rem !important;
+      }
+      .hero-content, .hero-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+      }
+      .cta-buttons {
+        flex-direction: column !important;
+        gap: 0.7rem !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .card, .character-item, .vocab-item, .kanji-card {
+        padding: 0.7rem 0.2rem !important;
+      }
+    }
+    .fade-in-page {
+      animation: fadeInPage 0.7s;
+    }
+    @keyframes fadeInPage {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    </style>
 </head>
 <body>
     <div class="sakura-container"></div>
@@ -272,5 +307,10 @@
     </main>
 
     <script src="script.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      document.body.classList.add('fade-in-page');
+    });
+    </script>
 </body>
 </html>
