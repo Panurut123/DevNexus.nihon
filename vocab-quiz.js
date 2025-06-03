@@ -45,7 +45,6 @@ function startVocabQuiz() {
         inputType: inputType
     };
     
-    // เพิ่มข้อมูลสถิติสำหรับโหมด Infinity
     if (isInfinity) {
         window.vocabQuiz.stats = {
             totalQuestions: 0,
