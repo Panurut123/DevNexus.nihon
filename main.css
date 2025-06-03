@@ -853,6 +853,18 @@ a:hover {
     .testimonial-slide {
         padding: 2rem;
     }
+    
+    .learning-cards {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+        overflow-x: unset !important;
+        flex-wrap: nowrap !important;
+    }
+    .learning-card {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }
 
 @media (max-width: 576px) {
@@ -866,6 +878,15 @@ a:hover {
     
     .level-card, .learning-card {
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .learning-cards {
+        gap: 1rem !important;
+    }
+    .learning-card {
+        padding: 1.2rem 0.7rem !important;
     }
 }
 
