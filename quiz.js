@@ -148,10 +148,17 @@ document.getElementById('start-quiz')?.addEventListener('click', () => {
             .map(input => vocabData.find(v => v.jp === input.value));
     } else if (currentCategory === 'all') {
         selectedVocabs = vocabData;
-    } else {
-        selectedVocabs = vocabData.filter(v => v.cat === currentCategory);
+    } else if (currentCategory === 'category') {
+        // ถ้าเลือกหมวดหมู่ ให้ selectedVocabs เป็นคำศัพท์ที่เลือกในหมวดหมู่ (ถ้าไม่ได้เลือก category-item ใดเลย ให้ selectedVocabs = [])
+        const activeCat = document.querySelector('.category-item.active');
+        if (activeCat) {
+            const cat = activeCat.textContent;
+            selectedVocabs = cat === 'ทั้งหมด' ? vocabData : vocabData.filter(v => v.cat === cat);
+        } else {
+            selectedVocabs = [];
+        }
     }
-    
+
     if (selectedVocabs.length === 0) {
         alert('กรุณาเลือกคำศัพท์ที่ต้องการทดสอบ');
         return;
@@ -163,9 +170,6 @@ document.getElementById('start-quiz')?.addEventListener('click', () => {
     // แสดงหน้า Quiz
     setupSection.style.display = 'none';
     questionsSection.style.display = 'block';
-    questionsSection.classList.remove('fade-in');
-    void questionsSection.offsetWidth; // trigger reflow
-    questionsSection.classList.add('fade-in');
     
     // เริ่มคำถามแรก
     showQuestion();
@@ -476,8 +480,6 @@ function checkAnswer(answer) {
 function showResults() {
     questionsSection.style.display = 'none';
     resultsSection.style.display = 'block';
-    resultsSection.classList.remove('fade-in');
-    void resultsSection.offsetWidth;
     
     // คำนวณคะแนน
     const total = quizQuestions.length;
@@ -532,9 +534,6 @@ document.querySelector('.retry-btn')?.addEventListener('click', () => {
     // สลับกลับไปหน้า Quiz
     resultsSection.style.display = 'none';
     questionsSection.style.display = 'block';
-    questionsSection.classList.remove('fade-in');
-    void questionsSection.offsetWidth;
-    questionsSection.classList.add('fade-in');
     
     // สร้างคำถามใหม่และเริ่ม
     generateQuestions();
@@ -545,9 +544,6 @@ document.querySelector('.retry-btn')?.addEventListener('click', () => {
 document.querySelector('.back-btn')?.addEventListener('click', () => {
     resultsSection.style.display = 'none';
     setupSection.style.display = 'block';
-    setupSection.classList.remove('fade-in');
-    void setupSection.offsetWidth;
-    setupSection.classList.add('fade-in');
 });
 
 // โหลดข้อมูลเริ่มต้น
