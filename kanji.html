@@ -8,6 +8,43 @@
     <link rel="stylesheet" href="kanji.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+    @media (max-width: 768px) {
+      .kanji-header, .kanji-tools, .kanji-list {
+        padding: 0.5rem 0.2rem !important;
+      }
+      .kanji-tools {
+        flex-direction: column !important;
+        gap: 0.7rem !important;
+      }
+      .kanji-tools input, .kanji-tools button {
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .kanji-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 1rem 0.5rem !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .kanji-header, .kanji-tools, .kanji-list {
+        padding: 0.2rem 0.1rem !important;
+      }
+      .kanji-card {
+        padding: 0.7rem 0.2rem !important;
+      }
+    }
+    .fade-in-page {
+      animation: fadeInPage 0.7s;
+    }
+    @keyframes fadeInPage {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    </style>
 </head>
 <body>
     <div class="sakura-container"></div>
@@ -52,5 +89,10 @@
         </div>
     </div>
     <script src="kanji.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      document.body.classList.add('fade-in-page');
+    });
+    </script>
 </body>
 </html>
