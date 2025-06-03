@@ -41,6 +41,17 @@
       from { opacity: 0; transform: translateY(30px);}
       to { opacity: 1; transform: translateY(0);}
     }
+    .about-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .about-modal.active {
+      display: flex;
+    }
     </style>
 </head>
 <body>
@@ -58,6 +69,7 @@
                 <li><a href="vocabulary.html">คำศัพท์</a></li>
                 <li><a href="kanji.html">คันจิ</a></li>
                 <li><a href="grammar.html">ไวยากรณ์</a></li>
+                <li><button id="about-btn" style="background:none;border:none;color:#e1306c;font-weight:600;font-size:1.05rem;cursor:pointer;">เกี่ยวกับเรา</button></li>
             </ul>
         </nav>
     </header>
@@ -69,7 +81,7 @@
                 <p class="fade-in delay-1">เริ่มต้นการเดินทางสู่การเรียนรู้ภาษาญี่ปุ่นกับ Devnexus.nihon</p>
                 <div class="cta-buttons fade-in delay-2">
                     <a href="main.html" class="btn primary">เริ่มเรียน</a>
-                    <a href="#katakana" class="btn secondary">เกี่ยวกับเรา</a>
+                    <button id="about-hero-btn" class="btn secondary">เกี่ยวกับเรา</button>
                 </div>
             </div>
             <div class="hero-image fade-in delay-3">
@@ -306,10 +318,58 @@
         </section>
     </main>
 
+    <footer class="site-footer" style="margin-top:2.5rem; background:#fffbe7; border-top:2px solid #ffd43b; padding:1.5rem 0; text-align:center; font-size:1.08rem; color:#7a5d00;">
+        <div style="margin-bottom:0.7rem; font-weight:600;">ติดต่อผู้พัฒนาเว็บไซต์</div>
+        <div style="display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap; align-items:center; font-size:1.15rem;">
+            <a href="https://www.instagram.com/devn3xus/" target="_blank" style="color:#e1306c; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-instagram"></i> @devn3xus</a>
+            <a href="https://www.facebook.com/panurut.junklin" target="_blank" style="color:#1877f2; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-facebook"></i> @panurut.junklin</a>
+            <span style="color:#5865f2; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-discord"></i> porto4611</span>
+        </div>
+    </footer>
+
+    <div id="about-modal" class="about-modal">
+        <div class="about-modal-bg" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.25);z-index:1001;"></div>
+        <div class="about-modal-content" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fffbe7;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,0.18);padding:2.5rem 2.2rem 2rem 2.2rem;min-width:320px;max-width:95vw;min-height:180px;z-index:1002;display:flex;flex-direction:column;align-items:center;">
+            <button class="about-modal-close" style="position:absolute;top:12px;right:18px;background:none;border:none;font-size:2rem;color:#ff6b6b;cursor:pointer;z-index:3;">×</button>
+            <div class="about-modal-body" style="max-width:600px;text-align:left;font-size:1.08rem;color:#7a5d00;line-height:1.8;">
+                <h2 style="color:#e1306c;text-align:center;margin-bottom:1.2rem;">เกี่ยวกับ Devnexus.nihon</h2>
+                <p>Devnexus.nihon ถูกสร้างขึ้นเพื่อเป็นแหล่งเรียนรู้ภาษาญี่ปุ่นออนไลน์สำหรับทุกคน ไม่ว่าคุณจะเป็นผู้เริ่มต้นหรือมีพื้นฐานอยู่แล้ว เว็บไซต์นี้ออกแบบมาให้ใช้งานง่าย มีเนื้อหาครอบคลุมทั้งตัวอักษร คำศัพท์ ไวยากรณ์ และแบบฝึกหัด พร้อมทั้งอัปเดตเนื้อหาใหม่ ๆ อย่างต่อเนื่อง</p>
+                <h3 style="margin-top:1.5rem;color:#e1306c;">ผู้พัฒนาเว็บไซต์</h3>
+                <ul style="margin-left:1.2rem;">
+                    <li>ผมชื่อ ภานุรุจ หรือเรียกว่า คุณโต้ก็ได้</li>
+                    <li>ประสบการณ์ ผมมีประสบการณ์ภาษาญี่ปุ่นจากโรงเรียน และ ทักษะการเขียนเว็บมาจากการศึกษาเองทั้งหมด</li>
+                    <li>ติดต่อ:
+                        <ul style="margin-left:1.2rem;">
+                            <li>Instagram: <a href="https://www.instagram.com/devn3xus/" target="_blank" style="color:#e1306c;">@devn3xus</a></li>
+                            <li>Facebook: <a href="https://www.facebook.com/panurut.junklin" target="_blank" style="color:#1877f2;">@panurut.junklin</a></li>
+                            <li>Discord: <span style="color:#5865f2;">porto4611</span></li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3 style="margin-top:1.5rem;color:#e1306c;">แรงบันดาลใจ</h3>
+                <p>จุดเริ่มต้นของเว็บนี้เกิดจากความชอบในภาษาญี่ปุ่นและอยากแบ่งปันความรู้ให้กับเพื่อนๆ น้องๆ พี่ๆ ที่สนใจ โดยหวังว่าจะช่วยให้ทุกคนเรียนรู้ได้อย่างสนุกและมีประสิทธิภาพ</p>
+                <h3 style="margin-top:1.5rem;color:#e1306c;">หมายเหตุ</h3>
+                <p>ข้อมูลในเว็บไซต์นี้จัดทำขึ้นเพื่อการศึกษา อาจมีข้อผิดพลาดหรือไม่สมบูรณ์ แนะนำให้อ้างอิงจากหนังสือ Minna no Nihongo หรือแหล่งข้อมูลมาตรฐานเป็นหลัก</p>
+                <h3 style="margin-top:1.5rem;color:#e1306c;">ขอขอบคุณ</h3>
+                <p>ขอบคุณทุกคนที่เข้ามาใช้งาน หากมีข้อเสนอแนะหรือพบปัญหา สามารถติดต่อได้ตามช่องทางด้านล่างสุดของหน้าหลัก</p>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
     <script>
     window.addEventListener('DOMContentLoaded', function() {
       document.body.classList.add('fade-in-page');
+      // about modal
+      const aboutBtn = document.getElementById('about-btn');
+      const aboutHeroBtn = document.getElementById('about-hero-btn');
+      const aboutModal = document.getElementById('about-modal');
+      if (aboutBtn && aboutModal) {
+        aboutBtn.onclick = () => aboutModal.classList.add('active');
+        aboutModal.querySelector('.about-modal-close').onclick = () => aboutModal.classList.remove('active');
+        aboutModal.querySelector('.about-modal-bg').onclick = () => aboutModal.classList.remove('active');
+        if (aboutHeroBtn) aboutHeroBtn.onclick = () => aboutModal.classList.add('active');
+      }
     });
     </script>
 </body>
