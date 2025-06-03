@@ -1228,8 +1228,19 @@ footer {
     }
     
     .footer-content {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 2rem !important;
+    }
+    
+    .footer-links, .footer-contact {
+        margin-top: 1.5rem !important;
+        width: 100% !important;
+        text-align: left !important;
+    }
+    
+    .footer-logo {
+        margin-bottom: 1rem !important;
     }
     
     .social-icons {
@@ -1277,5 +1288,18 @@ footer {
     
     .vocab-term {
         font-size: 1.3rem;
+    }
+    
+    .footer-content {
+        gap: 1rem !important;
+        padding: 1.2rem 0.5rem !important;
+    }
+    
+    .footer-logo h2 {
+        font-size: 1.2rem !important;
+    }
+    
+    .footer-logo p {
+        font-size: 0.9rem !important;
     }
 }
