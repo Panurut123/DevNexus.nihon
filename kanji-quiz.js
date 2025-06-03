@@ -17,14 +17,10 @@ function startKanjiQuiz() {
     let inputType = '';
     
     if (isInfinity) {
-        // สำหรับโหมด Infinity ใช้เพียง 1 คำถาม
         questions = generateQuestions(level, 1, format);
-        
-        // อ่านค่ารูปแบบการตอบจาก infinity-input-type
         const infinityInputType = document.getElementById('infinity-input-type');
         inputType = infinityInputType ? infinityInputType.value : 'multiple-choice';
     } else {
-        // สำหรับโหมดปกติ
         const questionCount = parseInt(document.getElementById('kanji-question-count').value);
         questions = generateQuestions(level, questionCount, format);
     }
@@ -62,8 +58,6 @@ function startKanjiQuiz() {
     document.getElementById('kanji-quiz-setup').style.display = 'none';
     document.getElementById('kanji-quiz-questions').style.display = 'block';
     
-    // แสดง/ซ่อนส่วนต่างๆ ตามโหมด
-    // document.querySelector('.infinity-stats').style.display = mode === 'infinity' ? 'block' : 'none';
     document.querySelector('.mistakes-left').style.display = mode === 'infinity' ? 'none' : 'block';
     
     showQuestion();
@@ -75,7 +69,6 @@ function generateQuestions(level, count, format) {
     if (level !== 'all') {
         kanjiList = kanjiList.filter(k => k.level === level);
     }
-    // สุ่มคันจิไม่ซ้ำ
     const shuffled = kanjiList.sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, count);
     return selected.map(kanji => {
@@ -87,7 +80,6 @@ function generateQuestions(level, count, format) {
             question = kanji.meaning;
             answer = kanji.char;
         } else {
-            // สุ่มรูปแบบคำถาม
             const isKanjiToMeaning = Math.random() > 0.5;
             question = isKanjiToMeaning ? kanji.char : kanji.meaning;
             answer = isKanjiToMeaning ? kanji.meaning : kanji.char;
@@ -101,7 +93,6 @@ function showQuestion() {
     const quiz = window.kanjiQuiz;
     const currentQuestion = quiz.questions[quiz.currentIndex];
     
-    // แสดงข้อมูลคำถามตามโหมด
     if (quiz.isInfinity) {
         document.querySelector('.question-number').textContent = `ข้อที่ ${quiz.stats.totalQuestions + 1}`;
         document.querySelector('.progress').style.width = '100%';
@@ -113,18 +104,19 @@ function showQuestion() {
     
     document.querySelector('.question-text').textContent = currentQuestion.question;
     
-    // แสดงตัวเลือกหรือช่องพิมพ์คำตอบตามโหมด
     if (quiz.mode === 'easy' || (quiz.isInfinity && quiz.inputType === 'multiple-choice')) {
         showMultipleChoice(currentQuestion);
     } else {
         showTextInput();
     }
     
-    // เริ่มจับเวลาในโหมดยาก
     if (quiz.mode === 'hard') {
         startTimer();
     }
 }
+
+// ฟังก์ชันทำความสะอาดสตริง
+const cleanString = str => str.replace(/\s+/g, ' ').trim().toLowerCase();
 
 // แสดงตัวเลือก 4 ตัวเลือก
 function showMultipleChoice(questionObj) {
@@ -135,25 +127,19 @@ function showMultipleChoice(questionObj) {
     const allKanji = window.kanjiData;
     const currentLevel = document.getElementById('kanji-level-select').value;
     
-    // กรองคันจิในระดับเดียวกันก่อน
     const sameLevelKanji = currentLevel === 'all' 
         ? allKanji 
         : allKanji.filter(k => k.level === currentLevel);
     
-    // ถ้าคำถามเป็น char->meaning หรือ meaning->char
     const isKanjiToMeaning = questionObj.question === questionObj.kanji.char;
     
-    // หาตัวเลือกที่ผิด (wrong answers)
     let wrongAnswers = [];
-    
-    // 1. ลองหาตัวเลือกจากระดับเดียวกันก่อน
     let candidates = sameLevelKanji
         .filter(k => isKanjiToMeaning 
             ? (k.char !== questionObj.kanji.char) 
             : (k.meaning !== questionObj.kanji.meaning))
         .sort(() => 0.5 - Math.random());
     
-    // 2. ถ้าในระดับเดียวกันมีไม่พอ 3 ตัว (ไม่รวมคำตอบที่ถูก) ให้เพิ่มจากระดับอื่น
     if (candidates.length < 3) {
         const otherLevelsKanji = allKanji
             .filter(k => isKanjiToMeaning 
@@ -165,26 +151,22 @@ function showMultipleChoice(questionObj) {
         candidates = [...candidates, ...otherLevelsKanji];
     }
     
-    // 3. จำกัดจำนวนตัวเลือกผิดให้ไม่เกิน 3 ตัว
     wrongAnswers = candidates
         .slice(0, 3)
         .map(k => isKanjiToMeaning ? k.meaning : k.char);
     
-    // 4. ผสมคำตอบที่ถูกกับคำตอบที่ผิด และสลับลำดับ
     const choices = [...wrongAnswers, questionObj.answer]
         .sort(() => 0.5 - Math.random());
     
-    // แสดงตัวเลือก
     container.innerHTML = choices.map(choice => `
-        <button class="choice-btn" data-answer="${choice.replace(/"/g, '&quot;')}">
+        <button class="choice-btn" data-answer="${encodeURIComponent(choice)}">
             ${choice}
         </button>
     `).join('');
     
-    // เพิ่ม event listener ให้กับปุ่มตัวเลือก
     container.querySelectorAll('.choice-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            checkAnswer(this.dataset.answer);
+            checkAnswer(decodeURIComponent(this.dataset.answer));
         });
     });
 }
@@ -197,7 +179,6 @@ function showTextInput() {
     const input = container.querySelector('input');
     input.value = '';
     input.focus();
-    // เพิ่ม event listener
     container.querySelector('.submit-btn').onclick = () => {
         const answer = input.value.trim();
         if (answer) checkAnswer(answer);
@@ -209,13 +190,16 @@ function checkAnswer(userAnswer) {
     const quiz = window.kanjiQuiz;
     const currentQuestion = quiz.questions[quiz.currentIndex];
     const correctAnswer = currentQuestion.answer;
-    const isCorrect = userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
-        
-    // สำหรับโหมด Infinity ให้บันทึกสถิติ
+    const acceptedAnswers = currentQuestion.kanji.acceptedAnswers || [correctAnswer];
+    
+    const isCorrect = acceptedAnswers.some(answer => 
+        cleanString(userAnswer) === cleanString(answer)
+    );
+    
+    console.log('User Answer:', userAnswer, 'Correct Answer:', correctAnswer, 'Is Correct:', isCorrect);
+    
     if (quiz.isInfinity) {
         quiz.stats.totalQuestions++;
-            
-        // บันทึกประวัติการตอบ
         const answerRecord = {
             question: currentQuestion.question,
             correctAnswer: correctAnswer,
@@ -223,72 +207,52 @@ function checkAnswer(userAnswer) {
             isCorrect: isCorrect,
             kanji: currentQuestion.kanji
         };
-            
-        // เพิ่มประวัติการตอบไปยังสถิติ
-        quiz.stats.answerHistory.unshift(answerRecord); // เพิ่มไปที่ต้นรายการ
-            
-        // จำกัดประวัติไม่ให้มีมากเกินไป
+        quiz.stats.answerHistory.unshift(answerRecord);
         if (quiz.stats.answerHistory.length > 50) {
             quiz.stats.answerHistory = quiz.stats.answerHistory.slice(0, 50);
         }
-            
         if (isCorrect) {
             quiz.stats.correctAnswers++;
         } else {
             quiz.stats.wrongAnswers++;
         }
-            
-        // อัพเดทข้อมูลสถิติใน UI
         updateInfinityStats();
     }
 
     if (isCorrect) {
         quiz.score++;
         quiz.currentIndex++;
-            
-        // สำหรับโหมดทั่วไป
         if (!quiz.isInfinity) {
-            // ถ้าตอบครบทุกข้อแล้ว
             if (quiz.currentIndex >= quiz.questions.length) {
                 endQuiz();
                 return;
             }
         } else {
-            // สำหรับโหมด Infinity สร้างคำถามใหม่
             const newQuestion = generateQuestions(quiz.level, 1, quiz.format);
             quiz.questions = newQuestion;
             quiz.currentIndex = 0;
         }
-            
         showQuestion();
     } else {
         quiz.mistakes++;
-            
-        // สำหรับโหมดทั่วไป
         if (!quiz.isInfinity) {
-            // ถ้าตอบผิดเกินจำนวนที่กำหนด
             if (quiz.mistakes >= quiz.maxMistakes) {
                 endQuiz();
                 return;
             }
             document.querySelector('.mistakes-count').textContent = quiz.maxMistakes - quiz.mistakes;
         }
-            
-        // แสดงคำตอบที่ถูกต้อง
         if (quiz.mode === 'easy' || (quiz.isInfinity && quiz.inputType === 'multiple-choice')) {
-            // ในโหมดง่าย จะไฮไลท์ตัวเลือกที่ถูกต้องและที่ผู้ใช้เลือก
             const buttons = document.querySelectorAll('.choice-btn');
             buttons.forEach(btn => {
-                if (btn.textContent.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+                if (acceptedAnswers.some(answer => cleanString(decodeURIComponent(btn.dataset.answer)) === cleanString(answer))) {
                     btn.classList.add('correct');
                 }
-                if (btn.textContent.trim().toLowerCase() === userAnswer.trim().toLowerCase()) {
+                if (cleanString(decodeURIComponent(btn.dataset.answer)) === cleanString(userAnswer)) {
                     btn.classList.add('wrong');
                 }
                 btn.disabled = true;
             });
-                
-            // รอ 1 วินาทีแล้วไปข้อถัดไป
             setTimeout(() => {
                 if (!quiz.isInfinity) {
                     quiz.currentIndex++;
@@ -297,7 +261,6 @@ function checkAnswer(userAnswer) {
                         return;
                     }
                 } else {
-                    // สำหรับโหมด Infinity สร้างคำถามใหม่
                     const newQuestion = generateQuestions(quiz.level, 1, quiz.format);
                     quiz.questions = newQuestion;
                     quiz.currentIndex = 0;
@@ -305,12 +268,9 @@ function checkAnswer(userAnswer) {
                 showQuestion();
             }, 1000);
         } else {
-            // ในโหมดกลางและยาก จะแสดงคำตอบที่ถูกต้อง
-            alert(`คำตอบที่ถูกต้องคือ: ${correctAnswer}`);
+            alert(`คำตอบที่ถูกต้องคือ: ${correctAnswer}\nคุณตอบ: ${userAnswer}`);
             document.querySelector('.text-input input').value = '';
-                
             if (quiz.isInfinity) {
-                // สำหรับโหมด Infinity สร้างคำถามใหม่
                 const newQuestion = generateQuestions(quiz.level, 1, quiz.format);
                 quiz.questions = newQuestion;
                 quiz.currentIndex = 0;
@@ -325,28 +285,24 @@ function endQuiz() {
     const quiz = window.kanjiQuiz;
     clearInterval(quiz.timer);
     
-    // สำหรับโหมดทั่วไป
     if (!quiz.isInfinity) {
         document.getElementById('kanji-quiz-questions').style.display = 'none';
         document.getElementById('kanji-quiz-results').style.display = 'block';
         
-        // คำนวณคะแนน
         const percent = Math.round((quiz.score / quiz.questions.length) * 100);
         document.querySelector('.score-percent').textContent = `${percent}%`;
         document.querySelector('.correct-count').textContent = quiz.score;
         document.querySelector('.wrong-count').textContent = quiz.questions.length - quiz.score;
         
-        // แสดงข้อความ feedback
         let feedback = '';
         if (percent >= 80) feedback = 'เยี่ยมมาก! คุณเก่งมาก';
         else if (percent >= 60) feedback = 'ดีมาก! พยายามต่อไป';
         else feedback = 'ไม่เป็นไร ลองใหม่อีกครั้ง';
         document.querySelector('.feedback-message').textContent = feedback;
         
-        // แสดงเฉลย
         const answersList = document.querySelector('.answers-list');
         answersList.innerHTML = quiz.questions.map((q, index) => {
-            const isCorrect = q.userAnswer === q.answer;
+            const isCorrect = q.userAnswer ? cleanString(q.userAnswer) === cleanString(q.answer) : false;
             return `
                 <div class="answer-item">
                     <div class="answer-status ${isCorrect ? 'correct' : 'wrong'}">
@@ -371,11 +327,9 @@ function endQuiz() {
             window.location.href = 'kanji.html';
         };
     } else {
-        // สำหรับโหมด Infinity กลับไปหน้าตั้งค่า
         document.getElementById('kanji-quiz-questions').style.display = 'none';
         document.getElementById('kanji-quiz-setup').style.display = 'block';
         
-        // แสดงข้อความสรุปผลการทดสอบ
         const totalQuestions = quiz.stats.totalQuestions;
         const correctAnswers = quiz.stats.correctAnswers;
         const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
@@ -388,24 +342,20 @@ function endQuiz() {
 function updateInfinityStats() {
     const quiz = window.kanjiQuiz;
     if (!quiz.isInfinity) return;
-    // อัพเดทตัวเลขสถิติ
     const totalQ = document.querySelector('.total-questions');
     if (totalQ) totalQ.textContent = quiz.stats.totalQuestions;
     const correctA = document.querySelector('.correct-answers');
     if (correctA) correctA.textContent = quiz.stats.correctAnswers;
     const wrongA = document.querySelector('.wrong-answers');
     if (wrongA) wrongA.textContent = quiz.stats.wrongAnswers;
-    // คำนวณความแม่นยำ
     const accuracy = quiz.stats.totalQuestions > 0 
         ? Math.round((quiz.stats.correctAnswers / quiz.stats.totalQuestions) * 100) 
         : 0;
     const accuracyElem = document.querySelector('.accuracy-percent');
     if (accuracyElem) accuracyElem.textContent = `${accuracy}%`;
-    // อัพเดทประวัติการตอบล่าสุด
     const recentAnswersContainer = document.querySelector('.recent-answers');
     if (recentAnswersContainer) {
         recentAnswersContainer.innerHTML = '';
-        // แสดงประวัติการตอบล่าสุด 5 ข้อ
         const recentAnswers = quiz.stats.answerHistory.slice(0, 5);
         recentAnswers.forEach(record => {
             const answerRecord = document.createElement('div');
@@ -452,7 +402,6 @@ function startTimer() {
 document.getElementById('start-kanji-quiz').addEventListener('click', startKanjiQuiz);
 
 document.addEventListener('DOMContentLoaded', function() {
-    // เพิ่ม event listeners สำหรับปุ่มโหมดต่างๆ
     document.querySelectorAll('.mode-btn').forEach(btn => {
         btn.onclick = () => {
             document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
@@ -462,7 +411,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (questionCountContainer) {
                 questionCountContainer.style.display = isInfinityMode ? 'none' : 'block';
             }
-            // เพิ่ม logic แสดง/ซ่อน infinity-input-type
             const infinityInputContainer = document.querySelector('.infinity-input-type');
             if (infinityInputContainer) {
                 infinityInputContainer.style.display = isInfinityMode ? 'block' : 'none';
@@ -470,7 +418,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     });
     
-    // เพิ่ม event listeners สำหรับปุ่มในสถิติโหมด Infinity
     const showStatsBtn = document.querySelector('.show-stats-btn');
     if (showStatsBtn) {
         showStatsBtn.addEventListener('click', function() {
