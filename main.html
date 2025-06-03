@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="main.css">
+    <style>
+        .fade-in-page {
+            animation: fadeInPage 0.7s;
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
 </head>
 <body>
     <!-- ส่วนดอกซากุระลอย -->
@@ -235,5 +244,10 @@
             </div>
         </section>
     </main>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('fade-in-page');
+    });
+    </script>
 </body>
 </html>
