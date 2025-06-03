@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="characters.css">
+    <style>
+        .fade-in-page {
+            animation: fadeInPage 0.7s;
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
 </head>
 <body>
     <div class="sakura-container"></div>
@@ -173,41 +182,11 @@
     </section>
 
     <!-- ส่วนท้ายของหน้า -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h2>เรียน<span>ญี่ปุ่น</span></h2>
-                    <p>เรียนรู้ภาษาญี่ปุ่นออนไลน์ฟรี ง่าย สนุก และมีประสิทธิภาพ</p>
-                </div>
-                <div class="footer-links">
-                    <h3>ลิงก์ด่วน</h3>
-                    <ul>
-                        <li><a href="index.html">หน้าแรก</a></li>
-                        <li><a href="main.html">เลือกเรียน</a></li>
-                        <li><a href="characters.html">ตัวอักษร</a></li>
-                        <li><a href="vocabulary.html">คำศัพท์</a></li>
-                        <li><a href="grammar.html">ไวยากรณ์</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h3>ติดต่อเรา</h3>
-                    <p>อีเมล: contact@learnjapanese.com</p>
-                    <p>โทรศัพท์: 02-123-4567</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 เรียนญี่ปุ่น. สงวนลิขสิทธิภาพทั้งหมด.</p>
-            </div>
-        </div>
-    </footer>
-
     <script src="characters.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('fade-in-page');
+    });
+    </script>
 </body>
 </html>
