@@ -149,7 +149,6 @@ document.getElementById('start-quiz')?.addEventListener('click', () => {
     } else if (currentCategory === 'all') {
         selectedVocabs = vocabData;
     } else if (currentCategory === 'category') {
-        // ถ้าเลือกหมวดหมู่ ให้ selectedVocabs เป็นคำศัพท์ที่เลือกในหมวดหมู่ (ถ้าไม่ได้เลือก category-item ใดเลย ให้ selectedVocabs = [])
         const activeCat = document.querySelector('.category-item.active');
         if (activeCat) {
             const cat = activeCat.textContent;
@@ -181,7 +180,6 @@ function generateQuestions() {
     const shuffled = [...selectedVocabs].sort(() => Math.random() - 0.5);
     
     if (isInfinity) {
-        // สำหรับโหมด Infinity จะสร้างแค่คำถามแรก
         const vocab = shuffled[0];
         const type = questionFormat === 'mix' ? 
             (Math.random() < 0.5 ? 'jp-th' : 'th-romaji') : 
@@ -194,7 +192,6 @@ function generateQuestions() {
             question: type === 'jp-th' ? vocab.jp : vocab.th
         });
         
-        // รีเซ็ตสถิติสำหรับโหมด Infinity
         infinityStats = {
             totalQuestions: 0,
             correctAnswers: 0,
@@ -202,7 +199,6 @@ function generateQuestions() {
             answerHistory: []
         };
     } else {
-        // สำหรับโหมดปกติ
         const count = Math.min(questionCount, shuffled.length);
         
         for (let i = 0; i < count; i++) {
@@ -228,16 +224,13 @@ function showQuestion() {
     const multipleChoice = document.querySelector('.multiple-choice');
     const textInput = document.querySelector('.text-input');
     
-    // อัพเดทข้อมูลคำถาม
     if (isInfinity) {
         document.querySelector('.question-number').textContent = `ข้อที่ ${infinityStats.totalQuestions + 1}`;
     } else {
         document.querySelector('.question-number').textContent = `ข้อที่ ${currentQuestion + 1}/${quizQuestions.length}`;
     }
     
-    // แสดงจำนวนการตอบผิดที่เหลือ
     if (isInfinity) {
-        // ซ่อนการแสดงจำนวนการตอบผิดในโหมด Infinity
         document.querySelector('.quiz-footer').style.display = 'none';
     } else {
         document.querySelector('.quiz-footer').style.display = 'flex';
@@ -246,27 +239,22 @@ function showQuestion() {
     
     questionText.textContent = question.question;
     
-    // อัพเดทแถบความคืบหน้า
     if (!isInfinity) {
         const progress = ((currentQuestion) / quizQuestions.length) * 100;
         document.querySelector('.progress').style.width = `${progress}%`;
     } else {
-        // ในโหมด Infinity ไม่มีแถบความคืบหน้า
         document.querySelector('.progress').style.width = '0%';
     }
     
-    // แสดงตัวเลือกหรือช่องกรอกตามโหมด
     if (currentMode === 'easy' || (isInfinity && infinityInputType === 'multiple-choice')) {
         multipleChoice.style.display = 'grid';
         textInput.style.display = 'none';
         
-        // สร้างตัวเลือก
         const choices = generateChoices(question);
         multipleChoice.innerHTML = choices.map((choice, i) => `
             <button class="choice-btn" data-answer="${choice}">${choice}</button>
         `).join('');
         
-        // เพิ่ม event listener
         multipleChoice.querySelectorAll('.choice-btn').forEach(btn => {
             btn.onclick = () => checkAnswer(btn.dataset.answer);
         });
@@ -274,11 +262,9 @@ function showQuestion() {
         multipleChoice.style.display = 'none';
         textInput.style.display = 'flex';
         
-        // รีเซ็ตช่องกรอก
         textInput.querySelector('input').value = '';
         textInput.querySelector('input').focus();
         
-        // เพิ่ม event listener
         textInput.querySelector('.submit-btn').onclick = () => {
             const answer = textInput.querySelector('input').value.trim();
             if (answer) checkAnswer(answer);
@@ -292,7 +278,9 @@ function showQuestion() {
         };
     }
     
-    // เริ่มนับถอยหลังสำหรับโหมดยาก
+    if (currentMode === 'hard') {
+        startTimer();
+    }
 }
 
 // สร้างตัวเลือกสำหรับโหมดง่าย
@@ -300,7 +288,6 @@ function generateChoices(question) {
     const correctAnswer = question.correct;
     const choices = [correctAnswer];
     
-    // สร้างตัวเลือกที่ไม่ซ้ำกัน 3 ตัวเลือก
     while (choices.length < 4) {
         const randomVocab = selectedVocabs[Math.floor(Math.random() * selectedVocabs.length)];
         const randomAnswer = question.type === 'jp-th' ? randomVocab.th : randomVocab.romaji;
@@ -310,7 +297,6 @@ function generateChoices(question) {
         }
     }
     
-    // สลับตำแหน่งตัวเลือก
     return choices.sort(() => Math.random() - 0.5);
 }
 
@@ -326,7 +312,7 @@ function startTimer() {
         
         if (timeLeft <= 0) {
             clearInterval(timer);
-            checkAnswer(''); // ส่งคำตอบว่างเพื่อนับเป็นตอบผิด
+            checkAnswer('');
         }
     }, 1000);
 }
@@ -341,7 +327,6 @@ function updateInfinityStats(isCorrect, question, answer) {
         infinityStats.wrongAnswers++;
     }
     
-    // เก็บประวัติคำตอบล่าสุด 10 ข้อ
     infinityStats.answerHistory.unshift({
         question: question.question,
         correctAnswer: question.correct,
@@ -350,12 +335,10 @@ function updateInfinityStats(isCorrect, question, answer) {
         type: question.type
     });
     
-    // จำกัดประวัติให้เก็บแค่ 10 รายการล่าสุด
     if (infinityStats.answerHistory.length > 10) {
         infinityStats.answerHistory.pop();
     }
     
-    // อัพเดทแสดงสถิติ
     updateInfinityStatsDisplay();
 }
 
@@ -364,17 +347,14 @@ function updateInfinityStatsDisplay() {
     const statsPanel = document.getElementById('infinity-stats-panel');
     if (!statsPanel) return;
     
-    // อัพเดทสถิติรวม
     document.getElementById('infinity-total-questions').textContent = infinityStats.totalQuestions;
     document.getElementById('infinity-correct-answers').textContent = infinityStats.correctAnswers;
     document.getElementById('infinity-wrong-answers').textContent = infinityStats.wrongAnswers;
     
-    // คำนวณเปอร์เซ็นต์ความแม่นยำ
     const accuracy = infinityStats.totalQuestions > 0 ? 
         Math.round((infinityStats.correctAnswers / infinityStats.totalQuestions) * 100) : 0;
     document.getElementById('infinity-accuracy').textContent = `${accuracy}%`;
     
-    // อัพเดทประวัติคำตอบ
     const historyContainer = document.getElementById('infinity-answer-history');
     historyContainer.innerHTML = '';
     
@@ -398,10 +378,8 @@ function updateInfinityStatsDisplay() {
 
 // สร้างคำถามใหม่สำหรับโหมด Infinity
 function generateNextInfinityQuestion() {
-    // สุ่มคำศัพท์ที่ไม่ซ้ำกับคำถามล่าสุด (ถ้าเป็นไปได้)
     let shuffled = [...selectedVocabs].sort(() => Math.random() - 0.5);
     
-    // หลีกเลี่ยงการถามคำถามซ้ำ
     if (infinityStats.answerHistory.length > 0 && shuffled.length > 1) {
         const lastQuestion = infinityStats.answerHistory[0].question;
         shuffled = shuffled.filter(vocab => 
@@ -421,22 +399,19 @@ function generateNextInfinityQuestion() {
         question: type === 'jp-th' ? vocab.jp : vocab.th
     };
     
-    // รีเซ็ตคำถามปัจจุบัน
     currentQuestion = 0;
 }
 
 // ตรวจสอบคำตอบ
 function checkAnswer(answer) {
-    clearInterval(timer); // หยุดนับถอยหลัง
+    clearInterval(timer);
     
     const question = quizQuestions[currentQuestion];
     const isCorrect = answer.toLowerCase() === question.correct.toLowerCase();
     
     if (isInfinity) {
-        // อัพเดทสถิติสำหรับโหมด Infinity
         updateInfinityStats(isCorrect, question, answer);
     } else {
-        // อัพเดทคะแนนและการตอบผิดสำหรับโหมดปกติ
         if (isCorrect) {
             correctAnswers++;
         } else {
@@ -445,7 +420,6 @@ function checkAnswer(answer) {
         }
     }
     
-    // แสดงผลลัพธ์
     const resultElement = document.createElement('div');
     resultElement.className = `answer-result ${isCorrect ? 'correct' : 'wrong'}`;
     resultElement.innerHTML = isCorrect ? 
@@ -453,22 +427,18 @@ function checkAnswer(answer) {
         `<i class="fas fa-times"></i> ผิด! คำตอบที่ถูกคือ: ${question.correct}`;
     document.getElementById('quiz-questions').appendChild(resultElement);
     
-    // ลบผลลัพธ์หลังจาก 2 วินาที
     setTimeout(() => {
         resultElement.remove();
         
         if (isInfinity) {
-            // สร้างคำถามใหม่สำหรับโหมด Infinity
             generateNextInfinityQuestion();
             showQuestion();
         } else {
-            // ตรวจสอบว่าจบ Quiz หรือไม่สำหรับโหมดปกติ
             if (mistakesLeft <= 0) {
                 endQuiz('mistakes');
             } else if (currentQuestion + 1 >= quizQuestions.length) {
                 endQuiz('complete');
             } else {
-                // ไปยังคำถามถัดไป
                 currentQuestion++;
                 showQuestion();
             }
@@ -476,21 +446,26 @@ function checkAnswer(answer) {
     }, 2000);
 }
 
-// แสดงผลลัพธ์
-function showResults() {
+// จบ Quiz
+function endQuiz(reason) {
+    if (reason === 'mistakes') {
+        alert('คุณตอบผิดเกินจำนวนที่กำหนดแล้ว!');
+    }
+    
+    showResults();
     questionsSection.style.display = 'none';
     resultsSection.style.display = 'block';
-    
-    // คำนวณคะแนน
+}
+
+// แสดงผลลัพธ์
+function showResults() {
     const total = quizQuestions.length;
     const score = Math.round((correctAnswers / total) * 100);
     
-    // แสดงคะแนน
     document.querySelector('.score-percent').textContent = `${score}%`;
     document.querySelector('.correct-count').textContent = correctAnswers;
     document.querySelector('.wrong-count').textContent = wrongAnswers;
     
-    // แสดงข้อความให้กำลังใจ
     const feedback = document.querySelector('.feedback-message');
     if (score >= 80) {
         feedback.textContent = 'เยี่ยมมาก! คุณเก่งมากเลย';
@@ -500,7 +475,6 @@ function showResults() {
         feedback.textContent = 'ไม่เป็นไร ลองฝึกฝนเพิ่มเติมนะ';
     }
     
-    // แสดงเฉลย
     const answersList = document.querySelector('.answers-list');
     answersList.innerHTML = quizQuestions.map((q, i) => `
         <div class="answer-item">
@@ -525,17 +499,14 @@ function showResults() {
 
 // ปุ่มลองใหม่
 document.querySelector('.retry-btn')?.addEventListener('click', () => {
-    // รีเซ็ตค่าต่างๆ
     currentQuestion = 0;
     correctAnswers = 0;
     wrongAnswers = 0;
     mistakesLeft = currentMode === 'easy' ? 10 : currentMode === 'medium' ? 5 : 3;
     
-    // สลับกลับไปหน้า Quiz
     resultsSection.style.display = 'none';
     questionsSection.style.display = 'block';
     
-    // สร้างคำถามใหม่และเริ่ม
     generateQuestions();
     showQuestion();
 });
@@ -550,4 +521,4 @@ document.querySelector('.back-btn')?.addEventListener('click', () => {
 window.addEventListener('DOMContentLoaded', () => {
     renderCategories();
     renderVocabCheckboxes();
-}); 
+});
