@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เรียนภาษาญี่ปุ่น - Devnexus.nihon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- ส่วนดอกซากุระลอย -->
+    <div class="sakura-container" id="sakura-container"></div>
+
+    <!-- ส่วนเฮดเดอร์ -->
+    <header>
+        <div class="logo">
+            <h1>Devnexus.<span class="nihon">nihon</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="main.html" class="active">บทเรียน</a></li>
+                <li><a href="characters.html">ตัวอักษรญี่ปุ่น</a></li>
+                <li><a href="vocabulary.html">คำศัพท์</a></li>
+                <li><a href="kanji.html">คันจิ</a></li>
+                <li><a href="grammar.html">ไวยากรณ์</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ส่วนหลัก -->
+    <main>
+        <section class="learning-hero">
+            <div class="learning-hero-content">
+                <h1 class="slide-up">เลือกเส้นทางการเรียนรู้<br>ภาษาญี่ปุ่นของคุณ</h1>
+                <p class="slide-up delay-1">เลือกหัวข้อที่คุณสนใจและเริ่มต้นการเรียนรู้ภาษาญี่ปุ่นได้ทันที ไม่ว่าคุณจะเป็นผู้เริ่มต้นหรือต้องการพัฒนาทักษะเพิ่มเติม</p>
+            </div>
+        </section>
+
+        <section class="learning-paths">
+            <div class="container">
+                <h2 class="section-title">เลือกเส้นทางการเรียนรู้</h2>
+                
+                <div class="learning-cards" style="flex-wrap:nowrap;overflow-x:auto;gap:2rem;">
+                    <!-- บัตรเรียนตัวอักษร -->
+                    <div class="learning-card slide-up">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-font"></i>
+                            </div>
+                            <h3>ตัวอักษรญี่ปุ่น</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>เรียนรู้ตัวอักษรฮิระงะนะ คาตาคานะ และคันจิพื้นฐาน พร้อมวิธีการเขียนและการออกเสียง</p>
+                            <div class="level-badges">
+                                <span class="level-badge beginner">N5</span>
+                                <span class="level-badge intermediate">N4</span>
+                                <span class="level-badge advanced">N3</span>
+                            </div>
+                            <div class="card-features">
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>ฮิระงะนะ 46 ตัว</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>คาตาคานะ 46 ตัว</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>คันจิพื้นฐาน 100 ตัว</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="characters.html" class="btn primary">เริ่มเรียนตัวอักษร</a>
+                        </div>
+                    </div>
+
+                    <!-- บัตรเรียนคำศัพท์ -->
+                    <div class="learning-card slide-up delay-1">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>คำศัพท์ภาษาญี่ปุ่น</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>เรียนรู้คำศัพท์ภาษาญี่ปุ่นที่ใช้บ่อยในชีวิตประจำวัน แบ่งตามหมวดหมู่และระดับความยาก</p>
+                            <div class="level-badges">
+                                <span class="level-badge beginner">N5</span>
+                                <span class="level-badge intermediate">N4</span>
+                                <span class="level-badge advanced">N3</span>
+                            </div>
+                            <div class="card-features">
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>คำศัพท์ชีวิตประจำวัน</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>คำศัพท์ธุรกิจและการทำงาน</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>สำนวนและวลีที่ใช้บ่อย</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="vocabulary.html" class="btn primary">เริ่มเรียนคำศัพท์</a>
+                        </div>
+                    </div>
+
+                    <!-- บัตรเรียนไวยากรณ์ -->
+                    <div class="learning-card slide-up delay-2">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-pencil-ruler"></i>
+                            </div>
+                            <h3>ไวยากรณ์ภาษาญี่ปุ่น</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>เรียนรู้โครงสร้างประโยคและไวยากรณ์ภาษาญี่ปุ่นตั้งแต่ระดับพื้นฐานจนถึงระดับกลาง</p>
+                            <div class="level-badges">
+                                <span class="level-badge beginner">N5</span>
+                                <span class="level-badge intermediate">N4</span>
+                                <span class="level-badge advanced">N3</span>
+                            </div>
+                            <div class="card-features">
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>โครงสร้างประโยคพื้นฐาน</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>รูปประโยคต่างๆ</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>การผันคำกริยาและคำคุณศัพท์</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="grammar.html" class="btn primary">เริ่มเรียนไวยากรณ์</a>
+                        </div>
+                    </div>
+
+                    <!-- บัตรเรียนคันจิ -->
+                    <div class="learning-card slide-up delay-3">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3069/3069182.png" alt="คันจิ" style="width: 60px; height: 60px;">
+                            </div>
+                            <h3>คันจิภาษาญี่ปุ่น</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>เรียนรู้คันจิพื้นฐานที่ใช้บ่อยในชีวิตประจำวัน พร้อมวิธีการอ่านและตัวอย่างการใช้งาน</p>
+                            <div class="level-badges">
+                                <span class="level-badge beginner">N5</span>
+                                <span class="level-badge intermediate">N4</span>
+                                <span class="level-badge advanced">N3</span>
+                            </div>
+                            <div class="card-features">
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>คันจิพื้นฐาน 100 ตัว</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>ตัวอย่างการอ่านฟุริกานะ</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>ตัวอย่างคำศัพท์ที่ใช้คันจิ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="kanji.html" class="btn primary">เริ่มเรียนคันจิ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="learning-levels">
+            <div class="container">
+                <h2 class="section-title">ระดับการเรียนรู้</h2>
+                <p class="section-description">เลือกระดับการเรียนรู้ที่เหมาะสมกับความสามารถของคุณ</p>
+                
+                <div class="level-cards">
+                    <div class="level-card beginner-card slide-up">
+                        <div class="level-icon">N5</div>
+                        <h3>ระดับเริ่มต้น</h3>
+                        <p>เหมาะสำหรับผู้เริ่มต้นเรียนภาษาญี่ปุ่น เรียนรู้คำศัพท์และไวยากรณ์พื้นฐานที่ใช้ในชีวิตประจำวัน</p>
+                        <ul class="level-features">
+                            <li><i class="fas fa-check"></i> ตัวอักษรฮิระงะนะและคาตาคานะ</li>
+                            <li><i class="fas fa-check"></i> คันจิพื้นฐาน 100 ตัว</li>
+                            <li><i class="fas fa-check"></i> คำศัพท์ประมาณ 800 คำ</li>
+                            <li><i class="fas fa-check"></i> ไวยากรณ์พื้นฐาน</li>
+                        </ul>
+                        <a href="#" class="btn-level">เริ่มเรียน N5</a>
+                    </div>
+                    
+                    <div class="level-card intermediate-card slide-up delay-1">
+                        <div class="level-icon">N4</div>
+                        <h3>ระดับต้น</h3>
+                        <p>สำหรับผู้ที่มีพื้นฐานภาษาญี่ปุ่นแล้ว เรียนรู้คำศัพท์และไวยากรณ์ที่ซับซ้อนขึ้น</p>
+                        <ul class="level-features">
+                            <li><i class="fas fa-check"></i> คันจิประมาณ 300 ตัว</li>
+                            <li><i class="fas fa-check"></i> คำศัพท์ประมาณ 1,500 คำ</li>
+                            <li><i class="fas fa-check"></i> ไวยากรณ์ระดับกลาง</li>
+                            <li><i class="fas fa-check"></i> การสนทนาในสถานการณ์ต่างๆ</li>
+                        </ul>
+                        <a href="#" class="btn-level">เริ่มเรียน N4</a>
+                    </div>
+                    
+                    <div class="level-card advanced-card slide-up delay-2">
+                        <div class="level-icon">N3</div>
+                        <h3>ระดับกลาง</h3>
+                        <p>สำหรับผู้ที่มีความรู้ภาษาญี่ปุ่นในระดับหนึ่งแล้ว เรียนรู้การใช้ภาษาในบริบทที่หลากหลาย</p>
+                        <ul class="level-features">
+                            <li><i class="fas fa-check"></i> คันจิประมาณ 650 ตัว</li>
+                            <li><i class="fas fa-check"></i> คำศัพท์ประมาณ 3,000 คำ</li>
+                            <li><i class="fas fa-check"></i> ไวยากรณ์ที่ซับซ้อน</li>
+                            <li><i class="fas fa-check"></i> การอ่านบทความและข่าว</li>
+                        </ul>
+                        <a href="#" class="btn-level">เริ่มเรียน N3</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

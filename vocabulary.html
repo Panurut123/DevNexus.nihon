@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำศัพท์ภาษาญี่ปุ่น - Devnexus.nihon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="vocabulary.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sakura-container"></div>
+    <header>
+        <div class="logo">
+            <h1><span class="logo-dev">Devnexus</span>.<span class="logo-nihon">nihon</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="main.html">บทเรียน</a></li>
+                <li><a href="characters.html">ตัวอักษรญี่ปุ่น</a></li>
+                <li><a href="vocabulary.html" class="active">คำศัพท์</a></li>
+                <li><a href="kanji.html">คันจิ</a></li>
+                <li><a href="grammar.html">ไวยากรณ์</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="vocab-header">
+            <input type="text" placeholder="ค้นหาคำศัพท์..." class="vocab-search" />
+            <button class="go-quiz-btn">ไปทำแบบทดสอบ</button>
+            <button class="vocab-random-btn">สุ่มคำศัพท์</button>
+            <button class="vocab-fav-btn">ดูคำโปรด</button>
+        </section>
+        <section class="vocab-category-section">
+            <div class="vocab-filter-container">
+                <label>หมวดหมู่:
+                    <select class="vocab-category-filter">
+                        <!-- จะสร้างโดย JavaScript -->
+                    </select>
+                </label>
+            </div>
+        </section>
+        <section class="vocab-list">
+            <!-- ตัวอย่างคำศัพท์ -->
+            <div class="vocab-card">
+                <div class="jp-word">ありがとう</div>
+                <div class="romaji">arigatou</div>
+                <div class="meaning">ขอบคุณ</div>
+                <button class="audio-btn">▶️</button>
+                <button class="fav-btn">☆</button>
+            </div>
+            <div class="vocab-card">
+                <div class="jp-word">さようなら</div>
+                <div class="romaji">sayounara</div>
+                <div class="meaning">ลาก่อน</div>
+                <button class="audio-btn">▶️</button>
+                <button class="fav-btn">☆</button>
+            </div>
+            <!-- เพิ่มเติมโดย JS -->
+        </section>
+    </main>
+    <div id="vocab-modal" class="vocab-modal" style="display:none;">
+        <div class="vocab-modal-bg"></div>
+        <div class="vocab-modal-content">
+            <button class="vocab-modal-close">×</button>
+            <div class="vocab-modal-body">
+                <!-- ข้อมูลคำศัพท์จะแสดงที่นี่ด้วย JS -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="favorites-modal" class="vocab-modal" style="display:none;">
+        <div class="vocab-modal-bg"></div>
+        <div class="vocab-modal-content favorites-modal-content">
+            <button class="vocab-modal-close">×</button>
+            <h3 class="favorites-title">คำศัพท์ที่ชอบ</h3>
+            <div class="favorites-list">
+                <!-- คำศัพท์โปรดจะแสดงที่นี่ด้วย JS -->
+            </div>
+        </div>
+    </div>
+    <script src="vocabulary.js"></script>
+    <script src="vocabulary-app.js"></script>
+</body>
+</html>

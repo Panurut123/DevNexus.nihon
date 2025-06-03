@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ไวยากรณ์ภาษาญี่ปุ่น - Devnexus.nihon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="grammar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sakura-container"></div>
+    <header>
+        <div class="logo">
+            <h1><span class="logo-dev">Devnexus</span>.<span class="logo-nihon">nihon</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="main.html">บทเรียน</a></li>
+                <li><a href="characters.html">ตัวอักษรญี่ปุ่น</a></li>
+                <li><a href="vocabulary.html">คำศัพท์</a></li>
+                <li><a href="kanji.html">คันจิ</a></li>
+                <li><a href="grammar.html" class="active">ไวยากรณ์</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="action-buttons-container">
+        <a href="#" class="grammar-quiz-btn"><i class="fas fa-book"></i> เรียนไวยากรณ์เพิ่มเติม</a>
+    </div>
+    <main>
+        <section class="grammar-header">
+            <h2>ไวยากรณ์ภาษาญี่ปุ่น</h2>
+            <div class="grammar-tools">
+                <input type="text" class="grammar-search" placeholder="ค้นหาไวยากรณ์...">
+                <button class="grammar-random-btn"><i class="fas fa-random"></i> สุ่มไวยากรณ์</button>
+            </div>
+        </section>
+        <section class="grammar-content">
+            <!-- เนื้อหาไวยากรณ์จะแสดงที่นี่ด้วย JS -->
+            <div id="grammar-detail">
+                <div class="grammar-detail-section">
+                    <div class="grammar-title">การใช้ です (desu)</div>
+                    <div class="grammar-pattern">〜は〜です</div>
+                    <div class="grammar-romaji">~wa ~desu</div>
+                    <div class="grammar-explanation">
+                        เป็นรูปแบบประโยคพื้นฐานที่ใช่บอกว่า "A คือ B" หรือใช้แสดงการยืนยันข้อมูล โดย です (desu) เป็นคำกริยาช่วยที่แสดงความสุภาพ มักใช้ในการแนะนำตัว อธิบายสิ่งของของ หรือข้อมูลทั่วไป
+                    </div>
+                    <div class="grammar-examples">
+                        <div class="grammar-example-item">
+                            <div class="grammar-example-jp">私は学生です。</div>
+                            <div class="grammar-example-romaji">Watashi wa gakusei desu.</div>
+                            <div class="grammar-example-th">ฉันเป็นนักเรียน</div>
+                        </div>
+                        <div class="grammar-example-item">
+                            <div class="grammar-example-jp">これは本です。</div>
+                            <div class="grammar-example-romaji">Kore wa hon desu.</div>
+                            <div class="grammar-example-th">นี่คือหนังสือ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="grammar-modal" class="grammar-modal" style="display:none;">
+        <div class="grammar-modal-bg"></div>
+        <div class="grammar-modal-content">
+            <button class="grammar-modal-close">×</button>
+            <div class="grammar-modal-body">
+                
+            </div>
+        </div>
+    </div>
+    <script src="grammar.js"></script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devnexus.nihon - เรียนรู้ภาษาญี่ปุ่นออนไลน์</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sakura-container"></div>
+    
+    <header>
+        <div class="logo">
+            <h1><span class="logo-dev">Devnexus</span>.<span class="logo-nihon">nihon</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">หน้าหลัก</a></li>
+                <li><a href="main.html">บทเรียน</a></li>
+                <li><a href="characters.html">ตัวอักษรญี่ปุ่น</a></li>
+                <li><a href="vocabulary.html">คำศัพท์</a></li>
+                <li><a href="kanji.html">คันจิ</a></li>
+                <li><a href="grammar.html">ไวยากรณ์</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2 class="fade-in">เรียนรู้<span class="accent">ภาษาญี่ปุ่น</span>ได้อย่างสนุกสนาน</h2>
+                <p class="fade-in delay-1">เริ่มต้นการเดินทางสู่การเรียนรู้ภาษาญี่ปุ่นกับ Devnexus.nihon</p>
+                <div class="cta-buttons fade-in delay-2">
+                    <a href="main.html" class="btn primary">เริ่มเรียน</a>
+                    <a href="#katakana" class="btn secondary">เกี่ยวกับเรา</a>
+                </div>
+            </div>
+            <div class="hero-image fade-in delay-3">
+                <img src="https://placehold.co/600x400/e66465/fff?text=日本語" alt="ภาษาญี่ปุ่น">
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2 class="section-title">โหมดการเรียนรู้</h2>
+            <div class="feature-cards">
+                <div class="card slide-up">
+                    <div class="card-icon easy">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>โหมดง่าย</h3>
+                    <p>เรียนรู้ด้วยตัวเลือก ไม่มีเวลาจำกัด ผิดได้ 10 ครั้ง</p>
+                    <a href="#" class="btn-small">เริ่มเลย</a>
+                </div>
+                <div class="card slide-up delay-1">
+                    <div class="card-icon medium">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                    <h3>โหมดกลาง</h3>
+                    <p>พิมพ์คำตอบเอง ไม่มีเวลาจำกัด ผิดได้ 5 ครั้ง</p>
+                    <a href="#" class="btn-small">เริ่มเลย</a>
+                </div>
+                <div class="card slide-up delay-2">
+                    <div class="card-icon hard">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>โหมดยาก</h3>
+                    <p>พิมพ์คำตอบเอง มีเวลาจำกัด ผิดได้ 3 ครั้ง</p>
+                    <a href="#" class="btn-small">เริ่มเลย</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="preview" class="preview">
+            <h2 class="section-title">ตัวอย่างตัวอักษร</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="hiragana">ฮิรากะนะ</button>
+                <button class="tab-btn" data-tab="katakana">คาตาคานะ</button>
+            </div>
+            <div class="tab-content">
+                <div id="hiragana-content" class="tab-pane active">
+                    <div class="character-grid">
+                        <div class="character-item">
+                            <div class="character">あ</div>
+                            <div class="romaji">a</div>
+                        </div>
+                        <div class="character-item">
+                            <div class="character">い</div>
+                            <div class="romaji">i</div>
+                        </div>
+                        <div class="character-item">
+                            <div class="character">う</div>
+                            <div class="romaji">u</div>
+                        </div>
+                        <div class="character-item">
+                            <div class="character">え</div>
+                            <div class="romaji">e</div>
+                        </div>
+                        <div class="character-item">
+                            <div class="character">お</div>
+                            <div class="romaji">o</div>
+                        </div>
+                        <!-- เพิ่มตัวอักษรอื่นๆ ตามต้องการ -->
+                    </div>
+                    <a href="#hiragana" class="btn secondary">ดูทั้งหมด</a>
+                </div>
+                <div id="katakana-content" class="tab-pane">
+                    <div class="character-grid">
+                        <div class="character-item">
+                            <div class="character">ア</div>
+                            <div class="romaji">a</div>
+                        </div>
+                        <div class="character-item">
+                            <div class="character">イ</div>
+                            <div class="romaji">i</div>
+                        </div>
+                        <div class="character-item">
+                            <div class="character">ウ</div>
+                            <div class="romaji">u</div>
+                        </div>
+                        <div class="character-item">
+                            <div class="character">エ</div>
+                            <div class="romaji">e</div>
+                        </div>
+                        <div class="character-item">
+                            <div class="character">オ</div>
+                            <div class="romaji">o</div>
+                        </div>
+                        <!-- เพิ่มตัวอักษรอื่นๆ ตามต้องการ -->
+                    </div>
+                    <a href="#katakana" class="btn secondary">ดูทั้งหมด</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="vocabulary" class="vocabulary">
+            <h2 class="section-title">ตัวอย่างคำศัพท์และไวยากรณ์</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="vocab">คำศัพท์</button>
+                <button class="tab-btn" data-tab="kanji">คันจิ</button>
+                <button class="tab-btn" data-tab="grammar">ไวยากรณ์</button>
+            </div>
+            <div class="tab-content">
+                <div id="vocab-content" class="tab-pane active">
+                    <div class="vocab-list">
+                        <div class="vocab-item">
+                            <div class="japanese">おはよう</div>
+                            <div class="romaji">ohayou</div>
+                            <div class="meaning">สวัสดี (ตอนเช้า)</div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="japanese">こんにちは</div>
+                            <div class="romaji">konnichiwa</div>
+                            <div class="meaning">สวัสดี (ตอนกลางวัน)</div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="japanese">こんばんは</div>
+                            <div class="romaji">konbanwa</div>
+                            <div class="meaning">สวัสดี (ตอนเย็น)</div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="japanese">ありがとう</div>
+                            <div class="romaji">arigatou</div>
+                            <div class="meaning">ขอบคุณ</div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="japanese">さようなら</div>
+                            <div class="romaji">sayounara</div>
+                            <div class="meaning">ลาก่อน</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="kanji-content" class="tab-pane">
+                    <div class="kanji-section">
+                        <h3 class="kanji-title">คันจิพื้นฐาน N5</h3>
+                        <div class="kanji-grid">
+                            <div class="kanji-card">
+                                <span class="kanji-character">日</span>
+                                <div class="kanji-readings">
+                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> ひ, び, か</span>
+                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> ニチ, ジツ</span>
+                                </div>
+                                <div class="kanji-meaning">วัน, ดวงอาทิตย์, ญี่ปุ่น</div>
+                            </div>
+                            
+                            <div class="kanji-card">
+                                <span class="kanji-character">本</span>
+                                <div class="kanji-readings">
+                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> もと</span>
+                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> ホン</span>
+                                </div>
+                                <div class="kanji-meaning">หนังสือ, ต้นฉบับ, จริง</div>
+                            </div>
+                            
+                            <div class="kanji-card">
+                                <span class="kanji-character">人</span>
+                                <div class="kanji-readings">
+                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> ひと</span>
+                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> ジン, ニン</span>
+                                </div>
+                                <div class="kanji-meaning">คน, มนุษย์</div>
+                            </div>
+                            
+                            <div class="kanji-card">
+                                <span class="kanji-character">月</span>
+                                <div class="kanji-readings">
+                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> つき</span>
+                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> ゲツ, ガツ</span>
+                                </div>
+                                <div class="kanji-meaning">เดือน, พระจันทร์</div>
+                            </div>
+                            
+                            <div class="kanji-card">
+                                <span class="kanji-character">水</span>
+                                <div class="kanji-readings">
+                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> みず</span>
+                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> スイ</span>
+                                </div>
+                                <div class="kanji-meaning">น้ำ</div>
+                            </div>
+                            
+                            <div class="kanji-card">
+                                <span class="kanji-character">火</span>
+                                <div class="kanji-readings">
+                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> ひ</span>
+                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> カ</span>
+                                </div>
+                                <div class="kanji-meaning">ไฟ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="grammar-content" class="tab-pane">
+                    <div class="grammar-section">
+                        <h3 class="grammar-title">ไวยากรณ์พื้นฐาน N5</h3>
+                        
+                        <div class="grammar-item">
+                            <h3>การใช้ です (desu)</h3>
+                            <div class="grammar-pattern">
+                                <div class="pattern">〜は〜です</div>
+                                <div class="pattern-romaji">~wa ~desu</div>
+                                <div class="explanation">
+                                    เป็นรูปแบบประโยคพื้นฐานที่ใช้บอกว่า "A คือ B" หรือใช้แสดงการยืนยันข้อมูล โดย です (desu) เป็นคำกริยาช่วยที่แสดงความสุภาพ มักใช้ในการแนะนำตัว อธิบายสิ่งของของ หรือข้อมูลทั่วไป
+                                </div>
+                            </div>
+                            
+                            <div class="grammar-notes">
+                                <h4>หมายเหตุสำคัญ</h4>
+                                <p>です (desu) เป็นรูปสุภาพ ในภาษาพูดแบบไม่เป็นทางการอาจใช้ だ (da) แทน และในประโยคปฏิเสธจะเปลี่ยนเป็น ではありません (dewa arimasen) หรือ じゃありません (ja arimasen) ในภาษาพูด</p>
+                            </div>
+                            
+                            <div class="example">
+                                <div class="example-title">ตัวอย่างประโยค</div>
+                                <div class="japanese">私は学生です。</div>
+                                <div class="romaji">Watashi wa gakusei desu.</div>
+                                <div class="meaning">ฉันเป็นนักเรียน/นักศึกษา</div>
+                                
+                                <div class="japanese">これは本です。</div>
+                                <div class="romaji">Kore wa hon desu.</div>
+                                <div class="meaning">นี่คือหนังสือ</div>
+                                
+                                <div class="japanese">あの人は日本人ではありません。</div>
+                                <div class="romaji">Ano hito wa nihonjin dewa arimasen.</div>
+                                <div class="meaning">คนนั้นไม่ใช่คนญี่ปุ่น</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

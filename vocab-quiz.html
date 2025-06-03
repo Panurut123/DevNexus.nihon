@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทดสอบคำศัพท์ - Nihon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="vocab-quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <main>
+        <!-- หน้าเลือกโหมด -->
+        <section id="vocab-quiz-setup" class="quiz-section">
+            <h2>เลือกโหมดการทดสอบคำศัพท์</h2>
+            <div class="difficulty-modes">
+                <button class="mode-btn easy" data-mode="easy">
+                    <i class="fas fa-star"></i>
+                    <span>โหมดง่าย</span>
+                    <small>เลือกตอบ 4 ตัวเลือก</small>
+                </button>
+                <button class="mode-btn medium" data-mode="medium">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>โหมดกลาง</span>
+                    <small>พิมพ์คำตอบเอง</small>
+                </button>
+                <button class="mode-btn hard" data-mode="hard">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>โหมดยาก</span>
+                    <small>พิมพ์คำตอบ + เวลาจำกัด</small>
+                </button>
+                <button class="mode-btn infinity" data-mode="infinity">
+                    <i class="fas fa-infinity"></i>
+                    <span>โหมด Infinity</span>
+                    <small>ไม่จำกัดข้อ + ดูสถิติละเอียด</small>
+                </button>
+            </div>
+            <div class="vocab-quiz-settings">
+                <h3>ตั้งค่าทดสอบ</h3>
+                <div class="setting-item">
+                    <label>ระดับคำศัพท์:</label>
+                    <select id="vocab-level-select">
+                        <option value="all">ทั้งหมด</option>
+                        <option value="N5">N5</option>
+                        <option value="N4">N4</option>
+                        <option value="N3">N3</option>
+                        <option value="เตรียมสอบ">เตรียมสอบ</option>
+                    </select>
+                </div>
+                <div class="setting-item question-count-setting">
+                    <label>จำนวนข้อ:</label>
+                    <input type="number" id="vocab-question-count" min="1" max="50" value="10">
+                </div>
+                <div class="setting-item">
+                    <label>รูปแบบคำถาม:</label>
+                    <select id="vocab-question-format">
+                        <option value="mix">สลับสุ่ม</option>
+                        <option value="japanese-meaning">ภาษาญี่ปุ่น → ความหมาย</option>
+                        <option value="meaning-japanese">ความหมาย → ภาษาญี่ปุ่น</option>
+                    </select>
+                </div>
+                <div class="setting-item infinity-input-type" style="display: none;">
+                    <label>รูปแบบการตอบ:</label>
+                    <select id="infinity-input-type">
+                        <option value="multiple-choice">ตัวเลือก 4 ข้อ</option>
+                        <option value="text-input">พิมพ์คำตอบเอง</option>
+                    </select>
+                </div>
+            </div>
+            <button id="start-vocab-quiz" class="start-btn">เริ่มทดสอบ</button>
+        </section>
+
+        <!-- หน้าแสดงคำถาม -->
+        <section id="vocab-quiz-questions" class="quiz-section" style="display: none;">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span class="question-number">ข้อที่ 1/10</span>
+                    <span class="timer">15</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div class="question-container">
+                <div class="question-text"></div>
+                <div class="answer-container">
+                    <!-- สำหรับโหมดง่าย -->
+                    <div class="multiple-choice" style="display: none;"></div>
+                    <!-- สำหรับโหมดกลางและยาก -->
+                    <div class="text-input" style="display: none;">
+                        <input type="text" placeholder="พิมพ์คำตอบ...">
+                        <button class="submit-btn">ตอบ</button>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-footer">
+                <div class="mistakes-left">
+                    เหลือการตอบผิด: <span class="mistakes-count">3</span> ครั้ง
+                </div>
+                <div class="infinity-stats" style="display: none;">
+                    <button class="show-stats-btn">แสดงสถิติ</button>
+                    <div class="stats-container" style="display: none;">
+                        <h3>สถิติการทดสอบ</h3>
+                        <div class="stats-summary">
+                            <div class="stat-item">
+                                <span class="stat-label">จำนวนข้อทั้งหมด:</span>
+                                <span class="total-questions">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">ตอบถูก:</span>
+                                <span class="correct-answers">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">ตอบผิด:</span>
+                                <span class="wrong-answers">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">ความแม่นยำ:</span>
+                                <span class="accuracy-percent">0%</span>
+                            </div>
+                        </div>
+                        <h4>คำตอบล่าสุด</h4>
+                        <div class="recent-answers">
+                            <!-- แสดงคำตอบล่าสุด 5 ข้อ -->
+                        </div>
+                        <button class="continue-quiz-btn">ทดสอบต่อ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- หน้าแสดงผลลัพธ์ -->
+        <section id="vocab-quiz-results" class="quiz-section" style="display: none;">
+            <div class="results-container">
+                <h2>ผลการทดสอบ</h2>
+                <div class="score-display">
+                    <div class="score-circle">0/10</div>
+                    <div class="score-details">
+                        <p>คะแนน: <span class="score-percentage">0%</span></p>
+                        <p>ตอบถูก: <span class="correct-count">0</span> ข้อ</p>
+                        <p>ตอบผิด: <span class="wrong-count">0</span> ข้อ</p>
+                    </div>
+                </div>
+                <div class="feedback-message"></div>
+                <div class="answers-review">
+                    <h3>คำตอบทั้งหมด</h3>
+                    <div class="answers-list">
+                        <!-- แสดงคำตอบทั้งหมด -->
+                    </div>
+                </div>
+                <div class="result-buttons">
+                    <button class="retry-btn">ลองใหม่</button>
+                    <button class="back-btn">กลับหน้าคำศัพท์</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="vocab-data.js"></script>
+    <script src="vocab-quiz.js"></script>
+</body>
+</html> 

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบคันจิ - Devnexus.nihon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="kanji-quiz.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sakura-container"></div>
+    <header>
+        <div class="logo">
+            <h1><span class="logo-dev">Devnexus</span>.<span class="logo-nihon">nihon</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="main.html">บทเรียน</a></li>
+                <li><a href="characters.html">ตัวอักษรญี่ปุ่น</a></li>
+                <li><a href="vocabulary.html">คำศัพท์</a></li>
+                <li><a href="kanji.html">คันจิ</a></li>
+                <li><a href="grammar.html">ไวยากรณ์</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- หน้าเลือกโหมด -->
+        <section id="kanji-quiz-setup" class="quiz-section">
+            <h2>เลือกโหมดการทดสอบคันจิ</h2>
+            <div class="difficulty-modes">
+                <button class="mode-btn easy" data-mode="easy">
+                    <i class="fas fa-star"></i>
+                    <span>โหมดง่าย</span>
+                    <small>เลือกตอบ 4 ตัวเลือก</small>
+                </button>
+                <button class="mode-btn medium" data-mode="medium">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>โหมดกลาง</span>
+                    <small>พิมพ์คำตอบเอง</small>
+                </button>
+                <button class="mode-btn hard" data-mode="hard">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>โหมดยาก</span>
+                    <small>พิมพ์คำตอบ + เวลาจำกัด</small>
+                </button>
+                <button class="mode-btn infinity" data-mode="infinity">
+                    <i class="fas fa-infinity"></i>
+                    <span>โหมด Infinity</span>
+                    <small>ไม่จำกัดข้อ + ดูสถิติละเอียด</small>
+                </button>
+            </div>
+            <div class="kanji-quiz-settings">
+                <h3>ตั้งค่าทดสอบ</h3>
+                <div class="setting-item">
+                    <label>ระดับคันจิ:</label>
+                    <select id="kanji-level-select">
+                        <option value="all">ทั้งหมด</option>
+                        <option value="N5">N5</option>
+                        <option value="N4">N4</option>
+                        <option value="N3">N3</option>
+                        <option value="เตรียมสอบ">เตรียมสอบ</option>
+                    </select>
+                </div>
+                <div class="setting-item question-count-setting">
+                    <label>จำนวนข้อ:</label>
+                    <input type="number" id="kanji-question-count" min="1" max="50" value="10">
+                </div>
+                <div class="setting-item">
+                    <label>รูปแบบคำถาม:</label>
+                    <select id="kanji-question-format">
+                        <option value="mix">สลับสุ่ม</option>
+                        <option value="kanji-meaning">คันจิ → ความหมาย</option>
+                        <option value="meaning-kanji">ความหมาย → คันจิ</option>
+                    </select>
+                </div>
+                <div class="setting-item infinity-input-type" style="display: none;">
+                    <label>รูปแบบการตอบ:</label>
+                    <select id="infinity-input-type">
+                        <option value="multiple-choice">ตัวเลือก 4 ข้อ</option>
+                        <option value="text-input">พิมพ์คำตอบเอง</option>
+                    </select>
+                </div>
+            </div>
+            <button id="start-kanji-quiz" class="start-btn">เริ่มทดสอบ</button>
+        </section>
+        <!-- หน้าแสดงคำถาม -->
+        <section id="kanji-quiz-questions" class="quiz-section" style="display: none;">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span class="question-number">ข้อที่ 1/10</span>
+                    <span class="timer">15</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div class="question-container">
+                <div class="question-text"></div>
+                <div class="answer-container">
+                    <!-- สำหรับโหมดง่าย -->
+                    <div class="multiple-choice" style="display: none;"></div>
+                    <!-- สำหรับโหมดกลางและยาก -->
+                    <div class="text-input" style="display: none;">
+                        <input type="text" placeholder="พิมพ์คำตอบ...">
+                        <button class="submit-btn">ตอบ</button>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-footer">
+                <div class="mistakes-left">
+                    เหลือการตอบผิด: <span class="mistakes-count">3</span> ครั้ง
+                </div>
+            </div>
+        </section>
+        
+        <section id="kanji-quiz-results" class="quiz-section" style="display: none;">
+            <div class="results-container">
+                <h2>ผลการทดสอบ</h2>
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span class="score-percent">85%</span>
+                    </div>
+                    <div class="score-details">
+                        <p>ตอบถูก: <span class="correct-count">8</span> ข้อ</p>
+                        <p>ตอบผิด: <span class="wrong-count">2</span> ข้อ</p>
+                    </div>
+                </div>
+                <div class="feedback-message"></div>
+                <div class="answers-review">
+                    <h3>เฉลยคำตอบ</h3>
+                    <div class="answers-list"></div>
+                </div>
+                <div class="result-buttons">
+                    <button class="retry-btn">ลองใหม่</button>
+                    <button class="back-btn">กลับไปหน้าเรียน</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="kanji.js"></script>
+    <script src="kanji-quiz.js"></script>
+</body>
+</html> 
