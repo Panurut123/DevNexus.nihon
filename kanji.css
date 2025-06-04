@@ -198,6 +198,34 @@
     margin-bottom: 0.7rem;
     text-align: center;
 }
+
+/* Random navigation button */
+.random-next-btn {
+    padding: 0.7rem 1.5rem;
+    border-radius: 30px;
+    border: none;
+    background: #ff6b6b;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.random-next-btn:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 80, 80, 0.4);
+}
+
+.random-next-btn:active {
+    transform: translateY(0);
+}
 @media (max-width: 600px) {
     .kanji-list {
         gap: 0.7rem;
