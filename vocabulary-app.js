@@ -140,12 +140,41 @@ if (searchInput) {
 
 // สุ่มคำศัพท์
 const randomBtn = document.querySelector('.vocab-random-btn');
+let currentRandomWord = null;
+
+function showRandomWord() {
+    if (currentList.length === 0) return;
+    currentRandomWord = currentList[Math.floor(Math.random() * currentList.length)];
+    showVocabModal(currentRandomWord);
+}
+
 if (randomBtn) {
-    randomBtn.onclick = () => {
-        const rand = currentList[Math.floor(Math.random() * currentList.length)];
-        renderVocabList([rand]);
+    randomBtn.onclick = (e) => {
+        e.preventDefault();
+        showRandomWord();
     };
 }
+
+// เพิ่มปุ่ม Next สำหรับสุ่มคำถัดไป
+function addRandomNavigationButtons() {
+    const modal = document.getElementById('vocab-modal');
+    if (!modal) return;
+    
+    // เพิ่มปุ่ม Next ถ้ายังไม่มี
+    if (!modal.querySelector('.random-next-btn')) {
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'random-next-btn';
+        nextBtn.innerHTML = 'ถัดไป &rarr;';
+        nextBtn.onclick = (e) => {
+            e.stopPropagation();
+            showRandomWord();
+        };
+        modal.querySelector('.vocab-modal-content').appendChild(nextBtn);
+    }
+}
+
+// เรียกเมื่อโหลดหน้าเว็บ
+addRandomNavigationButtons();
 
 // ดูคำโปรดในหน้าต่างป๊อปอัพ
 function showFavoritesModal() {
