@@ -528,4 +528,21 @@
         margin: 0;
         border-radius: 12px 12px 0 0;
     }
-} 
+    
+    /* เพิ่ม CSS สำหรับ .text-input และ .submit-btn ในหน้าจอมือถือ */
+    .text-input {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    
+    .text-input input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .submit-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
