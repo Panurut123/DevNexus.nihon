@@ -115,43 +115,10 @@ function showQuestion() {
     }
 }
 
-// ปรับปรุงฟังก์ชันทำความสะอาดสตริง
-const cleanString = str => {
-    if (!str) return '';
-    return str.toString()
-        .trim()
-        .replace(/\s+/g, ' ')
-        .replace(/[　\u3000]/g, ' ') // แทนที่ full-width space ด้วย normal space
-        .toLowerCase();
-};
+// ฟังก์ชันทำความสะอาดสตริง
+const cleanString = str => str.replace(/\s+/g, ' ').trim().toLowerCase();
 
-// ฟังก์ชันเปรียบเทียบคำตอบที่ปรับปรุงแล้ว
-function compareAnswers(userAnswer, correctAnswers) {
-    if (!userAnswer || !correctAnswers) return false;
-    
-    // ทำให้ correctAnswers เป็น array เสมอ
-    const answersArray = Array.isArray(correctAnswers) ? correctAnswers : [correctAnswers];
-    
-    const cleanUserAnswer = cleanString(userAnswer);
-    
-    return answersArray.some(answer => {
-        const cleanCorrectAnswer = cleanString(answer);
-        
-        // เปรียบเทียบแบบตรงทุกตัวอักษร
-        if (cleanUserAnswer === cleanCorrectAnswer) return true;
-        
-        // เปรียบเทียบโดยไม่สนใจช่องว่าง
-        if (cleanUserAnswer.replace(/\s/g, '') === cleanCorrectAnswer.replace(/\s/g, '')) return true;
-        
-        // สำหรับภาษาญี่ปุ่น - เปรียบเทียบโดยไม่สนใจตัวอักษรพิเศษ
-        const normalizeJapanese = (str) => str.replace(/[ー～〜・]/g, '');
-        if (normalizeJapanese(cleanUserAnswer) === normalizeJapanese(cleanCorrectAnswer)) return true;
-        
-        return false;
-    });
-}
-
-// แสดงตัวเลือก 4 ตัวเลือก (ปรับปรุงแล้ว)
+// แสดงตัวเลือก 4 ตัวเลือก
 function showMultipleChoice(questionObj) {
     const container = document.querySelector('.multiple-choice');
     container.style.display = 'grid';
@@ -191,19 +158,15 @@ function showMultipleChoice(questionObj) {
     const choices = [...wrongAnswers, questionObj.answer]
         .sort(() => 0.5 - Math.random());
     
-    // ไม่ใช้ encodeURIComponent/decodeURIComponent
-    container.innerHTML = choices.map((choice, index) => `
-        <button class="choice-btn" data-answer-index="${index}">
+    container.innerHTML = choices.map(choice => `
+        <button class="choice-btn" data-answer="${encodeURIComponent(choice)}">
             ${choice}
         </button>
     `).join('');
     
-    // เก็บ choices ไว้ใน global variable เพื่อใช้ตอนเช็คคำตอบ
-    window.currentChoices = choices;
-    
-    container.querySelectorAll('.choice-btn').forEach((btn, index) => {
+    container.querySelectorAll('.choice-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            checkAnswer(choices[index]);
+            checkAnswer(decodeURIComponent(this.dataset.answer));
         });
     });
 }
@@ -222,41 +185,21 @@ function showTextInput() {
     };
 }
 
-// ตรวจคำตอบ (ปรับปรุงแล้ว)
+// ตรวจคำตอบ
 function checkAnswer(userAnswer) {
     const quiz = window.kanjiQuiz;
     const currentQuestion = quiz.questions[quiz.currentIndex];
     const correctAnswer = currentQuestion.answer;
+    const acceptedAnswers = currentQuestion.kanji.acceptedAnswers || [correctAnswer];
     
-    // สร้าง array ของคำตอบที่ยอมรับได้
-    let acceptedAnswers = [correctAnswer];
+    // Сохраняем ответ пользователя для итогов
+    currentQuestion.userAnswer = userAnswer;
+
+    const isCorrect = acceptedAnswers.some(answer => 
+        cleanString(userAnswer) === cleanString(answer)
+    );
     
-    // เพิ่มคำตอบอื่นๆ ที่เป็นไปได้จาก kanji object
-    if (currentQuestion.kanji.acceptedAnswers && Array.isArray(currentQuestion.kanji.acceptedAnswers)) {
-        acceptedAnswers = [...acceptedAnswers, ...currentQuestion.kanji.acceptedAnswers];
-    }
-    
-    // เพิ่มความหมายหรือการอ่านอื่นๆ ถ้ามี
-    if (currentQuestion.kanji.meanings && Array.isArray(currentQuestion.kanji.meanings)) {
-        acceptedAnswers = [...acceptedAnswers, ...currentQuestion.kanji.meanings];
-    }
-    
-    if (currentQuestion.kanji.readings && Array.isArray(currentQuestion.kanji.readings)) {
-        acceptedAnswers = [...acceptedAnswers, ...currentQuestion.kanji.readings];
-    }
-    
-    // ลบ duplicate
-    acceptedAnswers = [...new Set(acceptedAnswers)];
-    
-    const isCorrect = compareAnswers(userAnswer, acceptedAnswers);
-    
-    console.log('=== Debug Info ===');
-    console.log('User Answer:', userAnswer);
-    console.log('Correct Answer:', correctAnswer);
-    console.log('Accepted Answers:', acceptedAnswers);
-    console.log('Is Correct:', isCorrect);
-    console.log('Clean User Answer:', cleanString(userAnswer));
-    console.log('Clean Correct Answer:', cleanString(correctAnswer));
+    console.log('User Answer:', userAnswer, 'Correct Answer:', correctAnswer, 'Is Correct:', isCorrect);
     
     if (quiz.isInfinity) {
         quiz.stats.totalQuestions++;
@@ -302,25 +245,17 @@ function checkAnswer(userAnswer) {
             }
             document.querySelector('.mistakes-count').textContent = quiz.maxMistakes - quiz.mistakes;
         }
-        
         if (quiz.mode === 'easy' || (quiz.isInfinity && quiz.inputType === 'multiple-choice')) {
             const buttons = document.querySelectorAll('.choice-btn');
-            buttons.forEach((btn, index) => {
-                const buttonAnswer = window.currentChoices[index];
-                
-                // เช็คว่าเป็นคำตอบที่ถูกต้องหรือไม่
-                if (compareAnswers(buttonAnswer, acceptedAnswers)) {
+            buttons.forEach(btn => {
+                if (acceptedAnswers.some(answer => cleanString(decodeURIComponent(btn.dataset.answer)) === cleanString(answer))) {
                     btn.classList.add('correct');
                 }
-                
-                // เช็คว่าเป็นคำตอบที่ผู้ใช้เลือกหรือไม่
-                if (buttonAnswer === userAnswer) {
+                if (cleanString(decodeURIComponent(btn.dataset.answer)) === cleanString(userAnswer)) {
                     btn.classList.add('wrong');
                 }
-                
                 btn.disabled = true;
             });
-            
             setTimeout(() => {
                 if (!quiz.isInfinity) {
                     quiz.currentIndex++;
@@ -334,7 +269,7 @@ function checkAnswer(userAnswer) {
                     quiz.currentIndex = 0;
                 }
                 showQuestion();
-            }, 1500); // เพิ่มเวลาให้ผู้เล่นเห็นคำตอบที่ถูกต้อง
+            }, 1000);
         } else {
             alert(`คำตอบที่ถูกต้องคือ: ${correctAnswer}\nคุณตอบ: ${userAnswer}`);
             document.querySelector('.text-input input').value = '';
@@ -467,18 +402,6 @@ function startTimer() {
     }, 1000);
 }
 
-// เพิ่มฟังก์ชันสำหรับ debug ข้อมูล kanji
-function debugKanjiData() {
-    console.log('=== Kanji Data Debug ===');
-    if (window.kanjiData && window.kanjiData.length > 0) {
-        const sample = window.kanjiData[0];
-        console.log('Sample Kanji Object:', sample);
-        console.log('Available properties:', Object.keys(sample));
-    } else {
-        console.log('No kanji data available');
-    }
-}
-
 document.getElementById('start-kanji-quiz').addEventListener('click', startKanjiQuiz);
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -535,7 +458,4 @@ document.addEventListener('DOMContentLoaded', function() {
             endQuiz();
         });
     }
-    
-    // เรียกใช้ debug เมื่อโหลดหน้า
-    setTimeout(debugKanjiData, 1000); // รอให้ข้อมูลโหลดเสร็จ
 });
