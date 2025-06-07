@@ -1,5 +1,12 @@
-// ข้อมูลไวยากรณ์ (ตัวอย่าง N5)
-const grammarData = [
+// โหลดข้อมูลไวยากรณ์ Minna no Nihongo
+let grammarData = [];
+
+// ตรวจสอบว่ามีข้อมูล Minna no Nihongo หรือไม่
+if (typeof minnaGrammarData !== 'undefined') {
+    grammarData = minnaGrammarData;
+} else {
+    // ถ้าไม่มี ใช้ข้อมูลเก่า
+    grammarData = [
     {
         id: 'desu',
         title: 'การใช้ です (desu)',
@@ -5270,7 +5277,8 @@ const grammarData = [
             compareWith: '～ことになりました (ตกลง) vs ～つもりです (ตั้งใจ)'
         }
 
-    ]
+    ];
+}
 
 let currentGrammarList = grammarData; // สำหรับ search/filter
 
@@ -5280,34 +5288,34 @@ const difficultyOrder = { 'ง่าย': 1, 'ปานกลาง': 2, 'ยา
 
 function sortGrammarList(list, sortBy = 'default', sortDir = 'asc') {
     return [...list].sort((a, b) => {
-        // Default: เรียง N5->N4->N3 และง่าย->ยาก
+        // Default: เรียงตามเล่ม และบท
         if (sortBy === 'default') {
-            const lvA = levelOrder[a.level] || 99;
-            const lvB = levelOrder[b.level] || 99;
-            if (lvA !== lvB) return lvA - lvB;
-            const diffA = difficultyOrder[a.difficulty] || 99;
-            const diffB = difficultyOrder[b.difficulty] || 99;
-            return diffA - diffB;
+            const bookA = a.minnaBook || 99;
+            const bookB = b.minnaBook || 99;
+            if (bookA !== bookB) return bookA - bookB;
+            const chapterA = a.minnaChapter || 99;
+            const chapterB = b.minnaChapter || 99;
+            return chapterA - chapterB;
         }
-        if (sortBy === 'level') {
-            const lvA = levelOrder[a.level] || 99;
-            const lvB = levelOrder[b.level] || 99;
-            return sortDir === 'asc' ? lvA - lvB : lvB - lvA;
+        if (sortBy === 'book') {
+            const bookA = a.minnaBook || 99;
+            const bookB = b.minnaBook || 99;
+            return sortDir === 'asc' ? bookA - bookB : bookB - bookA;
         }
-        if (sortBy === 'difficulty') {
-            const diffA = difficultyOrder[a.difficulty] || 99;
-            const diffB = difficultyOrder[b.difficulty] || 99;
-            return sortDir === 'asc' ? diffA - diffB : diffB - diffA;
+        if (sortBy === 'chapter') {
+            const chapterA = a.minnaChapter || 99;
+            const chapterB = b.minnaChapter || 99;
+            return sortDir === 'asc' ? chapterA - chapterB : chapterB - chapterA;
         }
         return 0;
     });
 }
 
-function filterGrammarList(list, levelFilter, diffFilter) {
+function filterGrammarList(list, bookFilter, chapterFilter) {
     return list.filter(g => {
         let ok = true;
-        if (levelFilter && levelFilter !== 'all') ok = ok && g.level === levelFilter;
-        if (diffFilter && diffFilter !== 'all') ok = ok && g.difficulty === diffFilter;
+        if (bookFilter && bookFilter !== 'all') ok = ok && g.minnaBook == bookFilter;
+        if (chapterFilter && chapterFilter !== 'all') ok = ok && g.minnaChapter == chapterFilter;
         return ok;
     });
 }
@@ -5322,29 +5330,49 @@ function renderGrammarFilterBar() {
         if (grammarHeader) grammarHeader.appendChild(bar);
     }
     bar.innerHTML = `
-        <label>ระดับ:
-            <select class="grammar-filter-level">
+        <label>เล่ม:
+            <select class="grammar-filter-book">
                 <option value="all">ทั้งหมด</option>
-                <option value="N5">N5</option>
-                <option value="N4">N4</option>
-                <option value="N3">N3</option>
+                <option value="1">เล่ม 1</option>
+                <option value="2">เล่ม 2</option>
             </select>
         </label>
-        <label>ความยาก:
-            <select class="grammar-filter-difficulty">
+        <label>บท:
+            <select class="grammar-filter-chapter">
                 <option value="all">ทั้งหมด</option>
-                <option value="ง่าย">ง่าย</option>
-                <option value="ปานกลาง">ปานกลาง</option>
-                <option value="ยาก">ยาก</option>
+                <option value="1">บท 1</option>
+                <option value="2">บท 2</option>
+                <option value="3">บท 3</option>
+                <option value="4">บท 4</option>
+                <option value="5">บท 5</option>
+                <option value="6">บท 6</option>
+                <option value="7">บท 7</option>
+                <option value="8">บท 8</option>
+                <option value="9">บท 9</option>
+                <option value="10">บท 10</option>
+                <option value="11">บท 11</option>
+                <option value="12">บท 12</option>
+                <option value="13">บท 13</option>
+                <option value="14">บท 14</option>
+                <option value="15">บท 15</option>
+                <option value="16">บท 16</option>
+                <option value="17">บท 17</option>
+                <option value="18">บท 18</option>
+                <option value="19">บท 19</option>
+                <option value="20">บท 20</option>
+                <option value="21">บท 21</option>
+                <option value="22">บท 22</option>
+                <option value="23">บท 23</option>
+                <option value="24">บท 24</option>
+                <option value="25">บท 25</option>
             </select>
         </label>
         <label>เรียง:
             <select class="grammar-sort-by">
-                <option value="default">ง่าย → ยาก</option>
-                <option value="level-asc">N5 → N3</option>
-                <option value="level-desc">N3 → N5</option>
-                <option value="difficulty-asc">ง่าย → ยาก</option>
-                <option value="difficulty-desc">ยาก → ง่าย</option>
+                <option value="default">บทต่อเนื่อง</option>
+                <option value="book-asc">เล่ม 1 → 2</option>
+                <option value="chapter-asc">บท 1 → 25</option>
+                <option value="chapter-desc">บท 25 → 1</option>
             </select>
         </label>
     `;
@@ -5365,17 +5393,17 @@ function renderGrammarList(list) {
         // badge
         const badgeDiv = document.createElement('div');
         badgeDiv.className = 'grammar-topic-badges';
-        if (grammar.level) {
-            const levelBadge = document.createElement('span');
-            levelBadge.className = 'grammar-badge grammar-badge-level';
-            levelBadge.textContent = grammar.level;
-            badgeDiv.appendChild(levelBadge);
+        if (grammar.minnaBook) {
+            const bookBadge = document.createElement('span');
+            bookBadge.className = 'grammar-badge grammar-badge-book';
+            bookBadge.textContent = `เล่ม ${grammar.minnaBook}`;
+            badgeDiv.appendChild(bookBadge);
         }
-        if (grammar.difficulty) {
-            const diffBadge = document.createElement('span');
-            diffBadge.className = 'grammar-badge grammar-badge-difficulty';
-            diffBadge.textContent = grammar.difficulty;
-            badgeDiv.appendChild(diffBadge);
+        if (grammar.minnaChapter) {
+            const chapterBadge = document.createElement('span');
+            chapterBadge.className = `grammar-badge grammar-badge-chapter grammar-badge-chapter-${grammar.minnaChapter}`;
+            chapterBadge.textContent = `บท ${grammar.minnaChapter}`;
+            badgeDiv.appendChild(chapterBadge);
         }
         topicElement.appendChild(badgeDiv);
         listDiv.appendChild(topicElement);
@@ -5386,31 +5414,30 @@ function renderGrammarList(list) {
 // --- ฟังก์ชันโหลดเริ่มต้นและ event filter/sort ---
 window.addEventListener('DOMContentLoaded', () => {
     renderGrammarFilterBar();
-    let levelFilter = 'all';
-    let diffFilter = 'all';
+    let bookFilter = 'all';
+    let chapterFilter = 'all';
     let sortBy = 'default';
-    let sortDir = 'asc';
+    
     function updateList() {
-        let filtered = filterGrammarList(grammarData, levelFilter, diffFilter);
-        if (sortBy === 'level-asc') {
-            filtered = sortGrammarList(filtered, 'level', 'asc');
-        } else if (sortBy === 'level-desc') {
-            filtered = sortGrammarList(filtered, 'level', 'desc');
-        } else if (sortBy === 'difficulty-asc') {
-            filtered = sortGrammarList(filtered, 'difficulty', 'asc');
-        } else if (sortBy === 'difficulty-desc') {
-            filtered = sortGrammarList(filtered, 'difficulty', 'desc');
+        let filtered = filterGrammarList(grammarData, bookFilter, chapterFilter);
+        if (sortBy === 'book-asc') {
+            filtered = sortGrammarList(filtered, 'book', 'asc');
+        } else if (sortBy === 'chapter-asc') {
+            filtered = sortGrammarList(filtered, 'chapter', 'asc');
+        } else if (sortBy === 'chapter-desc') {
+            filtered = sortGrammarList(filtered, 'chapter', 'desc');
         } else {
             filtered = sortGrammarList(filtered, 'default', 'asc');
         }
         renderGrammarList(filtered);
     }
-    document.querySelector('.grammar-filter-level').onchange = e => {
-        levelFilter = e.target.value;
+    
+    document.querySelector('.grammar-filter-book').onchange = e => {
+        bookFilter = e.target.value;
         updateList();
     };
-    document.querySelector('.grammar-filter-difficulty').onchange = e => {
-        diffFilter = e.target.value;
+    document.querySelector('.grammar-filter-chapter').onchange = e => {
+        chapterFilter = e.target.value;
         updateList();
     };
     document.querySelector('.grammar-sort-by').onchange = e => {
