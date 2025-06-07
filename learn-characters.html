@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เรียนรู้ตัวอักษรญี่ปุ่น - ฮิรากะนะและคาตาคานะ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="learn-characters.css">
+    <link rel="icon" type="image/png" href="logo/logodennexus.png">
+    <style>
+        .fade-in-page {
+            animation: fadeInPage 0.7s;
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <div class="sakura-container"></div>
+    
+    <header>
+        <div class="logo">
+            <h1>DevNexus.<span class="nihon">Nihon</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="main.html">บทเรียน</a></li>
+                <li><a href="characters.html">ทดสอบตัวอักษร</a></li>
+                <li><a href="learn-characters.html" class="active">เรียนตัวอักษร</a></li>
+                <li><a href="vocabulary.html">คำศัพท์</a></li>
+                <li><a href="kanji.html">คันจิ</a></li>
+                <li><a href="grammar.html">ไวยากรณ์</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="learn-main">
+        <header class="learn-header">
+            <div class="container">
+                <h1>เรียนรู้ตัวอักษรญี่ปุ่น</h1>
+                <p>เรียนรู้ตัวอักษรฮิรากะนะและคาตาคานะแบบละเอียด พร้อมเคล็ดลับการจดจำ</p>
+            </div>
+        </header>
+
+        <!-- แท็บการเลือกตัวอักษร -->
+        <section class="character-tabs-section">
+            <div class="container">
+                <div class="character-tabs">
+                    <button class="tab-btn active" data-type="hiragana">
+                        <i class="fas fa-circle-dot"></i>
+                        ฮิรากะนะ (ひらがな)
+                    </button>
+                    <button class="tab-btn" data-type="katakana">
+                        <i class="fas fa-square"></i>
+                        คาตาคานะ (カタカナ)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- เนื้อหาตัวอักษร -->
+        <section class="character-content">
+            <div class="container">
+                <!-- ข้อมูลเบื้องต้น -->
+                <div class="character-intro" id="hiragana-intro">
+                    <div class="intro-card">
+                        <h2><i class="fas fa-info-circle"></i> เกี่ยวกับฮิรางานะ</h2>
+                        <div class="intro-content">
+                            <p><strong>ฮิรางานะ (ひらがな)</strong> เป็นระบบตัวอักษรพื้นฐานของภาษาญี่ปุ่น ใช้เขียนคำญี่ปุ่นดั้งเดิม คำกริยา คำคุณศัพท์ และไวยากรณ์ต่างๆ</p>
+                            
+                            <div class="intro-points">
+                                <div class="point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>มีทั้งหมด 46 ตัวพื้นฐาน</span>
+                                </div>
+                                <div class="point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>ใช้สำหรับคำญี่ปุ่นดั้งเดิม</span>
+                                </div>
+                                <div class="point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>รูปทรงโค้งมน นุ่มนวล</span>
+                                </div>
+                                <div class="point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>เป็นพื้นฐานสำคัญในการเรียนภาษาญี่ปุ่น</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="character-intro" id="katakana-intro" style="display: none;">
+                    <div class="intro-card">
+                        <h2><i class="fas fa-info-circle"></i> เกี่ยวกับคาตาคานะ</h2>
+                        <div class="intro-content">
+                            <p><strong>คาตาคานะ (カタカナ)</strong> เป็นระบบตัวอักษรที่ใช้เขียนคำยืมจากภาษาต่างประเทศ ชื่อประเทศ และคำที่ต้องการเน้น</p>
+                            
+                            <div class="intro-points">
+                                <div class="point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>มีทั้งหมด 46 ตัวพื้นฐาน (เหมือนฮิรางานะ)</span>
+                                </div>
+                                <div class="point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>ใช้สำหรับคำยืมจากต่างประเทศ</span>
+                                </div>
+                                <div class="point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>รูปทรงเหลี่ยม แข็งแกร่ง</span>
+                                </div>
+                                <div class="point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>ใช้เขียนชื่อประเทศและคำเน้น</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ตารางตัวอักษร -->
+                <div id="character-tables">
+                    <!-- ตารางจะถูกสร้างด้วย JavaScript -->
+                </div>
+
+                <!-- ส่วนเสียงควบกล้ำ -->
+                <section class="yoon-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-music"></i> เสียงควบกล้ำ (拗音 - Yōon)</h2>
+                        <p>การผสมเสียงพยัญชนะที่ลงท้ายด้วย "i" กับเสียง ya, yu, yo</p>
+                    </div>
+                    
+                    <div class="yoon-explanation">
+                        <div class="explanation-card">
+                            <h3>หลักการเสียงควบกล้ำ</h3>
+                            <ul>
+                                <li>ใช้ตัวอักษรที่ลงท้ายด้วยเสียง "i" (เช่น き, し, ち, に, ひ, ฯลฯ)</li>
+                                <li>ตามด้วย ゃ (ya), ゅ (yu), ょ (yo) ที่เขียนเป็นตัวเล็ก</li>
+                                <li>ออกเสียงเป็นพยางค์เดียว ไม่แยกเสียง</li>
+                                <li>ตัวอย่าง: き + ゃ = きゃ (kya) ไม่ใช่ ki-ya</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="yoon-tables" id="yoon-tables">
+                        <!-- ตารางเสียงควบกล้ำจะถูกสร้างด้วย JavaScript -->
+                    </div>
+                </section>
+
+                <!-- เคล็ดลับการจดจำ -->
+                <section class="tips-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-lightbulb"></i> เคล็ดลับการจดจำ</h2>
+                        <p>วิธีการจดจำตัวอักษรญี่ปุ่นอย่างมีประสิทธิภาพ</p>
+                    </div>
+                    
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>จดจำด้วยภาพ</h3>
+                            <p>มองหารูปทรงที่คล้ายกับสิ่งของที่คุณรู้จัก เช่น あ (a) เหมือนบ้าน</p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-repeat"></i>
+                            </div>
+                            <h3>ฝึกเขียนซ้ำ</h3>
+                            <p>เขียนตัวอักษรซ้ำๆ เพื่อให้จำได้ด้วยกล้ามเนื้อ (Muscle Memory)</p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h3>อ่านทุกวัน</h3>
+                            <p>หาข้อความที่เป็นฮิรางานะและคาตาคานะมาอ่านเป็นประจำ</p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3>เล่นเกม</h3>
+                            <p>ใช้แอพหรือเกมออนไลน์ที่ช่วยฝึกจำตัวอักษร</p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>เรียนกลุ่ม</h3>
+                            <p>แยกเรียนทีละกลุ่ม เริ่มจาก あいうえお แล้วค่อยเพิ่ม</p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-sticky-note"></i>
+                            </div>
+                            <h3>ทำ Flashcard</h3>
+                            <p>สร้างการ์ดเพื่อทบทวน ด้านหนึ่งเป็นตัวอักษร อีกด้านเป็นโรมาจิ</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ลิงก์ไปหน้าทดสอบ -->
+                <section class="test-link-section">
+                    <div class="test-link-card">
+                        <h2><i class="fas fa-graduation-cap"></i> พร้อมทดสอบแล้วใช่ไหม?</h2>
+                        <p>เมื่อเรียนรู้ตัวอักษรแล้ว มาทดสอบความรู้กันเถอะ!</p>
+                        <div class="test-buttons">
+                            <button onclick="openTestMode()" class="test-btn primary">
+                                <i class="fas fa-play"></i>
+                                ทดสอบตัวอักษร
+                            </button>
+                            <a href="vocabulary.html" class="test-btn secondary">
+                                <i class="fas fa-book"></i>
+                                เรียนคำศัพท์
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script src="learn-characters.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('fade-in-page');
+    });
+    </script>
+</body>
+</html> 
