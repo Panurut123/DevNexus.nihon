@@ -1,367 +1,247 @@
-window.vocabData = [
-    // ชีวิตประจำวัน
-    { jp: 'ありがとう', romaji: 'arigatou', th: 'ขอบคุณ', cat: 'ชีวิตประจำวัน' },
-    { jp: 'おはよう', romaji: 'ohayou', th: 'สวัสดี (ตอนเช้า)', cat: 'ชีวิตประจำวัน' },
-    { jp: 'こんにちは', romaji: 'konnichiwa', th: 'สวัสดี (ตอนกลางวัน)', cat: 'ชีวิตประจำวัน' },
-    { jp: 'こんばんは', romaji: 'konbanwa', th: 'สวัสดี (ตอนเย็น)', cat: 'ชีวิตประจำวัน' },
-    { jp: 'さようなら', romaji: 'sayounara', th: 'ลาก่อน', cat: 'ชีวิตประจำวัน' },
-    { jp: 'すみません', romaji: 'sumimasen', th: ['ขอโทษ', 'ขออภัย'], cat: 'ชีวิตประจำวัน' },
-    { jp: 'はい', romaji: 'hai', th: 'ใช่', cat: 'ชีวิตประจำวัน' },
-    { jp: 'いいえ', romaji: 'iie', th: 'ไม่ใช่', cat: 'ชีวิตประจำวัน' },
-    { jp: 'お願いします', romaji: 'onegaishimasu', th: ['ขอร้อง', 'กรุณา'], cat: 'ชีวิตประจำวัน', furigana: 'おねがいします' },
-    { jp: '元気', romaji: 'genki', th: 'สบายดี', cat: 'ชีวิตประจำวัน', furigana: 'げんき' },
-    { jp: 'わかります', romaji: 'wakarimasu', th: 'เข้าใจ', cat: 'ชีวิตประจำวัน' },
-    { jp: 'あります', romaji: 'arimasu', th: ['มี', 'มี (ใช้กับสิ่งไม่มีชีวิต)'], cat: 'ชีวิตประจำวัน' },
-    { jp: 'すき', romaji: 'suki', th: 'ชอบ', cat: 'ชีวิตประจำวัน', furigana: 'すき' },
-    { jp: 'きらい', romaji: 'kirai', th: 'เกลียด', cat: 'ชีวิตประจำวัน', furigana: 'きらい' },
-    { jp: 'じょうず', romaji: 'jouzu', th: ['เก่ง', 'เก่ง (ชำนาญ)'], cat: 'ชีวิตประจำวัน', furigana: 'じょうず' },
-    { jp: 'へた', romaji: 'heta', th: ['ไม่เก่ง', 'ไม่เก่ง (ไม่ชำนาญ)'], cat: 'ชีวิตประจำวัน', furigana: 'へた' },
-    { jp: 'ぜんぜん', romaji: 'zenzen', th: ['ไม่เลย', 'ไม่เลย (ใช้กับรูปปฏิเสธ)'], cat: 'ชีวิตประจำวัน', furigana: 'ぜんぜん' },
-    { jp: 'はやく', romaji: 'hayaku', th: 'เร็ว ๆ', cat: 'ชีวิตประจำวัน', furigana: 'はやく' },
-    { jp: 'から', romaji: 'kara', th: 'เพราะว่า～', cat: 'ชีวิตประจำวัน' },
-    { jp: 'どうして', romaji: 'doushite', th: 'ทำไม', cat: 'ชีวิตประจำวัน', furigana: 'どうして' },
-    { jp: 'いっしょに いかがですか', romaji: 'issho ni ikaga desu ka', th: 'ไปด้วยกันไหม', cat: 'ชีวิตประจำวัน', furigana: 'いっしょに いかがですか' },
-    { jp: 'は ちょっと…', romaji: 'wa chotto...', th: ['ไม่ค่อยสะดวก', 'ไม่ค่อยสะดวกน่ะครับ/ค่ะ'], cat: 'ชีวิตประจำวัน' },
-    { jp: 'また こんど おねがいします', romaji: 'mata kondo onegaishimasu', th: ['เอาไว้คราวหน้า', 'เอาไว้คราวหน้านะครับ/ค่ะ'], cat: 'ชีวิตประจำวัน', furigana: 'また こんど おねがいします' },
-    { jp: 'じかん', romaji: 'jikan', th: 'เวลา', cat: 'ชีวิตประจำวัน', furigana: 'じかん' },
-    { jp: 'ようじ', romaji: 'youji', th: 'ธุระ', cat: 'ชีวิตประจำวัน', furigana: 'ようじ' },
-    { jp: 'やくそく', romaji: 'yakusoku', th: ['การนัดหมาย', 'สัญญา'], cat: 'ชีวิตประจำวัน', furigana: 'やくそく' },
-    { jp: 'アルバイト', romaji: 'arubaito', th: ['งานพิเศษ', 'Part-time'], cat: 'ชีวิตประจำวัน' },
-    // อาหาร
-    { jp: 'ごはん', romaji: 'gohan', th: 'ข้าว', cat: 'อาหาร' },
-    { jp: 'みず', romaji: 'mizu', th: 'น้ำ', cat: 'อาหาร' },
-    { jp: 'さかな', romaji: 'sakana', th: 'ปลา', cat: 'อาหาร' },
-    { jp: 'にく', romaji: 'niku', th: 'เนื้อสัตว์', cat: 'อาหาร' },
-    { jp: 'やさい', romaji: 'yasai', th: 'ผัก', cat: 'อาหาร' },
-    { jp: 'くだもの', romaji: 'kudamono', th: 'ผลไม้', cat: 'อาหาร' },
-    { jp: 'たまご', romaji: 'tamago', th: 'ไข่', cat: 'อาหาร' },
-    { jp: 'パン', romaji: 'pan', th: 'ขนมปัง', cat: 'อาหาร' },
-    { jp: 'ミルク', romaji: 'miruku', th: 'นม', cat: 'อาหาร' },
-    { jp: 'ジュース', romaji: 'juusu', th: 'น้ำผลไม้', cat: 'อาหาร' },
-    { jp: 'のみもの', romaji: 'nomimono', th: 'เครื่องดื่ม', cat: 'อาหาร', furigana: 'のみもの' },
-    { jp: 'りょうり', romaji: 'ryouri', th: 'อาหาร, การทำอาหาร', cat: 'อาหาร', furigana: 'りょうり' },
-    // กีฬา
-    { jp: 'サッカー', romaji: 'sakka-', th: 'ฟุตบอล', cat: 'กีฬา' },
-    { jp: 'やきゅう', romaji: 'yakyuu', th: 'เบสบอล', cat: 'กีฬา' },
-    { jp: 'テニス', romaji: 'tenisu', th: 'เทนนิส', cat: 'กีฬา' },
-    { jp: 'スポーツ', romaji: 'supootsu', th: 'กีฬา', cat: 'กีฬา' },
-    { jp: 'ダンス', romaji: 'dansu', th: 'เต้นรำ', cat: 'กีฬา' },
-    // ดนตรี
-    { jp: 'おんがく', romaji: 'ongaku', th: 'ดนตรี', cat: 'ดนตรี', furigana: 'おんがく' },
-    { jp: 'うた', romaji: 'uta', th: 'เพลง', cat: 'ดนตรี', furigana: 'うた' },
-    { jp: 'クラシック', romaji: 'kurashikku', th: 'เพลงคลาสสิก', cat: 'ดนตรี' },
-    { jp: 'ジャズ', romaji: 'jazu', th: 'แจ๊ส', cat: 'ดนตรี' },
-    { jp: 'コンサート', romaji: 'konsaato', th: 'คอนเสิร์ต', cat: 'ดนตรี' },
-    { jp: 'カラオケ', romaji: 'karaoke', th: 'คาราโอเกะ', cat: 'ดนตรี' },
-    // ศิลปะ
-    { jp: 'かぶき', romaji: 'kabuki', th: ['คาบุกิ', 'คาบุกิ (ละครเพลงญี่ปุ่น)'], cat: 'ศิลปะ', furigana: 'かぶき' },
-    { jp: 'え', romaji: 'e', th: 'รูปวาด, ภาพวาด', cat: 'ศิลปะ', furigana: 'え' },
-    { jp: 'じ', romaji: 'ji', th: 'ตัวอักษร', cat: 'ศิลปะ', furigana: 'じ' },
-    { jp: 'かんじ', romaji: 'kanji', th: 'อักษรคันจิ', cat: 'ศิลปะ', furigana: 'かんじ' },
-    { jp: 'ひらがな', romaji: 'hiragana', th: 'อักษรฮิระงะนะ', cat: 'ศิลปะ' },
-    { jp: 'かたかな', romaji: 'katakana', th: 'อักษรคะตะกะนะ', cat: 'ศิลปะ' },
-    { jp: 'ローマじ', romaji: 'roomaji', th: 'อักษรโรมัน', cat: 'ศิลปะ', furigana: 'ローマじ' },
-    // ครอบครัว
-    { jp: 'ちち', romaji: 'chichi', th: 'พ่อ', cat: 'ครอบครัว' },
-    { jp: 'はは', romaji: 'haha', th: 'แม่', cat: 'ครอบครัว' },
-    { jp: 'あに', romaji: 'ani', th: 'พี่ชาย', cat: 'ครอบครัว' },
-    { jp: 'あね', romaji: 'ane', th: 'พี่สาว', cat: 'ครอบครัว' },
-    { jp: 'おとうと', romaji: 'otouto', th: 'น้องชาย', cat: 'ครอบครัว' },
-    { jp: 'いもうと', romaji: 'imouto', th: 'น้องสาว', cat: 'ครอบครัว' },
-    { jp: 'そふ', romaji: 'sofu', th: ['ปู่', 'ตา'], cat: 'ครอบครัว' },
-    { jp: 'そぼ', romaji: 'sobo', th: ['ย่า', 'ยาย'], cat: 'ครอบครัว' },
-    { jp: 'ごしゅじん', romaji: 'goshujin', th: ['สามี', 'สามี (ของคนอื่น)'], cat: 'ครอบครัว', furigana: 'ごしゅじん' },
-    { jp: 'おっと', romaji: 'otto', th: ['สามี', 'สามี (ของตัวเอง)'], cat: 'ครอบครัว', furigana: 'おっと' },
-    { jp: 'ごしゅふ', romaji: 'goshufu', th: 'เจ้าของบ้าน', cat: 'ครอบครัว', furigana: 'ごしゅふ' },
-    { jp: 'おくさん', romaji: 'okusan', th: ['ภรรยา', 'ภรรยา (ของคนอื่น)'], cat: 'ครอบครัว', furigana: 'おくさん' },
-    { jp: 'つま', romaji: 'tsuma', th: ['ภรรยา', 'ภรรยา (ของตัวเอง)'], cat: 'ครอบครัว', furigana: 'つま' },
-    { jp: 'かない', romaji: 'kanai', th: ['ภรรยา', 'ภรรยา (ของตัวเอง)'], cat: 'ครอบครัว', furigana: 'かない' },
-    { jp: 'こども', romaji: 'kodomo', th: 'ลูก', cat: 'ครอบครัว', furigana: 'こども' },
-    // การเดินทาง
-    { jp: 'でんしゃ', romaji: 'densha', th: 'รถไฟ', cat: 'การเดินทาง', furigana: 'でんしゃ' },
-    { jp: 'くるま', romaji: 'kuruma', th: 'รถยนต์', cat: 'การเดินทาง' },
-    { jp: 'バス', romaji: 'basu', th: 'รถบัส', cat: 'การเดินทาง' },
-    { jp: 'ひこうき', romaji: 'hikouki', th: 'เครื่องบิน', cat: 'การเดินทาง' },
-    { jp: 'ちかてつ', romaji: 'chikatetsu', th: 'รถไฟใต้ดิน', cat: 'การเดินทาง' },
-    { jp: 'タクシー', romaji: 'takushii', th: 'แท็กซี่', cat: 'การเดินทาง' },
-    { jp: 'じてんしゃ', romaji: 'jitensha', th: 'จักรยาน', cat: 'การเดินทาง' },
-    { jp: 'あるく', romaji: 'aruku', th: 'เดิน', cat: 'การเดินทาง' },
-    { jp: 'りょこう', romaji: 'ryokou', th: 'การท่องเที่ยว', cat: 'การเดินทาง', furigana: 'りょこう' },
-    // สถานที่
-    { jp: 'がっこう', romaji: 'gakkou', th: 'โรงเรียน', cat: 'สถานที่' },
-    { jp: 'いえ', romaji: 'ie', th: 'บ้าน', cat: 'สถานที่' },
-    { jp: 'みせ', romaji: 'mise', th: 'ร้านค้า', cat: 'สถานที่' },
-    { jp: 'えき', romaji: 'eki', th: 'สถานีรถไฟ', cat: 'สถานที่' },
-    { jp: 'びょういん', romaji: 'byouin', th: 'โรงพยาบาล', cat: 'สถานที่', furigana: 'びょういん' },
-    { jp: 'こうえん', romaji: 'kouen', th: 'สวนสาธารณะ', cat: 'สถานที่' },
-    { jp: 'ゆうびんきょく', romaji: 'yuubinkyoku', th: 'ไปรษณีย์', cat: 'สถานที่' },
-    // ตัวเลข
-    { jp: 'いち', romaji: 'ichi', th: 'หนึ่ง', cat: 'ตัวเลข' },
-    { jp: 'に', romaji: 'ni', th: 'สอง', cat: 'ตัวเลข' },
-    { jp: 'さん', romaji: 'san', th: 'สาม', cat: 'ตัวเลข' },
-    { jp: 'し/よん', romaji: 'shi/yon', th: 'สี่', cat: 'ตัวเลข' },
-    { jp: 'ご', romaji: 'go', th: 'ห้า', cat: 'ตัวเลข' },
-    { jp: 'ろく', romaji: 'roku', th: 'หก', cat: 'ตัวเลข' },
-    { jp: 'しち/なな', romaji: 'shichi/nana', th: 'เจ็ด', cat: 'ตัวเลข' },
-    { jp: 'はち', romaji: 'hachi', th: 'แปด', cat: 'ตัวเลข' },
-    { jp: 'きゅう', romaji: 'kyuu', th: 'เก้า', cat: 'ตัวเลข' },
-    { jp: 'じゅう', romaji: 'juu', th: 'สิบ', cat: 'ตัวเลข' },
-    // สี
-    { jp: 'あか', romaji: 'aka', th: 'สีแดง', cat: 'สี' },
-    { jp: 'あお', romaji: 'ao', th: 'สีน้ำเงิน', cat: 'สี' },
-    { jp: 'きいろ', romaji: 'kiiro', th: 'สีเหลือง', cat: 'สี' },
-    { jp: 'みどり', romaji: 'midori', th: 'สีเขียว', cat: 'สี' },
-    { jp: 'しろ', romaji: 'shiro', th: 'สีขาว', cat: 'สี' },
-    { jp: 'くろ', romaji: 'kuro', th: 'สีดำ', cat: 'สี' },
-    // อารมณ์
-    { jp: 'うれしい', romaji: 'ureshii', th: 'ดีใจ', cat: 'อารมณ์' },
-    { jp: 'かなしい', romaji: 'kanashii', th: 'เศร้า', cat: 'อารมณ์' },
-    { jp: 'たのしい', romaji: 'tanoshii', th: 'สนุก', cat: 'อารมณ์' },
-    { jp: 'こわい', romaji: 'kowai', th: 'กลัว', cat: 'อารมณ์' },
-    { jp: 'おこる', romaji: 'okoru', th: 'โกรธ', cat: 'อารมณ์' },
-    // สัตว์
-    { jp: 'いぬ', romaji: 'inu', th: 'สุนัข', cat: 'สัตว์' },
-    { jp: 'ねこ', romaji: 'neko', th: 'แมว', cat: 'สัตว์' },
-    { jp: 'とり', romaji: 'tori', th: 'นก', cat: 'สัตว์' },
-    { jp: 'さかな', romaji: 'sakana', th: 'ปลา', cat: 'สัตว์' },
-    { jp: 'うま', romaji: 'uma', th: 'ม้า', cat: 'สัตว์' },
-    { jp: 'うし', romaji: 'ushi', th: 'วัว', cat: 'สัตว์' },
-    // ฤดูกาล
-    { jp: 'はる', romaji: 'haru', th: 'ฤดูใบไม้ผลิ', cat: 'ฤดูกาล' },
-    { jp: 'なつ', romaji: 'natsu', th: 'ฤดูร้อน', cat: 'ฤดูกาล' },
-    { jp: 'あき', romaji: 'aki', th: 'ฤดูใบไม้ร่วง', cat: 'ฤดูกาล' },
-    { jp: 'ふゆ', romaji: 'fuyu', th: 'ฤดูหนาว', cat: 'ฤดูกาล' },
-    // เทคโนโลยี
-    { jp: 'パソコン', romaji: 'pasokon', th: 'คอมพิวเตอร์', cat: 'เทคโนโลยี' },
-    { jp: 'スマホ', romaji: 'sumaho', th: 'สมาร์ทโฟน', cat: 'เทคโนโลยี' },
-    { jp: 'インターネット', romaji: 'inta-netto', th: 'อินเทอร์เน็ต', cat: 'เทคโนโลยี' },
-    // อาชีพ
-    { jp: 'いしゃ', romaji: 'isha', th: 'หมอ', cat: 'อาชีพ' },
-    { jp: 'せんせい', romaji: 'sensei', th: 'ครู', cat: 'อาชีพ' },
-    { jp: 'がくせい', romaji: 'gakusei', th: 'นักเรียน', cat: 'อาชีพ' },
-    { jp: 'かいしゃいん', romaji: 'kaishain', th: 'พนักงานบริษัท', cat: 'อาชีพ' },
-    { jp: 'こうむいん', romaji: 'koumuin', th: 'ข้าราชการ', cat: 'อาชีพ' },
-    { jp: 'エンジニア', romaji: 'enjinia', th: 'วิศวกร', cat: 'อาชีพ' },
-    { jp: 'けいさつかん', romaji: 'keisatsukan', th: 'ตำรวจ', cat: 'อาชีพ' },
-    // เครื่องใช้ในบ้าน
-    { jp: 'でんき', romaji: 'denki', th: 'ไฟฟ้า', cat: 'เครื่องใช้ในบ้าน' },
-    { jp: 'エアコン', romaji: 'eakon', th: 'แอร์', cat: 'เครื่องใช้ในบ้าน' },
-    { jp: 'れいぞうこ', romaji: 'reizouko', th: 'ตู้เย็น', cat: 'เครื่องใช้ในบ้าน' },
-    { jp: 'せんたくき', romaji: 'sentakuki', th: 'เครื่องซักผ้า', cat: 'เครื่องใช้ในบ้าน' },
-    { jp: 'そうじき', romaji: 'soujiki', th: 'เครื่องดูดฝุ่น', cat: 'เครื่องใช้ในบ้าน' },
-    { jp: 'でんわ', romaji: 'denwa', th: 'โทรศัพท์', cat: 'เครื่องใช้ในบ้าน' },
-    // ร่างกาย
-    { jp: 'あたま', romaji: 'atama', th: 'หัว', cat: 'ร่างกาย' },
-    { jp: 'め', romaji: 'me', th: 'ตา', cat: 'ร่างกาย' },
-    { jp: 'みみ', romaji: 'mimi', th: 'หู', cat: 'ร่างกาย' },
-    { jp: 'くち', romaji: 'kuchi', th: 'ปาก', cat: 'ร่างกาย' },
-    { jp: 'て', romaji: 'te', th: 'มือ', cat: 'ร่างกาย' },
-    { jp: 'あし', romaji: 'ashi', th: 'ขา/เท้า', cat: 'ร่างกาย' },
-    // วันในสัปดาห์
-    { jp: 'げつようび', romaji: 'getsuyoubi', th: 'วันจันทร์', cat: 'วันในสัปดาห์' },
-    { jp: 'かようび', romaji: 'kayoubi', th: 'วันอังคาร', cat: 'วันในสัปดาห์' },
-    { jp: 'すいようび', romaji: 'suiyoubi', th: 'วันพุธ', cat: 'วันในสัปดาห์' },
-    { jp: 'もくようび', romaji: 'mokuyoubi', th: 'วันพฤหัสบดี', cat: 'วันในสัปดาห์' },
-    { jp: 'きんようび', romaji: 'kinyoubi', th: 'วันศุกร์', cat: 'วันในสัปดาห์' },
-    { jp: 'どようび', romaji: 'doyoubi', th: 'วันเสาร์', cat: 'วันในสัปดาห์' },
-    { jp: 'にちようび', romaji: 'nichiyoubi', th: 'วันอาทิตย์', cat: 'วันในสัปดาห์' },
-    // เดือน
-    { jp: 'いちがつ', romaji: 'ichigatsu', th: 'มกราคม', cat: 'เดือน' },
-    { jp: 'にがつ', romaji: 'nigatsu', th: 'กุมภาพันธ์', cat: 'เดือน' },
-    { jp: 'さんがつ', romaji: 'sangatsu', th: 'มีนาคม', cat: 'เดือน' },
-    { jp: 'しがつ', romaji: 'shigatsu', th: 'เมษายน', cat: 'เดือน' },
-    { jp: 'ごがつ', romaji: 'gogatsu', th: 'พฤษภาคม', cat: 'เดือน' },
-    { jp: 'ろくがつ', romaji: 'rokugatsu', th: 'มิถุนายน', cat: 'เดือน' },
-    { jp: 'しちがつ', romaji: 'shichigatsu', th: 'กรกฎาคม', cat: 'เดือน' },
-    { jp: 'はちがつ', romaji: 'hachigatsu', th: 'สิงหาคม', cat: 'เดือน' },
-    { jp: 'くがつ', romaji: 'kugatsu', th: 'กันยายน', cat: 'เดือน' },
-    { jp: 'じゅうがつ', romaji: 'juugatsu', th: 'ตุลาคม', cat: 'เดือน' },
-    { jp: 'じゅういちがつ', romaji: 'juuichigatsu', th: 'พฤศจิกายน', cat: 'เดือน' },
-    { jp: 'じゅうにがつ', romaji: 'juunigatsu', th: 'ธันวาคม', cat: 'เดือน' },
-    // ธรรมชาติ
-    { jp: 'やま', romaji: 'yama', th: 'ภูเขา', cat: 'ธรรมชาติ' },
-    { jp: 'かわ', romaji: 'kawa', th: 'แม่น้ำ', cat: 'ธรรมชาติ' },
-    { jp: 'うみ', romaji: 'umi', th: 'ทะเล', cat: 'ธรรมชาติ' },
-    { jp: 'もり', romaji: 'mori', th: 'ป่า', cat: 'ธรรมชาติ' },
-    { jp: 'そら', romaji: 'sora', th: 'ท้องฟ้า', cat: 'ธรรมชาติ' },
-    { jp: 'たいよう', romaji: 'taiyou', th: 'พระอาทิตย์', cat: 'ธรรมชาติ' },
-    { jp: 'つき', romaji: 'tsuki', th: 'พระจันทร์', cat: 'ธรรมชาติ' },
-    // เครื่องแต่งกาย
-    { jp: 'シャツ', romaji: 'shatsu', th: 'เสื้อเชิ้ต', cat: 'เครื่องแต่งกาย' },
-    { jp: 'ズボン', romaji: 'zubon', th: 'กางเกง', cat: 'เครื่องแต่งกาย' },
-    { jp: 'スカート', romaji: 'sukaato', th: 'กระโปรง', cat: 'เครื่องแต่งกาย' },
-    { jp: 'くつ', romaji: 'kutsu', th: 'รองเท้า', cat: 'เครื่องแต่งกาย' },
-    { jp: 'ぼうし', romaji: 'boushi', th: 'หมวก', cat: 'เครื่องแต่งกาย' },
-    // เครื่องเขียน
-    { jp: 'えんぴつ', romaji: 'enpitsu', th: 'ดินสอ', cat: 'เครื่องเขียน' },
-    { jp: 'ペン', romaji: 'pen', th: 'ปากกา', cat: 'เครื่องเขียน' },
-    { jp: 'けしごむ', romaji: 'keshigomu', th: 'ยางลบ', cat: 'เครื่องเขียน' },
-    { jp: 'ノート', romaji: 'nooto', th: 'สมุด', cat: 'เครื่องเขียน' },
-    { jp: 'ほん', romaji: 'hon', th: 'หนังสือ', cat: 'เครื่องเขียน' },
-    // เทศกาล
-    { jp: 'おしょうがつ', romaji: 'oshougatsu', th: 'ปีใหม่', cat: 'เทศกาล' },
-    { jp: 'たなばた', romaji: 'tanabata', th: 'เทศกาลทานาบาตะ', cat: 'เทศกาล' },
-    { jp: 'はなみ', romaji: 'hanami', th: 'ชมดอกซากุระ', cat: 'เทศกาล' },
-    { jp: 'おぼん', romaji: 'obon', th: 'เทศกาลโอบ้ง', cat: 'เทศกาล' },
-    { jp: 'クリスマス', romaji: 'kurisumasu', th: 'คริสต์มาส', cat: 'เทศกาล' },
-    { jp: 'きんろうかんしゃのひ', romaji: 'kinrou kansha no hi', th: 'วันขอบคุณแรงงาน', cat: 'เทศกาล' },
-    { jp: 'こどものひ', romaji: 'kodomo no hi', th: 'วันเด็ก', cat: 'เทศกาล' },
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำศัพท์ภาษาญี่ปุ่น - Devnexus.nihon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="vocabulary.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo/logodennexus.png">
+    <style>
+    @media (max-width: 768px) {
+      .vocab-header, .vocab-category-section, .vocab-list {
+        padding: 0.5rem 0.2rem !important;
+      }
+      .vocab-header {
+        flex-direction: column !important;
+        gap: 0.7rem !important;
+      }
+      .vocab-header input, .vocab-header button {
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .vocab-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 1rem 0.5rem !important;
+      }
+      .vocab-hero-section {
+        padding: 2rem 1rem !important;
+      }
+      .vocab-hero-content h1 {
+        font-size: 1.8rem !important;
+      }
+      .vocab-hero-stats {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .vocab-header, .vocab-category-section, .vocab-list {
+        padding: 0.2rem 0.1rem !important;
+      }
+      .vocab-card {
+        padding: 0.7rem 0.2rem !important;
+      }
+      .vocab-hero-section {
+        padding: 1.5rem 0.5rem !important;
+      }
+    }
+    .fade-in-page {
+      animation: fadeInPage 0.7s;
+    }
+    @keyframes fadeInPage {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    </style>
+</head>
+<body>
+    <div class="sakura-container"></div>
+    <header>
+        <div class="logo">
+            <h1><span class="logo-dev">DevNexus</span>.<span class="logo-nihon">Nihon</span></h1>
+        </div>
+        <nav>
+            <ul>
+              <li><a href="index.html" class="active">หน้าหลัก</a></li>
+              <li><a href="main.html">บทเรียน</a></li>
+              <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
+              <li><a href="vocabulary.html">คำศัพท์</a></li>
+              <li><a href="kanji.html">คันจิ</a></li>
+              <li><a href="grammar.html">ไวยากรณ์</a></li>
+              <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="vocab-hero-section">
+            <div class="vocab-hero-content">
+                <h1><i class="fas fa-book-open"></i> คำศัพท์ภาษาญี่ปุ่น</h1>
+                <p>เรียนรู้คำศัพท์จำเป็นสำหรับการสื่อสารในชีวิตประจำวัน</p>
+                <div class="vocab-hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">คำศัพท์</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">หมวดหมู่</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">N5-N1</div>
+                        <div class="stat-label">ระดับ JLPT</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    // อากาศ
-    { jp: 'あつい', romaji: 'atsui', th: 'ร้อน', cat: 'อากาศ' },
-    { jp: 'さむい', romaji: 'samui', th: 'หนาว', cat: 'อากาศ' },
-    { jp: 'あたたかい', romaji: 'atatakai', th: 'อบอุ่น', cat: 'อากาศ' },
-    { jp: 'すずしい', romaji: 'suzushii', th: 'เย็นสบาย', cat: 'อากาศ' },
-    { jp: 'あめ', romaji: 'ame', th: 'ฝน', cat: 'อากาศ' },
-    { jp: 'ゆき', romaji: 'yuki', th: 'หิมะ', cat: 'อากาศ' },
-    { jp: 'かぜ', romaji: 'kaze', th: 'ลม', cat: 'อากาศ' },
-    { jp: 'くも', romaji: 'kumo', th: 'เมฆ', cat: 'อากาศ' },
-    { jp: 'はれ', romaji: 'hare', th: 'แจ่มใส', cat: 'อากาศ' },
-    { jp: 'きり', romaji: 'kiri', th: 'หมอก', cat: 'อากาศ' },
+        <!-- Action Buttons -->
+        <section class="vocab-action-section">
+            <div class="action-buttons-container">
+                <a href="quiz.html" class="action-btn primary">
+                    <i class="fas fa-pencil-alt"></i>
+                    ทำแบบทดสอบ
+                </a>
+                <button class="action-btn secondary vocab-random-btn">
+                    <i class="fas fa-random"></i>
+                    สุ่มคำศัพท์
+                </button>
+                <button class="action-btn tertiary vocab-fav-btn">
+                    <i class="fas fa-heart"></i>
+                    คำโปรด
+                </button>
+            </div>
+        </section>
 
-    // เวลา
-    { jp: 'あさ', romaji: 'asa', th: 'เช้า', cat: 'เวลา' },
-    { jp: 'ひる', romaji: 'hiru', th: 'กลางวัน', cat: 'เวลา' },
-    { jp: 'ばん', romaji: 'ban', th: 'เย็น', cat: 'เวลา' },
-    { jp: 'よる', romaji: 'yoru', th: 'กลางคืน', cat: 'เวลา' },
-    { jp: 'きょう', romaji: 'kyou', th: 'วันนี้', cat: 'เวลา' },
-    { jp: 'きのう', romaji: 'kinou', th: 'เมื่อวาน', cat: 'เวลา' },
-    { jp: 'あした', romaji: 'ashita', th: 'พรุ่งนี้', cat: 'เวลา' },
-    { jp: 'いま', romaji: 'ima', th: 'ตอนนี้', cat: 'เวลา' },
-    { jp: 'まえ', romaji: 'mae', th: 'ก่อน', cat: 'เวลา' },
-    { jp: 'あと', romaji: 'ato', th: 'หลัง', cat: 'เวลา' },
+        <!-- Search & Filter Section -->
+        <section class="vocab-tools-section">
+            <div class="vocab-search-container">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="ค้นหาคำศัพท์..." class="vocab-search" />
+                </div>
+            </div>
+            
+            <div class="vocab-filter-section">
+                <div class="filter-title">
+                    <i class="fas fa-filter"></i>
+                    กรองตามหมวดหมู่
+                </div>
+                <div class="vocab-filter-container">
+                    <select class="vocab-category-filter">
+                        <!-- จะสร้างโดย JavaScript -->
+                    </select>
+                </div>
+            </div>
+        </section>
 
-    // กิจกรรม
-    { jp: 'べんきょう', romaji: 'benkyou', th: 'การเรียน', cat: 'กิจกรรม' },
-    { jp: 'しごと', romaji: 'shigoto', th: 'งาน', cat: 'กิจกรรม' },
-    { jp: 'あそび', romaji: 'asobi', th: 'การเล่น', cat: 'กิจกรรม' },
-    { jp: 'りょこう', romaji: 'ryokou', th: 'การเดินทาง', cat: 'กิจกรรม' },
-    { jp: 'かいもの', romaji: 'kaimono', th: 'การซื้อของ', cat: 'กิจกรรม' },
-    { jp: 'そうじ', romaji: 'souji', th: 'การทำความสะอาด', cat: 'กิจกรรม' },
-    { jp: 'せんたく', romaji: 'sentaku', th: 'การซักผ้า', cat: 'กิจกรรม' },
-    { jp: 'りょうり', romaji: 'ryouri', th: 'การทำอาหาร', cat: 'กิจกรรม' },
-    { jp: 'どくしょ', romaji: 'dokusho', th: 'การอ่านหนังสือ', cat: 'กิจกรรม' },
-    { jp: 'えいが', romaji: 'eiga', th: 'หนัง', cat: 'กิจกรรม' },
-
-    // คำคุณศัพท์
-    { jp: 'おおきい', romaji: 'ookii', th: 'ใหญ่', cat: 'คำคุณศัพท์' },
-    { jp: 'ちいさい', romaji: 'chiisai', th: 'เล็ก', cat: 'คำคุณศัพท์' },
-    { jp: 'ながい', romaji: 'nagai', th: 'ยาว', cat: 'คำคุณศัพท์' },
-    { jp: 'みじかい', romaji: 'mijikai', th: 'สั้น', cat: 'คำคุณศัพท์' },
-    { jp: 'たかい', romaji: 'takai', th: ['แพง', 'สูง'], cat: 'คำคุณศัพท์' },
-    { jp: 'やすい', romaji: 'yasui', th: 'ถูก', cat: 'คำคุณศัพท์' },
-    { jp: 'あたらしい', romaji: 'atarashii', th: 'ใหม่', cat: 'คำคุณศัพท์' },
-    { jp: 'ふるい', romaji: 'furui', th: 'เก่า', cat: 'คำคุณศัพท์' },
-    { jp: 'いい', romaji: 'ii', th: 'ดี', cat: 'คำคุณศัพท์' },
-    { jp: 'わるい', romaji: 'warui', th: 'แย่', cat: 'คำคุณศัพท์' },
-    { jp: 'はやい', romaji: 'hayai', th: 'เร็ว', cat: 'คำคุณศัพท์' },
-    { jp: 'おそい', romaji: 'osoi', th: 'ช้า', cat: 'คำคุณศัพท์' },
-    { jp: 'きれい', romaji: 'kirei', th: 'สวย', cat: 'คำคุณศัพท์' },
-    { jp: 'きたない', romaji: 'kitanai', th: 'สกปรก', cat: 'คำคุณศัพท์' },
-    { jp: 'おもしろい', romaji: 'omoshiroi', th: 'น่าสนใจ', cat: 'คำคุณศัพท์' },
-    { jp: 'つまらない', romaji: 'tsumaranai', th: 'น่าเบื่อ', cat: 'คำคุณศัพท์' },
-
-    // ห้องต่างๆ ในบ้าน
-    { jp: 'だいどころ', romaji: 'daidokoro', th: 'ห้องครัว', cat: 'ห้องต่างๆ' },
-    { jp: 'しんしつ', romaji: 'shinshitsu', th: 'ห้องนอน', cat: 'ห้องต่างๆ' },
-    { jp: 'ろうか', romaji: 'rouka', th: 'ทางเดิน', cat: 'ห้องต่างๆ' },
-    { jp: 'おふろ', romaji: 'ofuro', th: 'ห้องน้ำ/อาบน้ำ', cat: 'ห้องต่างๆ' },
-    { jp: 'トイレ', romaji: 'toire', th: 'ห้องส้วม', cat: 'ห้องต่างๆ' },
-    { jp: 'げんかん', romaji: 'genkan', th: 'ประตูหน้า', cat: 'ห้องต่างๆ' },
-    { jp: 'にわ', romaji: 'niwa', th: 'สวน', cat: 'ห้องต่างๆ' },
-    { jp: 'ベランダ', romaji: 'beranda', th: 'ระเบียง', cat: 'ห้องต่างๆ' },
-
-    // เฟอร์นิเจอร์
-    { jp: 'つくえ', romaji: 'tsukue', th: 'โต๊ะ', cat: 'เฟอร์นิเจอร์' },
-    { jp: 'いす', romaji: 'isu', th: 'เก้าอี้', cat: 'เฟอร์นิเจอร์' },
-    { jp: 'ベッド', romaji: 'beddo', th: 'เตียง', cat: 'เฟอร์นิเจอร์' },
-    { jp: 'ソファ', romaji: 'sofaa', th: 'โซฟา', cat: 'เฟอร์นิเจอร์' },
-    { jp: 'たんす', romaji: 'tansu', th: 'ตู้เสื้อผ้า', cat: 'เฟอร์นิเจอร์' },
-    { jp: 'ほんだな', romaji: 'hondana', th: 'ชั้นหนังสือ', cat: 'เฟอร์นิเจอร์' },
-    { jp: 'とだな', romaji: 'todana', th: 'ตู้', cat: 'เฟอร์นิเจอร์' },
-    { jp: 'かがみ', romaji: 'kagami', th: 'กระจก', cat: 'เฟอร์นิเจอร์' },
-
-    // อาหารเพิ่มเติม
-    { jp: 'ラーメン', romaji: 'raamen', th: 'ราเมน', cat: 'อาหาร' },
-    { jp: 'すし', romaji: 'sushi', th: 'ซูชิ', cat: 'อาหาร' },
-    { jp: 'てんぷら', romaji: 'tenpura', th: 'เทมปุระ', cat: 'อาหาร' },
-    { jp: 'やきとり', romaji: 'yakitori', th: 'ไก่ย่าง', cat: 'อาหาร' },
-    { jp: 'カレー', romaji: 'karee', th: 'แกงกะหรี่', cat: 'อาหาร' },
-    { jp: 'サラダ', romaji: 'sarada', th: 'สลัด', cat: 'อาหาร' },
-    { jp: 'ケーキ', romaji: 'keeki', th: 'เค้ก', cat: 'อาหาร' },
-    { jp: 'あいす', romaji: 'aisu', th: 'ไอศกรีม', cat: 'อาหาร' },
-    { jp: 'チョコレート', romaji: 'chokoreeto', th: 'ช็อกโกแลต', cat: 'อาหาร' },
-    { jp: 'ハンバーガー', romaji: 'hanbaagaa', th: 'แฮมเบอร์เกอร์', cat: 'อาหาร' },
-    { jp: 'ピザ', romaji: 'piza', th: 'พิซซ่า', cat: 'อาหาร' },
-    { jp: 'スープ', romaji: 'suupu', th: 'ซุป', cat: 'อาหาร' },
-
-    // เครื่องดื่มเพิ่มเติม
-    { jp: 'こーひー', romaji: 'koohii', th: 'กาแฟ', cat: 'อาหาร' },
-    { jp: 'こうちゃ', romaji: 'koucha', th: 'ชาดำ', cat: 'อาหาร' },
-    { jp: 'びーる', romaji: 'biiru', th: 'เบียร์', cat: 'อาหาร' },
-    { jp: 'ワイン', romaji: 'wain', th: 'ไวน์', cat: 'อาหาร' },
-    { jp: 'みず', romaji: 'mizu', th: 'น้ำ', cat: 'อาหาร' },
-
-    // ผลไม้เพิ่มเติม
-    { jp: 'りんご', romaji: 'ringo', th: 'แอปเปิล', cat: 'อาหาร' },
-    { jp: 'みかん', romaji: 'mikan', th: 'ส้ม', cat: 'อาหาร' },
-    { jp: 'バナナ', romaji: 'banana', th: 'กล้วย', cat: 'อาหาร' },
-    { jp: 'いちご', romaji: 'ichigo', th: 'สตรอเบอร์รี่', cat: 'อาหาร' },
-    { jp: 'ぶどう', romaji: 'budou', th: 'องุ่น', cat: 'อาหาร' },
-    { jp: 'すいか', romaji: 'suika', th: 'แตงโม', cat: 'อาหาร' },
-    { jp: 'メロン', romaji: 'meron', th: 'เมลอน', cat: 'อาหาร' },
-
-    // กีฬาเพิ่มเติม
-    { jp: 'バスケットボール', romaji: 'basukettobooru', th: 'บาสเกตบอล', cat: 'กีฬา' },
-    { jp: 'バレーボール', romaji: 'bariibooru', th: 'วอลเลย์บอล', cat: 'กีฬา' },
-    { jp: 'ゴルフ', romaji: 'gorufu', th: 'กอล์ฟ', cat: 'กีฬา' },
-    { jp: 'すいえい', romaji: 'suiei', th: 'การว่ายน้ำ', cat: 'กีฬา' },
-    { jp: 'じゅうどう', romaji: 'juudou', th: 'ยูโด', cat: 'กีฬา' },
-    { jp: 'からて', romaji: 'karate', th: 'คาราเต้', cat: 'กีฬา' },
-    { jp: 'ヨガ', romaji: 'yoga', th: 'โยคะ', cat: 'กีฬา' },
-
-    // ประเทศและสัญชาติ
-    { jp: 'にほん', romaji: 'nihon', th: 'ญี่ปุ่น', cat: 'ประเทศ' },
-    { jp: 'タイ', romaji: 'tai', th: 'ไทย', cat: 'ประเทศ' },
-    { jp: 'アメリカ', romaji: 'amerika', th: 'อเมริกา', cat: 'ประเทศ' },
-    { jp: 'イギリス', romaji: 'igirisu', th: 'อังกฤษ', cat: 'ประเทศ' },
-    { jp: 'フランス', romaji: 'furansu', th: 'ฝรั่งเศส', cat: 'ประเทศ' },
-    { jp: 'ドイツ', romaji: 'doitsu', th: 'เยอรมนี', cat: 'ประเทศ' },
-    { jp: 'かんこく', romaji: 'kankoku', th: 'เกาหลี', cat: 'ประเทศ' },
-    { jp: 'ちゅうごく', romaji: 'chuugoku', th: 'จีน', cat: 'ประเทศ' },
-
-    // ภาษา
-    { jp: 'にほんご', romaji: 'nihongo', th: 'ภาษาญี่ปุ่น', cat: 'ภาษา' },
-    { jp: 'タイご', romaji: 'taigo', th: 'ภาษาไทย', cat: 'ภาษา' },
-    { jp: 'えいご', romaji: 'eigo', th: 'ภาษาอังกฤษ', cat: 'ภาษา' },
-    { jp: 'ちゅうごくご', romaji: 'chuugokugo', th: 'ภาษาจีน', cat: 'ภาษา' },
-    { jp: 'かんこくご', romaji: 'kankokugo', th: 'ภาษาเกาหลี', cat: 'ภาษา' },
-
-    // ความรู้สึกเพิ่มเติม
-    { jp: 'ねむい', romaji: 'nemui', th: 'ง่วง', cat: 'อารมณ์' },
-    { jp: 'つかれた', romaji: 'tsukareta', th: 'เหนื่อย', cat: 'อารมณ์' },
-    { jp: 'びっくり', romaji: 'bikkuri', th: 'ตกใจ', cat: 'อารมณ์' },
-    { jp: 'しんぱい', romaji: 'shinpai', th: 'กังวล', cat: 'อารมณ์' },
-    { jp: 'あんしん', romaji: 'anshin', th: 'สบายใจ', cat: 'อารมณ์' },
-    { jp: 'ざんねん', romaji: 'zannen', th: 'เสียดาย', cat: 'อารมณ์' },
-
-    // อาชีพเพิ่มเติม  
-    { jp: 'プログラマー', romaji: 'puroguramaa', th: 'โปรแกรมเมอร์', cat: 'อาชีพ' },
-    { jp: 'デザイナー', romaji: 'dezainaa', th: 'นักออกแบบ', cat: 'อาชีพ' },
-    { jp: 'かんごし', romaji: 'kangoshi', th: 'พยาบาล', cat: 'อาชีพ' },
-    { jp: 'りょうりにん', romaji: 'ryourinin', th: 'พ่อครัว', cat: 'อาชีพ' },
-    { jp: 'うんてんしゅ', romaji: 'untenshu', th: 'คนขับรถ', cat: 'อาชีพ' },
-    { jp: 'てんいん', romaji: 'tenin', th: 'พนักงานขาย', cat: 'อาชีพ' },
-    { jp: 'しゃしんか', romaji: 'shashinaka', th: 'ช่างภาพ', cat: 'อาชีพ' },
-
-    // ร้านค้าต่างๆ
-    { jp: 'スーパー', romaji: 'suupaa', th: 'ซูเปอร์มาร์เก็ต', cat: 'สถานที่' },
-    { jp: 'コンビニ', romaji: 'konbini', th: 'ร้านสะดวกซื้อ', cat: 'สถานที่' },
-    { jp: 'ほんや', romaji: 'honya', th: 'ร้านหนังสือ', cat: 'สถานที่' },
-    { jp: 'レストラン', romaji: 'resutoran', th: 'ร้านอาหาร', cat: 'สถานที่' },
-    { jp: 'ぎんこう', romaji: 'ginkou', th: 'ธนาคาร', cat: 'สถานที่' },
-    { jp: 'ホテル', romaji: 'hoteru', th: 'โรงแรม', cat: 'สถานที่' },
-    { jp: 'びじゅつかん', romaji: 'bijutsukan', th: 'พิพิธภัณฑ์', cat: 'สถานที่' },
-    { jp: 'とりかん', romaji: 'toshokan', th: 'ห้องสมุด', cat: 'สถานที่' },
-    { jp: 'えいがかん', romaji: 'eigakan', th: 'โรงภาพยนตร์', cat: 'สถานที่' }
-];
+        <!-- Vocabulary Cards Section -->
+        <section class="vocab-content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-list"></i> รายการคำศัพท์</h2>
+                <div class="view-toggle">
+                    <button class="toggle-btn active" data-view="grid">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="toggle-btn" data-view="list">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="vocab-list" data-view="grid">
+                <!-- ตัวอย่างคำศัพท์ -->
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="difficulty-badge n5">N5</div>
+                        <button class="fav-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="jp-word">ありがとう</div>
+                    <div class="romaji">arigatou</div>
+                    <div class="meaning">ขอบคุณ</div>
+                    <div class="card-actions">
+                        <button class="audio-btn">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <button class="detail-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="card-header">
+                        <div class="difficulty-badge n5">N5</div>
+                        <button class="fav-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="jp-word">さようなら</div>
+                    <div class="romaji">sayounara</div>
+                    <div class="meaning">ลาก่อน</div>
+                    <div class="card-actions">
+                        <button class="audio-btn">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <button class="detail-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- เพิ่มเติมโดย JS -->
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="load-more-container">
+                <button class="load-more-btn">
+                    <i class="fas fa-plus-circle"></i>
+                    โหลดเพิ่มเติม
+                </button>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Modals -->
+    <div id="vocab-modal" class="vocab-modal" style="display:none;">
+        <div class="vocab-modal-bg"></div>
+        <div class="vocab-modal-content">
+            <button class="vocab-modal-close">×</button>
+            <div class="vocab-modal-body">
+                <!-- ข้อมูลคำศัพท์จะแสดงที่นี่ด้วย JS -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="favorites-modal" class="vocab-modal" style="display:none;">
+        <div class="vocab-modal-bg"></div>
+        <div class="vocab-modal-content favorites-modal-content">
+            <button class="vocab-modal-close">×</button>
+            <h3 class="favorites-title">
+                <i class="fas fa-heart"></i>
+                คำศัพท์ที่ชอบ
+            </h3>
+            <div class="favorites-list">
+                <!-- คำศัพท์โปรดจะแสดงที่นี่ด้วย JS -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="vocabulary.js"></script>
+    <script src="vocabulary-app.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      document.body.classList.add('fade-in-page');
+    });
+    </script>
+</body>
+</html>
