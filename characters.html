@@ -30,7 +30,8 @@
             <ul>
                 <li><a href="index.html">หน้าหลัก</a></li>
                 <li><a href="main.html">บทเรียน</a></li>
-                <li><a href="characters.html" class="active">ตัวอักษรญี่ปุ่น</a></li>
+                <li><a href="characters.html" class="active">ทดสอบตัวอักษร</a></li>
+                <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
                 <li><a href="vocabulary.html">คำศัพท์</a></li>
                 <li><a href="kanji.html">คันจิ</a></li>
                 <li><a href="grammar.html">ไวยากรณ์</a></li>
@@ -41,190 +42,257 @@
     <header class="character-header">
         <div class="container">
             <h1>เรียนรู้ตัวอักษรภาษาญี่ปุ่น</h1>
-            <p>เรียนรู้และฝึกฝนตัวอักษรฮิรากะนะนะนะนะและคาตาคานะ พร้อมแบบทดสอบที่จะช่วยให้คุณจดจำได้อย่างรวดเร็ว</p>
+            <p>เรียนรู้และฝึกฝนตัวอักษรฮิรากะนะและคาตาคานะ พร้อมแบบทดสอบที่จะช่วยให้คุณจดจำได้อย่างรวดเร็ว</p>
         </div>
     </header>
     
-    <section class="character-selection">
-        <div class="container">
-            <div class="character-tabs">
-                <button class="tab-btn active" data-type="hiragana">ฮิรากะนะ</button>
-                <button class="tab-btn" data-type="katakana">คาตาคานะ</button>
+    <main>
+        <!-- หน้าเลือกโหมด -->
+        <section id="character-setup" class="quiz-section">
+            <h2>เลือกโหมดการเรียน</h2>
+            <div class="difficulty-modes">
+                <button class="mode-btn easy active" data-mode="easy">
+                    <i class="fas fa-star"></i>
+                    <span>โหมดง่าย</span>
+                    <small>เลือกตอบ 4 ตัวเลือก</small>
+                </button>
+                <button class="mode-btn medium" data-mode="medium">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>โหมดกลาง</span>
+                    <small>พิมพ์คำตอบเอง</small>
+                </button>
+                <button class="mode-btn hard" data-mode="hard">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>โหมดยาก</span>
+                    <small>พิมพ์คำตอบ + เวลาจำกัด</small>
+                </button>
+                <button class="mode-btn infinity" data-mode="infinity">
+                    <i class="fas fa-infinity"></i>
+                    <span>โหมด Infinity</span>
+                    <small>ไม่จำกัดจำนวนข้อ</small>
+                </button>
             </div>
 
-            <!-- ส่วนตารางตัวอักษร -->
-            <div class="character-table-container">
-                <!-- ตารางตัวอักษรจะถูกสร้างด้วย JavaScript -->
+            <div class="character-selection">
+                <h3>เลือกประเภทตัวอักษร</h3>
+                <div class="selection-tabs">
+                    <button class="tab-btn active" data-tab="hiragana">ฮิรากะนะ</button>
+                    <button class="tab-btn" data-tab="katakana">คาตาคานะ</button>
+                </div>
+
+                <div class="character-group-selection">
+                    <h3>เลือกกลุ่มตัวอักษรที่ต้องการเรียน</h3>
+                    <div class="character-groups">
+                        <div class="group-item active" data-group="basic">
+                            <span>พื้นฐาน</span>
+                            <small>a, i, u, e, o</small>
+                        </div>
+                        <div class="group-item" data-group="k">
+                            <span>กลุ่ม K</span>
+                            <small>ka, ki, ku, ke, ko</small>
+                        </div>
+                        <div class="group-item" data-group="g">
+                            <span>กลุ่ม G</span>
+                            <small>ga, gi, gu, ge, go</small>
+                        </div>
+                        <div class="group-item" data-group="s">
+                            <span>กลุ่ม S</span>
+                            <small>sa, shi, su, se, so</small>
+                        </div>
+                        <div class="group-item" data-group="z">
+                            <span>กลุ่ม Z</span>
+                            <small>za, ji, zu, ze, zo</small>
+                        </div>
+                        <div class="group-item" data-group="t">
+                            <span>กลุ่ม T</span>
+                            <small>ta, chi, tsu, te, to</small>
+                        </div>
+                        <div class="group-item" data-group="d">
+                            <span>กลุ่ม D</span>
+                            <small>da, ji, zu, de, do</small>
+                        </div>
+                        <div class="group-item" data-group="n">
+                            <span>กลุ่ม N</span>
+                            <small>na, ni, nu, ne, no</small>
+                        </div>
+                        <div class="group-item" data-group="h">
+                            <span>กลุ่ม H</span>
+                            <small>ha, hi, fu, he, ho</small>
+                        </div>
+                        <div class="group-item" data-group="b">
+                            <span>กลุ่ม B</span>
+                            <small>ba, bi, bu, be, bo</small>
+                        </div>
+                        <div class="group-item" data-group="p">
+                            <span>กลุ่ม P</span>
+                            <small>pa, pi, pu, pe, po</small>
+                        </div>
+                        <div class="group-item" data-group="m">
+                            <span>กลุ่ม M</span>
+                            <small>ma, mi, mu, me, mo</small>
             </div>
-
-            <!-- เสียงควบกล้ำ (Yōon) -->
-            <div class="yoon-section" style="margin-top:2.5rem;">
-                <h3 style="color:#ff6b6b;margin-bottom:1rem;">เสียงควบกล้ำ (Yōon / 拗音)</h3>
-                <p style="font-size:1.08rem;max-width:700px;line-height:1.8;">เสียงควบกล้ำในภาษาญี่ปุ่น คือการผสมเสียงระหว่างพยัญชนะที่ลงท้ายด้วยเสียง <b>i</b> (เช่น き, し, ち, に ฯลฯ) กับ <b>ゃ (ya), ゅ (yu), ょ (yo)</b> ที่เขียนเป็นตัวเล็ก ทำให้เกิดเสียงใหม่ เช่น <b>きゃ (kya), しゅ (shu), ちょ (cho)</b> เป็นต้น</p>
-                <div style="overflow-x:auto;">
-                <table class="yoon-table" style="margin:1.5rem 0;min-width:500px;text-align:center;">
-                    <thead>
-                        <tr style="background:#f8f9fa;">
-                            <th></th><th>ゃ (ya)</th><th>ゅ (yu)</th><th>ょ (yo)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>き (ki)</td><td>きゃ (kya)</td><td>きゅ (kyu)</td><td>きょ (kyo)</td></tr>
-                        <tr><td>し (shi)</td><td>しゃ (sha)</td><td>しゅ (shu)</td><td>しょ (sho)</td></tr>
-                        <tr><td>ち (chi)</td><td>ちゃ (cha)</td><td>ちゅ (chu)</td><td>ちょ (cho)</td></tr>
-                        <tr><td>に (ni)</td><td>にゃ (nya)</td><td>にゅ (nyu)</td><td>にょ (nyo)</td></tr>
-                        <tr><td>ひ (hi)</td><td>ひゃ (hya)</td><td>ひゅ (hyu)</td><td>ひょ (hyo)</td></tr>
-                        <tr><td>み (mi)</td><td>みゃ (mya)</td><td>みゅ (myu)</td><td>みょ (myo)</td></tr>
-                        <tr><td>り (ri)</td><td>りゃ (rya)</td><td>りゅ (ryu)</td><td>りょ (ryo)</td></tr>
-                        <tr><td>ぎ (gi)</td><td>ぎゃ (gya)</td><td>ぎゅ (gyu)</td><td>ぎょ (gyo)</td></tr>
-                        <tr><td>じ (ji)</td><td>じゃ (ja)</td><td>じゅ (ju)</td><td>じょ (jo)</td></tr>
-                        <tr><td>び (bi)</td><td>びゃ (bya)</td><td>びゅ (byu)</td><td>びょ (byo)</td></tr>
-                        <tr><td>ぴ (pi)</td><td>ぴゃ (pya)</td><td>ぴゅ (pyu)</td><td>ぴょ (pyo)</td></tr>
-                    </tbody>
-                </table>
+                        <div class="group-item" data-group="y">
+                            <span>กลุ่ม Y</span>
+                            <small>ya, yu, yo</small>
                 </div>
-                <ul style="font-size:1.05rem;max-width:700px;margin:0 auto 1.2rem auto;line-height:1.7;">
-                    <li>เสียงควบกล้ำจะออกเสียงเป็นพยางค์เดียว เช่น <b>きゃ (kya)</b> ไม่ใช่ <b>きや (kiya)</b></li>
-                    <li>ต้องใช้ <b>ゃ, ゅ, ょ</b> ตัวเล็กเท่านั้น</li>
-                    <li>มีทั้งในฮิรางานะและคาตาคานะ</li>
-                </ul>
-                <div style="margin-bottom:0.7rem;font-size:1.05rem;"><b>ตัวอย่างคำศัพท์:</b></div>
-                <ul style="font-size:1.05rem;max-width:700px;margin:0 auto;line-height:1.7;">
-                    <li>きゃく (kyaku) = แขก, ลูกค้า</li>
-                    <li>しゅくだい (shukudai) = การบ้าน</li>
-                    <li>ちゅうごく (chuugoku) = ประเทศจีน</li>
-                    <li>りょうり (ryouri) = อาหาร, การทำอาหาร</li>
-                    <li>びょういん (byouin) = โรงพยาบาล</li>
-                    <li>じゅぎょう (jugyou) = คาบเรียน</li>
-                </ul>
-            </div>
-
-            <!-- ส่วนปุ่มทดสอบ -->
-            <div class="test-buttons">
-                <h3>เลือกเรียน</h3>
-                <div class="character-type-selection">
-                    <button class="character-type-btn active" data-type="hiragana">ฮิรากะนะ</button>
-                    <button class="character-type-btn" data-type="katakana">คาตาคานะ</button>
+                        <div class="group-item" data-group="r">
+                            <span>กลุ่ม R</span>
+                            <small>ra, ri, ru, re, ro</small>
                 </div>
-                <div class="character-group-buttons">
-                    <button class="character-group-btn" data-group="basic">พื้นฐาน (a, i, u, e, o)</button>
-                    <button class="character-group-btn" data-group="k">กลุ่ม K</button>
-                    <button class="character-group-btn" data-group="k_dakuten">กลุ่ม K + ゛</button>
-                    <button class="character-group-btn" data-group="s">กลุ่ม S</button>
-                    <button class="character-group-btn" data-group="s_dakuten">กลุ่ม S + ゛</button>
-                    <button class="character-group-btn" data-group="t">กลุ่ม T</button>
-                    <button class="character-group-btn" data-group="t_dakuten">กลุ่ม T + ゛</button>
-                    <button class="character-group-btn" data-group="n">กลุ่ม N</button>
-                    <button class="character-group-btn" data-group="h">กลุ่ม H</button>
-                    <button class="character-group-btn" data-group="h_dakuten">กลุ่ม H + ゛</button>
-                    <button class="character-group-btn" data-group="h_maru">กลุ่ม H + ゜</button>
-                    <button class="character-group-btn" data-group="m">กลุ่ม M</button>
-                    <button class="character-group-btn" data-group="y">กลุ่ม Y</button>
-                    <button class="character-group-btn" data-group="r">กลุ่ม R</button>
-                    <button class="character-group-btn" data-group="w">กลุ่ม W</button>
-                    <button class="character-group-btn" data-group="other">อื่นๆ</button>
-                </div>
-
-                <h3 class="mt-4">โหมดการเรียน</h3>
-                <div class="test-mode-buttons">
-                    <div class="test-mode-card">
-                        <h4>โหมดง่าย</h4>
-                        <ul>
-                            <li>ตัวเลือก 4 ข้อ</li>
-                            <li>ไม่มีเวลาจำกัด</li>
-                            <li>ผิดได้ 10 ครั้ง</li>
-                        </ul>
-                        <button class="test-mode-btn" data-mode="easy">เริ่มเรียน</button>
+                        <div class="group-item" data-group="w">
+                            <span>กลุ่ม W</span>
+                            <small>wa, wo, n</small>
                     </div>
-                    <div class="test-mode-card">
-                        <h4>โหมดกลาง</h4>
-                        <ul>
-                            <li>พิมพ์คำตอบเอง</li>
-                            <li>ไม่มีเวลาจำกัด</li>
-                            <li>ผิดได้ 5 ครั้ง</li>
-                        </ul>
-                        <button class="test-mode-btn" data-mode="medium">เริ่มเรียน</button>
+                        <div class="group-item" data-group="yoon">
+                            <span>เสียงควบกล้ำ</span>
+                            <small>kya, sha, cha, nya, etc.</small>
                     </div>
-                    <div class="test-mode-card">
-                        <h4>โหมดยาก</h4>
-                        <ul>
-                            <li>พิมพ์คำตอบเอง</li>
-                            <li>มีเวลาจำกัด</li>
-                            <li>ผิดได้ 3 ครั้ง</li>
-                        </ul>
-                        <button class="test-mode-btn" data-mode="hard">เริ่มเรียน</button>
                     </div>
                 </div>
             </div>
+
+            <div class="quiz-settings">
+                <h3>ตั้งค่าเพิ่มเติม</h3>
+                <div class="setting-item question-count-setting">
+                    <label>จำนวนข้อ:</label>
+                    <input type="number" id="question-count" min="1" max="50" value="10">
         </div>
-    </section>
-
-    <!-- ส่วนทดสอบ -->
-    <section class="test-section" style="display: none;">
-        <div class="container">
-            <div class="test-header">
-                <h2 class="test-title">เรียนฮิรากะนะ - กลุ่มพื้นฐาน</h2>
-                <div class="test-info">
-                    <div class="test-status">
-                        <span class="current-question">1</span>/<span class="total-questions">10</span>
-                        <span class="status-divider" style="margin: 0 0.7em;"> </span>
-                        <i class="fas fa-times"></i>
-                        <span class="mistakes-count">0</span>/<span class="max-mistakes">10</span>
+                <div class="setting-item infinity-input-type-setting" style="display: none;">
+                    <label>รูปแบบการตอบ:</label>
+                    <select id="infinity-input-type">
+                        <option value="multiple-choice">ตัวเลือก 4 ข้อ</option>
+                        <option value="text-input">พิมพ์คำตอบเอง</option>
+                    </select>
                     </div>
-                </div>
-                <button class="test-exit-btn"><i class="fas fa-times"></i> ออกจากโหมดเรียน</button>
-            </div>
-
-            <div class="test-content">
-                <div class="test-character">あ</div>
-                <div class="test-question">ตัวอักษรนี้อ่านว่าอะไร?</div>
-                
-                <!-- ส่วนตัวเลือก (สำหรับโหมดง่าย) -->
-                <div class="test-options">
-                    <!-- ตัวเลือกจะถูกสร้างด้วย JavaScript -->
-                </div>
-                
-                <!-- ส่วนพิมพ์คำตอบ (สำหรับโหมดกลางและยาก) -->
-                <div class="test-input-container" style="display: none;">
-                    <input type="text" class="test-answer-input" placeholder="พิมพ์คำตอบของคุณ...">
-                    <button class="test-submit-btn">ตอบ</button>
-                </div>
-                
-                <div class="test-feedback" style="display: none;">
-                    <div class="feedback-correct">
-                        <i class="fas fa-check-circle"></i>
-                        <span>ถูกต้อง!</span>
-                    </div>
-                    <div class="feedback-incorrect" style="display: none;">
-                        <i class="fas fa-times-circle"></i>
-                        <span>ไม่ถูกต้อง! คำตอบที่ถูกคือ: <span class="correct-answer">a</span></span>
-                    </div>
+                <div class="setting-item">
+                    <label>รูปแบบคำถาม:</label>
+                    <select id="question-format">
+                        <option value="character-to-romaji">ตัวอักษร → โรมาจิ</option>
+                        <option value="romaji-to-character">โรมาจิ → ตัวอักษร</option>
+                        <option value="mix">สลับสุ่ม</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="test-result" style="display: none;">
+            <div class="note-box">
+                <i class="fas fa-info-circle"></i>
+                <p><strong>ข้อมูล:</strong> ตอบได้ทั้งโรมาจิและตัวอักษรญี่ปุ่น เช่น "あ" ตอบได้ "a" หรือ "あ" ก็ได้</p>
+            </div>
+
+            <button id="start-character-quiz" class="start-btn">เริ่มเรียน</button>
+        </section>
+
+        <!-- หน้าแสดงคำถาม -->
+        <section id="character-questions" class="quiz-section" style="display: none;">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span class="question-number">ข้อที่ 1/10</span>
+                    <span class="timer">15</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                </div>
+                
+            <div class="question-container">
+                <div class="question-text"></div>
+                <div class="answer-container">
+                    <!-- สำหรับโหมดง่าย -->
+                    <div class="multiple-choice" style="display: none;">
+                        <!-- จะถูกเติมด้วย JavaScript -->
+                    </div>
+                    <!-- สำหรับโหมดกลางและยาก -->
+                    <div class="text-input" style="display: none;">
+                        <input type="text" placeholder="พิมพ์คำตอบ...">
+                        <button class="submit-btn">ตอบ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-footer">
+                <div class="mistakes-left">
+                    เหลือการตอบผิด: <span class="mistakes-count">3</span> ครั้ง
+                </div>
+                <div class="infinity-stats-button" style="display: none;">
+                    <button id="show-detailed-stats" class="detailed-stats-btn">
+                        <i class="fas fa-chart-bar"></i>
+                        ดูสถิติเชิงลึก
+                    </button>
+                </div>
+                <div class="note-box" style="margin-top: 15px;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>ตอบได้ทั้งโรมาจิและตัวอักษรญี่ปุ่น เช่น "a" หรือ "あ"</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- หน้าแสดงผลลัพธ์ -->
+        <section id="character-results" class="quiz-section" style="display: none;">
+            <div class="results-container">
                 <h2>ผลการเรียน</h2>
-                <div class="result-score">
+                <div class="score-display">
                     <div class="score-circle">
-                        <span class="score-number">0</span>
-                        <span class="score-percent">%</span>
+                        <span class="score-percent">85%</span>
+                    </div>
+                    <div class="score-details">
+                        <p>ตอบถูก: <span class="correct-count">8</span> ข้อ</p>
+                        <p>ตอบผิด: <span class="wrong-count">2</span> ข้อ</p>
                     </div>
                 </div>
-                <div class="result-message">คุณตอบถูก <span class="correct-count">0</span> ข้อ จากทั้งหมด <span class="total-count">10</span> ข้อ</div>
-                <div class="result-feedback">ยังต้องฝึกฝนเพิ่มเติม! ลองเรียนอีกครั้ง</div>
+
+                <div class="feedback-message">
+                    <!-- จะถูกเติมด้วย JavaScript -->
+                </div>
+
                 <div class="answers-review">
                     <h3>เฉลยคำตอบ</h3>
-                    <div class="answers-list"></div>
+                    <div class="answers-list">
+                        <!-- จะถูกเติมด้วย JavaScript -->
+                    </div>
                 </div>
+
                 <div class="result-buttons">
-                    <button class="test-retry-btn">ลองใหม่</button>
-                    <button class="test-back-btn">กลับไปหน้าเรียน</button>
+                    <button class="retry-btn">ลองใหม่</button>
+                    <button class="back-btn">กลับไปหน้าเรียน</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- แผงสถิติสำหรับโหมด Infinity -->
+        <div class="infinity-stats-panel" style="display: none;">
+            <div class="infinity-stats-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>สถิติเชิงลึก - โหมด Infinity</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- เนื้อหาสถิติจะถูกเติมด้วย JavaScript -->
+                    </div>
+                    <div class="modal-footer">
+                        <button class="continue-quiz-btn">ทำต่อ</button>
+                        <button class="end-quiz-btn">จบการเรียน</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- ส่วนท้ายของหน้า -->
+    <!-- ส่วนแสดงผลคำตอบ -->
+    <div class="answer-result" style="display: none;">
+        <div class="answer-result correct">
+            <i class="fas fa-check-circle"></i>
+            <span>ถูกต้อง!</span>
+        </div>
+        <div class="answer-result wrong">
+            <i class="fas fa-times-circle"></i>
+            <span>ไม่ถูกต้อง! คำตอบที่ถูกคือ: <span class="correct-answer"></span></span>
+        </div>
+    </div>
+
     <script src="characters.js"></script>
     <script>
     window.addEventListener('DOMContentLoaded', function() {
