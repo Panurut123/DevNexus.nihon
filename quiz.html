@@ -17,12 +17,13 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="index.html" class="active">หน้าหลัก</a></li>
                 <li><a href="main.html">บทเรียน</a></li>
-                <li><a href="characters.html">ตัวอักษรญี่ปุ่น</a></li>
+                <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
                 <li><a href="vocabulary.html">คำศัพท์</a></li>
                 <li><a href="kanji.html">คันจิ</a></li>
                 <li><a href="grammar.html">ไวยากรณ์</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
             </ul>
         </nav>
     </header>
@@ -113,8 +114,8 @@
             </div>
 
             <div class="note-box">
-                <i class="fas fa-exclamation-circle"></i>
-                <p><strong>หมายเหตุ:</strong> สำหรับโหมดพิมพ์ตอบเอง เมื่อต้องแปลจากไทยเป็นญี่ปุ่น กรุณาตอบเป็นโรมาจิเท่านั้น เช่น "เข้าใจ" ให้ตอบ "wakarimasu" ไม่สามารถตอบเป็นตัวอักษรญี่ปุ่น "わかります" ได้</p>
+                <i class="fas fa-info-circle"></i>
+                <p><strong>ข้อมูล:</strong> ตอบได้ทั้งโรมาจิและญี่ปุ่น เช่น "เข้าใจ" ตอบได้ "wakarimasu" หรือ "わかります" ก็ได้</p>
             </div>
 
             <button id="start-quiz" class="start-btn">เริ่มทดสอบ</button>
@@ -151,9 +152,15 @@
                 <div class="mistakes-left">
                     เหลือการตอบผิด: <span class="mistakes-count">3</span> ครั้ง
                 </div>
+                <div class="infinity-stats-button" style="display: none;">
+                    <button id="show-detailed-stats" class="detailed-stats-btn">
+                        <i class="fas fa-chart-bar"></i>
+                        ดูสถิติเชิงลึก
+                    </button>
+                </div>
                 <div class="note-box" style="margin-top: 15px;">
                     <i class="fas fa-exclamation-circle"></i>
-                    <p>หากต้องแปลจากไทยเป็นญี่ปุ่น กรุณาตอบเป็นโรมาจิเท่านั้น</p>
+                    <p>ตอบได้ทั้งโรมาจิและญี่ปุ่น เช่น "wakarimasu" หรือ "わかります"</p>
                 </div>
             </div>
         </section>
