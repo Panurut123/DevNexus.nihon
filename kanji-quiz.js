@@ -47,18 +47,20 @@ function startKanjiQuiz() {
             totalQuestions: 0,
             correctAnswers: 0,
             wrongAnswers: 0,
-            answerHistory: []
+            answerHistory: [],
+            wrongKanjiFrequency: {},
+            correctKanjiFrequency: {}
         };
         document.querySelector('.mistakes-left').style.display = 'none';
+        document.querySelector('.infinity-stats-button').style.display = 'block';
     } else {
         document.querySelector('.mistakes-left').style.display = 'flex';
+        document.querySelector('.infinity-stats-button').style.display = 'none';
     }
     
     // แสดงหน้าคำถาม
     document.getElementById('kanji-quiz-setup').style.display = 'none';
     document.getElementById('kanji-quiz-questions').style.display = 'block';
-    
-    document.querySelector('.mistakes-left').style.display = mode === 'infinity' ? 'none' : 'block';
     
     showQuestion();
 }
@@ -118,6 +120,25 @@ function showQuestion() {
 // ฟังก์ชันทำความสะอาดสตริง
 const cleanString = str => str.replace(/\s+/g, ' ').trim().toLowerCase();
 
+// ฟังก์ชันตรวจสอบคำตอบหลายรูปแบบ
+function isKanjiAnswerCorrect(userAnswer, kanji, correctAnswer) {
+    const cleanUserAnswer = cleanString(userAnswer);
+    
+    // ตรวจสอบคำตอบหลัก
+    if (cleanString(correctAnswer) === cleanUserAnswer) {
+        return true;
+    }
+    
+    // ตรวจสอบคำตอบที่ยอมรับได้ (ถ้ามี)
+    if (kanji.acceptedAnswers && Array.isArray(kanji.acceptedAnswers)) {
+        return kanji.acceptedAnswers.some(answer => 
+            cleanString(answer) === cleanUserAnswer
+        );
+    }
+    
+    return false;
+}
+
 // แสดงตัวเลือก 4 ตัวเลือก
 function showMultipleChoice(questionObj) {
     const container = document.querySelector('.multiple-choice');
@@ -168,6 +189,9 @@ function showMultipleChoice(questionObj) {
         btn.addEventListener('click', function() {
             checkAnswer(decodeURIComponent(this.dataset.answer));
         });
+        // รีเซ็ตสีปุ่ม
+        btn.classList.remove('correct', 'wrong');
+        btn.disabled = false;
     });
 }
 
@@ -190,36 +214,37 @@ function checkAnswer(userAnswer) {
     const quiz = window.kanjiQuiz;
     const currentQuestion = quiz.questions[quiz.currentIndex];
     const correctAnswer = currentQuestion.answer;
-    const acceptedAnswers = currentQuestion.kanji.acceptedAnswers || [correctAnswer];
+    const kanji = currentQuestion.kanji;
     
-    // Сохраняем ответ пользователя для итогов
+    // บันทึกคำตอบของผู้ใช้และผลลัพธ์
     currentQuestion.userAnswer = userAnswer;
 
-    const isCorrect = acceptedAnswers.some(answer => 
-        cleanString(userAnswer) === cleanString(answer)
-    );
+    const isCorrect = isKanjiAnswerCorrect(userAnswer, kanji, correctAnswer);
+    currentQuestion.isCorrect = isCorrect;
     
     console.log('User Answer:', userAnswer, 'Correct Answer:', correctAnswer, 'Is Correct:', isCorrect);
     
     if (quiz.isInfinity) {
-        quiz.stats.totalQuestions++;
-        const answerRecord = {
-            question: currentQuestion.question,
-            correctAnswer: correctAnswer,
-            userAnswer: userAnswer,
-            isCorrect: isCorrect,
-            kanji: currentQuestion.kanji
-        };
-        quiz.stats.answerHistory.unshift(answerRecord);
-        if (quiz.stats.answerHistory.length > 50) {
-            quiz.stats.answerHistory = quiz.stats.answerHistory.slice(0, 50);
-        }
-        if (isCorrect) {
-            quiz.stats.correctAnswers++;
-        } else {
-            quiz.stats.wrongAnswers++;
-        }
-        updateInfinityStats();
+        updateKanjiInfinityStats(isCorrect, currentQuestion, userAnswer);
+    }
+
+    // แสดงผลสีบนปุ่มตัวเลือก (สำหรับโหมด multiple choice)
+    if (quiz.mode === 'easy' || (quiz.isInfinity && quiz.inputType === 'multiple-choice')) {
+        const buttons = document.querySelectorAll('.choice-btn');
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            const btnAnswer = decodeURIComponent(btn.dataset.answer);
+            
+            // ตรวจสอบว่าปุ่มนี้เป็นคำตอบที่ถูกหรือไม่
+            if (isKanjiAnswerCorrect(btnAnswer, kanji, correctAnswer)) {
+                btn.classList.add('correct');
+            }
+            
+            // ถ้าเป็นปุ่มที่ผู้ใช้กดและตอบผิด
+            if (btnAnswer === userAnswer && !isCorrect) {
+                btn.classList.add('wrong');
+            }
+        });
     }
 
     if (isCorrect) {
@@ -235,7 +260,12 @@ function checkAnswer(userAnswer) {
             quiz.questions = newQuestion;
             quiz.currentIndex = 0;
         }
+        
+        // แสดงผลลัพธ์สั้น ๆ ก่อนไปคำถามถัดไป
+        showAnswerResult(true, correctAnswer);
+        setTimeout(() => {
         showQuestion();
+        }, 1500);
     } else {
         quiz.mistakes++;
         if (!quiz.isInfinity) {
@@ -245,17 +275,10 @@ function checkAnswer(userAnswer) {
             }
             document.querySelector('.mistakes-count').textContent = quiz.maxMistakes - quiz.mistakes;
         }
-        if (quiz.mode === 'easy' || (quiz.isInfinity && quiz.inputType === 'multiple-choice')) {
-            const buttons = document.querySelectorAll('.choice-btn');
-            buttons.forEach(btn => {
-                if (acceptedAnswers.some(answer => cleanString(decodeURIComponent(btn.dataset.answer)) === cleanString(answer))) {
-                    btn.classList.add('correct');
-                }
-                if (cleanString(decodeURIComponent(btn.dataset.answer)) === cleanString(userAnswer)) {
-                    btn.classList.add('wrong');
-                }
-                btn.disabled = true;
-            });
+        
+        // แสดงผลลัพธ์สั้น ๆ ก่อนไปคำถามถัดไป
+        showAnswerResult(false, correctAnswer);
+        
             setTimeout(() => {
                 if (!quiz.isInfinity) {
                     quiz.currentIndex++;
@@ -269,18 +292,161 @@ function checkAnswer(userAnswer) {
                     quiz.currentIndex = 0;
                 }
                 showQuestion();
-            }, 1000);
-        } else {
-            alert(`คำตอบที่ถูกต้องคือ: ${correctAnswer}\nคุณตอบ: ${userAnswer}`);
-            document.querySelector('.text-input input').value = '';
-            if (quiz.isInfinity) {
-                const newQuestion = generateQuestions(quiz.level, 1, quiz.format);
-                quiz.questions = newQuestion;
-                quiz.currentIndex = 0;
-                showQuestion();
-            }
-        }
+        }, 2000);
     }
+}
+
+// แสดงผลคำตอบ
+function showAnswerResult(isCorrect, correctAnswer) {
+    const resultElement = document.createElement('div');
+    resultElement.className = `answer-result ${isCorrect ? 'correct' : 'wrong'}`;
+    resultElement.innerHTML = isCorrect ? 
+        '<i class="fas fa-check"></i> ถูกต้อง!' : 
+        `<i class="fas fa-times"></i> ผิด! คำตอบที่ถูกคือ: ${correctAnswer}`;
+    document.getElementById('kanji-quiz-questions').appendChild(resultElement);
+    
+    setTimeout(() => {
+        resultElement.remove();
+    }, isCorrect ? 1500 : 2000);
+}
+
+// อัพเดทสถิติสำหรับโหมด Infinity
+function updateKanjiInfinityStats(isCorrect, question, userAnswer) {
+    const quiz = window.kanjiQuiz;
+    if (!quiz.isInfinity) return;
+    
+    quiz.stats.totalQuestions++;
+    
+    const kanji = question.kanji;
+    const kanjiKey = `${kanji.char} (${kanji.meaning})`;
+    
+    if (isCorrect) {
+        quiz.stats.correctAnswers++;
+        quiz.stats.correctKanjiFrequency[kanjiKey] = (quiz.stats.correctKanjiFrequency[kanjiKey] || 0) + 1;
+    } else {
+        quiz.stats.wrongAnswers++;
+        quiz.stats.wrongKanjiFrequency[kanjiKey] = (quiz.stats.wrongKanjiFrequency[kanjiKey] || 0) + 1;
+    }
+    
+    quiz.stats.answerHistory.unshift({
+        question: question.question,
+        correctAnswer: question.answer,
+        userAnswer: userAnswer,
+        isCorrect: isCorrect,
+        kanji: kanji
+    });
+    
+    if (quiz.stats.answerHistory.length > 50) {
+        quiz.stats.answerHistory = quiz.stats.answerHistory.slice(0, 50);
+    }
+}
+
+// ฟังก์ชันแสดงสถิติเชิงลึกสำหรับโหมด Infinity
+function showKanjiDetailedStats() {
+    const quiz = window.kanjiQuiz;
+    if (!quiz.isInfinity) return;
+    
+    const modal = document.createElement('div');
+    modal.className = 'infinity-stats-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>สถิติเชิงลึก - โหมด Infinity (คันจิ)</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="stats-section">
+                    <h4>สรุปโดยรวม</h4>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">ทำทั้งหมด:</span>
+                            <span class="stat-value">${quiz.stats.totalQuestions} ข้อ</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">ตอบถูก:</span>
+                            <span class="stat-value correct">${quiz.stats.correctAnswers} ข้อ</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">ตอบผิด:</span>
+                            <span class="stat-value wrong">${quiz.stats.wrongAnswers} ข้อ</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">ความแม่นยำ:</span>
+                            <span class="stat-value">${quiz.stats.totalQuestions > 0 ? Math.round((quiz.stats.correctAnswers / quiz.stats.totalQuestions) * 100) : 0}%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <h4>คันจิที่ตอบผิดบ่อยที่สุด</h4>
+                    <div class="words-frequency wrong-words">
+                        ${Object.entries(quiz.stats.wrongKanjiFrequency)
+                            .sort((a, b) => b[1] - a[1])
+                            .slice(0, 5)
+                            .map(([kanji, count]) => `
+                                <div class="frequency-item wrong">
+                                    <span class="word">${kanji}</span>
+                                    <span class="count">${count} ครั้ง</span>
+                                </div>
+                            `).join('') || '<p class="no-data">ยังไม่มีข้อมูล</p>'}
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <h4>คันจิที่ตอบถูกบ่อยที่สุด</h4>
+                    <div class="words-frequency correct-words">
+                        ${Object.entries(quiz.stats.correctKanjiFrequency)
+                            .sort((a, b) => b[1] - a[1])
+                            .slice(0, 5)
+                            .map(([kanji, count]) => `
+                                <div class="frequency-item correct">
+                                    <span class="word">${kanji}</span>
+                                    <span class="count">${count} ครั้ง</span>
+                                </div>
+                            `).join('') || '<p class="no-data">ยังไม่มีข้อมูล</p>'}
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <h4>ประวัติการตอบล่าสุด (10 ข้อ)</h4>
+                    <div class="recent-history">
+                        ${quiz.stats.answerHistory.slice(0, 10).map(item => `
+                            <div class="history-detail-item ${item.isCorrect ? 'correct' : 'wrong'}">
+                                <div class="question-text">${item.question}</div>
+                                <div class="answer-info">
+                                    <span class="user-answer ${item.isCorrect ? 'correct' : 'wrong'}">
+                                        คำตอบ: ${item.userAnswer}
+                                    </span>
+                                    ${!item.isCorrect ? `<span class="correct-answer">ถูกต้อง: ${item.correctAnswer}</span>` : ''}
+                                    ${item.kanji.furigana ? `<span class="furigana">อ่าน: ${item.kanji.furigana}</span>` : ''}
+                                    ${item.kanji.example ? `<span class="example">ตัวอย่าง: ${item.kanji.example}</span>` : ''}
+                                </div>
+                            </div>
+                        `).join('') || '<p class="no-data">ยังไม่มีข้อมูล</p>'}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="continue-quiz-btn">ทำต่อ</button>
+                <button class="end-quiz-btn">จบการทดสอบ</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Event listeners สำหรับ modal
+    modal.querySelector('.close-modal').onclick = () => modal.remove();
+    modal.querySelector('.continue-quiz-btn').onclick = () => modal.remove();
+    modal.querySelector('.end-quiz-btn').onclick = () => {
+        modal.remove();
+        endQuiz();
+    };
+    
+    // ปิด modal เมื่อคลิกนอก content
+    modal.onclick = (e) => {
+        if (e.target === modal) modal.remove();
+    };
 }
 
 // จบ quiz และแสดงผลลัพธ์
@@ -292,10 +458,13 @@ function endQuiz() {
         document.getElementById('kanji-quiz-questions').style.display = 'none';
         document.getElementById('kanji-quiz-results').style.display = 'block';
         
-        const percent = Math.round((quiz.score / quiz.questions.length) * 100);
+        const actualCorrect = quiz.questions.filter(q => q.isCorrect).length;
+        const actualWrong = quiz.questions.length - actualCorrect;
+        const percent = quiz.questions.length > 0 ? Math.round((actualCorrect / quiz.questions.length) * 100) : 0;
+        
         document.querySelector('.score-percent').textContent = `${percent}%`;
-        document.querySelector('.correct-count').textContent = quiz.score;
-        document.querySelector('.wrong-count').textContent = quiz.questions.length - quiz.score;
+        document.querySelector('.correct-count').textContent = actualCorrect;
+        document.querySelector('.wrong-count').textContent = actualWrong;
         
         let feedback = '';
         if (percent >= 80) feedback = 'เยี่ยมมาก! คุณเก่งมาก';
@@ -305,7 +474,7 @@ function endQuiz() {
         
         const answersList = document.querySelector('.answers-list');
         answersList.innerHTML = quiz.questions.map((q, index) => {
-            const isCorrect = q.userAnswer ? cleanString(q.userAnswer) === cleanString(q.answer) : false;
+            const isCorrect = q.isCorrect || false;
             return `
                 <div class="answer-item">
                     <div class="answer-status ${isCorrect ? 'correct' : 'wrong'}">
@@ -314,6 +483,7 @@ function endQuiz() {
                     <div class="answer-content">
                         <div class="answer-text">${q.question} → ${q.answer}</div>
                         <div class="answer-details">
+                            ${q.userAnswer ? `คำตอบ: ${q.userAnswer}` : 'ไม่ได้ตอบ'} | 
                             <span style='color:#ffb3b3;'>${q.kanji.furigana ? q.kanji.furigana : ''}</span>
                             ${q.kanji.example ? `<span style='color:#888; margin-left:1em;'>${q.kanji.example}</span>` : ''}
                         </div>
@@ -341,40 +511,9 @@ function endQuiz() {
     }
 }
 
-// อัพเดทข้อมูลสถิติในโหมด Infinity
+// อัพเดทข้อมูลสถิติในโหมด Infinity (เก่า - ไม่ใช้แล้ว)
 function updateInfinityStats() {
-    const quiz = window.kanjiQuiz;
-    if (!quiz.isInfinity) return;
-    const totalQ = document.querySelector('.total-questions');
-    if (totalQ) totalQ.textContent = quiz.stats.totalQuestions;
-    const correctA = document.querySelector('.correct-answers');
-    if (correctA) correctA.textContent = quiz.stats.correctAnswers;
-    const wrongA = document.querySelector('.wrong-answers');
-    if (wrongA) wrongA.textContent = quiz.stats.wrongAnswers;
-    const accuracy = quiz.stats.totalQuestions > 0 
-        ? Math.round((quiz.stats.correctAnswers / quiz.stats.totalQuestions) * 100) 
-        : 0;
-    const accuracyElem = document.querySelector('.accuracy-percent');
-    if (accuracyElem) accuracyElem.textContent = `${accuracy}%`;
-    const recentAnswersContainer = document.querySelector('.recent-answers');
-    if (recentAnswersContainer) {
-        recentAnswersContainer.innerHTML = '';
-        const recentAnswers = quiz.stats.answerHistory.slice(0, 5);
-        recentAnswers.forEach(record => {
-            const answerRecord = document.createElement('div');
-            answerRecord.className = 'answer-record';
-            answerRecord.innerHTML = `
-                <div class="answer-status ${record.isCorrect ? 'correct' : 'wrong'}"></div>
-                <div class="answer-details">
-                    <div class="answer-question">${record.question} → ${record.correctAnswer}</div>
-                    <div class="answer-response">
-                        ${record.isCorrect ? 'ตอบถูก' : `ตอบผิด: ${record.userAnswer}`}
-                    </div>
-                </div>
-            `;
-            recentAnswersContainer.appendChild(answerRecord);
-        });
-    }
+    // Function เก่า - ใช้ updateKanjiInfinityStats แทน
 }
 
 function startTimer() {
@@ -404,13 +543,16 @@ function startTimer() {
 
 document.getElementById('start-kanji-quiz').addEventListener('click', startKanjiQuiz);
 
+// Event listener สำหรับปุ่มสถิติเชิงลึก
+document.getElementById('show-kanji-detailed-stats')?.addEventListener('click', showKanjiDetailedStats);
+
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.mode-btn').forEach(btn => {
         btn.onclick = () => {
             document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const isInfinityMode = btn.dataset.mode === 'infinity';
-            const questionCountContainer = document.querySelector('.question-count-container');
+            const questionCountContainer = document.querySelector('.question-count-setting');
             if (questionCountContainer) {
                 questionCountContainer.style.display = isInfinityMode ? 'none' : 'block';
             }
@@ -420,42 +562,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
     });
-    
-    const showStatsBtn = document.querySelector('.show-stats-btn');
-    if (showStatsBtn) {
-        showStatsBtn.addEventListener('click', function() {
-            const statsPanel = document.querySelector('.infinity-stats-panel');
-            if (statsPanel) {
-                statsPanel.style.display = 'flex';
-                updateInfinityStats();
-            }
-        });
-    }
-    
-    const closeStatsBtn = document.querySelector('.close-stats-btn');
-    if (closeStatsBtn) {
-        closeStatsBtn.addEventListener('click', function() {
-            const statsPanel = document.querySelector('.infinity-stats-panel');
-            if (statsPanel) {
-                statsPanel.style.display = 'none';
-            }
-        });
-    }
-    
-    const continueBtn = document.querySelector('.continue-btn');
-    if (continueBtn) {
-        continueBtn.addEventListener('click', function() {
-            const statsPanel = document.querySelector('.infinity-stats-panel');
-            if (statsPanel) {
-                statsPanel.style.display = 'none';
-            }
-        });
-    }
-    
-    const endInfinityBtn = document.querySelector('.end-infinity-btn');
-    if (endInfinityBtn) {
-        endInfinityBtn.addEventListener('click', function() {
-            endQuiz();
-        });
-    }
 });
