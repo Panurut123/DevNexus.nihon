@@ -20,13 +20,51 @@ let infinityStats = {
     totalQuestions: 0,
     correctAnswers: 0,
     wrongAnswers: 0,
-    answerHistory: []
+    answerHistory: [],
+    wrongWordsFrequency: {},
+    correctWordsFrequency: {}
 };
 
 // เพิ่มตัวแปรอ้างอิง section ต่างๆ
 const setupSection = document.getElementById('quiz-setup');
 const questionsSection = document.getElementById('quiz-questions');
 const resultsSection = document.getElementById('quiz-results');
+
+// ฟังก์ชันสำหรับทำความสะอาดข้อความ (เอาช่องว่างและเปลี่ยนเป็นตัวพิมพ์เล็ก)
+function cleanString(str) {
+    return str.toLowerCase().trim().replace(/\s+/g, ' ');
+}
+
+// ฟังก์ชันตรวจสอบคำตอบหลายรูปแบบ
+function isAnswerCorrect(userAnswer, correctData) {
+    const cleanUserAnswer = cleanString(userAnswer);
+    
+    // ตรวจสอบโรมาจิ
+    if (cleanString(correctData.romaji) === cleanUserAnswer) {
+        return true;
+    }
+    
+    // ตรวจสอบภาษาญี่ปุ่น
+    if (cleanString(correctData.jp) === cleanUserAnswer) {
+        return true;
+    }
+    
+    // ตรวจสอบความหมายไทย (ถ้าคำถามเป็นญี่ปุ่น -> ไทย)
+    if (Array.isArray(correctData.th)) {
+        // ถ้า th เป็น array ให้ตรวจสอบทุกความหมาย
+        for (let meaning of correctData.th) {
+            if (cleanString(meaning) === cleanUserAnswer) {
+                return true;
+            }
+        }
+    } else {
+        if (cleanString(correctData.th) === cleanUserAnswer) {
+            return true;
+        }
+    }
+    
+    return false;
+}
 
 // โหมดความยาก
 document.querySelectorAll('.mode-btn').forEach(btn => {
@@ -188,7 +226,6 @@ function generateQuestions() {
         quizQuestions.push({
             vocab,
             type,
-            correct: type === 'jp-th' ? vocab.th : vocab.romaji,
             question: type === 'jp-th' ? vocab.jp : vocab.th
         });
         
@@ -196,7 +233,9 @@ function generateQuestions() {
             totalQuestions: 0,
             correctAnswers: 0,
             wrongAnswers: 0,
-            answerHistory: []
+            answerHistory: [],
+            wrongWordsFrequency: {},
+            correctWordsFrequency: {}
         };
     } else {
         const count = Math.min(questionCount, shuffled.length);
@@ -210,7 +249,6 @@ function generateQuestions() {
             quizQuestions.push({
                 vocab,
                 type,
-                correct: type === 'jp-th' ? vocab.th : vocab.romaji,
                 question: type === 'jp-th' ? vocab.jp : vocab.th
             });
         }
@@ -231,8 +269,12 @@ function showQuestion() {
     }
     
     if (isInfinity) {
-        document.querySelector('.quiz-footer').style.display = 'none';
+        document.querySelector('.mistakes-left').style.display = 'none';
+        document.querySelector('.infinity-stats-button').style.display = 'block';
+        document.querySelector('.quiz-footer').style.display = 'flex';
     } else {
+        document.querySelector('.mistakes-left').style.display = 'flex';
+        document.querySelector('.infinity-stats-button').style.display = 'none';
         document.querySelector('.quiz-footer').style.display = 'flex';
         document.querySelector('.mistakes-count').textContent = mistakesLeft;
     }
@@ -257,6 +299,9 @@ function showQuestion() {
         
         multipleChoice.querySelectorAll('.choice-btn').forEach(btn => {
             btn.onclick = () => checkAnswer(btn.dataset.answer);
+            // รีเซ็ตสีปุ่ม
+            btn.classList.remove('correct', 'wrong');
+            btn.disabled = false;
         });
     } else {
         multipleChoice.style.display = 'none';
@@ -285,12 +330,26 @@ function showQuestion() {
 
 // สร้างตัวเลือกสำหรับโหมดง่าย
 function generateChoices(question) {
-    const correctAnswer = question.correct;
+    const vocab = question.vocab;
+    let correctAnswer;
+    
+    if (question.type === 'jp-th') {
+        correctAnswer = Array.isArray(vocab.th) ? vocab.th[0] : vocab.th;
+    } else {
+        correctAnswer = vocab.romaji;
+    }
+    
     const choices = [correctAnswer];
     
     while (choices.length < 4) {
         const randomVocab = selectedVocabs[Math.floor(Math.random() * selectedVocabs.length)];
-        const randomAnswer = question.type === 'jp-th' ? randomVocab.th : randomVocab.romaji;
+        let randomAnswer;
+        
+        if (question.type === 'jp-th') {
+            randomAnswer = Array.isArray(randomVocab.th) ? randomVocab.th[0] : randomVocab.th;
+        } else {
+            randomAnswer = randomVocab.romaji;
+        }
         
         if (!choices.includes(randomAnswer) && randomAnswer !== correctAnswer) {
             choices.push(randomAnswer);
@@ -321,18 +380,23 @@ function startTimer() {
 function updateInfinityStats(isCorrect, question, answer) {
     infinityStats.totalQuestions++;
     
+    const vocab = question.vocab;
+    const wordKey = `${vocab.jp} (${vocab.th})`;
+    
     if (isCorrect) {
         infinityStats.correctAnswers++;
+        infinityStats.correctWordsFrequency[wordKey] = (infinityStats.correctWordsFrequency[wordKey] || 0) + 1;
     } else {
         infinityStats.wrongAnswers++;
+        infinityStats.wrongWordsFrequency[wordKey] = (infinityStats.wrongWordsFrequency[wordKey] || 0) + 1;
     }
     
     infinityStats.answerHistory.unshift({
         question: question.question,
-        correctAnswer: question.correct,
         userAnswer: answer,
         isCorrect: isCorrect,
-        type: question.type
+        type: question.type,
+        vocab: vocab
     });
     
     if (infinityStats.answerHistory.length > 10) {
@@ -356,24 +420,34 @@ function updateInfinityStatsDisplay() {
     document.getElementById('infinity-accuracy').textContent = `${accuracy}%`;
     
     const historyContainer = document.getElementById('infinity-answer-history');
-    historyContainer.innerHTML = '';
-    
-    infinityStats.answerHistory.forEach(item => {
-        const historyItem = document.createElement('div');
-        historyItem.className = `history-item ${item.isCorrect ? 'correct' : 'wrong'}`;
-        historyItem.innerHTML = `
-            <div class="question">${item.question}</div>
-            <div class="answer-details">
-                <span class="${item.isCorrect ? 'correct-text' : 'wrong-text'}">
-                    ${item.isCorrect ? 
-                        `<i class="fas fa-check"></i> ${item.userAnswer}` : 
-                        `<i class="fas fa-times"></i> ${item.userAnswer} (ถูก: ${item.correctAnswer})`
-                    }
-                </span>
-            </div>
-        `;
-        historyContainer.appendChild(historyItem);
-    });
+    if (historyContainer) {
+        historyContainer.innerHTML = '';
+        
+        infinityStats.answerHistory.forEach(item => {
+            const historyItem = document.createElement('div');
+            historyItem.className = `history-item ${item.isCorrect ? 'correct' : 'wrong'}`;
+            
+            let correctAnswerText = '';
+            if (item.type === 'jp-th') {
+                correctAnswerText = Array.isArray(item.vocab.th) ? item.vocab.th[0] : item.vocab.th;
+            } else {
+                correctAnswerText = item.vocab.romaji;
+            }
+            
+            historyItem.innerHTML = `
+                <div class="question">${item.question}</div>
+                <div class="answer-details">
+                    <span class="${item.isCorrect ? 'correct-text' : 'wrong-text'}">
+                        ${item.isCorrect ? 
+                            `<i class="fas fa-check"></i> ${item.userAnswer}` : 
+                            `<i class="fas fa-times"></i> ${item.userAnswer} (ถูก: ${correctAnswerText})`
+                        }
+                    </span>
+                </div>
+            `;
+            historyContainer.appendChild(historyItem);
+        });
+    }
 }
 
 // สร้างคำถามใหม่สำหรับโหมด Infinity
@@ -395,7 +469,6 @@ function generateNextInfinityQuestion() {
     quizQuestions[0] = {
         vocab,
         type,
-        correct: type === 'jp-th' ? vocab.th : vocab.romaji,
         question: type === 'jp-th' ? vocab.jp : vocab.th
     };
     
@@ -407,7 +480,12 @@ function checkAnswer(answer) {
     clearInterval(timer);
     
     const question = quizQuestions[currentQuestion];
-    const isCorrect = answer.toLowerCase() === question.correct.toLowerCase();
+    const vocab = question.vocab;
+    const isCorrect = isAnswerCorrect(answer, vocab);
+    
+    // บันทึกคำตอบของผู้ใช้และผลลัพธ์
+    question.userAnswer = answer;
+    question.isCorrect = isCorrect;
     
     if (isInfinity) {
         updateInfinityStats(isCorrect, question, answer);
@@ -420,16 +498,36 @@ function checkAnswer(answer) {
         }
     }
     
-    const resultElement = document.createElement('div');
-    resultElement.className = `answer-result ${isCorrect ? 'correct' : 'wrong'}`;
-    resultElement.innerHTML = isCorrect ? 
-        '<i class="fas fa-check"></i> ถูกต้อง!' : 
-        `<i class="fas fa-times"></i> ผิด! คำตอบที่ถูกคือ: ${question.correct}`;
-    document.getElementById('quiz-questions').appendChild(resultElement);
+    // แสดงผลสีบนปุ่มตัวเลือก (สำหรับโหมด multiple choice)
+    if (currentMode === 'easy' || (isInfinity && infinityInputType === 'multiple-choice')) {
+        const buttons = document.querySelectorAll('.choice-btn');
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            const btnAnswer = btn.dataset.answer;
+            
+            // ตรวจสอบว่าปุ่มนี้เป็นคำตอบที่ถูกหรือไม่
+            if (isAnswerCorrect(btnAnswer, vocab)) {
+                btn.classList.add('correct');
+            }
+            
+            // ถ้าเป็นปุ่มที่ผู้ใช้กดและตอบผิด
+            if (btnAnswer === answer && !isCorrect) {
+                btn.classList.add('wrong');
+            }
+        });
+    }
+    
+    // แสดงผลคำตอบแบบ popup
+    let correctAnswerText = '';
+    if (question.type === 'jp-th') {
+        correctAnswerText = Array.isArray(vocab.th) ? vocab.th.join(', ') : vocab.th;
+    } else {
+        correctAnswerText = `${vocab.romaji} (${vocab.jp})`;
+    }
+    
+    showAnswerResult(isCorrect, correctAnswerText);
     
     setTimeout(() => {
-        resultElement.remove();
-        
         if (isInfinity) {
             generateNextInfinityQuestion();
             showQuestion();
@@ -443,11 +541,40 @@ function checkAnswer(answer) {
                 showQuestion();
             }
         }
-    }, 2000);
+    }, isCorrect ? 1500 : 2000);
+}
+
+// แสดงผลคำตอบแบบ popup
+function showAnswerResult(isCorrect, correctAnswer) {
+    const resultElement = document.createElement('div');
+    resultElement.className = `answer-result ${isCorrect ? 'correct' : 'wrong'}`;
+    resultElement.innerHTML = isCorrect ? 
+        '<i class="fas fa-check"></i> ถูกต้อง!' : 
+        `<i class="fas fa-times"></i> ผิด! คำตอบที่ถูกคือ: ${correctAnswer}`;
+    document.getElementById('quiz-questions').appendChild(resultElement);
+    
+    setTimeout(() => {
+        resultElement.remove();
+    }, isCorrect ? 1500 : 2000);
 }
 
 // จบ Quiz
 function endQuiz(reason) {
+    if (isInfinity) {
+        // โหมด Infinity - แสดงสรุปผลและกลับไปหน้า setup
+        const totalQuestions = infinityStats.totalQuestions;
+        const correctAnswers = infinityStats.correctAnswers;
+        const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+        
+        alert(`สรุปผลการทดสอบโหมด Infinity:\nจำนวนข้อทั้งหมด: ${totalQuestions}\nตอบถูก: ${correctAnswers}\nตอบผิด: ${totalQuestions - correctAnswers}\nความแม่นยำ: ${accuracy}%`);
+        
+        // กลับไปหน้า setup
+        questionsSection.style.display = 'none';
+        setupSection.style.display = 'block';
+        return;
+    }
+    
+    // โหมดปกติ - แสดงหน้าผลการทดสอบ
     if (reason === 'mistakes') {
         alert('คุณตอบผิดเกินจำนวนที่กำหนดแล้ว!');
     }
@@ -460,11 +587,13 @@ function endQuiz(reason) {
 // แสดงผลลัพธ์
 function showResults() {
     const total = quizQuestions.length;
-    const score = Math.round((correctAnswers / total) * 100);
+    const actualCorrect = quizQuestions.filter(q => q.isCorrect).length;
+    const actualWrong = total - actualCorrect;
+    const score = total > 0 ? Math.round((actualCorrect / total) * 100) : 0;
     
     document.querySelector('.score-percent').textContent = `${score}%`;
-    document.querySelector('.correct-count').textContent = correctAnswers;
-    document.querySelector('.wrong-count').textContent = wrongAnswers;
+    document.querySelector('.correct-count').textContent = actualCorrect;
+    document.querySelector('.wrong-count').textContent = actualWrong;
     
     const feedback = document.querySelector('.feedback-message');
     if (score >= 80) {
@@ -478,16 +607,17 @@ function showResults() {
     const answersList = document.querySelector('.answers-list');
     answersList.innerHTML = quizQuestions.map((q, i) => `
         <div class="answer-item">
-            <div class="answer-status ${i < correctAnswers ? 'correct' : 'wrong'}">
-                ${i < correctAnswers ? '✓' : '✗'}
+            <div class="answer-status ${q.isCorrect ? 'correct' : 'wrong'}">
+                ${q.isCorrect ? '✓' : '✗'}
             </div>
             <div class="answer-content">
                 <div class="answer-text">
                     ${q.type === 'jp-th' ? 
-                        `${q.vocab.jp} → ${q.vocab.th}` : 
-                        `${q.vocab.th} → ${q.vocab.romaji}`}
+                        `${q.vocab.jp} → ${Array.isArray(q.vocab.th) ? q.vocab.th.join(', ') : q.vocab.th}` : 
+                        `${q.vocab.th} → ${q.vocab.romaji} (${q.vocab.jp})`}
                 </div>
                 <div class="answer-details">
+                    ${q.userAnswer ? `คำตอบ: ${q.userAnswer}` : 'ไม่ได้ตอบ'} | 
                     ${q.type === 'jp-th' ? 
                         `คำอ่าน: ${q.vocab.romaji}` : 
                         `คำศัพท์: ${q.vocab.jp}`}
@@ -516,6 +646,123 @@ document.querySelector('.back-btn')?.addEventListener('click', () => {
     resultsSection.style.display = 'none';
     setupSection.style.display = 'block';
 });
+
+// ฟังก์ชันแสดงสถิติเชิงลึกสำหรับโหมด Infinity
+function showInfinityDetailedStats() {
+    if (!isInfinity) return;
+    
+    const modal = document.createElement('div');
+    modal.className = 'infinity-stats-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>สถิติเชิงลึก - โหมด Infinity</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="stats-section">
+                    <h4>สรุปโดยรวม</h4>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">ทำทั้งหมด:</span>
+                            <span class="stat-value">${infinityStats.totalQuestions} ข้อ</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">ตอบถูก:</span>
+                            <span class="stat-value correct">${infinityStats.correctAnswers} ข้อ</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">ตอบผิด:</span>
+                            <span class="stat-value wrong">${infinityStats.wrongAnswers} ข้อ</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">ความแม่นยำ:</span>
+                            <span class="stat-value">${Math.round((infinityStats.correctAnswers / infinityStats.totalQuestions) * 100)}%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <h4>คำศัพท์ที่ตอบผิดบ่อยที่สุด</h4>
+                    <div class="words-frequency wrong-words">
+                        ${Object.entries(infinityStats.wrongWordsFrequency)
+                            .sort((a, b) => b[1] - a[1])
+                            .slice(0, 5)
+                            .map(([word, count]) => `
+                                <div class="frequency-item wrong">
+                                    <span class="word">${word}</span>
+                                    <span class="count">${count} ครั้ง</span>
+                                </div>
+                            `).join('') || '<p class="no-data">ยังไม่มีข้อมูล</p>'}
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <h4>คำศัพท์ที่ตอบถูกบ่อยที่สุด</h4>
+                    <div class="words-frequency correct-words">
+                        ${Object.entries(infinityStats.correctWordsFrequency)
+                            .sort((a, b) => b[1] - a[1])
+                            .slice(0, 5)
+                            .map(([word, count]) => `
+                                <div class="frequency-item correct">
+                                    <span class="word">${word}</span>
+                                    <span class="count">${count} ครั้ง</span>
+                                </div>
+                            `).join('') || '<p class="no-data">ยังไม่มีข้อมูล</p>'}
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <h4>ประวัติการตอบล่าสุด (10 ข้อ)</h4>
+                    <div class="recent-history">
+                        ${infinityStats.answerHistory.map(item => {
+                            let correctAnswerText = '';
+                            if (item.type === 'jp-th') {
+                                correctAnswerText = Array.isArray(item.vocab.th) ? item.vocab.th[0] : item.vocab.th;
+                            } else {
+                                correctAnswerText = item.vocab.romaji;
+                            }
+                            
+                            return `
+                                <div class="history-detail-item ${item.isCorrect ? 'correct' : 'wrong'}">
+                                    <div class="question-text">${item.question}</div>
+                                    <div class="answer-info">
+                                        <span class="user-answer ${item.isCorrect ? 'correct' : 'wrong'}">
+                                            คำตอบ: ${item.userAnswer}
+                                        </span>
+                                        ${!item.isCorrect ? `<span class="correct-answer">ถูกต้อง: ${correctAnswerText}</span>` : ''}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('') || '<p class="no-data">ยังไม่มีข้อมูล</p>'}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="continue-quiz-btn">ทำต่อ</button>
+                <button class="end-quiz-btn">จบการทดสอบ</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Event listeners สำหรับ modal
+    modal.querySelector('.close-modal').onclick = () => modal.remove();
+    modal.querySelector('.continue-quiz-btn').onclick = () => modal.remove();
+    modal.querySelector('.end-quiz-btn').onclick = () => {
+        modal.remove();
+        endQuiz('infinity');
+    };
+    
+    // ปิด modal เมื่อคลิกนอก content
+    modal.onclick = (e) => {
+        if (e.target === modal) modal.remove();
+    };
+}
+
+// Event listener สำหรับปุ่มสถิติเชิงลึก
+document.getElementById('show-detailed-stats')?.addEventListener('click', showInfinityDetailedStats);
 
 // โหลดข้อมูลเริ่มต้น
 window.addEventListener('DOMContentLoaded', () => {
