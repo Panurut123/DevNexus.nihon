@@ -349,6 +349,88 @@
     background: #ffa502;
 }
 
+/* สีสำหรับป้ายเล่ม */
+.grammar-badge-book {
+    background: #4a90e2; /* สีฟ้าสำหรับเล่ม 1 */
+}
+
+/* สีสุ่มสำหรับป้ายบทต่างๆ */
+.grammar-badge-chapter-1 {
+    background: #e74c3c; /* สีแดง */
+}
+.grammar-badge-chapter-2 {
+    background: #9b59b6; /* สีม่วง */
+}
+.grammar-badge-chapter-3 {
+    background: #3498db; /* สีน้ำเงิน */
+}
+.grammar-badge-chapter-4 {
+    background: #2ecc71; /* สีเขียว */
+}
+.grammar-badge-chapter-5 {
+    background: #f39c12; /* สีส้ม */
+}
+.grammar-badge-chapter-6 {
+    background: #1abc9c; /* สีเขียวอมฟ้า */
+}
+.grammar-badge-chapter-7 {
+    background: #e67e22; /* สีส้มแก่ */
+}
+.grammar-badge-chapter-8 {
+    background: #8e44ad; /* สีม่วงเข้ม */
+}
+.grammar-badge-chapter-9 {
+    background: #27ae60; /* สีเขียวเข้ม */
+}
+.grammar-badge-chapter-10 {
+    background: #c0392b; /* สีแดงเข้ม */
+}
+.grammar-badge-chapter-11 {
+    background: #d35400; /* สีแดงส้ม */
+}
+.grammar-badge-chapter-12 {
+    background: #2980b9; /* สีฟ้าเข้ม */
+}
+.grammar-badge-chapter-13 {
+    background: #16a085; /* สีเขียวน้ำทะเล */
+}
+.grammar-badge-chapter-14 {
+    background: #7f8c8d; /* สีเทา */
+}
+.grammar-badge-chapter-15 {
+    background: #34495e; /* สีเทาเข้ม */
+}
+.grammar-badge-chapter-16 {
+    background: #f1c40f; /* สีเหลือง */
+}
+.grammar-badge-chapter-17 {
+    background: #9c88ff; /* สีม่วงอ่อน */
+}
+.grammar-badge-chapter-18 {
+    background: #ff6b81; /* สีชมพู */
+}
+.grammar-badge-chapter-19 {
+    background: #54a0ff; /* สีฟ้าอ่อน */
+}
+.grammar-badge-chapter-20 {
+    background: #5f27cd; /* สีม่วงแก่ */
+}
+.grammar-badge-chapter-21 {
+    background: #ff9ff3; /* สีชมพูอ่อน */
+}
+.grammar-badge-chapter-22 {
+    background: #48dbfb; /* สีฟ้าใส */
+}
+.grammar-badge-chapter-23 {
+    background: #0abde3; /* สีฟ้าทะเล */
+}
+.grammar-badge-chapter-24 {
+    background: #006ba6; /* สีน้ำเงินเข้ม */
+}
+.grammar-badge-chapter-25 {
+    background: #833471; /* สีม่วงเข้ม */
+}
+
 /* Styles for grammar detail sections */
 .grammar-section {
     margin-bottom: 2rem;
