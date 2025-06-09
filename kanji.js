@@ -12,6 +12,13 @@ window.kanjiData = [
     { char: '九', furigana: 'きゅう/く', meaning: 'เก้า', example: '九つ (ここのつ) = เก้าอัน', level: 'เตรียมสอบ' },
     { char: '十', furigana: 'じゅう', meaning: 'สิบ', example: '十 (とお) = สิบ', level: 'เตรียมสอบ' },
     
+    // เตรียมสอบ (Basic Kanji)
+    { char: '小', furigana: 'ちいさい', meaning: 'เล็ก', example: '小さい (ちいさい) = เล็ก', level: 'เตรียมสอบ' },
+    { char: '店', furigana: 'みせ', meaning: 'ร้านค้า', example: '店 (みせ) = ร้านค้า', level: 'เตรียมสอบ' },
+    { char: '色', furigana: 'いろ', meaning: 'สี', example: '色 (いろ) = สี', level: 'เตรียมสอบ' },
+    { char: '赤', furigana: 'あかい', meaning: 'สีแดง', example: '赤い (あかい) = สีแดง', level: 'เตรียมสอบ' },
+    { char: '青', furigana: 'あおい', meaning: '(สี) ฟ้า (สี) น้ำเงิน (สี) เขียว', example: '青い (あおい) = สีฟ้า/น้ำเงิน/เขียว', level: 'เตรียมสอบ' },
+    
     // N5
     { char: '日', furigana: 'にち/ひ', meaning: 'วัน, ดวงอาทิตย์, ญี่ปุ่น', example: '日本 (にほん) = ประเทศญี่ปุ่น', level: 'N5' },
     { char: '本', furigana: 'ほん/もと', meaning: 'หนังสือ, ต้นฉบับ, จริง', example: '本 (ほん) = หนังสือ', level: 'N5' },
