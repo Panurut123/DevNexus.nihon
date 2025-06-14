@@ -204,5 +204,165 @@ window.vocabData = [
     { jp: 'たなばた', romaji: 'tanabata', th: 'เทศกาลทานาบาตะ', cat: 'เทศกาล' },
     { jp: 'はなみ', romaji: 'hanami', th: 'ชมดอกซากุระ', cat: 'เทศกาล' },
     { jp: 'おぼん', romaji: 'obon', th: 'เทศกาลโอบ้ง', cat: 'เทศกาล' },
-    { jp: 'クリスマス', romaji: 'kurisumasu', th: 'คริสต์มาส', cat: 'เทศกาล' }
+    { jp: 'クリスマス', romaji: 'kurisumasu', th: 'คริสต์มาส', cat: 'เทศกาล' },
+    { jp: 'きんろうかんしゃのひ', romaji: 'kinrou kansha no hi', th: 'วันขอบคุณแรงงาน', cat: 'เทศกาล' },
+    { jp: 'こどものひ', romaji: 'kodomo no hi', th: 'วันเด็ก', cat: 'เทศกาล' },
+
+    // อากาศ
+    { jp: 'あつい', romaji: 'atsui', th: 'ร้อน', cat: 'อากาศ' },
+    { jp: 'さむい', romaji: 'samui', th: 'หนาว', cat: 'อากาศ' },
+    { jp: 'あたたかい', romaji: 'atatakai', th: 'อบอุ่น', cat: 'อากาศ' },
+    { jp: 'すずしい', romaji: 'suzushii', th: 'เย็นสบาย', cat: 'อากาศ' },
+    { jp: 'あめ', romaji: 'ame', th: 'ฝน', cat: 'อากาศ' },
+    { jp: 'ゆき', romaji: 'yuki', th: 'หิมะ', cat: 'อากาศ' },
+    { jp: 'かぜ', romaji: 'kaze', th: 'ลม', cat: 'อากาศ' },
+    { jp: 'くも', romaji: 'kumo', th: 'เมฆ', cat: 'อากาศ' },
+    { jp: 'はれ', romaji: 'hare', th: 'แจ่มใส', cat: 'อากาศ' },
+    { jp: 'きり', romaji: 'kiri', th: 'หมอก', cat: 'อากาศ' },
+
+    // เวลา
+    { jp: 'あさ', romaji: 'asa', th: 'เช้า', cat: 'เวลา' },
+    { jp: 'ひる', romaji: 'hiru', th: 'กลางวัน', cat: 'เวลา' },
+    { jp: 'ばん', romaji: 'ban', th: 'เย็น', cat: 'เวลา' },
+    { jp: 'よる', romaji: 'yoru', th: 'กลางคืน', cat: 'เวลา' },
+    { jp: 'きょう', romaji: 'kyou', th: 'วันนี้', cat: 'เวลา' },
+    { jp: 'きのう', romaji: 'kinou', th: 'เมื่อวาน', cat: 'เวลา' },
+    { jp: 'あした', romaji: 'ashita', th: 'พรุ่งนี้', cat: 'เวลา' },
+    { jp: 'いま', romaji: 'ima', th: 'ตอนนี้', cat: 'เวลา' },
+    { jp: 'まえ', romaji: 'mae', th: 'ก่อน', cat: 'เวลา' },
+    { jp: 'あと', romaji: 'ato', th: 'หลัง', cat: 'เวลา' },
+
+    // กิจกรรม
+    { jp: 'べんきょう', romaji: 'benkyou', th: 'การเรียน', cat: 'กิจกรรม' },
+    { jp: 'しごと', romaji: 'shigoto', th: 'งาน', cat: 'กิจกรรม' },
+    { jp: 'あそび', romaji: 'asobi', th: 'การเล่น', cat: 'กิจกรรม' },
+    { jp: 'りょこう', romaji: 'ryokou', th: 'การเดินทาง', cat: 'กิจกรรม' },
+    { jp: 'かいもの', romaji: 'kaimono', th: 'การซื้อของ', cat: 'กิจกรรม' },
+    { jp: 'そうじ', romaji: 'souji', th: 'การทำความสะอาด', cat: 'กิจกรรม' },
+    { jp: 'せんたく', romaji: 'sentaku', th: 'การซักผ้า', cat: 'กิจกรรม' },
+    { jp: 'りょうり', romaji: 'ryouri', th: 'การทำอาหาร', cat: 'กิจกรรม' },
+    { jp: 'どくしょ', romaji: 'dokusho', th: 'การอ่านหนังสือ', cat: 'กิจกรรม' },
+    { jp: 'えいが', romaji: 'eiga', th: 'หนัง', cat: 'กิจกรรม' },
+
+    // คำคุณศัพท์
+    { jp: 'おおきい', romaji: 'ookii', th: 'ใหญ่', cat: 'คำคุณศัพท์' },
+    { jp: 'ちいさい', romaji: 'chiisai', th: 'เล็ก', cat: 'คำคุณศัพท์' },
+    { jp: 'ながい', romaji: 'nagai', th: 'ยาว', cat: 'คำคุณศัพท์' },
+    { jp: 'みじかい', romaji: 'mijikai', th: 'สั้น', cat: 'คำคุณศัพท์' },
+    { jp: 'たかい', romaji: 'takai', th: ['แพง', 'สูง'], cat: 'คำคุณศัพท์' },
+    { jp: 'やすい', romaji: 'yasui', th: 'ถูก', cat: 'คำคุณศัพท์' },
+    { jp: 'あたらしい', romaji: 'atarashii', th: 'ใหม่', cat: 'คำคุณศัพท์' },
+    { jp: 'ふるい', romaji: 'furui', th: 'เก่า', cat: 'คำคุณศัพท์' },
+    { jp: 'いい', romaji: 'ii', th: 'ดี', cat: 'คำคุณศัพท์' },
+    { jp: 'わるい', romaji: 'warui', th: 'แย่', cat: 'คำคุณศัพท์' },
+    { jp: 'はやい', romaji: 'hayai', th: 'เร็ว', cat: 'คำคุณศัพท์' },
+    { jp: 'おそい', romaji: 'osoi', th: 'ช้า', cat: 'คำคุณศัพท์' },
+    { jp: 'きれい', romaji: 'kirei', th: 'สวย', cat: 'คำคุณศัพท์' },
+    { jp: 'きたない', romaji: 'kitanai', th: 'สกปรก', cat: 'คำคุณศัพท์' },
+    { jp: 'おもしろい', romaji: 'omoshiroi', th: 'น่าสนใจ', cat: 'คำคุณศัพท์' },
+    { jp: 'つまらない', romaji: 'tsumaranai', th: 'น่าเบื่อ', cat: 'คำคุณศัพท์' },
+
+    // ห้องต่างๆ ในบ้าน
+    { jp: 'だいどころ', romaji: 'daidokoro', th: 'ห้องครัว', cat: 'ห้องต่างๆ' },
+    { jp: 'しんしつ', romaji: 'shinshitsu', th: 'ห้องนอน', cat: 'ห้องต่างๆ' },
+    { jp: 'ろうか', romaji: 'rouka', th: 'ทางเดิน', cat: 'ห้องต่างๆ' },
+    { jp: 'おふろ', romaji: 'ofuro', th: 'ห้องน้ำ/อาบน้ำ', cat: 'ห้องต่างๆ' },
+    { jp: 'トイレ', romaji: 'toire', th: 'ห้องส้วม', cat: 'ห้องต่างๆ' },
+    { jp: 'げんかん', romaji: 'genkan', th: 'ประตูหน้า', cat: 'ห้องต่างๆ' },
+    { jp: 'にわ', romaji: 'niwa', th: 'สวน', cat: 'ห้องต่างๆ' },
+    { jp: 'ベランダ', romaji: 'beranda', th: 'ระเบียง', cat: 'ห้องต่างๆ' },
+
+    // เฟอร์นิเจอร์
+    { jp: 'つくえ', romaji: 'tsukue', th: 'โต๊ะ', cat: 'เฟอร์นิเจอร์' },
+    { jp: 'いす', romaji: 'isu', th: 'เก้าอี้', cat: 'เฟอร์นิเจอร์' },
+    { jp: 'ベッド', romaji: 'beddo', th: 'เตียง', cat: 'เฟอร์นิเจอร์' },
+    { jp: 'ソファ', romaji: 'sofaa', th: 'โซฟา', cat: 'เฟอร์นิเจอร์' },
+    { jp: 'たんす', romaji: 'tansu', th: 'ตู้เสื้อผ้า', cat: 'เฟอร์นิเจอร์' },
+    { jp: 'ほんだな', romaji: 'hondana', th: 'ชั้นหนังสือ', cat: 'เฟอร์นิเจอร์' },
+    { jp: 'とだな', romaji: 'todana', th: 'ตู้', cat: 'เฟอร์นิเจอร์' },
+    { jp: 'かがみ', romaji: 'kagami', th: 'กระจก', cat: 'เฟอร์นิเจอร์' },
+
+    // อาหารเพิ่มเติม
+    { jp: 'ラーメン', romaji: 'raamen', th: 'ราเมน', cat: 'อาหาร' },
+    { jp: 'すし', romaji: 'sushi', th: 'ซูชิ', cat: 'อาหาร' },
+    { jp: 'てんぷら', romaji: 'tenpura', th: 'เทมปุระ', cat: 'อาหาร' },
+    { jp: 'やきとり', romaji: 'yakitori', th: 'ไก่ย่าง', cat: 'อาหาร' },
+    { jp: 'カレー', romaji: 'karee', th: 'แกงกะหรี่', cat: 'อาหาร' },
+    { jp: 'サラダ', romaji: 'sarada', th: 'สลัด', cat: 'อาหาร' },
+    { jp: 'ケーキ', romaji: 'keeki', th: 'เค้ก', cat: 'อาหาร' },
+    { jp: 'あいす', romaji: 'aisu', th: 'ไอศกรีม', cat: 'อาหาร' },
+    { jp: 'チョコレート', romaji: 'chokoreeto', th: 'ช็อกโกแลต', cat: 'อาหาร' },
+    { jp: 'ハンバーガー', romaji: 'hanbaagaa', th: 'แฮมเบอร์เกอร์', cat: 'อาหาร' },
+    { jp: 'ピザ', romaji: 'piza', th: 'พิซซ่า', cat: 'อาหาร' },
+    { jp: 'スープ', romaji: 'suupu', th: 'ซุป', cat: 'อาหาร' },
+
+    // เครื่องดื่มเพิ่มเติม
+    { jp: 'こーひー', romaji: 'koohii', th: 'กาแฟ', cat: 'อาหาร' },
+    { jp: 'こうちゃ', romaji: 'koucha', th: 'ชาดำ', cat: 'อาหาร' },
+    { jp: 'びーる', romaji: 'biiru', th: 'เบียร์', cat: 'อาหาร' },
+    { jp: 'ワイン', romaji: 'wain', th: 'ไวน์', cat: 'อาหาร' },
+    { jp: 'みず', romaji: 'mizu', th: 'น้ำ', cat: 'อาหาร' },
+
+    // ผลไม้เพิ่มเติม
+    { jp: 'りんご', romaji: 'ringo', th: 'แอปเปิล', cat: 'อาหาร' },
+    { jp: 'みかん', romaji: 'mikan', th: 'ส้ม', cat: 'อาหาร' },
+    { jp: 'バナナ', romaji: 'banana', th: 'กล้วย', cat: 'อาหาร' },
+    { jp: 'いちご', romaji: 'ichigo', th: 'สตรอเบอร์รี่', cat: 'อาหาร' },
+    { jp: 'ぶどう', romaji: 'budou', th: 'องุ่น', cat: 'อาหาร' },
+    { jp: 'すいか', romaji: 'suika', th: 'แตงโม', cat: 'อาหาร' },
+    { jp: 'メロン', romaji: 'meron', th: 'เมลอน', cat: 'อาหาร' },
+
+    // กีฬาเพิ่มเติม
+    { jp: 'バスケットボール', romaji: 'basukettobooru', th: 'บาสเกตบอล', cat: 'กีฬา' },
+    { jp: 'バレーボール', romaji: 'bariibooru', th: 'วอลเลย์บอล', cat: 'กีฬา' },
+    { jp: 'ゴルフ', romaji: 'gorufu', th: 'กอล์ฟ', cat: 'กีฬา' },
+    { jp: 'すいえい', romaji: 'suiei', th: 'การว่ายน้ำ', cat: 'กีฬา' },
+    { jp: 'じゅうどう', romaji: 'juudou', th: 'ยูโด', cat: 'กีฬา' },
+    { jp: 'からて', romaji: 'karate', th: 'คาราเต้', cat: 'กีฬา' },
+    { jp: 'ヨガ', romaji: 'yoga', th: 'โยคะ', cat: 'กีฬา' },
+
+    // ประเทศและสัญชาติ
+    { jp: 'にほん', romaji: 'nihon', th: 'ญี่ปุ่น', cat: 'ประเทศ' },
+    { jp: 'タイ', romaji: 'tai', th: 'ไทย', cat: 'ประเทศ' },
+    { jp: 'アメリカ', romaji: 'amerika', th: 'อเมริกา', cat: 'ประเทศ' },
+    { jp: 'イギリス', romaji: 'igirisu', th: 'อังกฤษ', cat: 'ประเทศ' },
+    { jp: 'フランス', romaji: 'furansu', th: 'ฝรั่งเศส', cat: 'ประเทศ' },
+    { jp: 'ドイツ', romaji: 'doitsu', th: 'เยอรมนี', cat: 'ประเทศ' },
+    { jp: 'かんこく', romaji: 'kankoku', th: 'เกาหลี', cat: 'ประเทศ' },
+    { jp: 'ちゅうごく', romaji: 'chuugoku', th: 'จีน', cat: 'ประเทศ' },
+
+    // ภาษา
+    { jp: 'にほんご', romaji: 'nihongo', th: 'ภาษาญี่ปุ่น', cat: 'ภาษา' },
+    { jp: 'タイご', romaji: 'taigo', th: 'ภาษาไทย', cat: 'ภาษา' },
+    { jp: 'えいご', romaji: 'eigo', th: 'ภาษาอังกฤษ', cat: 'ภาษา' },
+    { jp: 'ちゅうごくご', romaji: 'chuugokugo', th: 'ภาษาจีน', cat: 'ภาษา' },
+    { jp: 'かんこくご', romaji: 'kankokugo', th: 'ภาษาเกาหลี', cat: 'ภาษา' },
+
+    // ความรู้สึกเพิ่มเติม
+    { jp: 'ねむい', romaji: 'nemui', th: 'ง่วง', cat: 'อารมณ์' },
+    { jp: 'つかれた', romaji: 'tsukareta', th: 'เหนื่อย', cat: 'อารมณ์' },
+    { jp: 'びっくり', romaji: 'bikkuri', th: 'ตกใจ', cat: 'อารมณ์' },
+    { jp: 'しんぱい', romaji: 'shinpai', th: 'กังวล', cat: 'อารมณ์' },
+    { jp: 'あんしん', romaji: 'anshin', th: 'สบายใจ', cat: 'อารมณ์' },
+    { jp: 'ざんねん', romaji: 'zannen', th: 'เสียดาย', cat: 'อารมณ์' },
+
+    // อาชีพเพิ่มเติม  
+    { jp: 'プログラマー', romaji: 'puroguramaa', th: 'โปรแกรมเมอร์', cat: 'อาชีพ' },
+    { jp: 'デザイナー', romaji: 'dezainaa', th: 'นักออกแบบ', cat: 'อาชีพ' },
+    { jp: 'かんごし', romaji: 'kangoshi', th: 'พยาบาล', cat: 'อาชีพ' },
+    { jp: 'りょうりにん', romaji: 'ryourinin', th: 'พ่อครัว', cat: 'อาชีพ' },
+    { jp: 'うんてんしゅ', romaji: 'untenshu', th: 'คนขับรถ', cat: 'อาชีพ' },
+    { jp: 'てんいん', romaji: 'tenin', th: 'พนักงานขาย', cat: 'อาชีพ' },
+    { jp: 'しゃしんか', romaji: 'shashinaka', th: 'ช่างภาพ', cat: 'อาชีพ' },
+
+    // ร้านค้าต่างๆ
+    { jp: 'スーパー', romaji: 'suupaa', th: 'ซูเปอร์มาร์เก็ต', cat: 'สถานที่' },
+    { jp: 'コンビニ', romaji: 'konbini', th: 'ร้านสะดวกซื้อ', cat: 'สถานที่' },
+    { jp: 'ほんや', romaji: 'honya', th: 'ร้านหนังสือ', cat: 'สถานที่' },
+    { jp: 'レストラン', romaji: 'resutoran', th: 'ร้านอาหาร', cat: 'สถานที่' },
+    { jp: 'ぎんこう', romaji: 'ginkou', th: 'ธนาคาร', cat: 'สถานที่' },
+    { jp: 'ホテル', romaji: 'hoteru', th: 'โรงแรม', cat: 'สถานที่' },
+    { jp: 'びじゅつかん', romaji: 'bijutsukan', th: 'พิพิธภัณฑ์', cat: 'สถานที่' },
+    { jp: 'とりかん', romaji: 'toshokan', th: 'ห้องสมุด', cat: 'สถานที่' },
+    { jp: 'えいがかん', romaji: 'eigakan', th: 'โรงภาพยนตร์', cat: 'สถานที่' }
 ];
