@@ -3,68 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ยืนยันการเข้าใช้งาน - DevNexus Nihon</title>
+    <title>ความยินยอมในการเก็บข้อมูล | DevNexus Nihon</title>
     <link rel="stylesheet" href="visitor-consent.css">
 </head>
 <body>
-    <div class="consent-container">
-        <div class="consent-card">
-            <img src="logodennexus.png" alt="DevNexus Logo" class="logo">
-            <h1>ยินดีต้อนรับสู่ DevNexus Nihon</h1>
-            <p class="subtitle">เว็บไซต์เรียนภาษาญี่ปุ่น</p>
-            
-            <div class="privacy-notice">
-                <h2>ข้อมูลที่เราจะเก็บรวบรวม</h2>
-                <ul>
-                    <li><strong>เว็บไซต์อ้างอิง:</strong> เว็บไซต์ที่คุณมาจาก</li>
-                    <li><strong>อุปกรณ์ที่ใช้:</strong> ข้อมูลเบราว์เซอร์และอุปกรณ์</li>
-                    <li><strong>ตำแหน่งโดยประมาณ:</strong> ประเทศจาก IP Address</li>
-                    <li><strong>เวลาเข้าใช้:</strong> วันที่และเวลาที่เข้าชม</li>
-                    <li><strong>จำนวนครั้ง:</strong> จำนวนครั้งที่เข้าชมเว็บไซต์</li>
-                </ul>
+    <div class="consent-overlay">
+        <div class="consent-popup">
+            <div class="popup-header">
+                <img src="logodennexus.png" alt="DevNexus Logo" class="logo">
+                <h2>การเก็บข้อมูลการใช้งาน</h2>
+            </div>
+
+            <div class="popup-content">
+                <p>เราจะเก็บข้อมูลการใช้งานเว็บไซต์ของคุณเพื่อปรับปรุงประสบการณ์การใช้งาน ข้อมูลที่เก็บ ได้แก่:</p>
                 
-                <div class="info-display">
-                    <h3>ข้อมูลปัจจุบันของคุณ:</h3>
-                    <div class="info-item">
-                        <span class="label">มาจาก:</span>
-                        <span class="value" id="referrer-info">-</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">อุปกรณ์:</span>
-                        <span class="value" id="device-info">-</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">ประเทศ:</span>
-                        <span class="value" id="country-info">กำลังตรวจสอบ...</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">เวลา:</span>
-                        <span class="value" id="time-info">-</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">ครั้งที่เข้าชม:</span>
-                        <span class="value" id="visit-count">-</span>
-                    </div>
+                <ul class="data-list">
+                    <li>ตำแหน่งทั่วไป (ประเทศ/เมือง)</li>
+                    <li>อุปกรณ์และเบราว์เซอร์</li>
+                    <li>การใช้งานเว็บไซต์</li>
+                </ul>
+
+                <p class="note">เราไม่เก็บข้อมูลส่วนตัวและไม่แชร์ข้อมูลให้บุคคลที่สาม</p>
+            </div>
+
+            <div class="popup-actions">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="consent-checkbox">
+                    <label for="consent-checkbox">ฉันยินยอมให้เก็บข้อมูลการใช้งาน</label>
+                </div>
+                
+                <div class="button-container">
+                    <button class="btn-decline" id="decline-btn">ไม่ยินยอม</button>
+                    <button class="btn-accept" id="accept-btn" disabled>ยืนยัน</button>
                 </div>
             </div>
-            
-            <div class="consent-notice">
-                <p>ข้อมูลเหล่านี้จะใช้เพื่อปรับปรุงประสบการณ์การใช้งานเว็บไซต์และวิเคราะห์สถิติผู้เข้าชม</p>
-                <p><strong>ข้อมูลจะถูกเก็บไว้ในเว็บไซต์นี้เท่านั้น</strong></p>
+
+            <div class="loading-container" id="loading-container" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>กำลังดำเนินการ...</p>
             </div>
-            
-            <div class="action-buttons">
-                <button id="accept-btn" class="btn-accept">ยืนยันและเข้าสู่เว็บไซต์</button>
-                <button id="decline-btn" class="btn-decline">ไม่ยินยอม</button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="decline-modal" class="modal">
-        <div class="modal-content">
-            <h2>ขออภัย</h2>
-            <p>คุณจำเป็นต้องยินยอมให้เก็บข้อมูลเพื่อใช้งานเว็บไซต์นี้</p>
-            <button id="close-modal" class="btn-accept">ปิด</button>
         </div>
     </div>
 
