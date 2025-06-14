@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เรียนภาษาญี่ปุ่น - DevNexus.Nihon</title>
+    <title>คู่มือและเส้นทางการเรียนรู้ - DevNexus.Nihon</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -26,230 +26,362 @@
     <!-- ส่วนเฮดเดอร์ -->
     <header>
         <div class="logo">
-            <h1>DevNexus.<span class="nihon">Nihon</span></h1>
+            <h1><span class="logo-dev">DevNexus</span>.<span class="logo-nihon">Nihon</span></h1>
         </div>
         <nav>
             <ul>
                 <li><a href="index.html">หน้าหลัก</a></li>
-                <li><a href="main.html" class="active">บทเรียน</a></li>
-                <li><a href="characters.html">ทดสอบตัวอักษร</a></li>
+                <li><a href="main.html" class="active">คู่มือการเรียน</a></li>
                 <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
                 <li><a href="vocabulary.html">คำศัพท์</a></li>
                 <li><a href="kanji.html">คันจิ</a></li>
                 <li><a href="grammar.html">ไวยากรณ์</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- ส่วนหลัก -->
     <main>
+        <!-- ส่วนฮีโร่ -->
         <section class="learning-hero">
             <div class="learning-hero-content">
-                <h1 class="slide-up">เลือกเส้นทางการเรียนรู้<br>ภาษาญี่ปุ่นของคุณ</h1>
-                <p class="slide-up delay-1">เลือกหัวข้อที่คุณสนใจและเริ่มต้นการเรียนรู้ภาษาญี่ปุ่นได้ทันที ไม่ว่าคุณจะเป็นผู้เริ่มต้นหรือต้องการพัฒนาทักษะเพิ่มเติม</p>
+                <h1 class="slide-up">คู่มือเรียนภาษาญี่ปุ่น<br>ตั้งแต่เริ่มต้นจนชำนาญ</h1>
+                <p class="slide-up delay-1">เรียนรู้เส้นทางที่ถูกต้องและมีประสิทธิภาพในการเรียนภาษาญี่ปุ่น พร้อมคำแนะนำจากผู้เชี่ยวชาญ</p>
+                <div class="hero-buttons slide-up delay-2">
+                    <a href="#learning-path" class="btn primary">ดูเส้นทางการเรียน</a>
+                    <a href="#beginner-guide" class="btn secondary">คู่มือสำหรับผู้เริ่มต้น</a>
+                </div>
             </div>
         </section>
 
-        <section class="learning-paths">
+        <!-- ส่วนเส้นทางการเรียนรู้ -->
+        <section id="learning-path" class="learning-paths">
             <div class="container">
-                <h2 class="section-title">เลือกเส้นทางการเรียนรู้</h2>
+                <h2 class="section-title">เส้นทางการเรียนรู้ที่แนะนำ</h2>
+                <p class="section-description">ลำดับการเรียนที่เหมาะสมสำหรับผู้เรียนภาษาญี่ปุ่นในทุกระดับ</p>
                 
-                <div class="learning-cards" style="flex-wrap:nowrap;overflow-x:auto;gap:2rem;">
-                    <!-- บัตรเรียนตัวอักษร -->
-                    <div class="learning-card slide-up">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-font"></i>
+                <div class="learning-roadmap">
+                    <!-- ขั้นตอนที่ 1 -->
+                    <div class="roadmap-step slide-up">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>เรียนตัวอักษรฮิระงะนะ</h3>
+                            <p>เริ่มต้นด้วยการเรียนรู้ตัวอักษรฮิระงะนะ 46 ตัว ซึ่งเป็นพื้นฐานสำคัญที่สุด</p>
+                            <div class="step-features">
+                                <span class="feature-tag">พื้นฐาน</span>
+                                <span class="feature-tag">จำเป็น</span>
+                                <span class="time-estimate">2-3 สัปดาห์</span>
                             </div>
-                            <h3>ตัวอักษรญี่ปุ่น</h3>
-                        </div>
-                        <div class="card-body">
-                            <p>เรียนรู้ตัวอักษรฮิระงะนะ คาตาคานะ และคันจิพื้นฐาน พร้อมวิธีการเขียนและการออกเสียง</p>
-                            <div class="level-badges">
-                                <span class="level-badge beginner">N5</span>
-                                <span class="level-badge intermediate">N4</span>
-                                <span class="level-badge advanced">N3</span>
-                            </div>
-                            <div class="card-features">
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>ฮิระงะนะ 46 ตัว</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>คาตาคานะ 46 ตัว</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>คันจิพื้นฐาน 100 ตัว</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="characters.html" class="btn primary">เริ่มเรียนตัวอักษร</a>
+                            <a href="learn-characters.html" class="step-btn">เริ่มเรียนฮิระงะนะ</a>
                         </div>
                     </div>
 
-                    <!-- บัตรเรียนคำศัพท์ -->
-                    <div class="learning-card slide-up delay-1">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-book"></i>
+                    <!-- ขั้นตอนที่ 2 -->
+                    <div class="roadmap-step slide-up delay-1">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>เรียนตัวอักษรคาตาคานะ</h3>
+                            <p>เรียนรู้ตัวอักษรคาตาคานะ 46 ตัว ที่ใช้เขียนคำที่มาจากภาษาต่างประเทศ</p>
+                            <div class="step-features">
+                                <span class="feature-tag">พื้นฐาน</span>
+                                <span class="feature-tag">สำคัญ</span>
+                                <span class="time-estimate">2-3 สัปดาห์</span>
                             </div>
-                            <h3>คำศัพท์ภาษาญี่ปุ่น</h3>
-                        </div>
-                        <div class="card-body">
-                            <p>เรียนรู้คำศัพท์ภาษาญี่ปุ่นที่ใช้บ่อยในชีวิตประจำวัน แบ่งตามหมวดหมู่และระดับความยาก</p>
-                            <div class="level-badges">
-                                <span class="level-badge beginner">N5</span>
-                                <span class="level-badge intermediate">N4</span>
-                                <span class="level-badge advanced">N3</span>
-                            </div>
-                            <div class="card-features">
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>คำศัพท์ชีวิตประจำวัน</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>คำศัพท์ธุรกิจและการทำงาน</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>สำนวนและวลีที่ใช้บ่อย</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="vocabulary.html" class="btn primary">เริ่มเรียนคำศัพท์</a>
+                            <a href="learn-characters.html" class="step-btn">เริ่มเรียนคาตาคานะ</a>
                         </div>
                     </div>
 
-                    <!-- บัตรเรียนไวยากรณ์ -->
-                    <div class="learning-card slide-up delay-2">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-pencil-ruler"></i>
+                    <!-- ขั้นตอนที่ 3 -->
+                    <div class="roadmap-step slide-up delay-2">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>คำศัพท์พื้นฐาน N5</h3>
+                            <p>เรียนรู้คำศัพท์พื้นฐาน 800-1000 คำ ที่ใช้ในชีวิตประจำวัน</p>
+                            <div class="step-features">
+                                <span class="feature-tag">N5</span>
+                                <span class="feature-tag">ชีวิตประจำวัน</span>
+                                <span class="time-estimate">1-2 เดือน</span>
                             </div>
-                            <h3>ไวยากรณ์ภาษาญี่ปุ่น</h3>
-                        </div>
-                        <div class="card-body">
-                            <p>เรียนรู้โครงสร้างประโยคและไวยากรณ์ภาษาญี่ปุ่นตั้งแต่ระดับพื้นฐานจนถึงระดับกลาง</p>
-                            <div class="level-badges">
-                                <span class="level-badge beginner">N5</span>
-                                <span class="level-badge intermediate">N4</span>
-                                <span class="level-badge advanced">N3</span>
-                            </div>
-                            <div class="card-features">
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>โครงสร้างประโยคพื้นฐาน</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>รูปประโยคต่างๆ</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>การผันคำกริยาและคำคุณศัพท์</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="grammar.html" class="btn primary">เริ่มเรียนไวยากรณ์</a>
+                            <a href="vocabulary.html" class="step-btn">เริ่มเรียนคำศัพท์</a>
                         </div>
                     </div>
 
-                    <!-- บัตรเรียนคันจิ -->
-                    <div class="learning-card slide-up delay-3">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3069/3069182.png" alt="คันจิ" style="width: 60px; height: 60px;">
+                    <div class="roadmap-step slide-up delay-3">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>ไวยากรณ์พื้นฐาน</h3>
+                            <p>เรียนรู้โครงสร้างประโยคและไวยากรณ์พื้นฐานสำหรับการสื่อสาร</p>
+                            <div class="step-features">
+                                <span class="feature-tag">N5-N4</span>
+                                <span class="feature-tag">โครงสร้าง</span>
+                                <span class="time-estimate">2-3 เดือน</span>
                             </div>
-                            <h3>คันจิภาษาญี่ปุ่น</h3>
+                            <a href="grammar.html" class="step-btn">เริ่มเรียนไวยากรณ์</a>
                         </div>
-                        <div class="card-body">
-                            <p>เรียนรู้คันจิพื้นฐานที่ใช้บ่อยในชีวิตประจำวัน พร้อมวิธีการอ่านและตัวอย่างการใช้งาน</p>
-                            <div class="level-badges">
-                                <span class="level-badge beginner">N5</span>
-                                <span class="level-badge intermediate">N4</span>
-                                <span class="level-badge advanced">N3</span>
+                    </div>
+
+                    <!-- ขั้นตอนที่ 5 -->
+                    <div class="roadmap-step slide-up delay-4">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>คันจิพื้นฐาน</h3>
+                            <p>เรียนรู้คันจิพื้นฐาน 100-200 ตัวแรก พร้อมวิธีการอ่านและความหมาย</p>
+                            <div class="step-features">
+                                <span class="feature-tag">N5-N4</span>
+                                <span class="feature-tag">ตัวอักษรจีน</span>
+                                <span class="time-estimate">3-4 เดือน</span>
                             </div>
-                            <div class="card-features">
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>คันจิพื้นฐาน 100 ตัว</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>ตัวอย่างการอ่านฟุริกานะ</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>ตัวอย่างคำศัพท์ที่ใช้คันจิ</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="kanji.html" class="btn primary">เริ่มเรียนคันจิ</a>
+                            <a href="kanji.html" class="step-btn">เริ่มเรียนคันจิ</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="learning-levels">
+        <!-- ส่วนคู่มือสำหรับผู้เริ่มต้น -->
+        <section id="beginner-guide" class="beginner-guide">
             <div class="container">
-                <h2 class="section-title">ระดับการเรียนรู้</h2>
-                <p class="section-description">เลือกระดับการเรียนรู้ที่เหมาะสมกับความสามารถของคุณ</p>
+                <h2 class="section-title">คู่มือสำหรับผู้เริ่มต้น</h2>
                 
-                <div class="level-cards">
-                    <div class="level-card beginner-card slide-up">
-                        <div class="level-icon">N5</div>
-                        <h3>ระดับเริ่มต้น</h3>
-                        <p>เหมาะสำหรับผู้เริ่มต้นเรียนภาษาญี่ปุ่น เรียนรู้คำศัพท์และไวยากรณ์พื้นฐานที่ใช้ในชีวิตประจำวัน</p>
-                        <ul class="level-features">
-                            <li><i class="fas fa-check"></i> ตัวอักษรฮิระงะนะและคาตาคานะ</li>
-                            <li><i class="fas fa-check"></i> คันจิพื้นฐาน 100 ตัว</li>
-                            <li><i class="fas fa-check"></i> คำศัพท์ประมาณ 800 คำ</li>
-                            <li><i class="fas fa-check"></i> ไวยากรณ์พื้นฐาน</li>
-                        </ul>
-                        <a href="#" class="btn-level">เริ่มเรียน N5</a>
+                <div class="guide-cards">
+                    <div class="guide-card slide-up">
+                        <div class="guide-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>ทำไมต้องเรียนภาษาญี่ปุ่น?</h3>
+                        <div class="guide-content">
+                            <ul>
+                                <li>เปิดโอกาสการทำงานในญี่ปุ่น</li>
+                                <li>เข้าใจอนิเมะ/มังงะโดยไม่ต้องแปล</li>
+                                <li>สื่อสารกับคนญี่ปุ่นได้</li>
+                                <li>เข้าใจวัฒนธรรมญี่ปุ่นลึกซึ้งยิ่งขึ้น</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div class="level-card intermediate-card slide-up delay-1">
-                        <div class="level-icon">N4</div>
-                        <h3>ระดับต้น</h3>
-                        <p>สำหรับผู้ที่มีพื้นฐานภาษาญี่ปุ่นแล้ว เรียนรู้คำศัพท์และไวยากรณ์ที่ซับซ้อนขึ้น</p>
-                        <ul class="level-features">
-                            <li><i class="fas fa-check"></i> คันจิประมาณ 300 ตัว</li>
-                            <li><i class="fas fa-check"></i> คำศัพท์ประมาณ 1,500 คำ</li>
-                            <li><i class="fas fa-check"></i> ไวยากรณ์ระดับกลาง</li>
-                            <li><i class="fas fa-check"></i> การสนทนาในสถานการณ์ต่างๆ</li>
-                        </ul>
-                        <a href="#" class="btn-level">เริ่มเรียน N4</a>
+
+                    <div class="guide-card slide-up delay-1">
+                        <div class="guide-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>ใช้เวลาเรียนนานแค่ไหน?</h3>
+                        <div class="guide-content">
+                            <div class="time-breakdown">
+                                <div class="time-item">
+                                    <span class="level">N5 (พื้นฐาน)</span>
+                                    <span class="duration">6-12 เดือน</span>
+                                </div>
+                                <div class="time-item">
+                                    <span class="level">N4 (ต้น)</span>
+                                    <span class="duration">1-2 ปี</span>
+                                </div>
+                                <div class="time-item">
+                                    <span class="level">N3 (กลาง)</span>
+                                    <span class="duration">2-3 ปี</span>
+                                </div>
+                            </div>
+                            <p><strong>หมายเหตุ</strong>เป็นการคาดการณ์อาจขึ้นอยู่กับเวลาที่ฝึกฝนต่อวัน</p>
+                        </div>
                     </div>
-                    
-                    <div class="level-card advanced-card slide-up delay-2">
-                        <div class="level-icon">N3</div>
-                        <h3>ระดับกลาง</h3>
-                        <p>สำหรับผู้ที่มีความรู้ภาษาญี่ปุ่นในระดับหนึ่งแล้ว เรียนรู้การใช้ภาษาในบริบทที่หลากหลาย</p>
-                        <ul class="level-features">
-                            <li><i class="fas fa-check"></i> คันจิประมาณ 650 ตัว</li>
-                            <li><i class="fas fa-check"></i> คำศัพท์ประมาณ 3,000 คำ</li>
-                            <li><i class="fas fa-check"></i> ไวยากรณ์ที่ซับซ้อน</li>
-                            <li><i class="fas fa-check"></i> การอ่านบทความและข่าว</li>
-                        </ul>
-                        <a href="#" class="btn-level">เริ่มเรียน N3</a>
+
+                    <div class="guide-card slide-up delay-2">
+                        <div class="guide-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>เทคนิคการเรียนที่มีประสิทธิภาพ</h3>
+                        <div class="guide-content">
+                            <ul>
+                                <li><strong>SRS (Spaced Repetition):</strong> ทบทวนในช่วงเวลาที่เหมาะสม</li>
+                                <li><strong>อ่านออกเสียง:</strong> ฝึกออกเสียงตั้งแต่เริ่มต้น</li>
+                                <li><strong>เขียนด้วยมือ:</strong> จดจำตัวอักษรได้ดีขึ้น</li>
+                                <li><strong>ใช้ในบริบท:</strong> เรียนคำศัพท์ผ่านประโยค</li>
+                            </ul>
+                        </div>
                     </div>
+
+                    <div class="guide-card slide-up delay-3">
+                        <div class="guide-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3>ข้อผิดพลาดที่ควรหลีกเลี่ยง</h3>
+                        <div class="guide-content">
+                            <ul>
+                                <li>ข้ามการเรียนตัวอักษรไปเรียนคำศัพท์ก่อน</li>
+                                <li>เรียนไวยากรณ์โดยไม่ฝึกใช้</li>
+                                <li>ใช้โรมาจิมากเกินไป</li>
+                                <li>ไม่ฝึกฟัง-พูดเลย</li>
+                                <li>เรียนมากเกินไปในวันเดียว</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนเครื่องมือการเรียน -->
+        <section class="learning-tools">
+            <div class="container">
+                <h2 class="section-title">เครื่องมือการเรียนในเว็บไซต์</h2>
+                
+                <div class="tools-grid">
+                    <div class="tool-card slide-up">
+                        <div class="tool-icon">
+                            <i class="fas fa-font"></i>
+                        </div>
+                        <h3>เรียนตัวอักษร</h3>
+                        <p>เรียนรู้ฮิระงะนะและคาตาคานะอย่างเป็นระบบ พร้อมการฝึกเขียน</p>
+                        <div class="tool-features">
+                            <span class="feature">• วิธีการเขียนแบบเป็นขั้นตอน</span>
+                            <span class="feature">• การออกเสียงที่ถูกต้อง</span>
+                            <span class="feature">• แบบฝึกหัดครบครัน</span>
+                        </div>
+                        <a href="learn-characters.html" class="tool-btn">เริ่มเรียน</a>
+                    </div>
+
+                    <div class="tool-card slide-up delay-1">
+                        <div class="tool-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>ทดสอบตัวอักษร</h3>
+                        <p>ทดสอบความจำตัวอักษรด้วยเกมส์ที่สนุกและหลากหลายโหมด</p>
+                        <div class="tool-features">
+                            <span class="feature">• 4 โหมดความยาก</span>
+                            <span class="feature">• เลือกกลุ่มตัวอักษรได้</span>
+                            <span class="feature">• ระบบคะแนนและสถิติ</span>
+                        </div>
+                        <a href="characters.html" class="tool-btn">เริ่มทดสอบ</a>
+                    </div>
+
+                    <div class="tool-card slide-up delay-2">
+                        <div class="tool-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>คำศัพท์</h3>
+                        <p>คำศัพท์ที่จำเป็นแบ่งตามระดับ พร้อมตัวอย่างการใช้งาน</p>
+                        <div class="tool-features">
+                            <span class="feature">• แบ่งตามหมวดหมู่</span>
+                            <span class="feature">• ระบบ Flashcard</span>
+                            <span class="feature">• ตัวอย่างประโยค</span>
+                        </div>
+                        <a href="vocabulary.html" class="tool-btn">เริ่มเรียน</a>
+                    </div>
+
+                    <div class="tool-card slide-up delay-3">
+                        <div class="tool-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>ไวยากรณ์</h3>
+                        <p>เรียนรู้ไวยากรณ์และโครงสร้างประโยคแบบเป็นระบบ</p>
+                        <div class="tool-features">
+                            <span class="feature">• อธิบายเป็นภาษาไทย</span>
+                            <span class="feature">• ตัวอย่างการใช้งาน</span>
+                            <span class="feature">• แบบฝึกหัดประกอบ</span>
+                        </div>
+                        <a href="grammar.html" class="tool-btn">เริ่มเรียน</a>
+                    </div>
+
+                    <div class="tool-card slide-up delay-4">
+                        <div class="tool-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3069/3069182.png" alt="คันจิ" style="width: 60px; height: 60px;">
+                        </div>
+                        <h3>คันจิ</h3>
+                        <p>เรียนรู้คันจิพื้นฐานพร้อมวิธีการอ่านและความหมาย</p>
+                        <div class="tool-features">
+                            <span class="feature">• คันจิ N5-N3</span>
+                            <span class="feature">• วิธีการเขียน</span>
+                            <span class="feature">• ความหมายและการอ่าน</span>
+                        </div>
+                        <a href="kanji.html" class="tool-btn">เริ่มเรียน</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนคำถามที่พบบ่อย -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">คำถามที่พบบ่อย</h2>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>ผู้เริ่มต้นควรเริ่มจากอะไรก่อน?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>แนะนำให้เริ่มจากการเรียนตัวอักษรฮิระงะนะก่อน เพราะเป็นพื้นฐานที่สำคัญที่สุด หลังจากนั้นจึงค่อยเรียนคาตาคานะ จากนั้นจึงเริ่มเรียนคำศัพท์และไวยากรณ์พื้นฐาน</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>ควรใช้เวลาเรียนวันละกี่ชั่วโมง?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>สำหรับผู้เริ่มต้น แนะนำให้เรียนวันละ 30 นาที - 1 ชั่วโมง ความสม่ำเสมอสำคัญกว่าการเรียนนานในวันเดียว หากมีเวลามาก สามารถเพิ่มเป็น 2-3 ชั่วโมงต่อวันได้</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>ทำไมต้องเรียนตัวอักษรก่อนคำศัพท์?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>เพราะการเรียนคำศัพท์โดยใช้โรมาจิจะทำให้เกิดความเคยชินที่ไม่ดี การเรียนตัวอักษรก่อนจะช่วยให้คุณอ่านและเขียนภาษาญี่ปุ่นได้อย่างถูกต้องตั้งแต่เริ่มต้น</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>จำเป็นต้องเรียนคันจิหรือไม่?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>คันจิเป็นส่วนสำคัญของภาษาญี่ปุ่น แม้ว่าจะยากในตอนแรก แต่การเรียนคันจิจะช่วยให้คุณเข้าใจความหมายของคำศัพท์ได้ดีขึ้น และสามารถอ่านข้อความภาษาญี่ปุ่นได้อย่างเป็นธรรมชาติ</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>ควรทดสอบ JLPT หรือไม่?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>JLPT เป็นเป้าหมายที่ดีในการเรียนภาษาญี่ปุ่น เพราะจะช่วยให้คุณมีทิศทางการเรียนที่ชัดเจน และเป็นหลักฐานความสามารถที่ได้รับการยอมรับในการทำงาน แนะนำให้เริ่มจาก N5 หรือ N4</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วน CTA -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">พร้อมเริ่มเรียนภาษาญี่ปุ่นแล้วใช่ไหม?</h2>
+                <p class="cta-description">เริ่มต้นการเดินทางสู่การเรียนรู้ภาษาญี่ปุ่นที่มีประสิทธิภาพด้วยเครื่องมือที่ครบครัน</p>
+                <div class="cta-buttons">
+                    <a href="learn-characters.html" class="btn btn-white">เริ่มเรียนตัวอักษร</a>
+                    <a href="characters.html" class="btn btn-transparent">ทดสอบความรู้</a>
                 </div>
             </div>
         </section>
     </main>
+
     <script>
-    window.addEventListener('DOMContentLoaded', function() {
-        document.body.classList.add('fade-in-page');
-    });
+        window.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('fade-in-page');
+            
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        });
     </script>
 </body>
 </html>
