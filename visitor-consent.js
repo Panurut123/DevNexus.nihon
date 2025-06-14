@@ -6,7 +6,6 @@ class VisitorTracker {
 
     init() {
         this.collectVisitorInfo();
-        this.displayVisitorInfo();
         this.setupEventListeners();
         this.getLocationInfo();
     }
@@ -107,9 +106,6 @@ class VisitorTracker {
     }
 
     async getLocationInfo() {
-        // แสดงสถานะกำลังโหลด
-        document.getElementById('country-info').textContent = 'กำลังตรวจสอบ...';
-        
         try {
             // รายการ API หลายตัวสำหรับ backup
             const locationAPIs = [
@@ -217,12 +213,7 @@ class VisitorTracker {
                 this.visitorData.city = locationData.city || 'ไม่ทราบ';
                 this.visitorData.region = locationData.region || 'ไม่ทราบ';
 
-                // อัปเดตการแสดงผล
-                const displayText = this.visitorData.country !== 'ไม่สามารถระบุได้' && this.visitorData.country !== 'ไม่ทราบ'
-                    ? `${this.visitorData.country}${this.visitorData.city && this.visitorData.city !== 'ไม่ทราบ' ? `, ${this.visitorData.city}` : ''}`
-                    : 'ไม่สามารถระบุได้';
-                
-                document.getElementById('country-info').textContent = displayText;
+                console.log('Location detected:', this.visitorData.country, this.visitorData.city);
             } else {
                 throw lastError || new Error('ทุก API ล้มเหลว');
             }
@@ -242,45 +233,43 @@ class VisitorTracker {
             this.visitorData.country = 'ไม่สามารถระบุได้';
             this.visitorData.city = 'ไม่สามารถระบุได้';
             this.visitorData.region = 'ไม่สามารถระบุได้';
-            document.getElementById('country-info').textContent = 'ไม่สามารถระบุได้ (เฉพาะ IP)';
         }
     }
 
-    displayVisitorInfo() {
-        // แสดงข้อมูลในหน้าเว็บ
-        document.getElementById('referrer-info').textContent = 
-            this.visitorData.referrer === 'Direct (ไม่มีเว็บอ้างอิง)' 
-                ? 'เข้ามาโดยตรง' 
-                : this.visitorData.referrer;
-        
-        document.getElementById('device-info').textContent = this.visitorData.deviceInfo;
-        document.getElementById('time-info').textContent = this.visitorData.localTime;
-        document.getElementById('visit-count').textContent = `ครั้งที่ ${this.visitorData.visitCount}`;
-    }
+
 
     setupEventListeners() {
         const acceptBtn = document.getElementById('accept-btn');
         const declineBtn = document.getElementById('decline-btn');
-        const modal = document.getElementById('decline-modal');
-        const closeModal = document.getElementById('close-modal');
+        const consentCheckbox = document.getElementById('consent-checkbox');
+        const loadingContainer = document.getElementById('loading-container');
+
+        // เปิด/ปิดปุ่มยืนยันตาม checkbox
+        consentCheckbox.addEventListener('change', () => {
+            acceptBtn.disabled = !consentCheckbox.checked;
+        });
 
         acceptBtn.addEventListener('click', async () => {
-            await this.saveVisitorData();
-            this.redirectToMainSite();
+            // แสดง loading
+            loadingContainer.style.display = 'block';
+            document.querySelector('.popup-actions').style.display = 'none';
+            
+            try {
+                await this.saveVisitorData();
+                this.redirectToMainSite();
+            } catch (error) {
+                console.error('เกิดข้อผิดพลาด:', error);
+                alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+                
+                // ซ่อน loading และแสดงปุ่มกลับมา
+                loadingContainer.style.display = 'none';
+                document.querySelector('.popup-actions').style.display = 'block';
+            }
         });
 
         declineBtn.addEventListener('click', () => {
-            modal.style.display = 'block';
-        });
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        // ปิด modal เมื่อคลิกข้างนอก
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
+            if (confirm('คุณแน่ใจหรือไม่ที่จะไม่ยินยอม? คุณจะไม่สามารถใช้งานเว็บไซต์ได้')) {
+                alert('ขออภัย คุณจำเป็นต้องยินยอมเพื่อใช้งานเว็บไซต์');
             }
         });
     }
