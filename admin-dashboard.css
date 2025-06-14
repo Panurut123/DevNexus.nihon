@@ -583,4 +583,196 @@ body {
 .badge-warning {
     background: #fff3cd;
     color: #856404;
+}
+
+/* Enhanced Activity Tracking Styles */
+.detail-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 12px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    transition: transform 0.2s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Sessions, PageViews, and Interactions Lists */
+.sessions-list, .pageviews-list, .interactions-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background: white;
+    margin-top: 10px;
+}
+
+.session-item, .pageview-item, .interaction-item {
+    padding: 12px;
+    border-bottom: 1px solid #f1f3f4;
+    transition: background-color 0.2s ease;
+}
+
+.session-item:hover, .pageview-item:hover, .interaction-item:hover {
+    background-color: #f8f9fa;
+}
+
+.session-item:last-child, .pageview-item:last-child, .interaction-item:last-child {
+    border-bottom: none;
+}
+
+.session-header, .page-header, .interaction-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.session-header strong, .page-header strong {
+    color: #2c3e50;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.session-time, .page-time, .interaction-time {
+    font-size: 12px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.session-details, .page-details, .interaction-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.session-details span, .page-details span, .interaction-details span {
+    background: #e9ecef;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: #495057;
+    font-size: 11px;
+}
+
+.interaction-type {
+    background: #d4edda !important;
+    color: #155724 !important;
+    font-weight: 500;
+}
+
+.load-time {
+    background: #fff3cd !important;
+    color: #856404 !important;
+}
+
+.duration {
+    background: #cce5ff !important;
+    color: #004085 !important;
+}
+
+.scroll-info {
+    background: #f8d7da !important;
+    color: #721c24 !important;
+}
+
+.page-url {
+    font-family: 'Courier New', monospace;
+    background: #f1f3f4 !important;
+    color: #343a40 !important;
+    font-size: 10px;
+}
+
+.interaction-target {
+    background: #e2e3e5 !important;
+    color: #383d41 !important;
+    font-style: italic;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.interaction-page {
+    background: #b8daff !important;
+    color: #004085 !important;
+    font-family: 'Courier New', monospace;
+}
+
+.no-data {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    padding: 20px;
+}
+
+.more-info {
+    text-align: center;
+    color: #667eea;
+    font-size: 12px;
+    margin: 10px 0;
+    font-style: italic;
+    background: #f8f9fa;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Enhanced Summary Grid for 8 cards */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Scrollbar Styling */
+.sessions-list::-webkit-scrollbar,
+.pageviews-list::-webkit-scrollbar,
+.interactions-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sessions-list::-webkit-scrollbar-track,
+.pageviews-list::-webkit-scrollbar-track,
+.interactions-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.sessions-list::-webkit-scrollbar-thumb,
+.pageviews-list::-webkit-scrollbar-thumb,
+.interactions-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.sessions-list::-webkit-scrollbar-thumb:hover,
+.pageviews-list::-webkit-scrollbar-thumb:hover,
+.interactions-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
 } 
