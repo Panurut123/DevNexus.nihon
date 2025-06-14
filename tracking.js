@@ -55,9 +55,19 @@
     }
     
     // ฟังก์ชันเก็บข้อมูลการเข้าชมเพิ่มเติม
-    function trackPageView() {
+    async function trackPageView() {
         try {
+            const sessionId = localStorage.getItem('current_session_id');
+            const visitorId = localStorage.getItem('current_visitor_id');
+            
+            if (!sessionId || !visitorId) {
+                console.warn('ไม่มี session ID หรือ visitor ID');
+                return;
+            }
+            
             const pageViewData = {
+                visitorId: visitorId,
+                sessionId: sessionId,
                 page: window.location.pathname,
                 title: document.title,
                 timestamp: new Date().toISOString(),
@@ -65,19 +75,38 @@
                 userAgent: navigator.userAgent,
                 language: navigator.language,
                 screenResolution: `${screen.width}x${screen.height}`,
-                url: window.location.href
+                url: window.location.href,
+                viewDuration: 0, // จะอัปเดตเมื่อออกจากหน้า
+                loadTime: window.performance?.timing ? 
+                    window.performance.timing.loadEventEnd - window.performance.timing.navigationStart : 0
             };
             
-            // เก็บข้อมูลการเข้าชมหน้า
-            let pageViews = JSON.parse(localStorage.getItem('page_views') || '[]');
-            pageViews.unshift(pageViewData);
-            
-            // เก็บเฉพาะ 100 records ล่าสุด
-            if (pageViews.length > 100) {
-                pageViews = pageViews.slice(0, 100);
+            // บันทึกลง Firebase
+            try {
+                if (window.firebaseDb) {
+                    await window.firebaseDb.collection('page_views').add(pageViewData);
+                    console.log('Page view บันทึกลง Firebase แล้ว');
+                } else {
+                    throw new Error('Firebase not available');
+                }
+            } catch (error) {
+                console.warn('ไม่สามารถบันทึก page view ลง Firebase ได้:', error);
+                
+                // Fallback to localStorage
+                let pageViews = JSON.parse(localStorage.getItem('page_views') || '[]');
+                pageViews.unshift(pageViewData);
+                
+                // เก็บเฉพาะ 200 records ล่าสุด
+                if (pageViews.length > 200) {
+                    pageViews = pageViews.slice(0, 200);
+                }
+                
+                localStorage.setItem('page_views', JSON.stringify(pageViews));
             }
             
-            localStorage.setItem('page_views', JSON.stringify(pageViews));
+            // เก็บ page view id สำหรับอัปเดต duration ภายหลัง
+            window.currentPageViewId = Date.now();
+            window.pageStartTime = Date.now();
             
         } catch (error) {
             console.error('ไม่สามารถเก็บข้อมูลการเข้าชมได้:', error);
@@ -110,25 +139,51 @@
     }
     
     // ฟังก์ชันเก็บข้อมูลเมื่อผู้ใช้ออกจากหน้า
-    function trackPageLeave() {
+    async function trackPageLeave() {
         try {
+            const sessionId = localStorage.getItem('current_session_id');
+            const visitorId = localStorage.getItem('current_visitor_id');
+            
+            if (!sessionId || !visitorId) return;
+            
+            const timeSpent = window.pageStartTime ? Date.now() - window.pageStartTime : 0;
+            
             const leaveData = {
+                visitorId: visitorId,
+                sessionId: sessionId,
                 page: window.location.pathname,
                 leaveTime: new Date().toISOString(),
-                timeSpent: Date.now() - window.performance.timing.navigationStart
+                timeSpent: timeSpent,
+                maxScrollPercent: window.maxScrollPercent || 0,
+                totalScrollDistance: window.totalScrollDistance || 0
             };
             
-            // ใช้ sendBeacon ถ้ามี หรือใช้ localStorage
-            if (navigator.sendBeacon) {
-                // สำหรับเซิร์ฟเวอร์ที่รองรับ
-                navigator.sendBeacon('/api/track-leave', JSON.stringify(leaveData));
-            } else {
-                // เก็บใน localStorage
+            // บันทึกลง Firebase
+            try {
+                if (window.firebaseDb) {
+                    await window.firebaseDb.collection('page_exits').add(leaveData);
+                    
+                    // อัปเดต session ว่ายังคง active
+                    const sessionsRef = window.firebaseDb.collection('sessions').where('sessionId', '==', sessionId);
+                    const sessionDocs = await sessionsRef.get();
+                    sessionDocs.forEach(doc => {
+                        doc.ref.update({
+                            lastActivity: new Date().toISOString(),
+                            totalTimeSpent: firebase.firestore.FieldValue.increment(timeSpent)
+                        });
+                    });
+                } else {
+                    throw new Error('Firebase not available');
+                }
+            } catch (error) {
+                console.warn('ไม่สามารถบันทึก page exit ลง Firebase ได้:', error);
+                
+                // Fallback to localStorage
                 let pageLeaves = JSON.parse(localStorage.getItem('page_leaves') || '[]');
                 pageLeaves.unshift(leaveData);
                 
-                if (pageLeaves.length > 50) {
-                    pageLeaves = pageLeaves.slice(0, 50);
+                if (pageLeaves.length > 100) {
+                    pageLeaves = pageLeaves.slice(0, 100);
                 }
                 
                 localStorage.setItem('page_leaves', JSON.stringify(pageLeaves));
@@ -141,9 +196,16 @@
     
     // ฟังก์ชันเก็บข้อมูลการคลิก
     function trackClicks() {
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', async function(event) {
             try {
+                const sessionId = localStorage.getItem('current_session_id');
+                const visitorId = localStorage.getItem('current_visitor_id');
+                
+                if (!sessionId || !visitorId) return;
+                
                 const clickData = {
+                    visitorId: visitorId,
+                    sessionId: sessionId,
                     element: event.target.tagName,
                     elementId: event.target.id || '',
                     elementClass: event.target.className || '',
@@ -151,18 +213,33 @@
                     timestamp: new Date().toISOString(),
                     page: window.location.pathname,
                     x: event.clientX,
-                    y: event.clientY
+                    y: event.clientY,
+                    href: event.target.href || null, // สำหรับ link
+                    type: event.target.type || null // สำหรับ input/button
                 };
                 
-                let clicks = JSON.parse(localStorage.getItem('user_clicks') || '[]');
-                clicks.unshift(clickData);
-                
-                // เก็บเฉพาะ 200 clicks ล่าสุด
-                if (clicks.length > 200) {
-                    clicks = clicks.slice(0, 200);
+                // บันทึกลง Firebase
+                try {
+                    if (window.firebaseDb) {
+                        await window.firebaseDb.collection('user_interactions').add({
+                            ...clickData,
+                            interactionType: 'click'
+                        });
+                    } else {
+                        throw new Error('Firebase not available');
+                    }
+                } catch (error) {
+                    // Fallback to localStorage
+                    let clicks = JSON.parse(localStorage.getItem('user_clicks') || '[]');
+                    clicks.unshift(clickData);
+                    
+                    // เก็บเฉพาะ 300 clicks ล่าสุด
+                    if (clicks.length > 300) {
+                        clicks = clicks.slice(0, 300);
+                    }
+                    
+                    localStorage.setItem('user_clicks', JSON.stringify(clicks));
                 }
-                
-                localStorage.setItem('user_clicks', JSON.stringify(clicks));
                 
             } catch (error) {
                 console.error('ไม่สามารถเก็บข้อมูลการคลิกได้:', error);
@@ -172,35 +249,73 @@
     
     // ฟังก์ชันเก็บข้อมูลการ scroll
     function trackScrolling() {
-        let maxScroll = 0;
-        let scrollTimeout;
+        let lastScrollTop = 0;
+        let maxScrollPercent = 0;
+        let totalScrollDistance = 0;
+        let lastScrollPosition = 0;
         
-        window.addEventListener('scroll', function() {
-            clearTimeout(scrollTimeout);
-            
-            const scrollPercent = Math.round(
-                (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
-            );
-            
-            if (scrollPercent > maxScroll) {
-                maxScroll = scrollPercent;
-            }
-            
-            scrollTimeout = setTimeout(() => {
-                try {
+        window.addEventListener('scroll', async function() {
+            try {
+                const sessionId = localStorage.getItem('current_session_id');
+                const visitorId = localStorage.getItem('current_visitor_id');
+                
+                if (!sessionId || !visitorId) return;
+                
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = Math.round((scrollTop / documentHeight) * 100);
+                
+                // คำนวณระยะทางที่ scroll
+                totalScrollDistance += Math.abs(scrollTop - lastScrollPosition);
+                lastScrollPosition = scrollTop;
+                
+                // เก็บค่า max scroll percent
+                if (scrollPercent > maxScrollPercent) {
+                    maxScrollPercent = scrollPercent;
+                    window.maxScrollPercent = maxScrollPercent;
+                    window.totalScrollDistance = totalScrollDistance;
+                }
+                
+                // เก็บข้อมูลเมื่อผู้ใช้ scroll ลงไป 25%, 50%, 75%, 100%
+                if ([25, 50, 75, 100].includes(scrollPercent) && scrollPercent > lastScrollTop) {
                     const scrollData = {
+                        visitorId: visitorId,
+                        sessionId: sessionId,
                         page: window.location.pathname,
-                        maxScrollPercent: maxScroll,
-                        currentScrollPercent: scrollPercent,
-                        timestamp: new Date().toISOString()
+                        scrollPercent: scrollPercent,
+                        timestamp: new Date().toISOString(),
+                        direction: scrollTop > lastScrollTop ? 'down' : 'up',
+                        totalScrollDistance: totalScrollDistance
                     };
                     
-                    localStorage.setItem('scroll_data', JSON.stringify(scrollData));
-                    
-                } catch (error) {
-                    console.error('ไม่สามารถเก็บข้อมูลการ scroll ได้:', error);
+                    // บันทึกลง Firebase
+                    try {
+                        if (window.firebaseDb) {
+                            await window.firebaseDb.collection('user_interactions').add({
+                                ...scrollData,
+                                interactionType: 'scroll_milestone'
+                            });
+                        } else {
+                            throw new Error('Firebase not available');
+                        }
+                    } catch (error) {
+                        // Fallback to localStorage
+                        let scrollEvents = JSON.parse(localStorage.getItem('scroll_events') || '[]');
+                        scrollEvents.unshift(scrollData);
+                        
+                        if (scrollEvents.length > 200) {
+                            scrollEvents = scrollEvents.slice(0, 200);
+                        }
+                        
+                        localStorage.setItem('scroll_events', JSON.stringify(scrollEvents));
+                    }
                 }
-            }, 1000);
+                
+                lastScrollTop = scrollPercent;
+                
+            } catch (error) {
+                console.error('ไม่สามารถเก็บข้อมูลการ scroll ได้:', error);
+            }
         });
     }
     
