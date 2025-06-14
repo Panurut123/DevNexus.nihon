@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แอดมิน - ข้อมูลผู้เข้าชม | DevNexus Nihon</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="login-header">
+                <img src="logodennexus.png" alt="DevNexus Logo" class="login-logo">
+                <h2>เข้าสู่ระบบแอดมิน</h2>
+                <p>กรุณาใส่รหัสผ่านเพื่อเข้าสู่แดชบอร์ด</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="admin-password" placeholder="รหัสผ่านแอดมิน" required>
+                </div>
+                <button type="submit" class="login-btn">เข้าสู่ระบบ</button>
+                <div class="error-message" id="login-error"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard-container" style="display: none;">
+        <nav class="dashboard-nav">
+            <div class="nav-brand">
+                <img src="logodennexus.png" alt="DevNexus Logo" class="nav-logo">
+                <h1>DevNexus Nihon Admin</h1>
+            </div>
+            <div class="nav-controls">
+                <button id="refresh-btn" class="nav-btn">
+                    <i class="fas fa-sync-alt"></i> รีเฟรช
+                </button>
+                <button id="export-btn" class="nav-btn">
+                    <i class="fas fa-download"></i> ส่งออกข้อมูล
+                </button>
+                <button id="logout-btn" class="nav-btn logout">
+                    <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
+                </button>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <!-- Summary Cards -->
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 id="total-visitors">0</h3>
+                        <p>ผู้เข้าชมทั้งหมด</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 id="today-visitors">0</h3>
+                        <p>ผู้เข้าชมวันนี้</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 id="unique-countries">0</h3>
+                        <p>ประเทศที่เข้าชม</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 id="mobile-percentage">0%</h3>
+                        <p>ใช้มือถือ</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="chart-container">
+                    <h3>สถิติการเข้าชม 7 วันล่าสุด</h3>
+                    <div id="visits-chart" class="chart-placeholder">
+                        <canvas id="visits-canvas"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>อุปกรณ์ที่ใช้เข้าชม</h3>
+                    <div id="devices-chart" class="chart-placeholder">
+                        <canvas id="devices-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Countries -->
+            <div class="top-countries">
+                <h3>ประเทศที่เข้าชมมากที่สุด</h3>
+                <div id="countries-list" class="countries-list">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+
+            <!-- Visitors Table -->
+            <div class="table-section">
+                <div class="table-header">
+                    <h3>ข้อมูลผู้เข้าชมล่าสุด</h3>
+                    <div class="table-controls">
+                        <input type="text" id="search-input" placeholder="ค้นหา...">
+                        <select id="filter-select">
+                            <option value="all">ทั้งหมด</option>
+                            <option value="today">วันนี้</option>
+                            <option value="week">สัปดาห์นี้</option>
+                            <option value="month">เดือนนี้</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="visitors-table">
+                        <thead>
+                            <tr>
+                                <th>เวลาเข้าชม</th>
+                                <th>ประเทศ</th>
+                                <th>อุปกรณ์</th>
+                                <th>เว็บอ้างอิง</th>
+                                <th>ครั้งที่เข้าชม</th>
+                                <th>IP</th>
+                                <th>รายละเอียด</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visitors-tbody">
+                            <!-- Dynamic content -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button id="prev-page" class="page-btn">← ก่อนหน้า</button>
+                    <span id="page-info">หน้า 1 จาก 1</span>
+                    <button id="next-page" class="page-btn">ถัดไป →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visitor Detail Modal -->
+    <div id="detail-modal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>รายละเอียดผู้เข้าชม</h3>
+                <button class="close-btn" id="close-detail">&times;</button>
+            </div>
+            <div id="visitor-details" class="visitor-details">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Configuration and Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="admin-dashboard.js"></script>
+</body>
+</html> 
