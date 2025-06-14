@@ -1,23 +1,17 @@
 // ตัวอย่างข้อมูลคันจิพื้นฐาน N5-N4-N3 (เพิ่ม N4/N3 หลายตัว)
 window.kanjiData = [
-    // เตรียมสอบ (Numbers 1-10)
-    { char: '一', furigana: 'いち', meaning: 'หนึ่ง', example: '一つ (ひとつ) = หนึ่งอัน', level: 'เตรียมสอบ' },
-    { char: '二', furigana: 'に', meaning: 'สอง', example: '二つ (ふたつ) = สองอัน', level: 'เตรียมสอบ' },
-    { char: '三', furigana: 'さん', meaning: 'สาม', example: '三つ (みっつ) = สามอัน', level: 'เตรียมสอบ' },
-    { char: '四', furigana: 'し/よん', meaning: 'สี่', example: '四つ (よっつ) = สี่อัน', level: 'เตรียมสอบ' },
-    { char: '五', furigana: 'ご', meaning: 'ห้า', example: '五つ (いつつ) = ห้าอัน', level: 'เตรียมสอบ' },
-    { char: '六', furigana: 'ろく', meaning: 'หก', example: '六つ (むっつ) = หกอัน', level: 'เตรียมสอบ' },
-    { char: '七', furigana: 'しち/なな', meaning: 'เจ็ด', example: '七つ (ななつ) = เจ็ดอัน', level: 'เตรียมสอบ' },
-    { char: '八', furigana: 'はち', meaning: 'แปด', example: '八つ (やっつ) = แปดอัน', level: 'เตรียมสอบ' },
-    { char: '九', furigana: 'きゅう/く', meaning: 'เก้า', example: '九つ (ここのつ) = เก้าอัน', level: 'เตรียมสอบ' },
-    { char: '十', furigana: 'じゅう', meaning: 'สิบ', example: '十 (とお) = สิบ', level: 'เตรียมสอบ' },
-    
-    // เตรียมสอบ (Basic Kanji)
-    { char: '小', furigana: 'ちいさい', meaning: 'เล็ก', example: '小さい (ちいさい) = เล็ก', level: 'เตรียมสอบ' },
-    { char: '店', furigana: 'みせ', meaning: 'ร้านค้า', example: '店 (みせ) = ร้านค้า', level: 'เตรียมสอบ' },
-    { char: '色', furigana: 'いろ', meaning: 'สี', example: '色 (いろ) = สี', level: 'เตรียมสอบ' },
-    { char: '赤', furigana: 'あかい', meaning: 'สีแดง', example: '赤い (あかい) = สีแดง', level: 'เตรียมสอบ' },
-    { char: '青', furigana: 'あおい', meaning: '(สี) ฟ้า (สี) น้ำเงิน (สี) เขียว', example: '青い (あおい) = สีฟ้า/น้ำเงิน/เขียว', level: 'เตรียมสอบ' },
+    // N5 (Numbers 1-10)
+    { char: '一', furigana: 'いち', meaning: 'หนึ่ง', example: '一つ (ひとつ) = หนึ่งอัน', level: 'N5' },
+    { char: '二', furigana: 'に', meaning: 'สอง', example: '二つ (ふたつ) = สองอัน', level: 'N5' },
+    { char: '三', furigana: 'さん', meaning: 'สาม', example: '三つ (みっつ) = สามอัน', level: 'N5' },
+    { char: '四', furigana: 'し/よん', meaning: 'สี่', example: '四つ (よっつ) = สี่อัน', level: 'N5' },
+    { char: '五', furigana: 'ご', meaning: 'ห้า', example: '五つ (いつつ) = ห้าอัน', level: 'N5' },
+    { char: '六', furigana: 'ろく', meaning: 'หก', example: '六つ (むっつ) = หกอัน', level: 'N5' },
+    { char: '七', furigana: 'しち/なな', meaning: 'เจ็ด', example: '七つ (ななつ) = เจ็ดอัน', level: 'N5' },
+    { char: '八', furigana: 'はち', meaning: 'แปด', example: '八つ (やっつ) = แปดอัน', level: 'N5' },
+    { char: '九', furigana: 'きゅう/く', meaning: 'เก้า', example: '九つ (ここのつ) = เก้าอัน', level: 'N5' },
+    { char: '十', furigana: 'じゅう', meaning: 'สิบ', example: '十 (とお) = สิบ', level: 'N5' },
+    { char: '色', furigana: 'いろ', meaning: 'สี', example: '色 (いろ) = สี', level: 'N5' },
     
     // N5
     { char: '日', furigana: 'にち/ひ', meaning: 'วัน, ดวงอาทิตย์, ญี่ปุ่น', example: '日本 (にほん) = ประเทศญี่ปุ่น', level: 'N5' },
@@ -79,7 +73,6 @@ window.kanjiData = [
     { char: '黒', furigana: 'くろ', meaning: 'ดำ', example: '黒い (くろい) = สีดำ', level: 'N5' },
     { char: '赤', furigana: 'あか', meaning: 'แดง', example: '赤い (あかい) = สีแดง', level: 'N5' },
     { char: '青', furigana: 'あお', meaning: 'น้ำเงิน', example: '青い (あおい) = สีน้ำเงิน', level: 'N5' },
-    { char: '先', furigana: 'せん/さき', meaning: 'ข้างหน้า, ก่อน', example: '先生 (せんせい) = ครู', level: 'N5' },
     { char: '家', furigana: 'いえ/か', meaning: 'บ้าน', example: '家 (いえ) = บ้าน', level: 'N5' },
     { char: '駅', furigana: 'えき', meaning: 'สถานีรถไฟ', example: '駅 (えき) = สถานีรถไฟ', level: 'N5' },
     { char: '店', furigana: 'みせ/てん', meaning: 'ร้าน', example: '店 (みせ) = ร้าน', level: 'N5' },
@@ -92,67 +85,12 @@ window.kanjiData = [
     { char: '西', furigana: 'にし/せい/さい', meaning: 'ตะวันตก', example: '西口 (にしぐち) = ประตูทิศตะวันตก', level: 'N5' },
     { char: '南', furigana: 'みなみ/なん', meaning: 'ใต้', example: '南口 (みなみぐち) = ประตูทิศใต้', level: 'N5' },
     { char: '北', furigana: 'きた/ほく', meaning: 'เหนือ', example: '北口 (きたぐち) = ประตูทิศเหนือ', level: 'N5' },
-    { char: '体', furigana: 'からだ/たい', meaning: 'ร่างกาย', example: '体 (からだ) = ร่างกาย', level: 'N5' },
-    { char: '道', furigana: 'みち/どう', meaning: 'ถนน, ทาง', example: '道 (みち) = ถนน', level: 'N5' },
-    { char: '魚', furigana: 'さかな/ぎょ', meaning: 'ปลา', example: '魚 (さかな) = ปลา', level: 'N5' },
-    { char: '鳥', furigana: 'とり/ちょう', meaning: 'นก', example: '鳥 (とり) = นก', level: 'N5' },
-    { char: '牛', furigana: 'うし/ぎゅう', meaning: 'วัว', example: '牛乳 (ぎゅうにゅう) = นมวัว', level: 'N5' },
-    { char: '馬', furigana: 'うま/ば', meaning: 'ม้า', example: '馬 (うま) = ม้า', level: 'N5' },
-    { char: '犬', furigana: 'いぬ/けん', meaning: 'สุนัข', example: '犬 (いぬ) = สุนัข', level: 'N5' },
-    { char: '猫', furigana: 'ねこ', meaning: 'แมว', example: '猫 (ねこ) = แมว', level: 'N5' },
-    { char: '花', furigana: 'はな/か', meaning: 'ดอกไม้', example: '花 (はな) = ดอกไม้', level: 'N5' },
-    { char: '草', furigana: 'くさ/そう', meaning: 'หญ้า', example: '草 (くさ) = หญ้า', level: 'N5' },
-    { char: '林', furigana: 'はやし/りん', meaning: 'ป่าเล็ก', example: '林 (はやし) = ป่าเล็ก', level: 'N5' },
-    { char: '森', furigana: 'もり/しん', meaning: 'ป่าใหญ่', example: '森 (もり) = ป่าใหญ่', level: 'N5' },
-    { char: '石', furigana: 'いし/せき', meaning: 'หิน', example: '石 (いし) = หิน', level: 'N5' },
-    { char: '竹', furigana: 'たけ/ちく', meaning: 'ไผ่', example: '竹 (たけ) = ไผ่', level: 'N5' },
-    { char: '糸', furigana: 'いと/し', meaning: 'ด้าย', example: '糸 (いと) = ด้าย', level: 'N5' },
-    { char: '貝', furigana: 'かい', meaning: 'หอย', example: '貝 (かい) = หอย', level: 'N5' },
-    { char: '雪', furigana: 'ゆき/せつ', meaning: 'หิมะ', example: '雪 (ゆき) = หิมะ', level: 'N5' },
-    { char: '風', furigana: 'かぜ/ふう', meaning: 'ลม', example: '風 (かぜ) = ลม', level: 'N5' },
-    { char: '音', furigana: 'おと/おん', meaning: 'เสียง', example: '音楽 (おんがく) = ดนตรี', level: 'N5' },
-    { char: '楽', furigana: 'たのしい/がく/らく', meaning: 'สนุก, ดนตรี', example: '楽しい (たのしい) = สนุก', level: 'N5' },
-    { char: '歌', furigana: 'うた/か', meaning: 'เพลง', example: '歌 (うた) = เพลง', level: 'N5' },
-    { char: '画', furigana: 'が/かく', meaning: 'ภาพ, วาด', example: '映画 (えいが) = ภาพยนตร์', level: 'N5' },
-    { char: '写', furigana: 'しゃ/うつす', meaning: 'ถ่าย, คัดลอก', example: '写真 (しゃしん) = รูปถ่าย', level: 'N5' },
-    { char: '真', furigana: 'しん/ま', meaning: 'จริง, แท้', example: '真ん中 (まんなか) = ตรงกลาง', level: 'N5' },
-    { char: '英', furigana: 'えい', meaning: 'อังกฤษ, ยอดเยี่ยม', example: '英語 (えいご) = ภาษาอังกฤษ', level: 'N5' },
-    { char: '薬', furigana: 'くすり/やく', meaning: 'ยา', example: '薬 (くすり) = ยา', level: 'N5' },
-    { char: '医', furigana: 'い', meaning: 'การแพทย์', example: '医者 (いしゃ) = หมอ', level: 'N5' },
-    { char: '病', furigana: 'びょう/やまい', meaning: 'ป่วย', example: '病院 (びょういん) = โรงพยาบาล', level: 'N5' },
-    { char: '走', furigana: 'はしる/そう', meaning: 'วิ่ง', example: '走る (はしる) = วิ่ง', level: 'N5' },
-    { char: '歩', furigana: 'あるく/ほ/ぽ', meaning: 'เดิน', example: '歩く (あるく) = เดิน', level: 'N5' },
-    { char: '泳', furigana: 'およぐ/えい', meaning: 'ว่ายน้ำ', example: '泳ぐ (およぐ) = ว่ายน้ำ', level: 'N5' },
-    { char: '右', furigana: 'みぎ/う', meaning: 'ขวา', example: '右 (みぎ) = ขวา', level: 'N5' },
-    { char: '左', furigana: 'ひだり/さ', meaning: 'ซ้าย', example: '左 (ひだり) = ซ้าย', level: 'N5' },
-    { char: '分', furigana: 'ぶん/ふん/わける', meaning: 'นาที, แบ่ง', example: '分かる (わかる) = เข้าใจ', level: 'N5' },
-    { char: '名', furigana: 'な/めい', meaning: 'ชื่อ', example: '名前 (なまえ) = ชื่อ', level: 'N5' },
-    { char: '半', furigana: 'はん', meaning: 'ครึ่ง', example: '半分 (はんぶん) = ครึ่งหนึ่ง', level: 'N5' },
-    { char: '毎', furigana: 'まい', meaning: 'ทุก', example: '毎日 (まいにち) = ทุกวัน', level: 'N5' },
     { char: '海', furigana: 'うみ/かい', meaning: 'ทะเล', example: '海 (うみ) = ทะเล', level: 'N5' },
-    { char: '里', furigana: 'さと', meaning: 'หมู่บ้าน', example: '里 (さと) = หมู่บ้าน', level: 'N5' },
-    { char: '村', furigana: 'むら', meaning: 'หมู่บ้าน', example: '村 (むら) = หมู่บ้าน', level: 'N5' },
-    { char: '町', furigana: 'まち', meaning: 'เมือง', example: '町 (まち) = เมือง', level: 'N5' },
-    { char: '字', furigana: 'じ', meaning: 'ตัวอักษร', example: '漢字 (かんじ) = ตัวอักษรคันจิ', level: 'N5' },
     { char: '今', furigana: 'いま/こん', meaning: 'ตอนนี้', example: '今日 (きょう) = วันนี้', level: 'N5' },
     { char: '何', furigana: 'なに/なん', meaning: 'อะไร', example: '何 (なに) = อะไร', level: 'N5' },
-    { char: '近', furigana: 'ちかい/きん', meaning: 'ใกล้', example: '近い (ちかい) = ใกล้', level: 'N5' },
-    { char: '遠', furigana: 'とおい/えん', meaning: 'ไกล', example: '遠い (とおい) = ไกล', level: 'N5' },
-    { char: '安', furigana: 'やす/あん', meaning: 'ถูก, ปลอดภัย', example: '安全 (あんぜん) = ความปลอดภัย', level: 'N5' },
-    { char: '低', furigana: 'ひくい/てい', meaning: 'ต่ำ', example: '低い (ひくい) = ต่ำ', level: 'N5' },
-    { char: '古', furigana: 'ふるい/こ', meaning: 'เก่า', example: '古い (ふるい) = เก่า', level: 'N5' },
-    { char: '新', furigana: 'あたらしい/しん', meaning: 'ใหม่', example: '新しい (あたらしい) = ใหม่', level: 'N5' },
-    { char: '多', furigana: 'おおい/た', meaning: 'มาก', example: '多い (おおい) = มาก', level: 'N5' },
-    { char: '少', furigana: 'すくない/しょう', meaning: 'น้อย', example: '少ない (すくない) = น้อย', level: 'N5' },
-    { char: '早', furigana: 'はやい/そう', meaning: 'เร็ว, เช้า', example: '早い (はやい) = เร็ว', level: 'N5' },
-    { char: '遅', furigana: 'おそい/ち', meaning: 'ช้า', example: '遅い (おそい) = ช้า', level: 'N5' },
-    { char: '忙', furigana: 'いそがしい', meaning: 'ยุ่ง', example: '忙しい (いそがしい) = ยุ่ง', level: 'N5' },
-    { char: '静', furigana: 'しずか/せい', meaning: 'เงียบ', example: '静か (しずか) = เงียบ', level: 'N5' },
-    { char: '強', furigana: 'つよい/きょう', meaning: 'แข็งแกร่ง', example: '強い (つよい) = แข็งแกร่ง', level: 'N5' },
-    { char: '弱', furigana: 'よわい/じゃく', meaning: 'อ่อนแอ', example: '弱い (よわい) = อ่อนแอ', level: 'N5' },
-    { char: '光', furigana: 'ひかり/こう', meaning: 'แสงสว่าง', example: '光 (ひかり) = แสงสว่าง', level: 'N5' },
-    { char: '星', furigana: 'ほし/せい', meaning: 'ดวงดาว', example: '星 (ほし) = ดวงดาว', level: 'N5' },
-    { char: '雲', furigana: 'くも/うん', meaning: 'เมฆ', example: '雲 (くも) = เมฆ', level: 'N5' },
+    { char: '名', furigana: 'な/めい', meaning: 'ชื่อ', example: '名前 (なまえ) = ชื่อ', level: 'N5' },
+    { char: '字', furigana: 'じ', meaning: 'ตัวอักษร', example: '漢字 (かんじ) = ตัวอักษรคันจิ', level: 'N5' },
+    
     // N4
     { char: '愛', furigana: 'あい', meaning: 'ความรัก', example: '愛 (あい) = ความรัก', level: 'N4' },
     { char: '案', furigana: 'あん', meaning: 'แผน, ข้อเสนอ', example: '案内 (あんない) = การแนะนำ', level: 'N4' },
@@ -161,7 +99,6 @@ window.kanjiData = [
     { char: '員', furigana: 'いん', meaning: 'สมาชิก', example: '会社員 (かいしゃいん) = พนักงานบริษัท', level: 'N4' },
     { char: '院', furigana: 'いん', meaning: 'สถาบัน', example: '病院 (びょういん) = โรงพยาบาล', level: 'N4' },
     { char: '運', furigana: 'うん', meaning: 'ขนส่ง, โชค', example: '運転 (うんてん) = ขับรถ', level: 'N4' },
-    { char: '駅', furigana: 'えき', meaning: 'สถานีรถไฟ', example: '駅 (えき) = สถานีรถไฟ', level: 'N4' },
     { char: '横', furigana: 'よこ', meaning: 'ข้าง, แนวนอน', example: '横 (よこ) = ข้าง', level: 'N4' },
     { char: '屋', furigana: 'や', meaning: 'ร้าน, บ้าน', example: '本屋 (ほんや) = ร้านหนังสือ', level: 'N4' },
     { char: '温', furigana: 'おん', meaning: 'อุณหภูมิ', example: '温度 (おんど) = อุณหภูมิ', level: 'N4' },
@@ -170,7 +107,6 @@ window.kanjiData = [
     { char: '悪', furigana: 'わるい/あく', meaning: 'เลว, ไม่ดี', example: '悪い (わるい) = ไม่ดี', level: 'N4' },
     { char: '味', furigana: 'あじ/み', meaning: 'รสชาติ', example: '味 (あじ) = รสชาติ', level: 'N4' },
     { char: '医', furigana: 'い', meaning: 'การแพทย์', example: '医者 (いしゃ) = หมอ', level: 'N4' },
-    { char: '飲', furigana: 'のむ', meaning: 'ดื่ม', example: '飲み物 (のみもの) = เครื่องดื่ม', level: 'N4' },
     { char: '遠', furigana: 'とおい/えん', meaning: 'ไกล', example: '遠い (とおい) = ไกล', level: 'N4' },
     { char: '泳', furigana: 'およぐ/えい', meaning: 'ว่ายน้ำ', example: '泳ぐ (およぐ) = ว่ายน้ำ', level: 'N4' },
     { char: '親', furigana: 'おや/しん', meaning: 'พ่อแม่', example: '親 (おや) = พ่อแม่', level: 'N4' },
@@ -197,6 +133,7 @@ window.kanjiData = [
     { char: '広', furigana: 'ひろい/こう', meaning: 'กว้าง', example: '広い (ひろい) = กว้าง', level: 'N4' },
     { char: '細', furigana: 'ほそい/さい', meaning: 'เล็ก, ละเอียด', example: '細い (ほそい) = เล็ก', level: 'N4' },
     { char: '短', furigana: 'みじかい/たん', meaning: 'สั้น', example: '短い (みじかい) = สั้น', level: 'N4' },
+    
     // N3
     { char: '感', furigana: 'かん', meaning: 'ความรู้สึก', example: '感情 (かんじょう) = อารมณ์', level: 'N3' },
     { char: '覚', furigana: 'おぼえる/かく', meaning: 'จำ, รู้สึก', example: '覚える (おぼえる) = จำ', level: 'N3' },
@@ -204,184 +141,286 @@ window.kanjiData = [
     { char: '観', furigana: 'かん', meaning: 'มุมมอง', example: '観光 (かんこう) = การท่องเที่ยว', level: 'N3' },
     { char: '願', furigana: 'ねがう/がん', meaning: 'ขอร้อง, ปรารถนา', example: '願う (ねがう) = ขอร้อง', level: 'N3' },
     { char: '季', furigana: 'き', meaning: 'ฤดู', example: '季節 (きせつ) = ฤดูกาล', level: 'N3' },
-    { char: '機', furigana: 'き', meaning: 'เครื่อง, โอกาส', example: '機会 (きかい) = โอกาส', level: 'N3' },
-    { char: '議', furigana: 'ぎ', meaning: 'ประชุม, สนทนา', example: '会議 (かいぎ) = การประชุม', level: 'N3' },
-    { char: '求', furigana: 'もとめる/きゅう', meaning: 'ขอ, ต้องการ', example: '要求 (ようきゅう) = ความต้องการ', level: 'N3' },
-    { char: '泣', furigana: 'なく', meaning: 'ร้องไห้', example: '泣く (なく) = ร้องไห้', level: 'N3' },
-    { char: '球', furigana: 'きゅう', meaning: 'ลูกบอล, โลก', example: '地球 (ちきゅう) = โลก', level: 'N3' },
+    { char: '議', furigana: 'ぎ', meaning: 'การประชุม, การอภิปราย', example: '会議 (かいぎ) = การประชุม', level: 'N3' },
+    { char: '求', furigana: 'もとめる/きゅう', meaning: 'ขอ, แสวงหา', example: '要求 (ようきゅう) = การเรียกร้อง', level: 'N3' },
     { char: '救', furigana: 'すくう/きゅう', meaning: 'ช่วยเหลือ', example: '救急車 (きゅうきゅうしゃ) = รถพยาบาล', level: 'N3' },
-    { char: '橋', furigana: 'はし', meaning: 'สะพาน', example: '橋 (はし) = สะพาน', level: 'N3' },
-    { char: '経', furigana: 'けい', meaning: 'ผ่าน, เศรษฐกิจ', example: '経済 (けいざい) = เศรษฐกิจ', level: 'N3' },
-    { char: '警', furigana: 'けい', meaning: 'ตำรวจ', example: '警察 (けいさつ) = ตำรวจ', level: 'N3' },
-    { char: '劇', furigana: 'げき', meaning: 'ละคร', example: '劇場 (げきじょう) = โรงละคร', level: 'N3' },
-    { char: '血', furigana: 'ち', meaning: 'เลือด', example: '血 (ち) = เลือด', level: 'N3' },
-    { char: '件', furigana: 'けん', meaning: 'เรื่อง, กรณี', example: '事件 (じけん) = เหตุการณ์', level: 'N3' },
-    { char: '庫', furigana: 'こ', meaning: 'โกดัง', example: '倉庫 (そうこ) = โกดัง', level: 'N3' },
-    { char: '湖', furigana: 'みずうみ/こ', meaning: 'ทะเลสาบ', example: '湖 (みずうみ) = ทะเลสาบ', level: 'N3' },
-    { char: '幸', furigana: 'しあわせ/こう', meaning: 'ความสุข', example: '幸福 (こうふく) = ความสุข', level: 'N3' },
-    { char: '航', furigana: 'こう', meaning: 'เดินเรือ', example: '航空 (こうくう) = การบิน', level: 'N3' },
-    { char: '告', furigana: 'つげる/こく', meaning: 'แจ้ง, บอก', example: '報告 (ほうこく) = รายงาน', level: 'N3' },
-    { char: '混', furigana: 'まじる/こん', meaning: 'ปน, ผสม', example: '混雑 (こんざつ) = แออัด', level: 'N3' },
-    { char: '祭', furigana: 'まつり/さい', meaning: 'เทศกาล', example: '祭り (まつり) = เทศกาล', level: 'N3' },
-    { char: '育', furigana: 'そだつ/いく', meaning: 'เลี้ยงดู, เติบโต', example: '教育 (きょういく) = การศึกษา', level: 'N3' },
-    { char: '選', furigana: 'えらぶ/せん', meaning: 'เลือก', example: '選ぶ (えらぶ) = เลือก', level: 'N3' },
-    { char: '続', furigana: 'つづく/ぞく', meaning: 'ต่อเนื่อง', example: '続ける (つづける) = ทำต่อ', level: 'N3' },
-    { char: '試', furigana: 'ためす/し', meaning: 'ทดลอง', example: '試験 (しけん) = การสอบ', level: 'N3' },
-    { char: '練', furigana: 'ねる/れん', meaning: 'ฝึกฝน', example: '練習 (れんしゅう) = การฝึกซ้อม', level: 'N3' },
-    { char: '整', furigana: 'ととのえる/せい', meaning: 'จัดระเบียบ', example: '整理 (せいり) = การจัดระเบียบ', level: 'N3' },
-    { char: '済', furigana: 'すむ/さい', meaning: 'เสร็จสิ้น', example: '経済 (けいざい) = เศรษฐกิจ', level: 'N3' },
-    { char: '減', furigana: 'へる/げん', meaning: 'ลด', example: '減少 (げんしょう) = การลดลง', level: 'N3' },
-    { char: '増', furigana: 'ふえる/ぞう', meaning: 'เพิ่ม', example: '増加 (ぞうか) = การเพิ่มขึ้น', level: 'N3' },
-    { char: '集', furigana: 'あつまる/しゅう', meaning: 'รวบรวม', example: '集まる (あつまる) = รวมตัว', level: 'N3' },
-    { char: '断', furigana: 'ことわる/だん', meaning: 'ปฏิเสธ', example: '断る (ことわる) = ปฏิเสธ', level: 'N3' },
-    { char: '決', furigana: 'きめる/けつ', meaning: 'ตัดสินใจ', example: '決定 (けってい) = การตัดสินใจ', level: 'N3' },
-    { char: '然', furigana: 'ぜん', meaning: 'เช่นนั้น', example: '自然 (しぜん) = ธรรมชาติ', level: 'N3' },
-    { char: '熱', furigana: 'あつい/ねつ', meaning: 'ร้อน, ไข้', example: '熱 (ねつ) = ไข้', level: 'N3' },
-    { char: '燃', furigana: 'もえる/ねん', meaning: 'เผาไหม้', example: '燃える (もえる) = เผาไหม้', level: 'N3' },
-    { char: '照', furigana: 'てる/しょう', meaning: 'ส่องสว่าง', example: '照明 (しょうめい) = แสงสว่าง', level: 'N3' },
-    { char: '消', furigana: 'きえる/しょう', meaning: 'หายไป, ดับ', example: '消す (けす) = ดับ', level: 'N3' },
-    { char: '流', furigana: 'ながれる/りゅう', meaning: 'ไหล', example: '流行 (りゅうこう) = แฟชั่น', level: 'N3' },
-    { char: '旅', furigana: 'たび/りょ', meaning: 'การเดินทาง', example: '旅行 (りょこう) = การเดินทาง', level: 'N3' },
-    { char: '望', furigana: 'のぞむ/ぼう', meaning: 'หวัง, ปรารถนา', example: '希望 (きぼう) = ความหวัง', level: 'N3' },
-    { char: '深', furigana: 'ふかい/しん', meaning: 'ลึก', example: '深い (ふかい) = ลึก', level: 'N3' },
-    { char: '清', furigana: 'きよい/せい', meaning: 'สะอาด', example: '清潔 (せいけつ) = ความสะอาด', level: 'N3' },
-    { char: '静', furigana: 'しずか/せい', meaning: 'เงียบ', example: '静か (しずか) = เงียบ', level: 'N3' },
-    { char: '慣', furigana: 'なれる/かん', meaning: 'เคยชิน', example: '慣れる (なれる) = เคยชิน', level: 'N3' },
-    { char: '悩', furigana: 'なやむ/のう', meaning: 'กังวล', example: '悩む (なやむ) = กังวล', level: 'N3' },
-    { char: '忙', furigana: 'いそがしい', meaning: 'ยุ่ง', example: '忙しい (いそがしい) = ยุ่ง', level: 'N3' },
-    { char: '優', furigana: 'やさしい/ゆう', meaning: 'อ่อนโยน, ดีเยี่ยม', example: '優しい (やさしい) = อ่อนโยน', level: 'N3' },
-    { char: '厳', furigana: 'きびしい/げん', meaning: 'เข้มงวด', example: '厳しい (きびしい) = เข้มงวด', level: 'N3' },
-    { char: '規', furigana: 'き', meaning: 'กฎระเบียบ', example: '規則 (きそく) = กฎระเบียบ', level: 'N3' },
-    { char: '術', furigana: 'じゅつ', meaning: 'เทคนิค, ศิลปะ', example: '技術 (ぎじゅつ) = เทคโนโลยี', level: 'N3' }
-    
+    { char: '給', furigana: 'きゅう', meaning: 'จ่าย, ให้', example: '給料 (きゅうりょう) = เงินเดือน', level: 'N3' }
 ];
 
-let currentKanjiList = window.kanjiData;
-let currentLevel = 'all';
+// ตัวแปรสำหรับจัดการ state
+let currentData = [...window.kanjiData];
+let currentPage = 1;
+let itemsPerPage = 20;
+let isGridView = true;
 
-function renderKanjiLevelFilter() {
-    let filterBar = document.querySelector('.kanji-level-filter');
-    if (!filterBar) {
-        filterBar = document.createElement('div');
-        filterBar.className = 'kanji-level-filter';
-        const kanjiHeader = document.querySelector('.kanji-header');
-        if (kanjiHeader) kanjiHeader.appendChild(filterBar);
-    }
-    filterBar.innerHTML = `
-        <label>ระดับ:
-            <select class="kanji-filter-level">
-                <option value="all">ทั้งหมด</option>
-                <option value="N5">N5</option>
-                <option value="N4">N4</option>
-                <option value="N3">N3</option>
-                <option value="เตรียมสอบ">เตรียมสอบ</option>
-            </select>
-        </label>
-    `;
-    filterBar.querySelector('.kanji-filter-level').value = currentLevel;
-    filterBar.querySelector('.kanji-filter-level').onchange = (e) => {
-        currentLevel = e.target.value;
-        renderKanjiList(currentKanjiList);
-    };
+// เริ่มต้นเมื่อโหลดหน้า
+document.addEventListener('DOMContentLoaded', function() {
+    initializeKanjiApp();
+});
+
+function initializeKanjiApp() {
+    updateStats();
+    setupEventListeners();
+    setupLevelCards();
+    renderKanjiList();
+    updatePagination();
 }
 
-function renderKanjiList(list) {
-    const container = document.querySelector('.kanji-list');
-    if (!container) return;
-    container.innerHTML = '';
-    let filtered = list;
-    if (currentLevel !== 'all') {
-        filtered = list.filter(k => k.level === currentLevel);
+// อัปเดตสถิติ
+function updateStats() {
+    const n5Count = window.kanjiData.filter(k => k.level === 'N5').length;
+    const n4Count = window.kanjiData.filter(k => k.level === 'N4').length;
+    const n3Count = window.kanjiData.filter(k => k.level === 'N3').length;
+    const totalCount = window.kanjiData.length;
+
+    document.getElementById('n5-count').textContent = n5Count;
+    document.getElementById('n4-count').textContent = n4Count;
+    document.getElementById('n3-count').textContent = n3Count;
+    document.getElementById('total-count').textContent = totalCount;
+}
+
+// ตั้งค่า Event Listeners
+function setupEventListeners() {
+    // Search functionality
+    const searchInput = document.getElementById('kanji-search');
+    searchInput.addEventListener('input', handleSearch);
+
+    // Level filter
+    const levelFilter = document.getElementById('level-filter');
+    levelFilter.addEventListener('change', handleFilter);
+
+    // Sort filter
+    const sortFilter = document.getElementById('sort-filter');
+    sortFilter.addEventListener('change', handleSort);
+
+    // Random kanji button
+    const randomBtn = document.getElementById('random-kanji-btn');
+    randomBtn.addEventListener('click', showRandomKanji);
+
+    // View toggle buttons
+    const viewBtns = document.querySelectorAll('.view-btn');
+    viewBtns.forEach(btn => {
+        btn.addEventListener('click', () => toggleView(btn.dataset.view));
+    });
+
+    // Pagination buttons
+    document.getElementById('prev-page').addEventListener('click', () => changePage(-1));
+    document.getElementById('next-page').addEventListener('click', () => changePage(1));
+
+    // Modal close functionality
+    document.querySelector('.modal-close').addEventListener('click', closeModal);
+    document.querySelector('.modal-overlay').addEventListener('click', closeModal);
+}
+
+// ตั้งค่า Level Cards
+function setupLevelCards() {
+    const levelBtns = document.querySelectorAll('.level-btn');
+    levelBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const card = e.target.closest('.level-card');
+            const level = card.dataset.level;
+            filterByLevel(level);
+            
+            // Scroll to kanji list
+            document.getElementById('kanji-container').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+}
+
+// ฟังก์ชันค้นหา
+function handleSearch() {
+    const searchTerm = document.getElementById('kanji-search').value.toLowerCase();
+    
+    if (searchTerm === '') {
+        currentData = [...window.kanjiData];
+    } else {
+        currentData = window.kanjiData.filter(kanji => 
+            kanji.char.toLowerCase().includes(searchTerm) ||
+            kanji.meaning.toLowerCase().includes(searchTerm) ||
+            kanji.furigana.toLowerCase().includes(searchTerm) ||
+            kanji.example.toLowerCase().includes(searchTerm)
+        );
     }
-    filtered.forEach(kanji => {
-        const card = document.createElement('div');
-        card.className = 'kanji-card';
-        card.innerHTML = `
-            <span class="kanji-level-badge n${kanji.level ? kanji.level[1] : '5'}">${kanji.level || 'N5'}</span>
-            <div class="kanji-furigana">${kanji.furigana}</div>
-            <div class="kanji-char">${kanji.char}</div>
-            <div class="kanji-meaning">${kanji.meaning}</div>
-            <div class="kanji-example">${kanji.example}</div>
-        `;
-        card.onclick = () => showKanjiModal(kanji);
+    
+    currentPage = 1;
+    renderKanjiList();
+    updatePagination();
+}
+
+// ฟังก์ชันกรอง
+function handleFilter() {
+    const level = document.getElementById('level-filter').value;
+    filterByLevel(level);
+}
+
+function filterByLevel(level) {
+    if (level === 'all') {
+        currentData = [...window.kanjiData];
+        document.getElementById('current-level-title').textContent = 'คันจิทั้งหมด';
+    } else {
+        currentData = window.kanjiData.filter(kanji => kanji.level === level);
+        document.getElementById('current-level-title').textContent = `คันจิระดับ ${level}`;
+    }
+    
+    // Update level filter dropdown
+    document.getElementById('level-filter').value = level;
+    
+    currentPage = 1;
+    renderKanjiList();
+    updatePagination();
+}
+
+// ฟังก์ชันเรียงลำดับ
+function handleSort() {
+    const sortBy = document.getElementById('sort-filter').value;
+    
+    switch (sortBy) {
+        case 'level':
+            currentData.sort((a, b) => {
+                const levelOrder = { 'N5': 1, 'N4': 2, 'N3': 3 };
+                return levelOrder[a.level] - levelOrder[b.level];
+            });
+            break;
+        case 'alphabetical':
+            currentData.sort((a, b) => a.char.localeCompare(b.char));
+            break;
+        case 'stroke':
+            // Simplified stroke count estimation
+            currentData.sort((a, b) => a.char.length - b.char.length);
+            break;
+        case 'frequency':
+            // Random for demo purposes
+            currentData.sort(() => Math.random() - 0.5);
+            break;
+    }
+    
+    renderKanjiList();
+}
+
+// ฟังก์ชันสุ่มคันจิ
+function showRandomKanji() {
+    const randomKanji = window.kanjiData[Math.floor(Math.random() * window.kanjiData.length)];
+    showKanjiModal(randomKanji);
+}
+
+// ฟังก์ชันเปลี่ยนมุมมอง
+function toggleView(viewType) {
+    isGridView = viewType === 'grid';
+    
+    // Update button states
+    document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-view="${viewType}"]`).classList.add('active');
+    
+    // Update container class
+    const container = document.getElementById('kanji-container');
+    if (isGridView) {
+        container.className = 'kanji-grid';
+    } else {
+        container.className = 'kanji-list';
+    }
+    
+    renderKanjiList();
+}
+
+// ฟังก์ชันแสดงรายการคันจิ
+function renderKanjiList() {
+    const container = document.getElementById('kanji-container');
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const pageData = currentData.slice(start, end);
+    
+    container.innerHTML = '';
+    
+    pageData.forEach(kanji => {
+        const card = createKanjiCard(kanji);
         container.appendChild(card);
     });
 }
 
-function showKanjiModal(kanji) {
-    const modal = document.getElementById('kanji-modal');
-    const body = modal.querySelector('.kanji-modal-body');
-    body.innerHTML = `
-        <span class="kanji-level-badge n${kanji.level ? kanji.level[1] : '5'}">${kanji.level || 'N5'}</span>
-        <div class="kanji-furigana">${kanji.furigana}</div>
+// สร้างการ์ดคันจิ
+function createKanjiCard(kanji) {
+    const card = document.createElement('div');
+    card.className = `kanji-card ${!isGridView ? 'list-view' : ''}`;
+    card.addEventListener('click', () => showKanjiModal(kanji));
+    
+    card.innerHTML = `
+        <div class="kanji-level-badge ${kanji.level.toLowerCase()}">${kanji.level}</div>
         <div class="kanji-char">${kanji.char}</div>
+        <div class="kanji-furigana">${kanji.furigana}</div>
         <div class="kanji-meaning">${kanji.meaning}</div>
         <div class="kanji-example">${kanji.example}</div>
     `;
-    modal.style.display = 'flex';
-}
-
-// ปิด modal
-const modal = document.getElementById('kanji-modal');
-if (modal) {
-    modal.querySelector('.kanji-modal-close').onclick = () => modal.style.display = 'none';
-    modal.querySelector('.kanji-modal-bg').onclick = () => modal.style.display = 'none';
-}
-
-// ค้นหา
-const searchInput = document.querySelector('.kanji-search');
-if (searchInput) {
-    searchInput.addEventListener('input', e => {
-        const q = e.target.value.trim();
-        if (!q) {
-            currentKanjiList = window.kanjiData;
-        } else {
-            currentKanjiList = window.kanjiData.filter(k => k.char.includes(q) || k.furigana.includes(q) || k.meaning.includes(q) || k.example.includes(q));
-        }
-        renderKanjiList(currentKanjiList);
-    });
-}
-
-// สุ่มคันจิ
-const randomBtn = document.querySelector('.kanji-random-btn');
-let currentRandomKanji = null;
-
-function showRandomKanji() {
-    if (window.kanjiData.length === 0) return;
-    currentRandomKanji = window.kanjiData[Math.floor(Math.random() * window.kanjiData.length)];
-    showKanjiModal(currentRandomKanji);
-}
-
-if (randomBtn) {
-    randomBtn.onclick = (e) => {
-        e.preventDefault();
-        showRandomKanji();
-    };
-}
-
-// เพิ่มปุ่ม Next สำหรับสุ่มคันจิถัดไป
-function addKanjiRandomNavigationButtons() {
-    const modal = document.getElementById('kanji-modal');
-    if (!modal) return;
     
-    // เพิ่มปุ่ม Next ถ้ายังไม่มี
-    if (!modal.querySelector('.random-next-btn')) {
-        const nextBtn = document.createElement('button');
-        nextBtn.className = 'random-next-btn';
-        nextBtn.innerHTML = 'ถัดไป &rarr;';
-        nextBtn.onclick = (e) => {
-            e.stopPropagation();
-            showRandomKanji();
-        };
-        modal.querySelector('.kanji-modal-content').appendChild(nextBtn);
+    return card;
+}
+
+// แสดง Modal
+function showKanjiModal(kanji) {
+    const modal = document.getElementById('kanji-modal');
+    const modalBody = modal.querySelector('.modal-body');
+    
+    modalBody.innerHTML = `
+        <div class="kanji-level-badge ${kanji.level.toLowerCase()}">${kanji.level}</div>
+        <div class="kanji-char">${kanji.char}</div>
+        <div class="kanji-furigana">${kanji.furigana}</div>
+        <div class="kanji-meaning">${kanji.meaning}</div>
+        <div class="kanji-example">${kanji.example}</div>
+        <button class="btn primary" onclick="showRandomKanji()" style="margin-top: 2rem;">
+            <i class="fas fa-dice"></i>
+            คันจิสุ่มถัดไป
+        </button>
+    `;
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// ปิด Modal
+function closeModal() {
+const modal = document.getElementById('kanji-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// ฟังก์ชัน Pagination
+function changePage(direction) {
+    const totalPages = Math.ceil(currentData.length / itemsPerPage);
+    const newPage = currentPage + direction;
+    
+    if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        renderKanjiList();
+        updatePagination();
+        
+        // Scroll to top of list
+        document.getElementById('kanji-container').scrollIntoView({
+            behavior: 'smooth'
+        });
     }
 }
 
-// เรียกเมื่อโหลดหน้าเว็บ
-addKanjiRandomNavigationButtons();
+function updatePagination() {
+    const totalPages = Math.ceil(currentData.length / itemsPerPage);
+    
+    document.getElementById('current-page').textContent = currentPage;
+    document.getElementById('total-pages').textContent = totalPages;
+    
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+}
 
-// โหลดเริ่มต้น
-window.addEventListener('DOMContentLoaded', () => {
-    renderKanjiLevelFilter();
-    renderKanjiList(window.kanjiData);
+// ความเข้ากันได้กับโค้ดเก่า
+function renderKanjiLevelFilter() {
+    // Legacy function - kept for compatibility
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
 });
