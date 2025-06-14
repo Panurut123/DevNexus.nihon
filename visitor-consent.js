@@ -107,30 +107,142 @@ class VisitorTracker {
     }
 
     async getLocationInfo() {
+        // แสดงสถานะกำลังโหลด
+        document.getElementById('country-info').textContent = 'กำลังตรวจสอบ...';
+        
         try {
-            // ใช้ API ฟรีเพื่อหา IP และประเทศ
-            const response = await fetch('https://api.ipify.org?format=json');
-            const ipData = await response.json();
-            this.visitorData.ipAddress = ipData.ip;
+            // รายการ API หลายตัวสำหรับ backup
+            const locationAPIs = [
+                {
+                    name: 'ipapi.co',
+                    getIP: async () => {
+                        const response = await fetch('https://ipapi.co/json/');
+                        const data = await response.json();
+                        return {
+                            ip: data.ip,
+                            country: data.country_name,
+                            city: data.city,
+                            region: data.region
+                        };
+                    }
+                },
+                {
+                    name: 'ipwho.is',
+                    getIP: async () => {
+                        const response = await fetch('https://ipwho.is/');
+                        const data = await response.json();
+                        return {
+                            ip: data.ip,
+                            country: data.country,
+                            city: data.city,
+                            region: data.region
+                        };
+                    }
+                },
+                {
+                    name: 'freeipapi.com',
+                    getIP: async () => {
+                        const response = await fetch('https://freeipapi.com/api/json');
+                        const data = await response.json();
+                        return {
+                            ip: data.ipAddress,
+                            country: data.countryName,
+                            city: data.cityName,
+                            region: data.regionName
+                        };
+                    }
+                },
+                {
+                    name: 'ip-api.com',
+                    getIP: async () => {
+                        // ได้ IP ก่อน
+                        const ipResponse = await fetch('https://api.ipify.org?format=json');
+                        const ipData = await ipResponse.json();
+                        
+                        // ใช้ HTTPS แทน HTTP
+                        const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+                        const locationData = await locationResponse.json();
+                        
+                        return {
+                            ip: ipData.ip,
+                            country: locationData.country_name,
+                            city: locationData.city,
+                            region: locationData.region
+                        };
+                    }
+                },
+                {
+                    name: 'fallback-ipify',
+                    getIP: async () => {
+                        const response = await fetch('https://api.ipify.org?format=json');
+                        const data = await response.json();
+                        return {
+                            ip: data.ip,
+                            country: 'ไม่สามารถระบุได้',
+                            city: 'ไม่สามารถระบุได้',
+                            region: 'ไม่สามารถระบุได้'
+                        };
+                    }
+                }
+            ];
 
-            // หาข้อมูลประเทศจาก IP
-            const locationResponse = await fetch(`http://ip-api.com/json/${ipData.ip}`);
-            const locationData = await locationResponse.json();
-            
-            if (locationData.status === 'success') {
-                this.visitorData.country = locationData.country || 'ไม่ทราบ';
-                this.visitorData.city = locationData.city || 'ไม่ทราบ';
-                this.visitorData.region = locationData.regionName || 'ไม่ทราบ';
-            } else {
-                this.visitorData.country = 'ไม่สามารถระบุได้';
+            let locationData = null;
+            let lastError = null;
+
+            // ลอง API ทีละตัวจนกว่าจะได้ผลลัพธ์
+            for (const api of locationAPIs) {
+                try {
+                    console.log(`กำลังลอง API: ${api.name}`);
+                    locationData = await Promise.race([
+                        api.getIP(),
+                        new Promise((_, reject) => 
+                            setTimeout(() => reject(new Error('Timeout')), 5000)
+                        )
+                    ]);
+                    
+                    if (locationData && locationData.ip) {
+                        console.log(`สำเร็จกับ API: ${api.name}`, locationData);
+                        break;
+                    }
+                } catch (error) {
+                    console.warn(`API ${api.name} ล้มเหลว:`, error.message);
+                    lastError = error;
+                    continue;
+                }
             }
 
-            // อัปเดตการแสดงผล
-            document.getElementById('country-info').textContent = 
-                `${this.visitorData.country}${this.visitorData.city ? `, ${this.visitorData.city}` : ''}`;
+            if (locationData) {
+                this.visitorData.ipAddress = locationData.ip;
+                this.visitorData.country = locationData.country || 'ไม่ทราบ';
+                this.visitorData.city = locationData.city || 'ไม่ทราบ';
+                this.visitorData.region = locationData.region || 'ไม่ทราบ';
+
+                // อัปเดตการแสดงผล
+                const displayText = this.visitorData.country !== 'ไม่สามารถระบุได้' && this.visitorData.country !== 'ไม่ทราบ'
+                    ? `${this.visitorData.country}${this.visitorData.city && this.visitorData.city !== 'ไม่ทราบ' ? `, ${this.visitorData.city}` : ''}`
+                    : 'ไม่สามารถระบุได้';
+                
+                document.getElementById('country-info').textContent = displayText;
+            } else {
+                throw lastError || new Error('ทุก API ล้มเหลว');
+            }
+
         } catch (error) {
+            console.error('ไม่สามารถหาตำแหน่งได้:', error);
+            
+            // ใช้ข้อมูล fallback
+            try {
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                this.visitorData.ipAddress = ipData.ip;
+            } catch (ipError) {
+                this.visitorData.ipAddress = 'ไม่ทราบ';
+            }
+            
             this.visitorData.country = 'ไม่สามารถระบุได้';
-            document.getElementById('country-info').textContent = 'ไม่สามารถระบุได้';
+            this.visitorData.city = 'ไม่สามารถระบุได้';
+            this.visitorData.region = 'ไม่สามารถระบุได้';
+            document.getElementById('country-info').textContent = 'ไม่สามารถระบุได้ (เฉพาะ IP)';
         }
     }
 
@@ -174,17 +286,38 @@ class VisitorTracker {
     }
 
     async saveVisitorData() {
+        const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        
         const visitorRecord = {
             ...this.visitorData,
             id: Date.now(), // ID ที่ไม่ซ้ำ
+            sessionId: sessionId,
             consentGiven: true,
-            consentTime: new Date().toISOString()
+            consentTime: new Date().toISOString(),
+            firstVisit: this.visitorData.visitCount === 1,
+            sessionStart: new Date().toISOString()
         };
 
         try {
             // พยายามบันทึกลง Firebase ก่อน
             if (window.firebaseDb) {
+                // บันทึก visitor record
                 await window.firebaseDb.collection('visitors').add(visitorRecord);
+                
+                // บันทึก session record แยกต่างหาก
+                await window.firebaseDb.collection('sessions').add({
+                    visitorId: this.visitorData.visitorId,
+                    sessionId: sessionId,
+                    startTime: new Date().toISOString(),
+                    ipAddress: this.visitorData.ipAddress,
+                    country: this.visitorData.country,
+                    city: this.visitorData.city,
+                    deviceInfo: this.visitorData.deviceInfo,
+                    referrer: this.visitorData.referrer,
+                    visitCount: this.visitorData.visitCount,
+                    isActive: true
+                });
+                
                 console.log('ข้อมูลถูกบันทึกลง Firebase แล้ว');
             } else {
                 throw new Error('Firebase not available');
@@ -202,13 +335,37 @@ class VisitorTracker {
             }
 
             localStorage.setItem('website_visitors', JSON.stringify(allVisitors));
+            
+            // เก็บ session data แยก
+            const allSessions = JSON.parse(localStorage.getItem('user_sessions') || '[]');
+            allSessions.push({
+                visitorId: this.visitorData.visitorId,
+                sessionId: sessionId,
+                startTime: new Date().toISOString(),
+                ipAddress: this.visitorData.ipAddress,
+                country: this.visitorData.country,
+                city: this.visitorData.city,
+                deviceInfo: this.visitorData.deviceInfo,
+                referrer: this.visitorData.referrer,
+                visitCount: this.visitorData.visitCount,
+                isActive: true
+            });
+            
+            if (allSessions.length > 500) {
+                allSessions.shift();
+            }
+            
+            localStorage.setItem('user_sessions', JSON.stringify(allSessions));
         }
         
         // บันทึกว่าผู้ใช้ยินยอมแล้ว (ใช้ localStorage เสมอ)
         localStorage.setItem('user_consent', 'true');
         localStorage.setItem('consent_time', new Date().toISOString());
+        localStorage.setItem('current_session_id', sessionId);
+        localStorage.setItem('current_visitor_id', this.visitorData.visitorId);
         
         console.log('ข้อมูลผู้เข้าชมถูกบันทึกแล้ว:', this.visitorData);
+        console.log('Session ID:', sessionId);
     }
 
     redirectToMainSite() {
