@@ -4,40 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ไวยากรณ์ภาษาญี่ปุ่น - DevNexus.Nihon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="grammar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="logo/logodennexus.png">
     <style>
-    @media (max-width: 768px) {
-      .grammar-header, .grammar-tools, .grammar-content {
-        padding: 0.5rem 0.2rem !important;
-      }
-      .grammar-tools {
-        flex-direction: column !important;
-        gap: 0.7rem !important;
-      }
-      .grammar-tools input, .grammar-tools button {
-        width: 100% !important;
-        margin-bottom: 0.5rem !important;
-      }
-      .grammar-detail-section {
-        width: 100% !important;
-        min-width: 0 !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        padding: 1rem 0.5rem !important;
-      }
-    }
-    @media (max-width: 480px) {
-      .grammar-header, .grammar-tools, .grammar-content {
-        padding: 0.2rem 0.1rem !important;
-      }
-      .grammar-detail-section {
-        padding: 0.7rem 0.2rem !important;
-      }
-    }
     .fade-in-page {
       animation: fadeInPage 0.7s;
     }
@@ -48,73 +20,313 @@
     </style>
 </head>
 <body>
+    <!-- ส่วนดอกซากุระลอย -->
     <div class="sakura-container"></div>
+    
+    <!-- ส่วนเฮดเดอร์ -->
     <header>
         <div class="logo">
             <h1><span class="logo-dev">DevNexus</span>.<span class="logo-nihon">Nihon</span></h1>
         </div>
         <nav>
             <ul>
-              <li><a href="index.html" class="active">หน้าหลัก</a></li>
-              <li><a href="main.html">บทเรียน</a></li>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="main.html">คู่มือการเรียน</a></li>
               <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
               <li><a href="vocabulary.html">คำศัพท์</a></li>
               <li><a href="kanji.html">คันจิ</a></li>
-              <li><a href="grammar.html">ไวยากรณ์</a></li>
-              <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="grammar.html" class="active">ไวยากรณ์</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
             </ul>
         </nav>
     </header>
-    <div class="grammar-warning-box">
-        <strong>ประกาศ:</strong> ข้อมูลไวยากรณ์ในหน้านี้จัดทำเพื่อการศึกษา อาจมีข้อผิดพลาดหรือไม่สมบูรณ์ แนะนำให้อ้างอิงจากหนังสือ Minna no Nihongo หรือแหล่งข้อมูลมาตรฐานเป็นหลัก
-    </div>
+
+    <!-- ส่วนหลัก -->
     <main>
-        <section class="grammar-header">
-            <h2>ไวยากรณ์ภาษาญี่ปุ่น</h2>
-            <div class="grammar-tools">
-                
+        <!-- ส่วนฮีโร่ -->
+        <section class="grammar-hero">
+            <div class="grammar-hero-content">
+                <h1 class="slide-up">เรียนรู้ไวยากรณ์ญี่ปุ่น</h1>
+                <p class="slide-up delay-1">เรียนรู้ไวยากรณ์พื้นฐานตั้งแต่ระดับ N5 ถึง N3 พร้อมตัวอย่างประโยคและการใช้งานจริง</p>
+                <div class="hero-buttons slide-up delay-2">
+                    <a href="grammar-quiz.html" class="btn primary">
+                        <i class="fas fa-pencil-alt"></i>
+                        ทำแบบทดสอบไวยากรณ์
+                    </a>
+                    <a href="#grammar-levels" class="btn secondary">เลือกระดับการเรียน</a>
+                </div>
             </div>
         </section>
-        <section class="grammar-content">
-            <!-- เนื้อหาไวยากรณ์จะแสดงที่นี่ด้วย JS -->
-            <div id="grammar-detail">
-                <div class="grammar-detail-section">
-                    <div class="grammar-title">การใช้ です (desu)</div>
-                    <div class="grammar-pattern">〜は〜です</div>
-                    <div class="grammar-romaji">~wa ~desu</div>
-                    <div class="grammar-explanation">
-                        เป็นรูปแบบประโยคพื้นฐานที่ใช่บอกว่า "A คือ B" หรือใช้แสดงการยืนยันข้อมูล โดย です (desu) เป็นคำกริยาช่วยที่แสดงความสุภาพ มักใช้ในการแนะนำตัว อธิบายสิ่งของของ หรือข้อมูลทั่วไป
+
+        <!-- ข้อความเตือน -->
+    <div class="grammar-warning-box">
+            <i class="fas fa-info-circle"></i>
+        <strong>ประกาศ:</strong> ข้อมูลไวยากรณ์ในหน้านี้จัดทำเพื่อการศึกษา อาจมีข้อผิดพลาดหรือไม่สมบูรณ์ แนะนำให้อ้างอิงจากหนังสือ Minna no Nihongo หรือแหล่งข้อมูลมาตรฐานเป็นหลัก
+    </div>
+
+        <!-- ส่วนสถิติ -->
+        <section class="grammar-stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card slide-up">
+                        <div class="stat-icon n5">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="stat-number" id="n5-count">25</div>
+                        <div class="stat-label">ไวยากรณ์ N5</div>
+                        <div class="stat-description">ระดับพื้นฐาน</div>
                     </div>
-                    <div class="grammar-examples">
-                        <div class="grammar-example-item">
-                            <div class="grammar-example-jp">私は学生です。</div>
-                            <div class="grammar-example-romaji">Watashi wa gakusei desu.</div>
-                            <div class="grammar-example-th">ฉันเป็นนักเรียน</div>
+                    
+                    <div class="stat-card slide-up delay-1">
+                        <div class="stat-icon n4">
+                            <i class="fas fa-leaf"></i>
                         </div>
-                        <div class="grammar-example-item">
-                            <div class="grammar-example-jp">これは本です。</div>
-                            <div class="grammar-example-romaji">Kore wa hon desu.</div>
-                            <div class="grammar-example-th">นี่คือหนังสือ</div>
+                        <div class="stat-number" id="n4-count">20</div>
+                        <div class="stat-label">ไวยากรณ์ N4</div>
+                        <div class="stat-description">ระดับต้น</div>
+                    </div>
+                    
+                    <div class="stat-card slide-up delay-2">
+                        <div class="stat-icon n3">
+                            <i class="fas fa-tree"></i>
                         </div>
+                        <div class="stat-number" id="n3-count">15</div>
+                        <div class="stat-label">ไวยากรณ์ N3</div>
+                        <div class="stat-description">ระดับกลาง</div>
+                    </div>
+                    
+                    <div class="stat-card slide-up delay-3">
+                        <div class="stat-icon total">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-number" id="total-count">60</div>
+                        <div class="stat-label">รวมทั้งหมด</div>
+                        <div class="stat-description">หัวข้อไวยากรณ์</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนระดับการเรียน -->
+        <section id="grammar-levels" class="grammar-levels">
+            <div class="container">
+                <h2 class="section-title">เลือกระดับการเรียน</h2>
+                <p class="section-description">เริ่มต้นจากระดับที่เหมาะสมกับความสามารถของคุณ</p>
+                
+                <div class="level-cards">
+                    <div class="level-card n5-card slide-up" data-level="N5">
+                        <div class="level-badge">N5</div>
+                        <h3>ระดับพื้นฐาน</h3>
+                        <div class="level-description">
+                            <p>ไวยากรณ์พื้นฐานที่จำเป็นสำหรับการสื่อสารเบื้องต้น</p>
+                            <div class="level-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>です/ます และรูปปฏิเสธ</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>คำช่วย は, が, を, に, で</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>การผันกริยาพื้นฐาน</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>รูปอดีตและปัจจุบัน</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="level-btn">เรียนไวยากรณ์ N5</button>
+                    </div>
+
+                    <div class="level-card n4-card slide-up delay-1" data-level="N4">
+                        <div class="level-badge">N4</div>
+                        <h3>ระดับต้น</h3>
+                        <div class="level-description">
+                            <p>ไวยากรณ์ระดับต้นสำหรับการสื่อสารที่ซับซ้อนขึ้น</p>
+                            <div class="level-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>รูปたい และการแสดงความต้องการ</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>รูปて และการเชื่อมประโยค</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>คำนามและคำกริยาซับซ้อน</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>การเปรียบเทียบ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="level-btn">เรียนไวยากรณ์ N4</button>
+                    </div>
+
+                    <div class="level-card n3-card slide-up delay-2" data-level="N3">
+                        <div class="level-badge">N3</div>
+                        <h3>ระดับกลาง</h3>
+                        <div class="level-description">
+                            <p>ไวยากรณ์ระดับกลางที่ใช้ในการสื่อสารที่ซับซ้อน</p>
+                            <div class="level-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>รูปปฏิบัติการขั้นสูง</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>ประโยคเงื่อนไข</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>การแสดงความคิดเห็น</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>ไวยากรณ์สำหรับธุรกิจ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="level-btn">เรียนไวยากรณ์ N3</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนแสดงรายการไวยากรณ์ -->
+        <section class="grammar-list-section">
+            <div class="container">
+                <div class="list-header">
+                    <h3 id="current-level-title">ไวยากรณ์ทั้งหมด</h3>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="card">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="grammar-container" class="grammar-grid">
+                    <!-- ไวยากรณ์จะถูกสร้างด้วย JavaScript -->
+                </div>
+                
+                <div class="pagination">
+                    <button id="prev-page" class="page-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        ก่อนหน้า
+                    </button>
+                    <div class="page-info">
+                        <span id="current-page">1</span> / <span id="total-pages">1</span>
+                    </div>
+                    <button id="next-page" class="page-btn">
+                        ถัดไป
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนเคล็ดลับการเรียน -->
+        <section class="grammar-tips">
+            <div class="container">
+                <h2 class="section-title">เคล็ดลับการเรียนไวยากรณ์</h2>
+                
+                <div class="tips-grid">
+                    <div class="tip-card slide-up">
+                        <div class="tip-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h3>เรียนแบบทีละขั้นตอน</h3>
+                        <p>เริ่มจากไวยากรณ์พื้นฐาน เช่น です/ます ก่อนไปสู่รูปแบบที่ซับซ้อนขึ้น</p>
+                    </div>
+                    
+                    <div class="tip-card slide-up delay-1">
+                        <div class="tip-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>ฝึกใช้ในประโยค</h3>
+                        <p>อย่าจำเพียงรูปแบบ แต่ฝึกใช้ในประโยคจริงเพื่อให้เข้าใจบริบท</p>
+                    </div>
+                    
+                    <div class="tip-card slide-up delay-2">
+                        <div class="tip-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3>อ่านตัวอย่างหลากหลาย</h3>
+                        <p>อ่านตัวอย่างประโยคหลากหลาย เพื่อเห็นการใช้งานในสถานการณ์ต่างๆ</p>
+                    </div>
+                    
+                    <div class="tip-card slide-up delay-3">
+                        <div class="tip-icon">
+                            <i class="fas fa-redo-alt"></i>
+                        </div>
+                        <h3>ทบทวนสม่ำเสมอ</h3>
+                        <p>ทบทวนไวยากรณ์ที่เรียนไปแล้วเป็นประจำ เพื่อไม่ให้ลืม</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนหนังสืออ้างอิง -->
+        <section class="grammar-reference">
+            <div class="container">
+                <h2 class="section-title">หนังสืออ้างอิง</h2>
+                <div class="reference-grid">
+                    <div class="reference-card">
+                        <div class="reference-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Minna no Nihongo</h3>
+                        <p>หนังสือเรียนภาษาญี่ปุ่นที่เป็นมาตรฐานระดับโลก เหมาะสำหรับผู้เริ่มต้น</p>
+                    </div>
+                    
+                    <div class="reference-card">
+                        <div class="reference-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Genki Textbook</h3>
+                        <p>หนังสือเรียนที่ใช้ในมหาวิทยาลัย มีการอธิบายไวยากรณ์ที่ละเอียด</p>
+                    </div>
+                    
+                    <div class="reference-card">
+                        <div class="reference-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>JLPT Grammar</h3>
+                        <p>ไวยากรณ์ที่จำเป็นสำหรับสอบ JLPT แต่ละระดับ</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    <div id="grammar-modal" class="grammar-modal" style="display:none;">
-        <div class="grammar-modal-bg"></div>
-        <div class="grammar-modal-content">
-            <button class="grammar-modal-close">×</button>
-            <div class="grammar-modal-body">
-                
+
+    <!-- Modal แสดงรายละเอียดไวยากรณ์ -->
+    <div id="grammar-modal" class="grammar-modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <!-- เนื้อหาจะถูกเติมด้วย JavaScript -->
             </div>
         </div>
     </div>
+
     <script src="grammar-minna.js"></script>
     <script src="grammar.js"></script>
     <script>
     window.addEventListener('DOMContentLoaded', function() {
       document.body.classList.add('fade-in-page');
+      // เริ่มต้นการทำงานของหน้าไวยากรณ์
+      initializeNewGrammarPage();
     });
     </script>
 </body>
