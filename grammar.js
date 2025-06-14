@@ -5432,18 +5432,29 @@ window.addEventListener('DOMContentLoaded', () => {
         renderGrammarList(filtered);
     }
     
-    document.querySelector('.grammar-filter-book').onchange = e => {
-        bookFilter = e.target.value;
-        updateList();
-    };
-    document.querySelector('.grammar-filter-chapter').onchange = e => {
-        chapterFilter = e.target.value;
-        updateList();
-    };
-    document.querySelector('.grammar-sort-by').onchange = e => {
-        sortBy = e.target.value;
-        updateList();
-    };
+    const bookFilterEl = document.querySelector('.grammar-filter-book');
+    if (bookFilterEl) {
+        bookFilterEl.onchange = e => {
+            bookFilter = e.target.value;
+            updateList();
+        };
+    }
+    
+    const chapterFilterEl = document.querySelector('.grammar-filter-chapter');
+    if (chapterFilterEl) {
+        chapterFilterEl.onchange = e => {
+            chapterFilter = e.target.value;
+            updateList();
+        };
+    }
+    
+    const sortByEl = document.querySelector('.grammar-sort-by');
+    if (sortByEl) {
+        sortByEl.onchange = e => {
+            sortBy = e.target.value;
+            updateList();
+        };
+    }
     updateList();
 });
 
@@ -5529,7 +5540,11 @@ function renderGrammarDetail(grammar) {
 // ฟังก์ชันสำหรับแสดงรายละเอียดไวยากรณ์ใน modal
 function showGrammarModal(grammar) {
     const modal = document.getElementById('grammar-modal');
-    const modalBody = modal.querySelector('.grammar-modal-body');
+    if (!modal) return;
+    
+    const modalBody = modal.querySelector('.grammar-modal-body') || modal.querySelector('.modal-body');
+    if (!modalBody) return;
+    
     // ล้างเนื้อหาเดิม
     modalBody.innerHTML = '';
 
@@ -5720,10 +5735,725 @@ function closeGrammarModal() {
     modal.style.display = 'none';
 }
 
+// อิเล็มเมนต์ที่สำคัญ
+let searchInput, levelFilter, difficultyFilter, sortFilter, randomBtn;
+let grammarContainer, currentLevelTitle, viewBtns;
+let prevPageBtn, nextPageBtn, currentPageSpan, totalPagesSpan;
+let newModal, newModalBody, newModalClose, newModalOverlay;
+
+// ตัวแปรการทำงานใหม่
+let currentPage = 1;
+let itemsPerPage = 12;
+let filteredGrammar = [];
+let currentView = 'card';
+
+// เริ่มต้นใหม่เมื่อหน้าโหลดเสร็จ
+function initializeNewGrammarPage() {
+    initializeNewElements();
+    initializeNewEventListeners();
+    updateNewStats();
+    filteredGrammar = [...grammarData];
+    updateNewDisplay();
+}
+
+function initializeNewElements() {
+    // ค้นหาและฟิลเตอร์
+    searchInput = document.getElementById('grammar-search');
+    levelFilter = document.getElementById('level-filter');
+    difficultyFilter = document.getElementById('difficulty-filter');
+    sortFilter = document.getElementById('sort-filter');
+    randomBtn = document.getElementById('random-grammar-btn');
+    
+    // แสดงผล
+    grammarContainer = document.getElementById('grammar-container');
+    currentLevelTitle = document.getElementById('current-level-title');
+    viewBtns = document.querySelectorAll('.view-btn');
+    
+    // Pagination
+    prevPageBtn = document.getElementById('prev-page');
+    nextPageBtn = document.getElementById('next-page');
+    currentPageSpan = document.getElementById('current-page');
+    totalPagesSpan = document.getElementById('total-pages');
+    
+    // Modal ใหม่
+    newModal = document.getElementById('grammar-modal');
+    newModalBody = newModal?.querySelector('.modal-body');
+    newModalClose = newModal?.querySelector('.modal-close');
+    newModalOverlay = newModal?.querySelector('.modal-overlay');
+}
+
+function initializeNewEventListeners() {
+    // Search และ filter
+    if (searchInput) {
+        searchInput.addEventListener('input', handleNewSearch);
+    }
+    
+    if (levelFilter) {
+        levelFilter.addEventListener('change', applyNewFilters);
+    }
+    
+    if (difficultyFilter) {
+        difficultyFilter.addEventListener('change', applyNewFilters);
+    }
+    
+    if (sortFilter) {
+        sortFilter.addEventListener('change', applyNewFilters);
+    }
+    
+    if (randomBtn) {
+        randomBtn.addEventListener('click', showNewRandomGrammar);
+    }
+    
+    // View toggle
+    viewBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            viewBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentView = this.dataset.view;
+            updateNewDisplay();
+        });
+    });
+    
+    // Pagination
+    if (prevPageBtn) {
+        prevPageBtn.addEventListener('click', () => changeNewPage(-1));
+    }
+    
+    if (nextPageBtn) {
+        nextPageBtn.addEventListener('click', () => changeNewPage(1));
+    }
+    
+    // Modal ใหม่
+    if (newModalClose) {
+        newModalClose.addEventListener('click', closeNewModal);
+    }
+    
+    if (newModalOverlay) {
+        newModalOverlay.addEventListener('click', closeNewModal);
+    }
+    
+    // Level buttons
+    document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const levelCard = this.closest('.level-card');
+            const level = levelCard?.dataset.level;
+            if (level) {
+                filterByNewLevel(level);
+            }
+        });
+    });
+}
+
+function updateNewStats() {
+    const stats = {
+        n5: grammarData.filter(g => g.level === 'N5').length,
+        n4: grammarData.filter(g => g.level === 'N4').length,
+        n3: grammarData.filter(g => g.level === 'N3').length,
+        total: grammarData.length
+    };
+    
+    const n5Count = document.getElementById('n5-count');
+    const n4Count = document.getElementById('n4-count');
+    const n3Count = document.getElementById('n3-count');
+    const totalCount = document.getElementById('total-count');
+    
+    if (n5Count) n5Count.textContent = stats.n5;
+    if (n4Count) n4Count.textContent = stats.n4;
+    if (n3Count) n3Count.textContent = stats.n3;
+    if (totalCount) totalCount.textContent = stats.total;
+}
+
+function handleNewSearch() {
+    const query = searchInput.value.toLowerCase().trim();
+    
+    if (query === '') {
+        filteredGrammar = [...grammarData];
+    } else {
+        filteredGrammar = grammarData.filter(grammar => {
+            return grammar.title.toLowerCase().includes(query) ||
+                   grammar.pattern.toLowerCase().includes(query) ||
+                   grammar.explanation.toLowerCase().includes(query) ||
+                   grammar.level.toLowerCase().includes(query);
+        });
+    }
+    
+    applyNewFilters();
+}
+
+function applyNewFilters() {
+    let filtered = [...filteredGrammar];
+    
+    // ฟิลเตอร์ตามระดับ
+    const selectedLevel = levelFilter?.value;
+    if (selectedLevel && selectedLevel !== 'all') {
+        filtered = filtered.filter(g => g.level === selectedLevel);
+    }
+    
+    // ฟิลเตอร์ตามความยาก
+    const selectedDifficulty = difficultyFilter?.value;
+    if (selectedDifficulty && selectedDifficulty !== 'all') {
+        filtered = filtered.filter(g => g.difficulty === selectedDifficulty);
+    }
+    
+    // เรียงลำดับ
+    const sortBy = sortFilter?.value || 'level';
+    filtered = sortNewGrammar(filtered, sortBy);
+    
+    filteredGrammar = filtered;
+    currentPage = 1;
+    updateNewDisplay();
+}
+
+function sortNewGrammar(data, sortBy) {
+    const levelOrder = { 'N5': 1, 'N4': 2, 'N3': 3 };
+    const difficultyOrder = { 'ง่าย': 1, 'ปานกลาง': 2, 'ยาก': 3 };
+    
+    return data.sort((a, b) => {
+        switch (sortBy) {
+            case 'level':
+                return levelOrder[a.level] - levelOrder[b.level];
+            case 'difficulty':
+                return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+            case 'alphabetical':
+                return a.title.localeCompare(b.title);
+            case 'length':
+                return a.pattern.length - b.pattern.length;
+            default:
+                return 0;
+        }
+    });
+}
+
+function filterByNewLevel(level) {
+    if (levelFilter) {
+        levelFilter.value = level;
+    }
+    
+    filteredGrammar = grammarData.filter(g => g.level === level);
+    currentPage = 1;
+    updateNewDisplay();
+    
+    // เลื่อนไปยังส่วนรายการ
+    const listSection = document.querySelector('.grammar-list-section');
+    if (listSection) {
+        listSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function updateNewDisplay() {
+    if (!grammarContainer) return;
+    
+    const totalPages = Math.ceil(filteredGrammar.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = filteredGrammar.slice(startIndex, endIndex);
+    
+    // อัปเดตชื่อหัวข้อ
+    updateNewLevelTitle();
+    
+    // แสดงไวยากรณ์
+    displayNewGrammar(currentItems);
+    
+    // อัปเดต pagination
+    updateNewPagination(totalPages);
+}
+
+function updateNewLevelTitle() {
+    if (!currentLevelTitle) return;
+    
+    const selectedLevel = levelFilter?.value;
+    if (selectedLevel && selectedLevel !== 'all') {
+        currentLevelTitle.textContent = `ไวยากรณ์ ${selectedLevel}`;
+    } else {
+        currentLevelTitle.textContent = 'ไวยากรณ์ทั้งหมด';
+    }
+}
+
+function displayNewGrammar(items) {
+    if (!grammarContainer) return;
+    
+    grammarContainer.className = currentView === 'card' ? 'grammar-grid' : 'grammar-list';
+    
+    if (items.length === 0) {
+        grammarContainer.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <h3>ไม่พบผลลัพธ์</h3>
+                <p>ลองเปลี่ยนคำค้นหาหรือฟิลเตอร์</p>
+            </div>
+        `;
+        return;
+    }
+    
+    grammarContainer.innerHTML = items.map(grammar => {
+        return currentView === 'card' ? createNewGrammarCard(grammar) : createNewGrammarListItem(grammar);
+    }).join('');
+    
+    // เพิ่ม event listeners สำหรับการคลิก
+    grammarContainer.querySelectorAll('.grammar-item').forEach((item, index) => {
+        item.addEventListener('click', () => showNewGrammarModal(items[index]));
+    });
+}
+
+function createNewGrammarCard(grammar) {
+    const levelColors = {
+        'N5': 'success',
+        'N4': 'primary', 
+        'N3': 'warning'
+    };
+    
+    const difficultyIcons = {
+        'ง่าย': 'star',
+        'ปานกลาง': 'star-half-alt',
+        'ยาก': 'star'
+    };
+    
+    const level = grammar.level || 'N5';
+    const difficulty = grammar.difficulty || 'ง่าย';
+    const explanation = grammar.explanation || '';
+    const examples = grammar.examples || [];
+    
+    return `
+        <div class="grammar-item grammar-card" data-id="${grammar.id}">
+            <div class="card-header">
+                <div class="grammar-badges">
+                    <span class="badge badge-${levelColors[level]}">${level}</span>
+                    <span class="badge badge-difficulty">
+                        <i class="fas fa-${difficultyIcons[difficulty]}"></i>
+                        ${difficulty}
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <h3 class="grammar-title">${grammar.title}</h3>
+                <div class="grammar-pattern">${grammar.pattern}</div>
+                <p class="grammar-explanation">${explanation.substring(0, 120)}${explanation.length > 120 ? '...' : ''}</p>
+                <div class="grammar-examples-preview">
+                    ${examples.slice(0, 1).map(ex => `
+                        <div class="example-preview">
+                            <div class="example-jp">${ex.jp || ''}</div>
+                            <div class="example-th">${ex.th || ''}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="learn-btn">
+                    <i class="fas fa-book-open"></i>
+                    เรียนรู้เพิ่มเติม
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function createNewGrammarListItem(grammar) {
+    const level = grammar.level || 'N5';
+    const difficulty = grammar.difficulty || 'ง่าย';
+    const explanation = grammar.explanation || '';
+    
+    return `
+        <div class="grammar-item grammar-list-item" data-id="${grammar.id}">
+            <div class="list-content">
+                <div class="list-header">
+                    <h3 class="grammar-title">${grammar.title}</h3>
+                    <div class="grammar-badges">
+                        <span class="badge badge-${level.toLowerCase()}">${level}</span>
+                        <span class="badge badge-difficulty">${difficulty}</span>
+                    </div>
+                </div>
+                <div class="grammar-pattern">${grammar.pattern}</div>
+                <p class="grammar-explanation">${explanation.substring(0, 200)}${explanation.length > 200 ? '...' : ''}</p>
+            </div>
+            <div class="list-actions">
+                <button class="learn-btn">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function updateNewPagination(totalPages) {
+    if (currentPageSpan) currentPageSpan.textContent = currentPage;
+    if (totalPagesSpan) totalPagesSpan.textContent = totalPages;
+    
+    if (prevPageBtn) {
+        prevPageBtn.disabled = currentPage === 1;
+    }
+    
+    if (nextPageBtn) {
+        nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+    }
+}
+
+function changeNewPage(direction) {
+    const totalPages = Math.ceil(filteredGrammar.length / itemsPerPage);
+    const newPage = currentPage + direction;
+    
+    if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        updateNewDisplay();
+        
+        // เลื่อนกลับไปด้านบน
+        grammarContainer?.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function showNewRandomGrammar() {
+    if (grammarData.length === 0) return;
+    
+    const randomIndex = Math.floor(Math.random() * grammarData.length);
+    const randomGrammar = grammarData[randomIndex];
+    showNewGrammarModal(randomGrammar);
+}
+
+function showNewGrammarModal(grammar) {
+    if (!newModal || !newModalBody) return;
+    
+    newModalBody.innerHTML = createNewGrammarDetailContent(grammar);
+    newModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    // Animation
+    setTimeout(() => {
+        newModal.classList.add('show');
+    }, 10);
+}
+
+function createNewGrammarDetailContent(grammar) {
+    const level = grammar.level || 'N5';
+    const difficulty = grammar.difficulty || 'ง่าย';
+    const explanation = grammar.explanation || '';
+    const examples = grammar.examples || [];
+    
+    return `
+        <div class="grammar-detail">
+            <div class="detail-header">
+                <h2 class="grammar-title">${grammar.title}</h2>
+                <div class="grammar-badges">
+                    <span class="badge badge-${level.toLowerCase()}">${level}</span>
+                    <span class="badge badge-difficulty">${difficulty}</span>
+                </div>
+            </div>
+            
+            <div class="grammar-pattern-section">
+                <h4>รูปแบบ</h4>
+                <div class="grammar-pattern">${grammar.pattern}</div>
+            </div>
+            
+            <div class="grammar-explanation-section">
+                <h4>คำอธิบาย</h4>
+                <p>${explanation}</p>
+            </div>
+            
+            <div class="grammar-examples-section">
+                <h4>ตัวอย่างประโยค</h4>
+                <div class="examples-list">
+                    ${examples.map(example => `
+                        <div class="example-item">
+                            <div class="example-jp">${example.jp || ''}</div>
+                            <div class="example-romaji">${example.romaji || ''}</div>
+                            <div class="example-th">${example.th || ''}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            ${grammar.notes ? `
+                <div class="grammar-notes-section">
+                    <h4>หมายเหตุ</h4>
+                    <ul class="notes-list">
+                        ${grammar.notes.map(note => `<li>${note}</li>`).join('')}
+                    </ul>
+                </div>
+            ` : ''}
+            
+            ${grammar.conversation ? `
+                <div class="grammar-conversation-section">
+                    <h4>${grammar.conversation.title}</h4>
+                    <div class="conversation-items">
+                        ${grammar.conversation.items.map(item => `
+                            <div class="conversation-item">
+                                <div class="speaker">${item.speaker}</div>
+                                <div class="conversation-text">
+                                    <div class="jp-text">${item.text}</div>
+                                    <div class="romaji-text">${item.romaji}</div>
+                                    <div class="th-text">${item.translation}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+        </div>
+    `;
+}
+
+function closeNewModal() {
+    if (!newModal) return;
+    
+    newModal.classList.remove('show');
+    setTimeout(() => {
+        newModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 300);
+}
+
+// เพิ่มสไตล์ CSS
+const newGrammarStyles = `
+<style>
+.grammar-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.grammar-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    padding: 1.5rem 1.5rem 0;
+}
+
+.grammar-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-success { background: #d4edda; color: #155724; }
+.badge-primary { background: #cce5ff; color: #004085; }
+.badge-warning { background: #fff3cd; color: #856404; }
+.badge-difficulty { background: #f8f9fa; color: #6c757d; }
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.grammar-title {
+    font-size: 1.3rem;
+    color: #ff6b6b;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.grammar-pattern {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.1rem;
+    color: #333;
+    background: #f8f9fa;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #ff6b6b;
+}
+
+.grammar-explanation {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.example-preview {
+    background: #f8f9fa;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.example-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+.example-th {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.card-footer {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.learn-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ff8787);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    width: 100%;
+    justify-content: center;
+}
+
+.learn-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.grammar-list-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.grammar-list-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.list-content {
+    flex: 1;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+}
+
+.list-actions {
+    margin-left: 1rem;
+}
+
+.list-actions .learn-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+.no-results i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.grammar-detail .detail-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.grammar-detail h4 {
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    font-weight: 600;
+}
+
+.grammar-detail h4:first-child {
+    margin-top: 0;
+}
+
+.examples-list .example-item {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #ff6b6b;
+}
+
+.example-romaji {
+    color: #888;
+    font-style: italic;
+    margin: 0.3rem 0;
+}
+
+.notes-list {
+    padding-left: 1.5rem;
+}
+
+.notes-list li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.conversation-items .conversation-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.speaker {
+    font-weight: bold;
+    color: #ff6b6b;
+    min-width: 60px;
+}
+
+.conversation-text .jp-text {
+    font-family: 'Noto Sans JP', sans-serif;
+    margin-bottom: 0.3rem;
+}
+
+.conversation-text .romaji-text {
+    color: #888;
+    font-style: italic;
+    margin-bottom: 0.3rem;
+}
+
+.conversation-text .th-text {
+    color: #666;
+}
+</style>
+`;
+
+// ตรวจสอบว่าหน้าใหม่หรือเก่า
 window.addEventListener('DOMContentLoaded', () => {
-    const closeBtn = document.querySelector('.grammar-modal-close');
-    if (closeBtn) closeBtn.onclick = closeGrammarModal;
-    const modalBg = document.querySelector('.grammar-modal-bg');
-    if (modalBg) modalBg.onclick = closeGrammarModal;
-    renderGrammarList(grammarData);
+    // ตรวจสอบว่ามี element ใหม่หรือไม่
+    if (document.getElementById('grammar-search') || document.querySelector('.grammar-hero')) {
+        // หน้าใหม่
+        if (!document.querySelector('#new-grammar-styles')) {
+            const styleElement = document.createElement('div');
+            styleElement.id = 'new-grammar-styles';
+            styleElement.innerHTML = newGrammarStyles;
+            document.head.appendChild(styleElement);
+        }
+        initializeNewGrammarPage();
+    } else {
+        // หน้าเก่า - ใช้ฟังก์ชันเดิม
+        const closeBtn = document.querySelector('.grammar-modal-close');
+        if (closeBtn) closeBtn.onclick = closeGrammarModal;
+        const modalBg = document.querySelector('.grammar-modal-bg');
+        if (modalBg) modalBg.onclick = closeGrammarModal;
+        renderGrammarList(grammarData);
+    }
 });
