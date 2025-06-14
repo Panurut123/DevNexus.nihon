@@ -171,7 +171,93 @@ class AdminDashboard {
             this.allVisitors = JSON.parse(localStorage.getItem('website_visitors') || '[]');
         }
         
+        // โหลดข้อมูลเพิ่มเติม
+        await this.loadSessionData();
+        await this.loadPageViewData();
+        await this.loadInteractionData();
+        
         this.filteredData = [...this.allVisitors];
+    }
+
+    async loadSessionData() {
+        try {
+            if (window.firebaseDb) {
+                const snapshot = await window.firebaseDb.collection('sessions')
+                    .orderBy('startTime', 'desc')
+                    .limit(1000)
+                    .get();
+                
+                this.allSessions = [];
+                snapshot.forEach(doc => {
+                    this.allSessions.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                console.log(`โหลด Session จาก Firebase: ${this.allSessions.length} รายการ`);
+            } else {
+                throw new Error('Firebase not available');
+            }
+        } catch (error) {
+            this.allSessions = JSON.parse(localStorage.getItem('user_sessions') || '[]');
+            console.log(`โหลด Session จาก localStorage: ${this.allSessions.length} รายการ`);
+        }
+    }
+
+    async loadPageViewData() {
+        try {
+            if (window.firebaseDb) {
+                const snapshot = await window.firebaseDb.collection('page_views')
+                    .orderBy('timestamp', 'desc')
+                    .limit(2000)
+                    .get();
+                
+                this.allPageViews = [];
+                snapshot.forEach(doc => {
+                    this.allPageViews.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                console.log(`โหลด Page Views จาก Firebase: ${this.allPageViews.length} รายการ`);
+            } else {
+                throw new Error('Firebase not available');
+            }
+        } catch (error) {
+            this.allPageViews = JSON.parse(localStorage.getItem('page_views') || '[]');
+            console.log(`โหลด Page Views จาก localStorage: ${this.allPageViews.length} รายการ`);
+        }
+    }
+
+    async loadInteractionData() {
+        try {
+            if (window.firebaseDb) {
+                const snapshot = await window.firebaseDb.collection('user_interactions')
+                    .orderBy('timestamp', 'desc')
+                    .limit(5000)
+                    .get();
+                
+                this.allInteractions = [];
+                snapshot.forEach(doc => {
+                    this.allInteractions.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                console.log(`โหลด Interactions จาก Firebase: ${this.allInteractions.length} รายการ`);
+            } else {
+                throw new Error('Firebase not available');
+            }
+        } catch (error) {
+            // รวม clicks และ scroll events
+            const clicks = JSON.parse(localStorage.getItem('user_clicks') || '[]');
+            const scrolls = JSON.parse(localStorage.getItem('scroll_events') || '[]');
+            this.allInteractions = [...clicks, ...scrolls];
+            console.log(`โหลด Interactions จาก localStorage: ${this.allInteractions.length} รายการ`);
+        }
     }
 
     async refreshData() {
@@ -200,10 +286,30 @@ class AdminDashboard {
         const uniqueCountries = this.getUniqueCountries();
         const mobilePercentage = this.getMobilePercentage();
 
+        // เพิ่มข้อมูลใหม่
+        const totalSessions = this.allSessions ? this.allSessions.length : 0;
+        const totalPageViews = this.allPageViews ? this.allPageViews.length : 0;
+        const totalInteractions = this.allInteractions ? this.allInteractions.length : 0;
+        const avgPagesPerSession = totalSessions > 0 ? Math.round(totalPageViews / totalSessions) : 0;
+
         document.getElementById('total-visitors').textContent = totalVisitors.toLocaleString();
         document.getElementById('today-visitors').textContent = todayVisitors;
         document.getElementById('unique-countries').textContent = uniqueCountries;
         document.getElementById('mobile-percentage').textContent = mobilePercentage + '%';
+        
+        // อัปเดตข้อมูลใหม่ (ถ้ามี element)
+        if (document.getElementById('total-sessions')) {
+            document.getElementById('total-sessions').textContent = totalSessions.toLocaleString();
+        }
+        if (document.getElementById('total-pageviews')) {
+            document.getElementById('total-pageviews').textContent = totalPageViews.toLocaleString();
+        }
+        if (document.getElementById('total-interactions')) {
+            document.getElementById('total-interactions').textContent = totalInteractions.toLocaleString();
+        }
+        if (document.getElementById('avg-pages-per-session')) {
+            document.getElementById('avg-pages-per-session').textContent = avgPagesPerSession;
+        }
     }
 
     getTodayVisitors() {
@@ -544,6 +650,15 @@ class AdminDashboard {
         const visitor = this.allVisitors.find(v => v.id == visitorId);
         if (!visitor) return;
         
+        // หาข้อมูล session ของ visitor นี้
+        const visitorSessions = this.allSessions?.filter(s => s.visitorId === visitor.visitorId) || [];
+        
+        // หาข้อมูล page views ของ visitor นี้
+        const visitorPageViews = this.allPageViews?.filter(p => p.visitorId === visitor.visitorId) || [];
+        
+        // หาข้อมูล interactions ของ visitor นี้
+        const visitorInteractions = this.allInteractions?.filter(i => i.visitorId === visitor.visitorId) || [];
+        
         const detailsContainer = document.getElementById('visitor-details');
         detailsContainer.innerHTML = `
             <div class="detail-group">
@@ -617,9 +732,104 @@ class AdminDashboard {
                     <span class="detail-value">${visitor.consentTime ? new Date(visitor.consentTime).toLocaleString('th-TH') : 'ไม่ทราบ'}</span>
                 </div>
             </div>
+            
+            <div class="detail-group">
+                <h4>📊 สรุปกิจกรรม</h4>
+                <div class="detail-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">${visitorSessions.length}</span>
+                        <span class="stat-label">Session</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">${visitorPageViews.length}</span>
+                        <span class="stat-label">หน้าที่เข้าชม</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">${visitorInteractions.length}</span>
+                        <span class="stat-label">การกระทำ</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="detail-group">
+                <h4>⏰ ประวัติ Session (${visitorSessions.length} ครั้ง)</h4>
+                <div class="sessions-list">
+                    ${visitorSessions.length > 0 ? visitorSessions.slice(0, 5).map(session => `
+                        <div class="session-item">
+                            <div class="session-header">
+                                <strong>Session #${session.sessionId?.slice(-8) || 'N/A'}</strong>
+                                <span class="session-time">${new Date(session.startTime).toLocaleString('th-TH')}</span>
+                            </div>
+                            <div class="session-details">
+                                <span>ครั้งที่ ${session.visitCount || 1}</span>
+                                ${session.totalTimeSpent ? `<span>⏱️ ${Math.round(session.totalTimeSpent/1000)} วินาที</span>` : ''}
+                                ${session.lastActivity ? `<span>สุดท้าย: ${new Date(session.lastActivity).toLocaleString('th-TH')}</span>` : ''}
+                            </div>
+                        </div>
+                    `).join('') : '<p class="no-data">ไม่มีข้อมูล Session</p>'}
+                    ${visitorSessions.length > 5 ? `<p class="more-info">และอีก ${visitorSessions.length - 5} session...</p>` : ''}
+                </div>
+            </div>
+            
+            <div class="detail-group">
+                <h4>👁️ หน้าที่เข้าชม (${visitorPageViews.length} หน้า)</h4>
+                <div class="pageviews-list">
+                    ${visitorPageViews.length > 0 ? visitorPageViews.slice(0, 8).map(pv => `
+                        <div class="pageview-item">
+                            <div class="page-header">
+                                <strong>${pv.title || pv.page || 'ไม่ทราบชื่อหน้า'}</strong>
+                                <span class="page-time">${new Date(pv.timestamp).toLocaleString('th-TH')}</span>
+                            </div>
+                            <div class="page-details">
+                                <span class="page-url">📄 ${pv.page || 'ไม่ทราบ URL'}</span>
+                                ${pv.loadTime ? `<span class="load-time">⚡ ${pv.loadTime}ms</span>` : ''}
+                                ${pv.viewDuration ? `<span class="duration">⏱️ ${Math.round(pv.viewDuration/1000)}s</span>` : ''}
+                            </div>
+                        </div>
+                    `).join('') : '<p class="no-data">ไม่มีข้อมูลการเข้าชมหน้า</p>'}
+                    ${visitorPageViews.length > 8 ? `<p class="more-info">และอีก ${visitorPageViews.length - 8} หน้า...</p>` : ''}
+                </div>
+            </div>
+            
+            <div class="detail-group">
+                <h4>🖱️ กิจกรรมล่าสุด (${visitorInteractions.length} ครั้ง)</h4>
+                <div class="interactions-list">
+                    ${visitorInteractions.length > 0 ? visitorInteractions.slice(0, 10).map(interaction => `
+                        <div class="interaction-item">
+                            <div class="interaction-header">
+                                <span class="interaction-type">${this.getInteractionTypeText(interaction.interactionType || interaction.element)}</span>
+                                <span class="interaction-time">${new Date(interaction.timestamp).toLocaleString('th-TH')}</span>
+                            </div>
+                            <div class="interaction-details">
+                                ${interaction.elementText ? `<span class="interaction-target">💬 "${interaction.elementText.slice(0, 50)}${interaction.elementText.length > 50 ? '...' : ''}"</span>` : ''}
+                                <span class="interaction-page">📍 ${interaction.page}</span>
+                                ${interaction.scrollPercent ? `<span class="scroll-info">📜 ${interaction.scrollPercent}%</span>` : ''}
+                            </div>
+                        </div>
+                    `).join('') : '<p class="no-data">ไม่มีข้อมูลกิจกรรม</p>'}
+                    ${visitorInteractions.length > 10 ? `<p class="more-info">และอีก ${visitorInteractions.length - 10} กิจกรรม...</p>` : ''}
+                </div>
+            </div>
         `;
         
         document.getElementById('detail-modal').style.display = 'flex';
+    }
+
+    getInteractionTypeText(type) {
+        const types = {
+            'click': '🖱️ คลิก',
+            'scroll_milestone': '📜 เลื่อนหน้า',
+            'A': '🔗 คลิกลิงก์',
+            'BUTTON': '🔘 คลิกปุ่ม',
+            'INPUT': '✏️ กรอกข้อมูล',
+            'DIV': '📦 คลิกพื้นที่',
+            'SPAN': '📝 คลิกข้อความ',
+            'IMG': '🖼️ คลิกรูปภาพ',
+            'H1': '📰 คลิกหัวข้อ',
+            'H2': '📋 คลิกหัวข้อย่อย',
+            'P': '📄 คลิกย่อหน้า'
+        };
+        return types[type] || `${type || 'ไม่ทราบ'} 🎯`;
     }
 
     closeDetailModal() {
