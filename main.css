@@ -203,6 +203,13 @@ a:hover {
     line-height: 1.6;
 }
 
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 /* ===== ส่วนเส้นทางการเรียนรู้ ===== */
 .learning-paths {
     padding: 5rem 0;
@@ -237,6 +244,419 @@ a:hover {
     line-height: 1.6;
 }
 
+/* ===== Roadmap Styles ===== */
+.learning-roadmap {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.learning-roadmap::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.roadmap-step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.roadmap-step:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.roadmap-step:nth-child(even) .step-content {
+    text-align: right;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.step-content {
+    flex: 1;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin: 0 2rem;
+    transition: all 0.3s ease;
+}
+
+.step-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.step-content h3 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+}
+
+.step-content p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.step-features {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.feature-tag {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.time-estimate {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.step-btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.step-btn:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* ===== Beginner Guide Section ===== */
+.beginner-guide {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+}
+
+.guide-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.guide-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.guide-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.guide-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.guide-card h3 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+}
+
+.guide-content ul {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+}
+
+.guide-content li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.guide-content li::before {
+    content: '•';
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.time-breakdown {
+    margin-bottom: 1rem;
+}
+
+.time-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.level {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.duration {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* ===== Learning Tools Section ===== */
+.learning-tools {
+    padding: 5rem 0;
+    background: white;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.tool-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 1px solid #f0f0f0;
+}
+
+.tool-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.tool-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tool-card h3 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+}
+
+.tool-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.tool-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.feature {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.tool-btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.tool-btn:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* ===== FAQ Section ===== */
+.faq-section {
+    padding: 5rem 0;
+    background: #f5f7fa;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--dark-color);
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.faq-question:hover {
+    background: #f9f9f9;
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+    color: var(--primary-color);
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: #f9f9f9;
+}
+
+.faq-item.active .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+    max-height: 500px;
+}
+
+.faq-answer p {
+    color: #555;
+    line-height: 1.6;
+    margin: 1rem 0 0 0;
+}
+
+/* ===== CTA Section ===== */
+.cta-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    text-align: center;
+    color: white;
+}
+
+.cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-white {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.btn-white:hover {
+    background-color: #f0f0f0;
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.btn-transparent {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-transparent:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+/* ===== Legacy Styles for Compatibility ===== */
 .learning-cards {
     display: flex;
     justify-content: center;
@@ -369,429 +789,6 @@ a:hover {
     width: 100%;
 }
 
-/* ===== ส่วนระดับการเรียนรู้ ===== */
-.learning-levels {
-    padding: 5rem 0;
-    background-color: #f5f7fa;
-}
-
-.level-cards {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.level-card {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    padding: 2.5rem;
-    width: 350px;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.level-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    transition: transform 0.3s ease;
-}
-
-.beginner-card::before {
-    background-color: var(--beginner-color);
-}
-
-.intermediate-card::before {
-    background-color: var(--intermediate-color);
-}
-
-.advanced-card::before {
-    background-color: var(--advanced-color);
-}
-
-.level-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-}
-
-.level-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: white;
-}
-
-.beginner-card .level-icon {
-    background-color: var(--beginner-color);
-}
-
-.intermediate-card .level-icon {
-    background-color: var(--intermediate-color);
-}
-
-.advanced-card .level-icon {
-    background-color: var(--advanced-color);
-}
-
-.level-card h3 {
-    text-align: center;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    color: var(--dark-color);
-}
-
-.level-card p {
-    font-size: 1.05rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.level-features {
-    margin-bottom: 1.5rem;
-}
-
-.level-feature {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-}
-
-.level-feature i {
-    color: var(--primary-color);
-    margin-right: 0.8rem;
-    font-size: 1.1rem;
-    margin-top: 0.3rem;
-}
-
-.level-feature-content {
-    flex: 1;
-}
-
-.level-feature-content h4 {
-    font-size: 1.1rem;
-    color: var(--dark-color);
-    margin-bottom: 0.3rem;
-}
-
-.level-feature-content p {
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 0;
-}
-
-.level-card .btn {
-    width: 100%;
-    margin-top: 1rem;
-}
-
-/* ===== ส่วนรีวิวจากผู้เรียน ===== */
-.testimonials {
-    padding: 5rem 0;
-    background-color: white;
-}
-
-.testimonial-slider {
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.testimonial-slide {
-    background-color: #f9f9f9;
-    border-radius: 15px;
-    padding: 3rem;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-.testimonial-quote {
-    font-size: 1.2rem;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    position: relative;
-}
-
-.testimonial-quote::before,
-.testimonial-quote::after {
-    content: '"';
-    font-size: 3rem;
-    color: var(--primary-color);
-    opacity: 0.2;
-    position: absolute;
-}
-
-.testimonial-quote::before {
-    top: -20px;
-    left: -10px;
-}
-
-.testimonial-quote::after {
-    bottom: -40px;
-    right: -10px;
-}
-
-.testimonial-author {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.author-avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    border: 3px solid white;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.author-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.author-name {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--dark-color);
-    margin-bottom: 0.3rem;
-}
-
-.author-title {
-    font-size: 0.9rem;
-    color: #777;
-}
-
-/* ===== ส่วนคำถามที่พบบ่อย ===== */
-.faq-section {
-    padding: 5rem 0;
-    background-color: #f5f7fa;
-}
-
-.faq-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.faq-item {
-    background-color: white;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-}
-
-.faq-question {
-    padding: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    color: var(--dark-color);
-    transition: all 0.3s ease;
-}
-
-.faq-question:hover {
-    background-color: #f9f9f9;
-}
-
-.faq-question i {
-    transition: transform 0.3s ease;
-}
-
-.faq-item.active .faq-question i {
-    transform: rotate(180deg);
-}
-
-.faq-answer {
-    padding: 0 1.5rem;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.faq-item.active .faq-answer {
-    padding: 0 1.5rem 1.5rem;
-    max-height: 500px;
-}
-
-.faq-answer p {
-    color: #555;
-    line-height: 1.6;
-}
-
-/* ===== ส่วนท้ายเว็บไซต์ ===== */
-.cta-section {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    text-align: center;
-    color: white;
-}
-
-.cta-content {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.cta-title {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.cta-description {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.btn-white {
-    background-color: white;
-    color: var(--primary-color);
-}
-
-.btn-white:hover {
-    background-color: #f0f0f0;
-    color: var(--primary-color);
-}
-
-.btn-transparent {
-    background-color: transparent;
-    border: 2px solid white;
-    color: white;
-}
-
-.btn-transparent:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* ===== ส่วนฟุตเตอร์ ===== */
-.footer {
-    background-color: var(--dark-color);
-    color: white;
-    padding: 4rem 0 2rem;
-}
-
-.footer-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.footer-logo h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
-.footer-logo span {
-    color: var(--primary-color);
-}
-
-.footer-logo p {
-    color: #aaa;
-    margin-bottom: 1.5rem;
-}
-
-.footer-social {
-    display: flex;
-    gap: 1rem;
-}
-
-.footer-social a {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    transition: all 0.3s ease;
-}
-
-.footer-social a:hover {
-    background-color: var(--primary-color);
-    transform: translateY(-3px);
-}
-
-.footer-links h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.footer-links h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background-color: var(--primary-color);
-}
-
-.footer-links ul {
-    list-style: none;
-}
-
-.footer-links li {
-    margin-bottom: 0.8rem;
-}
-
-.footer-links a {
-    color: #aaa;
-    transition: all 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: white;
-    padding-left: 5px;
-}
-
-.footer-contact p {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    color: #aaa;
-}
-
-.footer-contact i {
-    margin-right: 1rem;
-    color: var(--primary-color);
-}
-
-.footer-bottom {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
 /* ===== รองรับอุปกรณ์มือถือ ===== */
 @media (max-width: 992px) {
     .learning-hero h1 {
@@ -826,6 +823,35 @@ a:hover {
     .nav-buttons {
         display: none;
     }
+
+    .learning-roadmap::before {
+        left: 30px;
+    }
+
+    .roadmap-step {
+        flex-direction: row !important;
+        padding-left: 60px;
+    }
+
+    .roadmap-step:nth-child(even) .step-content {
+        text-align: left;
+    }
+
+    .step-number {
+        position: absolute;
+        left: 0;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .step-content {
+        margin: 0 0 0 1rem;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
 }
 
 @media (max-width: 768px) {
@@ -850,10 +876,6 @@ a:hover {
         align-items: center;
     }
     
-    .testimonial-slide {
-        padding: 2rem;
-    }
-    
     .learning-cards {
         flex-direction: column !important;
         gap: 1.5rem !important;
@@ -864,6 +886,26 @@ a:hover {
         min-width: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .guide-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .step-features {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 
@@ -879,6 +921,18 @@ a:hover {
     .level-card, .learning-card {
         width: 100%;
     }
+
+    .step-content {
+        padding: 1.5rem;
+    }
+
+    .guide-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .tool-card {
+        padding: 1.5rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -887,6 +941,36 @@ a:hover {
     }
     .learning-card {
         padding: 1.2rem 0.7rem !important;
+    }
+
+    .learning-roadmap::before {
+        left: 20px;
+    }
+
+    .roadmap-step {
+        padding-left: 50px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .step-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .guide-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    .tool-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
     }
 }
 
@@ -925,4 +1009,8 @@ a:hover {
 
 .delay-3 {
     animation-delay: 0.6s;
+}
+
+.delay-4 {
+    animation-delay: 0.8s;
 }
