@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="th">
 
 <head>
@@ -9,60 +10,381 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="logo/logodennexus.png">
     <style>
-    @media (max-width: 768px) {
-      .feature-cards, .tabs, .tab-content, .character-grid, .vocab-list, .kanji-grid {
-        flex-direction: column !important;
-        gap: 1rem !important;
-        align-items: stretch !important;
-      }
-      .card, .character-item, .vocab-item, .kanji-card {
-        width: 100% !important;
-        min-width: 0 !important;
-        padding: 1rem 0.5rem !important;
-      }
-      .hero-content, .hero-image {
-        width: 100% !important;
-        max-width: 100% !important;
-        text-align: center !important;
-      }
-      .cta-buttons {
-        flex-direction: column !important;
-        gap: 0.7rem !important;
-      }
-      /* เพิ่มการจัดการ modal ในมือถือ */
-      .about-modal-content {
-        max-height: 80vh !important; /* จำกัดความสูงสูงสุด 80% ของ viewport */
-        overflow-y: auto !important; /* เปิดให้เลื่อนในแนวตั้ง */
-        padding: 2rem 1.5rem !important; /* ลด padding ในมือถือ */
-        margin: 0 10px !important; /* เพิ่ม margin ด้านข้างเล็กน้อย */
-      }
+    /* สไตล์สำหรับหน้าแรก */
+    .hero {
+        background: linear-gradient(135deg, #fff5f5 0%, #fff0f6 100%);
+        padding: 4rem 2rem;
+        position: relative;
+        overflow: hidden;
     }
-    @media (max-width: 480px) {
-      .card, .character-item, .vocab-item, .kanji-card {
-        padding: 0.7rem 0.2rem !important;
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('https://www.transparenttextures.com/patterns/cubes.png');
+        opacity: 0.1;
+        z-index: 0;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .hero-text {
+        flex: 1;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #2d3436;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
       }
-      .about-modal-content {
-        padding: 1.5rem 1rem !important; /* ลด padding เพิ่มเติมสำหรับหน้าจอเล็ก */
-        max-height: 75vh !important; /* ลดความสูงลงเล็กน้อยสำหรับหน้าจอเล็ก */
+
+    .hero-title .accent {
+        color: #e84393;
+        position: relative;
+        display: inline-block;
+    }
+
+    .hero-title .accent::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: rgba(232, 67, 147, 0.2);
+        border-radius: 4px;
+        z-index: -1;
+    }
+
+    .hero-description {
+        font-size: 1.2rem;
+        color: #636e72;
+        margin-bottom: 2rem;
+        line-height: 1.6;
       }
+
+    .hero-image {
+        flex: 1;
+        position: relative;
     }
-    .fade-in-page {
-      animation: fadeInPage 0.7s;
+
+    .hero-image img {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        transform: perspective(1000px) rotateY(-5deg);
+        transition: transform 0.3s ease;
     }
-    @keyframes fadeInPage {
-      from { opacity: 0; transform: translateY(30px);}
-      to { opacity: 1; transform: translateY(0);}
+
+    .hero-image img:hover {
+        transform: perspective(1000px) rotateY(0deg);
+      }
+
+    .stats-section {
+        background: #fff;
+        padding: 4rem 2rem;
+        text-align: center;
     }
-    .about-modal {
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .stat-item {
+        padding: 2rem;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+      }
+
+    .stat-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #e84393;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        color: #636e72;
+        font-size: 1.1rem;
+    }
+
+    .courses-section {
+        padding: 4rem 2rem;
+        background: #f8f9fa;
+    }
+
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .course-card {
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .course-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .course-content {
+        padding: 1.5rem;
+    }
+
+    .course-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2d3436;
+        margin-bottom: 1rem;
+    }
+
+    .course-description {
+        color: #636e72;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .course-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .course-features li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #636e72;
+        margin-bottom: 0.5rem;
+    }
+
+    .course-features li i {
+        color: #e84393;
+    }
+
+    .testimonials-section {
+        padding: 4rem 2rem;
+        background: #fff;
+    }
+
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .testimonial-card {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        position: relative;
+      }
+
+    .testimonial-card::before {
+        content: '"';
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-size: 4rem;
+        color: rgba(232, 67, 147, 0.1);
+        font-family: serif;
+    }
+
+    .testimonial-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .testimonial-text {
+        color: #636e72;
+        font-style: italic;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .author-info h4 {
+        color: #2d3436;
+        margin: 0;
+    }
+
+    .author-info p {
+        color: #636e72;
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .faq-section {
+        padding: 4rem 2rem;
+        background: #f8f9fa;
+    }
+
+    .faq-grid {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .faq-item {
+        background: #fff;
+        border-radius: 15px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+
+    .faq-question {
+        padding: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #2d3436;
+        font-weight: 500;
+    }
+
+    .faq-answer {
+        padding: 0 1.5rem 1.5rem;
+        color: #636e72;
+        line-height: 1.6;
       display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
     }
-    .about-modal.active {
-      display: flex;
+
+    .faq-item.active .faq-answer {
+        display: block;
+    }
+
+    .faq-item.active .faq-question i {
+        transform: rotate(180deg);
+    }
+
+    .cta-section {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #e84393 0%, #fd79a8 100%);
+        color: #fff;
+        text-align: center;
+    }
+
+    .cta-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .cta-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .cta-description {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-primary {
+        background: #fff;
+        color: #e84393;
+    }
+
+    .btn-secondary {
+        background: transparent;
+        border: 2px solid #fff;
+        color: #fff;
+    }
+
+    @media (max-width: 768px) {
+        .hero-content {
+            flex-direction: column;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+    }
+
+        .stats-grid,
+        .courses-grid,
+        .testimonials-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+        }
     }
     </style>
 </head>
@@ -76,8 +398,7 @@
         <nav>
             <ul>
                 <li><a href="index.html" class="active">หน้าหลัก</a></li>
-                <li><a href="main.html">บทเรียน</a></li>
-                <li><a href="characters.html">ทดสอบตัวอักษร</a></li>
+                <li><a href="main.html">คู่มือการเรียน</a></li>
                 <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
                 <li><a href="vocabulary.html">คำศัพท์</a></li>
                 <li><a href="kanji.html">คันจิ</a></li>
@@ -88,255 +409,159 @@
     </header>
 
     <main>
-        <section id="home" class="hero">
+        <section class="hero">
             <div class="hero-content">
-                <h2 class="fade-in">เรียนรู้<span class="accent">ภาษาญี่ปุ่น</span>ได้อย่างสนุกสนาน</h2>
-                <p class="fade-in delay-1">เริ่มต้นการเดินทางสู่การเรียนรู้ภาษาญี่ปุ่นกับ Devnexus.nihon</p>
-                <div class="cta-buttons fade-in delay-2">
-                    <a href="main.html" class="btn primary">เริ่มเรียน</a>
-                    <a href="about.html" class="btn secondary">เกี่ยวกับเรา</a>
-                </div>
-            </div>
-            <div class="hero-image fade-in delay-3">
-                <img src="https://placehold.co/600x400/e66465/fff?text=日本語" alt="ภาษาญี่ปุ่น">
-            </div>
-        </section>
-
-        <section id="features" class="features">
-            <h2 class="section-title">โหมดการเรียนรู้</h2>
-            <div class="feature-cards">
-                <div class="card slide-up">
-                    <div class="card-icon easy">
-                        <i class="fas fa-seedling"></i>
+                <div class="hero-text">
+                    <h1 class="hero-title">เริ่มต้นการเดินทางสู่การเรียนรู้<span class="accent">ภาษาญี่ปุ่น</span>ที่สนุกและมีประสิทธิภาพ</h1>
+                    <p class="hero-description">เรียนรู้ภาษาญี่ปุ่นผ่านระบบการเรียนที่ออกแบบมาเพื่อคนไทยโดยเฉพาะ พร้อมด้วยเครื่องมือและแบบฝึกหัดที่ช่วยให้คุณเก่งภาษาญี่ปุ่นได้เร็วขึ้น</p>
+                    <div class="cta-buttons">
+                        <a href="main.html" class="btn btn-primary">เริ่มเรียนเลย</a>
+                        <a href="about.html" class="btn btn-secondary">เรียนรู้เพิ่มเติม</a>
                     </div>
-                    <h3>โหมดง่าย</h3>
-                    <p>เรียนรู้ด้วยตัวเลือก ไม่มีเวลาจำกัด ผิดได้ 10 ครั้ง</p>
-                    <a href="#" class="btn-small">เริ่มเลย</a>
                 </div>
-                <div class="card slide-up delay-1">
-                    <div class="card-icon medium">
-                        <i class="fas fa-pen"></i>
-                    </div>
-                    <h3>โหมดกลาง</h3>
-                    <p>พิมพ์คำตอบเอง ไม่มีเวลาจำกัด ผิดได้ 5 ครั้ง</p>
-                    <a href="#" class="btn-small">เริ่มเลย</a>
-                </div>
-                <div class="card slide-up delay-2">
-                    <div class="card-icon hard">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <h3>โหมดยาก</h3>
-                    <p>พิมพ์คำตอบเอง มีเวลาจำกัด ผิดได้ 3 ครั้ง</p>
-                    <a href="#" class="btn-small">เริ่มเลย</a>
+                <div class="hero-image">
+                    <img src="https://placehold.co/600x400/e66465/fff?text=日本語" alt="ภาษาญี่ปุ่น">
                 </div>
             </div>
         </section>
 
-        <section id="preview" class="preview">
-            <h2 class="section-title">ตัวอย่างตัวอักษร</h2>
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="hiragana">ฮิรากะนะ</button>
-                <button class="tab-btn" data-tab="katakana">คาตาคานะ</button>
+        <section class="courses-section">
+            <h2 class="section-title">คอร์สเรียนของเรา</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <img src="https://placehold.co/600x400/ffd43b/fff?text=ひらがな" alt="ฮิรากะนะ" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">เรียนตัวอักษรฮิรากะนะ</h3>
+                        <p class="course-description">เรียนรู้ตัวอักษรพื้นฐานของภาษาญี่ปุ่น พร้อมแบบฝึกหัดและเกมส์ที่ช่วยให้จดจำได้ง่าย</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 46 ตัวอักษรพื้นฐาน</li>
+                            <li><i class="fas fa-check"></i> แบบฝึกหัดเขียน</li>
+                            <li><i class="fas fa-check"></i> เกมส์ทดสอบความจำ</li>
+                        </ul>
+                        <a href="learn-characters.html" class="btn btn-primary">เริ่มเรียน</a>
             </div>
-            <div class="tab-content">
-                <div id="hiragana-content" class="tab-pane active">
-                    <div class="character-grid">
-                        <div class="character-item">
-                            <div class="character">あ</div>
-                            <div class="romaji">a</div>
                         </div>
-                        <div class="character-item">
-                            <div class="character">い</div>
-                            <div class="romaji">i</div>
-                        </div>
-                        <div class="character-item">
-                            <div class="character">う</div>
-                            <div class="romaji">u</div>
-                        </div>
-                        <div class="character-item">
-                            <div class="character">え</div>
-                            <div class="romaji">e</div>
-                        </div>
-                        <div class="character-item">
-                            <div class="character">お</div>
-                            <div class="romaji">o</div>
-                        </div>
-                        <!-- เพิ่มตัวอักษรอื่นๆ ตามต้องการ -->
+
+                <div class="course-card">
+                    <img src="https://placehold.co/600x400/ff6b6b/fff?text=カタカナ" alt="คาตาคานะ" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">เรียนตัวอักษรคาตาคานะ</h3>
+                        <p class="course-description">เรียนรู้ตัวอักษรที่ใช้เขียนคำยืมจากภาษาต่างประเทศ พร้อมตัวอย่างการใช้งาน</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> 46 ตัวอักษรพื้นฐาน</li>
+                            <li><i class="fas fa-check"></i> คำยืมจากภาษาอังกฤษ</li>
+                            <li><i class="fas fa-check"></i> แบบฝึกหัดทบทวน</li>
+                        </ul>
+                        <a href="learn-characters.html" class="btn btn-primary">เริ่มเรียน</a>
                     </div>
-                    <a href="#hiragana" class="btn secondary">ดูทั้งหมด</a>
                 </div>
-                <div id="katakana-content" class="tab-pane">
-                    <div class="character-grid">
-                        <div class="character-item">
-                            <div class="character">ア</div>
-                            <div class="romaji">a</div>
-                        </div>
-                        <div class="character-item">
-                            <div class="character">イ</div>
-                            <div class="romaji">i</div>
-                        </div>
-                        <div class="character-item">
-                            <div class="character">ウ</div>
-                            <div class="romaji">u</div>
-                        </div>
-                        <div class="character-item">
-                            <div class="character">エ</div>
-                            <div class="romaji">e</div>
-                        </div>
-                        <div class="character-item">
-                            <div class="character">オ</div>
-                            <div class="romaji">o</div>
-                        </div>
-                        <!-- เพิ่มตัวอักษรอื่นๆ ตามต้องการ -->
+
+                <div class="course-card">
+                    <img src="https://placehold.co/600x400/4dabf7/fff?text=漢字" alt="คันจิ" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">เรียนคันจิพื้นฐาน</h3>
+                        <p class="course-description">เรียนรู้คันจิระดับ N5 พร้อมวิธีการเขียน ความหมาย และการอ่าน</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> คันจิ N5</li>
+                            <li><i class="fas fa-check"></i> วิธีการเขียน</li>
+                            <li><i class="fas fa-check"></i> ตัวอย่างคำศัพท์</li>
+                        </ul>
+                        <a href="kanji.html" class="btn btn-primary">เริ่มเรียน</a>
                     </div>
-                    <a href="#katakana" class="btn secondary">ดูทั้งหมด</a>
                 </div>
             </div>
         </section>
 
-        <section id="vocabulary" class="vocabulary">
-            <h2 class="section-title">ตัวอย่างคำศัพท์และไวยากรณ์</h2>
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="vocab">คำศัพท์</button>
-                <button class="tab-btn" data-tab="kanji">คันจิ</button>
-                <button class="tab-btn" data-tab="grammar">ไวยากรณ์</button>
+        <section class="faq-section">
+            <h2 class="section-title">คำถามที่พบบ่อย</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>ต้องมีพื้นฐานภาษาญี่ปุ่นก่อนไหม?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        ไม่จำเป็นต้องมีพื้นฐานมาก่อนก็ได้ครับ เพราะเราเริ่มสอนตั้งแต่พื้นฐานการอ่านตัวอักษรฮิรากะนะและคาตาคานะ พร้อมคำอธิบายภาษาไทยที่เข้าใจง่ายครับ
+                                </div>
+                            </div>
+                            
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>เรียนฟรีหรือต้องเสียค่าใช้จ่าย?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        ตอนนี้เว็บไซต์ของเราให้บริการฟรีทั้งหมดครับ คุณสามารถเข้าถึงบทเรียน แบบฝึกหัด และแบบทดสอบได้โดยไม่มีค่าใช้จ่ายใดๆทั้งสิ้นครับ
+                    </div>
+                            </div>
+                            
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>มีแอพพลิเคชั่นสำหรับมือถือไหม?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        เว็บไซต์ของเราสามารถใช้งานได้บนมือถือผ่านเบราว์เซอร์ โดยมีการออกแบบที่รองรับการแสดงผลบนหน้าจอขนาดต่างๆ
+                            </div>
+                        </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>ใช้เวลานานแค่ไหนในการเรียนจนจบหลักสูตร?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        ระยะเวลาในการเรียนขึ้นอยู่กับความตั้งใจและเวลาที่คุณทุ่มเทให้กับการเรียน โดยเฉลี่ยแล้ว ผู้เรียนที่เรียนวันละ 1-2 ชั่วโมง จะสามารถจบหลักสูตรพื้นฐานได้ภายใน 3-6 เดือน
+                    </div>
+                </div>
             </div>
-            <div class="tab-content">
-                <div id="vocab-content" class="tab-pane active">
-                    <div class="vocab-list">
-                        <div class="vocab-item">
-                            <div class="japanese">おはよう</div>
-                            <div class="romaji">ohayou</div>
-                            <div class="meaning">สวัสดี (ตอนเช้า)</div>
-                        </div>
-                        <div class="vocab-item">
-                            <div class="japanese">こんにちは</div>
-                            <div class="romaji">konnichiwa</div>
-                            <div class="meaning">สวัสดี (ตอนกลางวัน)</div>
-                        </div>
-                        <div class="vocab-item">
-                            <div class="japanese">こんばんは</div>
-                            <div class="romaji">konbanwa</div>
-                            <div class="meaning">สวัสดี (ตอนเย็น)</div>
-                        </div>
-                        <div class="vocab-item">
-                            <div class="japanese">ありがとう</div>
-                            <div class="romaji">arigatou</div>
-                            <div class="meaning">ขอบคุณ</div>
-                        </div>
-                        <div class="vocab-item">
-                            <div class="japanese">さようなら</div>
-                            <div class="romaji">sayounara</div>
-                            <div class="meaning">ลาก่อน</div>
-                        </div>
-                    </div>
-                </div>
-                <div id="kanji-content" class="tab-pane">
-                    <div class="kanji-section">
-                        <h3 class="kanji-title">คันจิพื้นฐาน N5</h3>
-                        <div class="kanji-grid">
-                            <div class="kanji-card">
-                                <span class="kanji-character">日</span>
-                                <div class="kanji-readings">
-                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> ก, ก, ก</span>
-                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> ニチ, ジツ</span>
-                                </div>
-                                <div class="kanji-meaning">วัน, ดวงอาทิตย์, ญี่ปุ่น</div>
-                            </div>
-                            
-                            <div class="kanji-card">
-                                <span class="kanji-character">本</span>
-                                <div class="kanji-readings">
-                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> もと</span>
-                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> ホン</span>
-                                </div>
-                                <div class="kanji-meaning">หนังสือ, ต้นฉบับ, จริง</div>
-                            </div>
-                            
-                            <div class="kanji-card">
-                                <span class="kanji-character">人</span>
-                                <div class="kanji-readings">
-                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> ひと</span>
-                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> ジン, ニン</span>
-                                </div>
-                                <div class="kanji-meaning">คน, มนุษย์</div>
-                            </div>
-                            
-                            <div class="kanji-card">
-                                <span class="kanji-character">月</span>
-                                <div class="kanji-readings">
-                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> つき</span>
-                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> ゲツ, ガツ</span>
-                                </div>
-                                <div class="kanji-meaning">เดือน, พระจันทร์</div>
-                            </div>
-                            
-                            <div class="kanji-card">
-                                <span class="kanji-character">水</span>
-                                <div class="kanji-readings">
-                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> みず</span>
-                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> スイ</span>
-                                </div>
-                                <div class="kanji-meaning">น้ำ</div>
-                            </div>
-                            
-                            <div class="kanji-card">
-                                <span class="kanji-character">火</span>
-                                <div class="kanji-readings">
-                                    <span class="kanji-reading"><span class="kanji-reading-label">คุนยอมิ:</span> ひ</span>
-                                    <span class="kanji-reading"><span class="kanji-reading-label">ออนยอมิ:</span> カ</span>
-                                </div>
-                                <div class="kanji-meaning">ไฟ</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="grammar-content" class="tab-pane">
-                    <div class="grammar-section">
-                        <h3 class="grammar-title">ไวยากรณ์พื้นฐาน N5</h3>
-                        
-                        <div class="grammar-item">
-                            <h3>การใช้ です (desu)</h3>
-                            <div class="grammar-pattern">
-                                <div class="pattern">〜は〜です</div>
-                                <div class="pattern-romaji">~wa ~desu</div>
-                                <div class="explanation">
-                                    เป็นรูปแบบประโยคพื้นฐานที่ใช้บอกว่า "A คือ B" หรือใช้แสดงการยืนยันข้อมูล โดย です (desu) เป็นคำกริยาช่วยที่แสดงความสุภาพ มักใช้ในการแนะนำตัว อธิบายสิ่งของของ หรือข้อมูลทั่วไป
-                                </div>
-                            </div>
-                            
-                            <div class="grammar-notes">
-                                <h4>หมายเหตุสำคัญ</h4>
-                                <p>です (desu) เป็นรูปสุภาพ ในภาษาพูดแบบไม่เป็นทางการอาจใช้ だ (da) แทน และในประโยคปฏิเสธจะเปลี่ยนเป็น ではありません (dewa arimasen) หรือ じゃありません (ja arimasen) ในภาษาพูด</p>
-                            </div>
-                            
-                            <div class="example">
-                                <div class="example-title">ตัวอย่างประโยค</div>
-                                <div class="japanese">私は学生です。</div>
-                                <div class="romaji">Watashi wa gakusei desu.</div>
-                                <div class="meaning">ฉันเป็นนักเรียน/นักศึกษา</div>
-                                
-                                <div class="japanese">これは本です。</div>
-                                <div class="romaji">Kore wa hon desu.</div>
-                                <div class="meaning">นี่คือหนังสือ</div>
-                                
-                                <div class="japanese">あの人は日本人ではありません。</div>
-                                <div class="romaji">Ano hito wa nihonjin dewa arimasen.</div>
-                                <div class="meaning">คนนั้นไม่ใช่คนญี่ปุ่น</div>
-                            </div>
-                        </div>
-                    </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">พร้อมเริ่มเรียนภาษาญี่ปุ่นแล้วใช่ไหม?</h2>
+                <p class="cta-description">เริ่มต้นการเดินทางสู่การเรียนรู้ภาษาญี่ปุ่นที่มีประสิทธิภาพด้วยเครื่องมือที่ครบครัน</p>
+                <div class="cta-buttons">
+                    <a href="learn-characters.html" class="btn btn-primary">เริ่มเรียนตัวอักษร</a>
+                    <a href="characters.html" class="btn btn-secondary">ทดสอบความรู้</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="site-footer" style="margin-top:2.5rem; background:#fffbe7; border-top:2px solid #ffd43b; padding:1.5rem 0; text-align:center; font-size:1.08rem; color:#7a5d00;">
-        <div style="margin-bottom:0.7rem; font-weight:600;">ติดต่อผู้พัฒนาเว็บไซต์</div>
-        <div style="display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap; align-items:center; font-size:1.15rem;">
-            <a href="https://www.instagram.com/devn3xus/" target="_blank" style="color:#e1306c; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-instagram"></i> @devn3xus</a>
-            <a href="https://www.facebook.com/panurut.junklin" target="_blank" style="color:#1877f2; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-facebook"></i> @panurut.junklin</a>
-            <span style="color:#5865f2; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-discord"></i> porto4611</span>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ติดต่อเรา</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/devn3xuss/" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i> @devn3xuss
+                    </a>
+                    <a href="https://www.facebook.com/panurut.junklin" target="_blank" class="social-link">
+                        <i class="fab fa-facebook"></i> @panurut.junklin
+                    </a>
+                    <span class="social-link">
+                        <i class="fab fa-discord"></i> porto4611
+                    </span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>ลิงก์ด่วน</h3>
+                <ul class="footer-links">
+                    <li><a href="main.html">คู่มือการเรียน</a></li>
+                    <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
+                    <li><a href="vocabulary.html">คำศัพท์</a></li>
+                    <li><a href="kanji.html">คันจิ</a></li>
+                    <li><a href="grammar.html">ไวยากรณ์</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>เกี่ยวกับเรา</h3>
+                <p>DevNexus.Nihon เป็นแพลตฟอร์มการเรียนรู้ภาษาญี่ปุ่นออนไลน์ที่ออกแบบมาเพื่อคนไทยโดยเฉพาะ</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DevNexus.Nihon. สงวนลิขสิทธิ์</p>
         </div>
     </footer>
 
@@ -345,6 +570,14 @@
     window.addEventListener('DOMContentLoaded', function() {
       document.body.classList.add('fade-in-page');
 
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
     });
     </script>
 </body>
