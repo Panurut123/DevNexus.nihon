@@ -4,40 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>คันจิภาษาญี่ปุ่น - DevNexus.Nihon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="kanji.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="logo/logodennexus.png">
     <style>
-    @media (max-width: 768px) {
-      .kanji-header, .kanji-tools, .kanji-list {
-        padding: 0.5rem 0.2rem !important;
-      }
-      .kanji-tools {
-        flex-direction: column !important;
-        gap: 0.7rem !important;
-      }
-      .kanji-tools input, .kanji-tools button {
-        width: 100% !important;
-        margin-bottom: 0.5rem !important;
-      }
-      .kanji-card {
-        width: 100% !important;
-        min-width: 0 !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        padding: 1rem 0.5rem !important;
-      }
-    }
-    @media (max-width: 480px) {
-      .kanji-header, .kanji-tools, .kanji-list {
-        padding: 0.2rem 0.1rem !important;
-      }
-      .kanji-card {
-        padding: 0.7rem 0.2rem !important;
-      }
-    }
     .fade-in-page {
       animation: fadeInPage 0.7s;
     }
@@ -55,38 +27,282 @@
         </div>
         <nav>
             <ul>
-              <li><a href="index.html" class="active">หน้าหลัก</a></li>
-              <li><a href="main.html">บทเรียน</a></li>
-              <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
-              <li><a href="vocabulary.html">คำศัพท์</a></li>
-              <li><a href="kanji.html">คันจิ</a></li>
-              <li><a href="grammar.html">ไวยากรณ์</a></li>
-              <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="main.html">คู่มือการเรียน</a></li>
+                <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
+                <li><a href="vocabulary.html">คำศัพท์</a></li>
+                <li><a href="kanji.html" class="active">คันจิ</a></li>
+                <li><a href="grammar.html">ไวยากรณ์</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
             </ul>
         </nav>
     </header>
-    <!-- ปุ่มไปทำแบบทดสอบคันจิ -->
-    <div class="action-buttons-container">
-        <a href="kanji-quiz.html" class="kanji-quiz-btn"><i class="fas fa-pencil-alt"></i> ไปทำแบบทดสอบคันจิ</a>
-    </div>
     <main>
-        <section class="kanji-header">
-            <h2>คันจิพื้นฐาน N5</h2>
-            <div class="kanji-tools">
-                <input type="text" class="kanji-search" placeholder="ค้นหาคันจิ...">
-                <button class="kanji-random-btn">สุ่มคันจิ</button>
+        <section class="kanji-hero">
+            <div class="kanji-hero-content">
+                <h1 class="slide-up">เรียนรู้คันจิภาษาญี่ปุ่น</h1>
+                <p class="slide-up delay-1">เรียนรู้คันจิพื้นฐานตั้งแต่ระดับ N5 ถึง N3 พร้อมวิธีการอ่าน ความหมาย และตัวอย่างการใช้งาน</p>
+                <div class="hero-buttons slide-up delay-2">
+                    <a href="kanji-quiz.html" class="btn primary">
+                        <i class="fas fa-pencil-alt"></i>
+                        ทำแบบทดสอบคันจิ
+                    </a>
+                    <a href="#kanji-levels" class="btn secondary">เลือกระดับการเรียน</a>
+                </div>
             </div>
         </section>
-        <section class="kanji-list">
-            <!-- การ์ดคันจิจะถูกสร้างด้วย JS -->
+        <section class="kanji-stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card slide-up">
+                        <div class="stat-icon n5">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-number" id="n5-count">80</div>
+                        <div class="stat-label">คันจิ N5</div>
+                        <div class="stat-description">ระดับพื้นฐาน</div>
+                    </div>
+                    
+                    <div class="stat-card slide-up delay-1">
+                        <div class="stat-icon n4">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-number" id="n4-count">40</div>
+                        <div class="stat-label">คันจิ N4</div>
+                        <div class="stat-description">ระดับต้น</div>
+                    </div>
+                    
+                    <div class="stat-card slide-up delay-2">
+                        <div class="stat-icon n3">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="stat-number" id="n3-count">10</div>
+                        <div class="stat-label">คันจิ N3</div>
+                        <div class="stat-description">ระดับกลาง</div>
+                    </div>
+                    
+                    <div class="stat-card slide-up delay-3">
+                        <div class="stat-icon total">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-number" id="total-count">130</div>
+                        <div class="stat-label">รวมทั้งหมด</div>
+                        <div class="stat-description">คันจิในระบบ</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="kanji-levels" class="kanji-levels">
+            <div class="container">
+                <h2 class="section-title">เลือกระดับการเรียน</h2>
+                <p class="section-description">เริ่มต้นจากระดับที่เหมาะสมกับความสามารถของคุณ</p>
+                
+                <div class="level-cards">
+                    <div class="level-card n5-card slide-up" data-level="N5">
+                        <div class="level-badge">N5</div>
+                        <h3>ระดับพื้นฐาน</h3>
+                        <div class="level-description">
+                            <p>คันจิพื้นฐานที่ใช้บ่อยในชีวิตประจำวัน เหมาะสำหรับผู้เริ่มต้น</p>
+                            <div class="level-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>ตัวเลข 1-10</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>วัน สัปดาห์ เดือน</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>ร่างกายและธรรมชาติ</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>กิจกรรมพื้นฐาน</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="level-btn">เรียนคันจิ N5</button>
+                    </div>
+
+                    <div class="level-card n4-card slide-up delay-1" data-level="N4">
+                        <div class="level-badge">N4</div>
+                        <h3>ระดับต้น</h3>
+                        <div class="level-description">
+                            <p>คันจิระดับต้นที่ใช้ในชีวิตประจำวันและการทำงาน</p>
+                            <div class="level-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>ครอบครัวและความสัมพันธ์</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>กิจกรรมประจำวัน</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>อาคารและสถานที่</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>คำคุณศัพท์พื้นฐาน</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="level-btn">เรียนคันจิ N4</button>
+                    </div>
+
+                    <div class="level-card n3-card slide-up delay-2" data-level="N3">
+                        <div class="level-badge">N3</div>
+                        <h3>ระดับกลาง</h3>
+                        <div class="level-description">
+                            <p>คันจิระดับกลางที่ใช้ในสื่อและการสื่อสารที่ซับซ้อนขึ้น</p>
+                            <div class="level-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>อารมณ์และความรู้สึก</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>แนวคิดเชิงนามธรรม</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>การท่องเที่ยวและวัฒนธรรม</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>คำศัพท์ทางวิชาการ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="level-btn">เรียนคันจิ N3</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="kanji-search-section">
+            <div class="container">
+                <h2 class="section-title">ค้นหาและเรียนรู้คันจิ</h2>
+                
+                <div class="search-tools">
+                    <div class="search-bar-container">
+                        <input type="text" id="kanji-search" class="search-input" placeholder="ค้นหาคันจิ ความหมาย หรือการออกเสียง...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="filter-tools">
+                        <div class="filter-group">
+                            <label>ระดับ:</label>
+                            <select id="level-filter">
+                                <option value="all">ทั้งหมด</option>
+                                <option value="N5">N5</option>
+                                <option value="N4">N4</option>
+                                <option value="N3">N3</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>เรียงตามอย่าง:</label>
+                            <select id="sort-filter">
+                                <option value="level">ระดับ</option>
+                                <option value="stroke">จำนวนขีด</option>
+                                <option value="frequency">ความถี่การใช้</option>
+                                <option value="alphabetical">ตัวอักษร</option>
+                            </select>
+                        </div>
+                        
+                        <button id="random-kanji-btn" class="random-btn">
+                            <i class="fas fa-dice"></i>
+                            สุ่มคันจิ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="kanji-list-section">
+            <div class="container">
+                <div class="list-header">
+                    <h3 id="current-level-title">คันจิทั้งหมด</h3>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="kanji-container" class="kanji-grid">
+                    <!-- คันจิจะถูกสร้างด้วย JavaScript -->
+                </div>
+                
+                <div class="pagination">
+                    <button id="prev-page" class="page-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        ก่อนหน้า
+                    </button>
+                    <div class="page-info">
+                        <span id="current-page">1</span> / <span id="total-pages">1</span>
+                    </div>
+                    <button id="next-page" class="page-btn">
+                        ถัดไป
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="kanji-tips">
+            <div class="container">
+                <h2 class="section-title">เคล็ดลับการเรียนคันจิ</h2>
+                
+                <div class="tips-grid">
+                    <div class="tip-card slide-up">
+                        <div class="tip-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>จำด้วยการเชื่อมโยง</h3>
+                        <p>สร้างเรื่องราวหรือภาพในใจที่เชื่อมโยงกับรูปร่างและความหมายของคันจิ</p>
+                    </div>
+                    
+                    <div class="tip-card slide-up delay-1">
+                        <div class="tip-icon">
+                            <i class="fas fa-pencil-alt"></i>
+                        </div>
+                        <h3>ฝึกเขียนด้วยมือ</h3>
+                        <p>การเขียนด้วยมือช่วยให้จำรูปร่างและลำดับขีดได้ดีกว่าการพิมพ์</p>
+                    </div>
+                    
+                    <div class="tip-card slide-up delay-2">
+                        <div class="tip-icon">
+                            <i class="fas fa-repeat"></i>
+                        </div>
+                        <h3>ทบทวนเป็นประจำ</h3>
+                        <p>ใช้วิธี Spaced Repetition ทบทวนคันจิที่เรียนแล้วในช่วงเวลาที่เหมาะสม</p>
+                    </div>
+                    
+                    <div class="tip-card slide-up delay-3">
+                        <div class="tip-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>เรียนในบริบท</h3>
+                        <p>เรียนคันจิผ่านคำศัพท์และประโยค ไม่ใช่จำเพียงตัวเดียว</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-    <div id="kanji-modal" class="kanji-modal" style="display:none;">
-        <div class="kanji-modal-bg"></div>
-        <div class="kanji-modal-content">
-            <button class="kanji-modal-close">×</button>
-            <div class="kanji-modal-body">
-                <!-- ข้อมูลคันจิแสดงที่นี่ด้วย JS -->
+    <div id="kanji-modal" class="kanji-modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <!-- เนื้อหาจะถูกเติมด้วย JavaScript -->
             </div>
         </div>
     </div>
