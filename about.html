@@ -7,15 +7,333 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="about.css">
     <link rel="icon" type="image/png" href="logo/logodennexus.png">
     <style>
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '私たち';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12rem;
+            font-weight: 100;
+            color: rgba(255, 255, 255, 0.05);
+            font-family: 'Noto Sans JP', sans-serif;
+            z-index: 1;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .about-main {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section Cards */
+        .about-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Developer Card */
+        .developer-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .developer-card::before {
+            content: '💻';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .developer-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .developer-skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .contact-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .contact-card a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Inspiration Quote */
+        .inspiration-quote {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            font-style: italic;
+            text-align: center;
+            color: #333;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .inspiration-quote::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(0, 0, 0, 0.1);
+            font-family: serif;
+        }
+
+        /* Features List */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background: #e9ecef;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Thank You Section */
+        .thank-you-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .thank-you-section::before {
+            content: '❤️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        /* Animation */
         .fade-in-page {
             animation: fadeInPage 0.7s;
         }
+
         @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(30px);}
-            to { opacity: 1; transform: translateY(0);}
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .about-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .developer-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -28,104 +346,233 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html" class="active">หน้าหลัก</a></li>
-                <li><a href="main.html">บทเรียน</a></li>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="main.html">คู่มือการเรียน</a></li>
                 <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
                 <li><a href="vocabulary.html">คำศัพท์</a></li>
                 <li><a href="kanji.html">คันจิ</a></li>
                 <li><a href="grammar.html">ไวยากรณ์</a></li>
-                <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="about.html" class="active">เกี่ยวกับเรา</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="about-container">
-        <section class="about-section">
-            <h2 class="about-title">เกี่ยวกับ Devnexus.nihon</h2>
-            <div class="about-content">
-                <p><strong>Devnexus.nihon</strong> คือเว็บไซต์เรียนภาษาญี่ปุ่นออนไลน์ที่ถูกสร้างขึ้นจากใจล้วนๆ โดยไม่มีองค์กรหรือสถาบันใดๆ อยู่เบื้องหลัง จุดประสงค์ของเว็บนี้คือเพื่อให้ทุกคนไม่ว่าจะเป็นมือใหม่ที่ยังอ่านตัวอักษรไม่ออกเลย หรือคนที่มีพื้นฐานแล้วแต่อยากทวนและต่อยอดสามารถเข้ามาเรียนรู้ได้แบบฟรีๆ และสบายๆ ไม่เครียด</p>
-                
-                <p>เว็บไซต์นี้รวบรวมเนื้อหาภาษาญี่ปุ่นที่จำเป็นครบถ้วน ทั้ง</p>
-                
-                <ul class="about-features">
-                    <li><strong>ตัวอักษรฮิรางานะ คาตาคานะ และคันจิพื้นฐาน</strong></li>
-                    <li><strong>คำศัพท์ที่ใช้บ่อยในชีวิตประจำวัน</strong></li>
-                    <li><strong>ไวยากรณ์ตั้งแต่ระดับ N5 ไปจนถึง N3</strong></li>
-                    <li><strong>บทเรียนแบบเข้าใจง่าย พร้อมตัวอย่างการใช้จริง</strong></li>
-                    <li><strong>แบบฝึกหัดและเกมเล็กๆ ไว้ทบทวน</strong></li>
-                </ul>
-                
-                <p>นอกจากนี้ยังมีการอัปเดตเนื้อหาใหม่ๆ อยู่เรื่อยๆ เพื่อให้ความรู้ไม่ล้าสมัย พร้อมทั้งฟีเจอร์เสริมในอนาคต</p>
-            </div>
-        </section>
-
-        <section class="about-section">
-            <h2 class="about-title">ผู้พัฒนาเว็บไซต์</h2>
-            <div class="about-content">
-                <div class="developer-info">
-                    <p>สวัสดีครับ ผม <strong>ภานุรุจ</strong> หรือเรียกกันง่ายๆ ว่า "<strong>โต้</strong>" ก็ได้ครับ</p>
-                    <p>ผมไม่ได้จบคอมพิวเตอร์มาโดยตรง แต่สิ่งที่เห็นในเว็บนี้ทั้งหมดเกิดจากความตั้งใจเรียนรู้ด้วยตัวเองล้วนๆครับ</p>
-                    
-                    <ul>
-                        <li>ภาษาญี่ปุ่นผมเรียนจากโรงเรียน, หนังสือ, และฝึกฟัง-พูด-อ่าน-เขียนเสมอ</li>
-                        <li>ส่วนเว็บ ผมศึกษาการเขียนโค้ดเองแบบดิบๆ จาก Youtube, Stack Overflow และเอกสารออนไลน์ต่างๆ ไม่มีใครจ้าง ไม่มีใครสอน มีแค่ใจล้วนๆ</li>
-                    </ul>
-                    
-                    <div class="contact-info">
-                        <h3>ช่องทางติดต่อ (มาคุยเล่นหรือแนะนำอะไรก็ได้นะ)</h3>
-                        <ul class="contact-links">
-                            <li><a href="https://instagram.com/devn3xus" target="_blank"><i class="fab fa-instagram"></i> Instagram: @devn3xus</a></li>
-                            <li><a href="https://facebook.com/panurut.junklin" target="_blank"><i class="fab fa-facebook"></i> Facebook: @panurut.junklin</a></li>
-                            <li><i class="fab fa-discord"></i> Discord: porto4611</li>
-                        </ul>
+    <main>
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="about-hero-content">
+                <h1 class="slide-up">เกี่ยวกับ DevNexus.Nihon</h1>
+                <p class="slide-up delay-1">แพลตฟอร์มการเรียนรู้ภาษาญี่ปุ่นออนไลน์ที่สร้างขึ้นด้วยใจรักและความตั้งใจ เพื่อให้ทุกคนเรียนภาษาญี่ปุ่นได้อย่างฟรีและสนุกสนาน</p>
+                <div class="hero-stats slide-up delay-2">
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">ฟรี</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">เรียนได้ตลอดเวลา</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">ไม่จำกัดการเรียน</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="about-section">
-            <h2 class="about-title">แรงบันดาลใจ</h2>
-            <div class="about-content">
-                <p>เว็บนี้เกิดจากความรู้สึกง่าย ๆ ว่า…</p>
-                
-                <blockquote class="inspiration-quote">
-                    "ชอบภาษาญี่ปุ่นว่ะ แต่ตอนเริ่มเรียนแม่งโคตรยาก ถ้ามีอะไรฟรีๆ ดีๆ ช่วยให้คนอื่นเรียนได้ง่ายขึ้นก็น่าจะดี"
-                </blockquote>
-                
-                <p>นั่นแหละคือที่มาของ Devnexus.nihon</p>
-                <p>ผมอยากสร้างพื้นที่เล็กๆ ที่ให้คนเข้ามาเรียนภาษาญี่ปุ่นได้โดยไม่ต้องเสียตัง ไม่ต้องกลัวว่าจะไม่เก่งพอ ไม่ต้องมีพื้นฐานอะไรมาก่อน ขอแค่เปิดใจพอ ที่เหลือเดี๋ยวช่วยปูพื้นให้เองครับ!!</p>
-            </div>
-        </section>
+        <div class="about-main">
+            <!-- About Section -->
+            <section class="about-section slide-up">
+                <h2 class="section-title">
+                    <i class="fas fa-heart" style="color: #e74c3c; margin-right: 0.5rem;"></i>
+                    ความเป็นมา
+                </h2>
+                <div class="section-content">
+                    <p><strong>DevNexus.Nihon</strong> คือเว็บไซต์เรียนภาษาญี่ปุ่นออนไลน์ที่ถูกสร้างขึ้นจากใจล้วนๆ โดยไม่มีองค์กรหรือสถาบันใดๆ อยู่เบื้องหลัง จุดประสงค์ของเว็บนี้คือเพื่อให้ทุกคนไม่ว่าจะเป็นมือใหม่ที่ยังอ่านตัวอักษรไม่ออกเลย หรือคนที่มีพื้นฐานแล้วแต่อยากทวนและต่อยอดสามารถเข้ามาเรียนรู้ได้แบบฟรีๆ และสบายๆ ไม่เครียด</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h4>ตัวอักษรญี่ปุ่น</h4>
+                            <p>ฮิรากะนะ คาตาคานะ และคันจิพื้นฐาน</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h4>คำศัพท์</h4>
+                            <p>คำศัพท์ที่ใช้บ่อยในชีวิตประจำวัน</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h4>ไวยากรณ์</h4>
+                            <p>ไวยากรณ์ตั้งแต่ระดับ N5 ไปจนถึง N3</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h4>แบบฝึกหัด</h4>
+                            <p>เกมและแบบทดสอบเพื่อทบทวนความรู้</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section class="about-section">
-            <h2 class="about-title">หมายเหตุ</h2>
-            <div class="about-content">
-                <p>ข้อมูลทั้งหมดในเว็บไซต์นี้ <strong>จัดทำขึ้นเพื่อการศึกษาเท่านั้น</strong> อาจมีจุดที่ยังไม่สมบูรณ์หรือผิดพลาด เพราะผมก็ยังเรียนรู้ไปพร้อมกับทุกคน ถ้าคุณต้องการอ้างอิงข้อมูลที่ "เป๊ะ" มาก ๆ แนะนำให้ดูควบคู่กับ</p>
-                
-                <ul>
-                    <li>หนังสือ <strong>Minna no Nihongo</strong></li>
-                    <li>เว็บ/แอปที่ได้รับการรับรอง เช่น Jisho, Tae Kim, หรือ NHK Easy Japanese</li>
-                </ul>
-            </div>
-        </section>
+            <!-- Developer Section -->
+            <section class="about-section slide-up delay-1">
+                <h2 class="section-title">
+                    <i class="fas fa-user-tie" style="color: #3498db; margin-right: 0.5rem;"></i>
+                    ผู้พัฒนาเว็บไซต์
+                </h2>
+                <div class="developer-card">
+                    <div class="developer-info">
+                        <h3>สวัสดีครับ ผม ภานุรุจ หรือ "โต้"</h3>
+                        <p>ผมไม่ได้จบคอมพิวเตอร์มาโดยตรง แต่สิ่งที่เห็นในเว็บนี้ทั้งหมดเกิดจากความตั้งใจเรียนรู้ด้วยตัวเองล้วนๆครับ</p>
+                        
+                        <div class="developer-skills">
+                            <div class="skill-item">
+                                <div class="skill-icon">🇯🇵</div>
+                                <h4>ภาษาญี่ปุ่น</h4>
+                                <p>เรียนจากโรงเรียน หนังสือ และฝึกฝนด้วยตัวเอง</p>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon">💻</div>
+                                <h4>เว็บดีเวลอปเมนต์</h4>
+                                <p>ศึกษาจาก YouTube, Stack Overflow และเอกสารออนไลน์</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section class="about-section">
-            <h2 class="about-title">ขอบคุณจากใจ</h2>
-            <div class="about-content">
-                <p>ขอบคุณทุกคนที่เข้ามาเยี่ยมชมเว็บไซต์นี้ไม่ว่าจะด้วยเหตุผลใดก็ตาม</p>
-                <p>ถ้าคุณรู้สึกว่าได้อะไรจากเว็บนี้ ไม่ว่าจะเล็กน้อยแค่ไหน นั่นแปลว่าผมทำถูกทางแล้ว</p>
-                <p>และถ้าคุณมีข้อเสนอแนะ อยากช่วยแก้ไข หรือแค่เข้ามาคุยสนุกๆ ก็ตามช่องทางข้างบนมาได้เลยนะ</p>
-                <p>เว็บนี้จะเติบโตได้ก็เพราะพลังของชุมชนและเพื่อนๆ ทุกคนจริงๆ ครับ ❤️</p>
-            </div>
-        </section>
+            <!-- Inspiration Section -->
+            <section class="about-section slide-up delay-2">
+                <h2 class="section-title">
+                    <i class="fas fa-lightbulb" style="color: #f39c12; margin-right: 0.5rem;"></i>
+                    แรงบันดาลใจ
+                </h2>
+                <div class="section-content">
+                    <p>เว็บนี้เกิดจากความรู้สึกง่าย ๆ ว่า…</p>
+                    
+                    <div class="inspiration-quote">
+                        "ชอบภาษาญี่ปุ่นว่ะ แต่ตอนเริ่มเรียนแม่งโคตรยาก ถ้ามีอะไรฟรีๆ ดีๆ ช่วยให้คนอื่นเรียนได้ง่ายขึ้นก็น่าจะดี"
+                    </div>
+                    
+                    <p>นั่นแหละคือที่มาของ DevNexus.Nihon</p>
+                    <p>ผมอยากสร้างพื้นที่เล็กๆ ที่ให้คนเข้ามาเรียนภาษาญี่ปุ่นได้โดยไม่ต้องเสียตัง ไม่ต้องกลัวว่าจะไม่เก่งพอ ไม่ต้องมีพื้นฐานอะไรมาก่อน ขอแค่เปิดใจพอ ที่เหลือเดี๋ยวช่วยปูพื้นให้เองครับ!!</p>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="about-section slide-up delay-3">
+                <h2 class="section-title">
+                    <i class="fas fa-comments" style="color: #9b59b6; margin-right: 0.5rem;"></i>
+                    ช่องทางติดต่อ
+                </h2>
+                <div class="section-content">
+                    <p>มาคุยเล่นหรือแนะนำอะไรก็ได้นะครับ</p>
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <h4>Instagram</h4>
+                            <a href="https://instagram.com/devn3xuss" target="_blank">@devn3xuss</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fab fa-facebook"></i>
+                            </div>
+                            <h4>Facebook</h4>
+                            <a href="https://facebook.com/panurut.junklin" target="_blank">@panurut.junklin</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <h4>Discord</h4>
+                            <span>porto4611</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Note Section -->
+            <section class="about-section slide-up">
+                <h2 class="section-title">
+                    <i class="fas fa-exclamation-triangle" style="color: #e67e22; margin-right: 0.5rem;"></i>
+                    หมายเหตุสำคัญ
+                </h2>
+                <div class="section-content">
+                    <p>ข้อมูลทั้งหมดในเว็บไซต์นี้ <strong>จัดทำขึ้นเพื่อการศึกษาเท่านั้น</strong> อาจมีจุดที่ยังไม่สมบูรณ์หรือผิดพลาด เพราะผมก็ยังเรียนรู้ไปพร้อมกับทุกคน ถ้าคุณต้องการอ้างอิงข้อมูลที่ "เป๊ะ" มาก ๆ แนะนำให้ดูควบคู่กับ</p>
+                    
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                            <i class="fas fa-book" style="color: #3498db; margin-right: 0.5rem;"></i>
+                            หนังสือ <strong>Minna no Nihongo</strong>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                            <i class="fas fa-globe" style="color: #27ae60; margin-right: 0.5rem;"></i>
+                            เว็บ/แอปที่ได้รับการรับรอง เช่น Jisho, Tae Kim, หรือ NHK Easy Japanese
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Thank You Section -->
+            <section class="about-section thank-you-section slide-up">
+                <h2 class="section-title" style="color: white;">
+                    <i class="fas fa-heart" style="color: white; margin-right: 0.5rem;"></i>
+                    ขอบคุณจากใจ
+                </h2>
+                <div class="section-content" style="color: white;">
+                    <p>ขอบคุณทุกคนที่เข้ามาเยี่ยมชมเว็บไซต์นี้ไม่ว่าจะด้วยเหตุผลใดก็ตาม</p>
+                    <p>ถ้าคุณรู้สึกว่าได้อะไรจากเว็บนี้ ไม่ว่าจะเล็กน้อยแค่ไหน นั่นแปลว่าผมทำถูกทางแล้ว</p>
+                    <p>และถ้าคุณมีข้อเสนอแนะ อยากช่วยแก้ไข หรือแค่เข้ามาคุยสนุกๆ ก็ตามช่องทางข้างบนมาได้เลยนะ</p>
+                    <p><strong>เว็บนี้จะเติบโตได้ก็เพราะพลังของชุมชนและเพื่อนๆ ทุกคนจริงๆ ครับ ❤️</strong></p>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer class="site-footer" style="margin-top:2.5rem; background:#fffbe7; border-top:2px solid #ffd43b; padding:1.5rem 0; text-align:center; font-size:1.08rem; color:#7a5d00;">
-        <div style="margin-bottom:0.7rem; font-weight:600;">ติดต่อผู้พัฒนาเว็บไซต์</div>
-        <div style="display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap; align-items:center; font-size:1.15rem;">
-            <a href="https://www.instagram.com/devn3xus/" target="_blank" style="color:#e1306c; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-instagram"></i> @devn3xus</a>
-            <a href="https://www.facebook.com/panurut.junklin" target="_blank" style="color:#1877f2; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-facebook"></i> @panurut.junklin</a>
-            <span style="color:#5865f2; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fab fa-discord"></i> porto4611</span>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ติดต่อเรา</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/devn3xus/" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i> @devn3xus
+                    </a>
+                    <a href="https://www.facebook.com/panurut.junklin" target="_blank" class="social-link">
+                        <i class="fab fa-facebook"></i> @panurut.junklin
+                    </a>
+                    <span class="social-link">
+                        <i class="fab fa-discord"></i> porto4611
+                    </span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>ลิงก์ด่วน</h3>
+                <ul class="footer-links">
+                    <li><a href="main.html">คู่มือการเรียน</a></li>
+                    <li><a href="learn-characters.html">เรียนตัวอักษร</a></li>
+                    <li><a href="vocabulary.html">คำศัพท์</a></li>
+                    <li><a href="kanji.html">คันจิ</a></li>
+                    <li><a href="grammar.html">ไวยากรณ์</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>เกี่ยวกับเรา</h3>
+                <p>DevNexus.Nihon เป็นแพลตฟอร์มการเรียนรู้ภาษาญี่ปุ่นออนไลน์ที่ออกแบบมาเพื่อคนไทยโดยเฉพาะ</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DevNexus.Nihon. สงวนลิขสิทธิ์</p>
         </div>
     </footer>
 
