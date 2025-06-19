@@ -57,12 +57,19 @@
     // ฟังก์ชันเก็บข้อมูลการเข้าชมเพิ่มเติม
     async function trackPageView() {
         try {
-            const sessionId = localStorage.getItem('current_session_id');
-            const visitorId = localStorage.getItem('current_visitor_id');
+            let sessionId = localStorage.getItem('current_session_id');
+            let visitorId = localStorage.getItem('current_visitor_id');
             
-            if (!sessionId || !visitorId) {
-                console.warn('ไม่มี session ID หรือ visitor ID');
-                return;
+            // สร้าง visitor ID ถ้าไม่มี
+            if (!visitorId) {
+                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('current_visitor_id', visitorId);
+            }
+            
+            // สร้าง session ID ถ้าไม่มี
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('current_session_id', sessionId);
             }
             
             const pageViewData = {

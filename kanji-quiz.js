@@ -65,7 +65,6 @@ function startKanjiQuiz() {
     showQuestion();
 }
 
-// สุ่มข้อสอบ
 function generateQuestions(level, count, format) {
     let kanjiList = window.kanjiData;
     if (level !== 'all') {

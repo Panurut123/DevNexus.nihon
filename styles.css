@@ -54,7 +54,6 @@ body {
     animation: falling linear infinite;
 }
 
-/* ===== อนิเมชั่นเปลี่ยนหน้า ===== */
 @keyframes pageTransition {
     0% {
         opacity: 0;
@@ -70,7 +69,6 @@ body {
     animation: pageTransition 0.8s ease-out forwards;
 }
 
-/* อนิเมชั่นเฉพาะสำหรับแต่ละหน้า */
 @keyframes characterPageEnter {
     0% {
         opacity: 0;

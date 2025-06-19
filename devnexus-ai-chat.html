@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevNexus AI Chat</title>
+    <link rel="stylesheet" href="devnexus-ai-chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="devnexus-chat-widget">
+        <div id="chat-toggle" class="chat-toggle">
+            <i class="fas fa-robot"></i>
+            <span class="chat-badge" id="chat-badge">1</span>
+        </div>
+
+        <div id="chat-window" class="chat-window">
+            <div class="chat-header">
+                <div class="ai-info">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="ai-details">
+                        <h3>DevNexus AI</h3>
+                        <span class="ai-status">
+                            <i class="fas fa-circle"></i>
+                            ช่วยเรียนภาษาญี่ปุ่น
+                        </span>
+                    </div>
+                </div>
+                <div class="chat-controls">
+                    <button id="clear-chat" class="control-btn" title="ล้างบทสนทนา">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button id="minimize-chat" class="control-btn" title="ย่อหน้าต่าง">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button class="quick-btn" data-action="explain-selection">
+                    <i class="fas fa-search"></i>
+                    อธิบายข้อความที่เลือก
+                </button>
+                <button class="quick-btn" data-action="grammar-check">
+                    <i class="fas fa-grammar"></i>
+                    ช่วยไวยากรณ์
+                </button>
+                <button class="quick-btn" data-action="conversation">
+                    <i class="fas fa-comments"></i>
+                    สร้างบทสนทนา
+                </button>
+            </div>
+
+            <div id="chat-messages" class="chat-messages">
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            สวัสดีครับ! ผม DevNexus AI ผู้ช่วยเรียนภาษาญี่ปุ่น 🤖
+                            <br><br>
+                            <strong>วิธีใช้:</strong>
+                            <ul>
+                                <li>🔍 เลือกข้อความในหน้าเว็บแล้วกด "อธิบายข้อความที่เลือก"</li>
+                                <li>💬 ถามคำถามเกี่ยวกับภาษาญี่ปุ่นได้เลย</li>
+                                <li>📚 ขอตัวอย่างประโยค โครงสร้าง หรือไวยากรณ์</li>
+                            </ul>
+                        </div>
+                        <div class="message-time">เมื่อสักครู่</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="selected-text-display" class="selected-text-display" style="display: none;">
+                <div class="selected-text-header">
+                    <span>ข้อความที่เลือก:</span>
+                    <button id="clear-selection" class="clear-selection">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="selected-text-content" class="selected-text-content"></div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <textarea id="chat-input" class="chat-input" placeholder="ถามเกี่ยวกับภาษาญี่ปุ่น... (กด Enter เพื่อส่ง, Shift+Enter เพื่อขึ้นบรรทัดใหม่)" rows="1"></textarea>
+                    <button id="send-message" class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="input-suggestions">
+                    <button class="suggestion-btn" data-text="อธิบายไวยากรณ์นี้หน่อย">อธิบายไวยากรณ์นี้หน่อย</button>
+                    <button class="suggestion-btn" data-text="ขอตัวอย่างประโยค">ขอตัวอย่างประโยค</button>
+                    <button class="suggestion-btn" data-text="โครงสร้างประโยคคืออะไร">โครงสร้างประโยคคืออะไร</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="devnexus-ai-chat.js"></script>
+</body>
+</html> 
